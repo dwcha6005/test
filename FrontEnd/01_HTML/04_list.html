@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+
+<style>
+    ul {
+        list-style-type: square;
+        /* list-style: none; */
+    }
+
+</style>
+
+<body>
+
+    <!-- 목록태그 (ul, ol, li): 여러 항목을 묶어서 표현할때 사용하는 태그 -->
+    <!-- ul(Unordered List): 순서가 중요하지 않은 항목을 표현 -->
+    <ul>
+        <!-- li(List Item): 목록의 항목 -->
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+
+    <!-- ol(Ordered List): 순서나 순위가 중요한 경우 -->
+    <ol>
+        <li>회원가입</li>
+        <li>로그인</li>
+        <li>상품 선택</li>
+        <li>결제</li>
+    </ol>
+    
+    <!-- <ol>의 다양한 번호: A, a, i, I, 1 -->
+    <ol type="1">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ol>
+
+    <!-- 중첩목록 -->
+    <ul>
+        <li>
+            웹 개발
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+        </li>
+
+        <li>
+            백엔드
+            <ul>
+                <li>Java</li>
+                <li>Spring</li>
+            </ul>
+        </li>
+    </ul>
+
+
+
+</body>
+</html>

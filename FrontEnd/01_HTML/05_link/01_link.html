@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+</head>
+<body>
+
+    <h1>HTML Link</h1>
+    <!-- 
+    링크란?
+    HTML에서 다른 페이지나 다른 위치로 이동할 수 있도록 만드는 것. 
+    <a href="https://www.google.com">Google</a>
+    - <a> → Anchor
+    - href → Hypertext Reference
+    - href에 이동할 주소를 지정
+    -->
+
+    <h2>1. 외부 사이트</h2>
+
+    <a href="https://www.google.com">Google</a><br>
+    <a href="https://www.naver.com">Naver</a><br>
+    <a href="https://www.youtube.com">YouTube</a>
+
+    <h2>2. 새 탭에서 열기</h2>
+
+    <!-- target="_self" 기본 디폴트값 -->
+    <a href="https://www.google.com" target="_blank">
+        Google 새 탭
+    </a>
+
+    <h2>3. 같은 폴더의 페이지</h2>
+
+    <a href="02_page.html">페이지 2</a>
+
+    <h2>4. 하위 폴더의 페이지</h2>
+
+    <a href="pages/about.html">회사 소개</a><br>
+    <a href="pages/contact.html">연락처</a>
+
+    <h2>5. 상위 폴더 이동</h2>
+
+    <a href="../01_hello.html">01_hello.html</a>
+
+    <!-- 6. 페이지 내부 이동 -->
+    <h2>6. 페이지 내부 이동</h2>
+
+    <a href="#bottom">페이지 아래로 이동</a>
+
+    <p>
+        HTML은 웹 페이지의 구조를 만드는 언어입니다.
+    </p>
+
+    <p>
+        링크를 이용하면 다른 페이지나 페이지의 특정 위치로 이동할 수 있습니다.
+    </p>
+
+    <br><br><br><br><br><br><br><br><br>
+
+    <h3 id="bottom">페이지 아래쪽</h3>
+
+    <p>페이지의 특정 위치로 이동했습니다.</p>
+
+    <a href="#">맨 위로</a>
+
+
+    <!-- 7. 다른 페이지의 특정 위치로 이동 -->
+    <h2>7. 다른 페이지의 특정 위치</h2>
+
+    <a href="pages/about.html#location">
+        회사 위치로 이동
+    </a>
+
+
+    <!-- 8. 이메일 링크 -->
+    <h2>8. 이메일 링크</h2>
+
+    <!-- ?subject=문의사항&body=안녕하세요. 문의드립니다. -->
+    <a href="mailto:test@example.com">
+        
+        이메일 보내기
+    </a>
+
+
+    <!-- 9. 전화 링크 -->
+    <h2>9. 전화 링크</h2>
+
+    <!-- 주로 모바일에서 사용하며 PC 경우에도 Skype 등 통화 프로그램이 연동되어있다면 동작함 -->
+    <a href="tel:010-1234-5678">
+        전화하기
+    </a>
+
+
+    <!-- 10. 링크와 목록 -->
+    <h2>10. 목록과 링크</h2>
+
+    <ul>
+        <li><a href="02_page.html">페이지 2</a></li>
+        <li><a href="pages/about.html">회사 소개</a></li>
+        <li><a href="pages/contact.html">연락처</a></li>
+    </ul>
+
+
+    <!-- 11. CSS로 링크 스타일 변경 -->
+    <h2>11. 링크 스타일</h2>
+
+    <a href="02_page.html" style="color: black; text-decoration: none;">
+        CSS가 적용된 링크
+    </a>
+
+</body>
+</html>
