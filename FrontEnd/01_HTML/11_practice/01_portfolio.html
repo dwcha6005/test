@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>홍길동 | 자기소개</title>
+</head>
+<body>
+
+    <!-- 
+    ┌─────────────────────────────┐
+    │          My Portfolio       │ ← header
+    ├─────────────────────────────┤
+    │ 홈 | 소개 | 기술 | 연락처     │ ← nav
+    ├─────────────────────────────┤
+    │                             │
+    │       나의 자기소개           │ ← main
+    │                             │
+    │  [프로필 이미지]              │
+    │                             │
+    │  안녕하세요. 홍길동입니다.      │
+    │                             │
+    │  보유 기술                   │
+    │  • HTML                     │
+    │  • CSS                      │
+    │  • Java                     │
+    │                             │
+    │  학력 / 경력                 │
+    │  [table]                    │
+    │                             │
+    │  문의하기                     │
+    │  [form]                     │
+    │                             │
+    ├─────────────────────────────┤
+    │ Copyright                   │ ← footer
+    └─────────────────────────────┘
+    
+    -->
+
+
+    <!-- ==============================
+         Header
+         ============================== -->
+
+    <header>
+
+        <h1>홍길동의 자기소개</h1>
+
+        <p>
+            웹 개발자를 꿈꾸는 홍길동입니다.
+        </p>
+
+    </header>
+
+
+    <!-- ==============================
+         Navigation
+         ============================== -->
+
+    <nav>
+
+        <a href="#about">소개</a>
+        <a href="#skill">기술</a>
+        <a href="#education">학력</a>
+        <a href="#contact">연락처</a>
+
+    </nav>
+
+
+    <!-- ==============================
+         Main
+         ============================== -->
+
+    <main>
+
+        <!-- ==============================
+             자기소개
+             ============================== -->
+
+        <section id="about">
+
+            <h2>나의 소개</h2>
+
+            <img
+                src="images/profile.jpg"
+                alt="홍길동의 프로필 사진"
+                width="200"
+            >
+
+            <p>
+                안녕하세요.
+                저는 <strong>홍길동</strong>입니다.
+            </p>
+
+            <p>
+                현재 HTML과 CSS를 공부하고 있으며,
+                웹 개발에 관심이 많습니다.
+            </p>
+
+        </section>
+
+
+        <!-- ==============================
+             기술
+             ============================== -->
+
+        <section id="skill">
+
+            <h2>보유 기술</h2>
+
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Java</li>
+                <li>JavaScript</li>
+            </ul>
+
+        </section>
+
+
+        <!-- ==============================
+             학력
+             ============================== -->
+
+        <section id="education">
+
+            <h2>학력</h2>
+
+            <table border="1">
+
+                <caption>학력 정보</caption>
+
+                <thead>
+                    <tr>
+                        <th>기간</th>
+                        <th>학교</th>
+                        <th>전공</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>2018 ~ 2022</td>
+                        <td>한국대학교</td>
+                        <td>컴퓨터공학과</td>
+                    </tr>
+
+                    <tr>
+                        <td>2026 ~ 현재</td>
+                        <td>IT 교육기관</td>
+                        <td>웹 개발</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- ==============================
+             관심 분야
+             ============================== -->
+
+        <section>
+
+            <h2>관심 분야</h2>
+
+            <ol>
+                <li>웹 개발</li>
+                <li>AI</li>
+                <li>클라우드</li>
+            </ol>
+
+        </section>
+
+
+        <!-- ==============================
+             자기소개 글
+             ============================== -->
+
+        <article>
+
+            <h2>개발자가 되고 싶은 이유</h2>
+
+            <p>
+                새로운 것을 배우고 직접 만들어보는 것을 좋아합니다.
+                <br>
+                앞으로 다양한 웹 서비스를 만들어보고 싶습니다.
+            </p>
+
+        </article>
+
+
+        <!-- ==============================
+             연락처
+             ============================== -->
+
+        <section id="contact">
+
+            <h2>연락처</h2>
+
+            <p>
+                이메일 :
+                <a href="mailto:hong@example.com">
+                    hong@example.com
+                </a>
+            </p>
+
+            <p>
+                전화 :
+                <a href="tel:010-1234-5678">
+                    010-1234-5678
+                </a>
+            </p>
+
+        </section>
+
+
+        <!-- ==============================
+             문의하기
+             ============================== -->
+
+        <section>
+
+            <h2>문의하기</h2>
+
+            <form action="#">
+
+                <p>
+                    <label for="name">이름</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                    >
+                </p>
+
+                <p>
+                    <label for="email">이메일</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                    >
+                </p>
+
+                <p>
+                    <label for="message">문의 내용</label>
+                    <br>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        cols="40"
+                    ></textarea>
+                </p>
+
+                <button type="submit">
+                    문의하기
+                </button>
+
+                <button type="reset">
+                    초기화
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         Footer
+         ============================== -->
+
+    <footer>
+
+        <p>
+            Copyright 2026 Hong Gil Dong.
+        </p>
+
+    </footer>
+
+</body>
+</html>

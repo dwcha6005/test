@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Multimedia</title>
+</head>
+<body>
+
+    <h1>HTML Multimedia</h1>
+
+
+    <!--
+        ========================================
+        1. audio
+        ========================================
+
+        <audio> : 오디오를 재생하는 요소
+
+        controls
+        → 재생 / 일시정지 / 볼륨 등의
+          컨트롤러를 화면에 표시한다.
+    -->
+
+    <h2>1. audio</h2>
+
+    <audio src="media/sample.mp3" controls>
+    </audio>
+
+
+    <!--
+        ========================================
+        2. audio - source
+        ========================================
+
+        <source>를 이용하면
+        여러 형식의 오디오 파일을
+        준비할 수 있다.
+
+        브라우저가 지원하는 형식을
+        선택해서 재생할 수 있다.
+    -->
+
+    <h2>2. audio - source</h2>
+
+    <audio controls>
+
+        <source src="media/sample.mp3"
+                type="audio/mpeg">
+
+        브라우저가 오디오를 지원하지 않습니다.
+
+    </audio>
+
+
+    <!--
+        ========================================
+        3. video
+        ========================================
+
+        <video> : 동영상을 재생하는 요소
+    -->
+
+    <h2>3. video</h2>
+
+    <video src="media/sample.mp4"
+           controls
+           width="500">
+    </video>
+
+
+    <!--
+        ========================================
+        4. video - source
+        ========================================
+    -->
+
+    <h2>4. video - source</h2>
+
+    <video controls
+           width="500">
+
+        <source src="media/sample.mp4"
+                type="video/mp4">
+
+        브라우저가 비디오를 지원하지 않습니다.
+
+    </video>
+
+
+    <!--
+        ========================================
+        5. video 속성
+        ========================================
+
+        controls
+        → 재생 컨트롤 표시
+
+        autoplay
+        → 자동 재생
+
+        loop
+        → 반복 재생
+
+        muted
+        → 음소거
+
+        poster
+        → 동영상 재생 전 표시할 이미지
+    -->
+
+    <h2>5. video 속성</h2>
+
+    <video controls
+           width="500"
+           loop
+           muted>
+
+        <source src="media/sample.mp4"
+                type="video/mp4">
+
+    </video>
+
+
+    <!--
+        ========================================
+        6. iframe
+        ========================================
+
+        외부 웹 콘텐츠를
+        현재 페이지 안에 삽입할 수 있다.
+
+        YouTube 영상 등을 삽입할 때
+        사용할 수 있다.
+    -->
+
+    <h2>6. iframe</h2>
+
+    <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/VIDEO_ID"
+        title="YouTube video"
+        allowfullscreen>
+    </iframe>
+
+
+    <!--
+        ========================================
+        7. autoplay 주의사항
+        ========================================
+
+        브라우저는 사용자 경험을 위해
+        소리가 나는 미디어의 자동 재생을
+        제한할 수 있다.
+
+        따라서 autoplay만 지정한다고
+        항상 자동 재생되는 것은 아니다.
+
+        자동 재생이 필요한 경우
+        muted와 함께 사용하는 경우가 많다.
+    -->
+
+
+    <!--
+        ========================================
+        8. 멀티미디어 정리
+        ========================================
+
+        <audio>
+        → 오디오
+
+        <video>
+        → 비디오
+
+        <source>
+        → 미디어 파일 지정
+
+        <iframe>
+        → 외부 콘텐츠 삽입
+    -->
+
+</body>
+</html>
