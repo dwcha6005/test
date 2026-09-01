@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>쇼핑몰 랜딩페이지 종합 실습</title>
+
+
+    <!--
+    ==========================================================
+    CSS 종합 실습
+    ==========================================================
+
+    지금까지 배운 CSS를 이용하여
+    하나의 쇼핑몰 랜딩페이지를 완성해보세요.
+
+
+    [사용 기술]
+
+    - display
+    - position
+    - flex
+    - box-shadow
+    - border-radius
+    - :hover
+    - :active
+    - ::before
+    - ::after
+    - transition
+    - transform
+    - animation
+    - background
+    - opacity
+
+
+    ==========================================================
+    [페이지 구성]
+    ==========================================================
+
+    ① Header
+    ② Main Banner
+    ③ 상품 목록
+    ④ 이벤트 배너
+    ⑤ Footer
+
+
+    ==========================================================
+    [실습 조건]
+    ==========================================================
+
+
+    ① HEADER
+
+    - 로고와 메뉴를 가로로 배치
+    - display: flex 사용
+    - 메뉴 사이에 간격 설정
+    - 메뉴에 마우스를 올리면 색상이 변경
+    - ::after를 이용하여 메뉴 밑줄 효과
+    - transition 사용
+
+
+    ----------------------------------------------------------
+
+
+    ② MAIN BANNER
+
+    - 화면 중앙에 제목과 설명 배치
+    - 버튼 만들기
+    - 버튼 hover 시 크기 확대
+    - transform + transition 사용
+    - 배너 제목은 animation을 이용하여
+      아래에서 위로 올라오며 나타나게 만들기
+
+
+    ----------------------------------------------------------
+
+
+    ③ PRODUCT
+
+    - 상품 카드 3개를 가로로 배치
+    - display: flex 사용
+    - 카드에 box-shadow 적용
+    - border-radius 적용
+    - 카드 hover 시 위로 10px 이동
+    - transform + transition 사용
+    - 상품 이미지도 hover 시 살짝 확대
+    - 이미지가 카드 영역 밖으로 나오지 않도록
+      overflow: hidden 사용
+
+
+    ----------------------------------------------------------
+
+
+    ④ EVENT BANNER
+
+    - position: relative 사용
+    - SALE 배지를 position: absolute로 배치
+    - 배지를 둥글게 만들기
+    - animation을 이용하여 배지가
+      계속 살짝 커졌다 작아지게 만들기
+
+
+    ----------------------------------------------------------
+
+
+    ⑤ FOOTER
+
+    - 가운데 정렬
+    - 어두운 배경
+    - 글자 색상 변경
+
+
+    ==========================================================
+    [중요]
+    ==========================================================
+
+    아래 CSS는 정답 코드입니다.
+
+    처음에는 CSS를 지우거나 주석 처리한 상태에서
+    직접 만들어보고,
+
+    어려운 부분은 아래 정답과 비교해보세요.
+
+
+    ==========================================================
+    -->
+
+
+    <style>
+
+        /*
+        ==========================================================
+        기본 설정
+        ==========================================================
+        */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Noto Sans KR",
+                sans-serif;
+
+            color: #333;
+
+            background-color: #f8f8f8;
+        }
+
+        a {
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        /*
+        ==========================================================
+        01. HEADER
+        ==========================================================
+        */
+
+        header {
+            height: 70px;
+
+            padding: 0 50px;
+
+            background-color: white;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /*
+        로고
+        */
+
+        .logo {
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+
+        /*
+        메뉴
+        */
+
+        .nav {
+            display: flex;
+
+            gap: 30px;
+        }
+
+
+        /*
+        메뉴 링크
+
+        position: relative를 사용하는 이유
+
+        ::after를 이용한 밑줄을
+        링크를 기준으로 배치하기 위해서이다.
+        */
+
+        .nav a {
+            position: relative;
+
+            padding: 10px 0;
+
+            transition:
+                color 0.3s;
+        }
+
+
+        /*
+        hover했을 때 글자 색상 변경
+        */
+
+        .nav a:hover {
+            color: #777;
+        }
+
+
+        /*
+        메뉴 밑줄
+
+        처음에는 scaleX(0)
+
+        hover하면 scaleX(1)
+        */
+
+        .nav a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 2px;
+
+            background-color: #333;
+
+            transform:
+                scaleX(0);
+
+            transform-origin: left;
+
+            transition:
+                transform 0.3s;
+        }
+
+
+        .nav a:hover::after {
+            transform:
+                scaleX(1);
+        }
+
+
+        /*
+        ==========================================================
+        02. MAIN BANNER
+        ==========================================================
+        */
+
+        .main-banner {
+            min-height: 450px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eeeeee,
+                    #ffffff
+                );
+        }
+
+
+        .main-banner h1 {
+            margin: 0 0 15px;
+
+            font-size: 48px;
+
+            animation:
+                titleShow 1s ease-out;
+        }
+
+
+        .main-banner p {
+            margin-bottom: 30px;
+
+            color: #666;
+
+            animation:
+                titleShow 1s ease-out 0.2s backwards;
+        }
+
+
+        /*
+        제목 등장 애니메이션
+
+        아래 → 위
+
+        투명 → 불투명
+        */
+
+        @keyframes titleShow {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /*
+        메인 버튼
+        */
+
+        .main-button {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background-color: #333;
+
+            color: white;
+
+            border-radius: 5px;
+
+            transition:
+                transform 0.3s,
+                background-color 0.3s;
+        }
+
+
+        /*
+        버튼 hover
+
+        살짝 확대
+        */
+
+        .main-button:hover {
+            transform:
+                scale(1.08);
+
+            background-color: #555;
+        }
+
+
+        /*
+        버튼 클릭
+
+        눌리는 느낌
+        */
+
+        .main-button:active {
+            transform:
+                scale(0.98);
+        }
+
+
+        /*
+        ==========================================================
+        03. PRODUCT SECTION
+        ==========================================================
+        */
+
+        .products {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 80px 20px;
+        }
+
+
+        .section-title {
+            margin-bottom: 40px;
+
+            text-align: center;
+
+            font-size: 32px;
+        }
+
+
+        /*
+        상품 카드 영역
+        */
+
+        .product-list {
+            display: flex;
+
+            gap: 25px;
+        }
+
+
+        /*
+        상품 카드
+        */
+
+        .product {
+            flex: 1;
+
+            background-color: white;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.1);
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s;
+        }
+
+
+        /*
+        카드 hover
+
+        위로 이동
+        그림자 강화
+        */
+
+        .product:hover {
+            transform:
+                translateY(-10px);
+
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.18);
+        }
+
+
+        /*
+        상품 이미지 영역
+        */
+
+        .product-image {
+            height: 220px;
+
+            overflow: hidden;
+        }
+
+
+        /*
+        상품 이미지
+        */
+
+        .product-image img {
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 0.5s;
+        }
+
+
+        /*
+        카드에 hover하면
+        이미지 확대
+        */
+
+        .product:hover img {
+            transform:
+                scale(1.1);
+        }
+
+
+        /*
+        상품 정보
+        */
+
+        .product-info {
+            padding: 20px;
+        }
+
+
+        .product-info h3 {
+            margin-top: 0;
+
+            margin-bottom: 10px;
+        }
+
+
+        .product-info p {
+            margin-bottom: 20px;
+
+            color: #777;
+        }
+
+
+        /*
+        상품 버튼
+        */
+
+        .product-button {
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            border: 1px solid #333;
+
+            border-radius: 5px;
+
+            transition:
+                background-color 0.3s,
+                color 0.3s,
+                transform 0.3s;
+        }
+
+
+        .product-button:hover {
+            background-color: #333;
+
+            color: white;
+
+            transform:
+                scale(1.05);
+        }
+
+
+        /*
+        ==========================================================
+        04. EVENT BANNER
+        ==========================================================
+        */
+
+        .event {
+            position: relative;
+
+            max-width: 1100px;
+
+            margin: 0 auto 80px;
+
+            padding: 60px 30px;
+
+            background-color: #222;
+
+            color: white;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+
+        .event h2 {
+            margin-top: 0;
+
+            font-size: 32px;
+        }
+
+
+        .event p {
+            color: #ddd;
+        }
+
+
+        /*
+        SALE 배지
+
+        position: absolute를 이용하여
+        이벤트 배너 오른쪽 위에 배치
+        */
+
+        .sale-badge {
+            position: absolute;
+
+            top: 20px;
+            right: 20px;
+
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background-color: white;
+
+            color: #222;
+
+            border-radius: 50%;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            animation:
+                badge 1s infinite alternate;
+        }
+
+
+        /*
+        SALE 배지 애니메이션
+
+        1배 → 1.1배 → 1배
+
+        */
+
+        @keyframes badge {
+
+            from {
+                transform:
+                    scale(1);
+            }
+
+            to {
+                transform:
+                    scale(1.1);
+            }
+
+        }
+
+
+        /*
+        ==========================================================
+        05. FOOTER
+        ==========================================================
+        */
+
+        footer {
+            padding: 40px;
+
+            background-color: #111;
+
+            color: #aaa;
+
+            text-align: center;
+        }
+
+
+        /*
+        ==========================================================
+        06. 반응형
+
+        화면이 좁아지면
+        상품 카드를 세로로 배치
+        ==========================================================
+        */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            .nav {
+                gap: 15px;
+
+                font-size: 14px;
+            }
+
+            .main-banner h1 {
+                font-size: 34px;
+            }
+
+            .product-list {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!--
+    ==========================================================
+    01. HEADER
+    ==========================================================
+    -->
+
+    <header>
+
+        <div class="logo">
+            MY SHOP
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="javascript:void(0)">
+                HOME
+            </a>
+
+            <a href="javascript:void(0)">
+                PRODUCT
+            </a>
+
+            <a href="javascript:void(0)">
+                ABOUT
+            </a>
+
+            <a href="javascript:void(0)">
+                CONTACT
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!--
+    ==========================================================
+    02. MAIN BANNER
+    ==========================================================
+    -->
+
+    <section class="main-banner">
+
+        <h1>
+            나만의 스타일을 완성하세요
+        </h1>
+
+        <p>
+            특별한 상품을 지금 만나보세요.
+        </p>
+
+        <a
+            href="javascript:void(0)"
+            class="main-button"
+        >
+            상품 보러가기
+        </a>
+
+    </section>
+
+
+
+    <!--
+    ==========================================================
+    03. PRODUCT
+    ==========================================================
+    -->
+
+    <section class="products">
+
+        <h2 class="section-title">
+            인기 상품
+        </h2>
+
+
+        <div class="product-list">
+
+
+            <!-- 상품 1 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://picsum.photos/500/400?random=1"
+                        alt="운동화"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        데일리 운동화
+                    </h3>
+
+                    <p>
+                        어디에나 잘 어울리는
+                        편안한 데일리 운동화
+                    </p>
+
+                    <strong>
+                        59,000원
+                    </strong>
+
+                    <br><br>
+
+                    <a
+                        href="javascript:void(0)"
+                        class="product-button"
+                    >
+                        구매하기
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- 상품 2 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://picsum.photos/500/400?random=2"
+                        alt="백팩"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        데일리 백팩
+                    </h3>
+
+                    <p>
+                        깔끔하고 실용적인
+                        데일리 백팩
+                    </p>
+
+                    <strong>
+                        79,000원
+                    </strong>
+
+                    <br><br>
+
+                    <a
+                        href="javascript:void(0)"
+                        class="product-button"
+                    >
+                        구매하기
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- 상품 3 -->
+
+            <div class="product">
+
+                <div class="product-image">
+
+                    <img
+                        src="https://picsum.photos/500/400?random=3"
+                        alt="모자"
+                    >
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        베이직 모자
+                    </h3>
+
+                    <p>
+                        어떤 스타일에도 어울리는
+                        심플한 디자인
+                    </p>
+
+                    <strong>
+                        29,000원
+                    </strong>
+
+                    <br><br>
+
+                    <a
+                        href="javascript:void(0)"
+                        class="product-button"
+                    >
+                        구매하기
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!--
+    ==========================================================
+    04. EVENT
+    ==========================================================
+    -->
+
+    <section class="event">
+
+        <div class="sale-badge">
+            SALE
+        </div>
+
+
+        <h2>
+            특별 할인 이벤트
+        </h2>
+
+        <p>
+            지금 구매하면 인기 상품을
+            특별한 가격으로 만나볼 수 있습니다.
+        </p>
+
+        <a
+            href="javascript:void(0)"
+            class="main-button"
+        >
+            이벤트 확인하기
+        </a>
+
+    </section>
+
+
+
+    <!--
+    ==========================================================
+    05. FOOTER
+    ==========================================================
+    -->
+
+    <footer>
+
+        <p>
+            © 2026 MY SHOP. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+</html>

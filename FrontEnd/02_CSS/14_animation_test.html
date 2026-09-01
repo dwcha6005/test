@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation 실습</title>
+
+    <style>
+
+        /*
+        ==================================================
+        실습 1. 오른쪽으로 이동
+        ==================================================
+
+        박스가 페이지가 실행되면
+        왼쪽에서 오른쪽으로 이동하도록 만드세요.
+
+        조건
+
+        - @keyframes 사용
+        - translateX()
+        - animation-duration: 2s
+        */
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightblue;
+
+            animation:
+                move1 2s;
+        }
+
+        @keyframes move1 {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 2. 페이드 인
+        ==================================================
+
+        박스가 처음에는 보이지 않다가
+        서서히 나타나도록 만드세요.
+
+        조건
+
+        opacity
+
+        0 → 1
+        */
+
+        .box2 {
+            width: 200px;
+            height: 100px;
+
+            background-color: lightcoral;
+
+            animation:
+                fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 3. 좌우 왕복
+        ==================================================
+
+        박스가
+
+        왼쪽 → 오른쪽 → 왼쪽
+
+        으로 계속 이동하도록 만드세요.
+
+        조건
+
+        - infinite
+        - alternate
+        - translateX()
+        */
+
+        .box3 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightgreen;
+
+            animation:
+                move3 2s infinite alternate;
+        }
+
+        @keyframes move3 {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 4. 계속 회전
+        ==================================================
+
+        박스가 360도 계속 회전하도록 만드세요.
+
+        조건
+
+        - rotate()
+        - infinite
+        - linear
+        */
+
+        .box4 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightblue;
+
+            animation:
+                rotate4 2s linear infinite;
+        }
+
+        @keyframes rotate4 {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 5. 점프 효과
+        ==================================================
+
+        박스가 위로 올라갔다가
+        다시 내려오는 효과를 만들어보세요.
+
+        여러 개의 keyframe을 사용합니다.
+
+        0%
+        → 원래 위치
+
+        50%
+        → 위로 100px
+
+        100%
+        → 원래 위치
+
+        무한 반복하세요.
+        */
+
+        .box5 {
+            width: 80px;
+            height: 80px;
+
+            background-color: lightcoral;
+
+            animation:
+                jump5 1s infinite;
+        }
+
+        @keyframes jump5 {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-100px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 6. 로딩 애니메이션
+        ==================================================
+
+        원형 로딩 아이콘을 만들어보세요.
+
+        조건
+
+        - width / height
+        - border
+        - border-radius: 50%
+        - border의 한쪽 색상 변경
+        - rotate()
+        - linear
+        - infinite
+        */
+
+        .loading6 {
+            width: 50px;
+            height: 50px;
+
+            border: 5px solid #ddd;
+
+            border-top-color: #333;
+
+            border-radius: 50%;
+
+            animation:
+                loading6 1s linear infinite;
+        }
+
+        @keyframes loading6 {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 7. 카드 등장 효과
+        ==================================================
+
+        카드가 페이지에 나타날 때
+
+        1. 아래쪽에서 올라오고
+        2. 동시에 투명 → 불투명
+
+        효과가 나타나도록 만드세요.
+
+        조건
+
+        opacity
+        translateY()
+        */
+
+        .card7 {
+            width: 250px;
+
+            padding: 20px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            animation:
+                cardShow7 1s ease-out;
+        }
+
+        @keyframes cardShow7 {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 8. 버튼 주목 효과
+        ==================================================
+
+        버튼이 계속 살짝 커졌다 작아지는
+        효과를 만들어보세요.
+
+        조건
+
+        scale()
+
+        0%
+        → scale(1)
+
+        50%
+        → scale(1.1)
+
+        100%
+        → scale(1)
+
+        무한 반복
+        */
+
+        .button8 {
+            display: inline-block;
+
+            padding: 12px 25px;
+
+            border: 1px solid #333;
+
+            text-decoration: none;
+
+            color: black;
+
+            animation:
+                attention8 1s infinite;
+        }
+
+        @keyframes attention8 {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 9. 메뉴 등장 효과
+        ==================================================
+
+        메뉴가 페이지에 나타날 때
+
+        왼쪽 → 오른쪽
+
+        으로 이동하면서 나타나도록 만드세요.
+
+        동시에
+
+        opacity: 0 → 1
+
+        효과를 적용하세요.
+        */
+
+        .menu9 {
+            display: flex;
+
+            gap: 20px;
+
+            animation:
+                menuShow9 1s;
+        }
+
+        @keyframes menuShow9 {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 10. 공이 사각형으로 움직이기
+        ==================================================
+
+        공이 다음 순서로 이동하도록 만드세요.
+
+        ① 왼쪽 위
+              ↓
+        ② 오른쪽 위
+              ↓
+        ③ 오른쪽 아래
+              ↓
+        ④ 왼쪽 아래
+              ↓
+        ⑤ 왼쪽 위
+
+
+        조건
+
+        - 0%
+        - 25%
+        - 50%
+        - 75%
+        - 100%
+        - infinite
+        */
+
+        .ball10 {
+            width: 50px;
+            height: 50px;
+
+            background-color: lightgreen;
+
+            border-radius: 50%;
+
+            animation:
+                ball10 4s infinite;
+        }
+
+        @keyframes ball10 {
+
+            0% {
+                transform:
+                    translate(0, 0);
+            }
+
+            25% {
+                transform:
+                    translate(250px, 0);
+            }
+
+            50% {
+                transform:
+                    translate(250px, 150px);
+            }
+
+            75% {
+                transform:
+                    translate(0, 150px);
+            }
+
+            100% {
+                transform:
+                    translate(0, 0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 11. 상품 카드 순차 등장
+        ==================================================
+
+        상품 카드 3개가
+
+        첫 번째
+        ↓
+        두 번째
+        ↓
+        세 번째
+
+        순서대로 나타나는 것처럼 만들어보세요.
+
+        animation-delay를 이용합니다.
+
+
+        첫 번째 카드
+        → delay 없음
+
+        두 번째 카드
+        → 0.3초
+
+        세 번째 카드
+        → 0.6초
+
+
+        animation-fill-mode: forwards를 사용하여
+        애니메이션이 끝난 후에도
+        카드가 보이는 상태를 유지합니다.
+        */
+
+        .product11 {
+            display: inline-block;
+
+            width: 200px;
+
+            padding: 20px;
+
+            margin: 10px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            opacity: 0;
+
+            animation:
+                productShow11 0.7s forwards;
+        }
+
+        .product11:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .product11:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes productShow11 {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        실습 12. 종합 실습
+        ==================================================
+
+        아래 카드에 다음 효과를 적용하세요.
+
+        페이지가 열리면
+
+        1. 카드가 아래에서 올라옴
+        2. 동시에 서서히 나타남
+        3. 애니메이션 종료 후 현재 위치 유지
+
+        카드에 마우스를 올리면
+
+        4. 카드가 위로 10px 이동
+        5. 크기가 1.03배 확대
+        6. 그림자 강화
+
+        여기서는
+
+        animation
+
+        과
+
+        transition
+
+        을 함께 사용합니다.
+        */
+
+        .product12 {
+            width: 250px;
+
+            padding: 20px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.15);
+
+            animation:
+                productShow12 0.8s ease-out forwards;
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s;
+        }
+
+        .product12:hover {
+            transform:
+                translateY(-10px)
+                scale(1.03);
+
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        @keyframes productShow12 {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Animation 실습</h1>
+
+
+    <!-- ==================================================
+         실습 1
+         ================================================== -->
+
+    <h2>실습 1. 오른쪽 이동</h2>
+
+    <div class="box1"></div>
+
+
+    <!-- ==================================================
+         실습 2
+         ================================================== -->
+
+    <h2>실습 2. 페이드 인</h2>
+
+    <div class="box2"></div>
+
+
+    <!-- ==================================================
+         실습 3
+         ================================================== -->
+
+    <h2>실습 3. 좌우 왕복</h2>
+
+    <div class="box3"></div>
+
+
+    <!-- ==================================================
+         실습 4
+         ================================================== -->
+
+    <h2>실습 4. 계속 회전</h2>
+
+    <div class="box4"></div>
+
+
+    <!-- ==================================================
+         실습 5
+         ================================================== -->
+
+    <h2>실습 5. 점프 효과</h2>
+
+    <div class="box5"></div>
+
+
+    <!-- ==================================================
+         실습 6
+         ================================================== -->
+
+    <h2>실습 6. 로딩 애니메이션</h2>
+
+    <div class="loading6"></div>
+
+
+    <!-- ==================================================
+         실습 7
+         ================================================== -->
+
+    <h2>실습 7. 카드 등장</h2>
+
+    <div class="card7">
+
+        <h3>
+            카드 제목
+        </h3>
+
+        <p>
+            아래에서 올라오면서 나타납니다.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         실습 8
+         ================================================== -->
+
+    <h2>실습 8. 버튼 주목 효과</h2>
+
+    <a class="button8">
+        지금 확인하기
+    </a>
+
+
+    <!-- ==================================================
+         실습 9
+         ================================================== -->
+
+    <h2>실습 9. 메뉴 등장</h2>
+
+    <nav class="menu9">
+
+        <a>
+            HOME
+        </a>
+
+        <a>
+            ABOUT
+        </a>
+
+        <a>
+            PRODUCT
+        </a>
+
+        <a>
+            CONTACT
+        </a>
+
+    </nav>
+
+
+    <!-- ==================================================
+         실습 10
+         ================================================== -->
+
+    <h2>실습 10. 공 움직이기</h2>
+
+    <div
+        style="
+            width: 300px;
+            height: 200px;
+            border: 1px solid #333;
+        "
+    >
+
+        <div class="ball10"></div>
+
+    </div>
+
+
+    <!-- ==================================================
+         실습 11
+         ================================================== -->
+
+    <h2>실습 11. 상품 카드 순차 등장</h2>
+
+    <div>
+
+        <div class="product11">
+
+            <h3>
+                운동화
+            </h3>
+
+            <p>
+                59,000원
+            </p>
+
+        </div>
+
+
+        <div class="product11">
+
+            <h3>
+                백팩
+            </h3>
+
+            <p>
+                79,000원
+            </p>
+
+        </div>
+
+
+        <div class="product11">
+
+            <h3>
+                모자
+            </h3>
+
+            <p>
+                29,000원
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         실습 12
+         ================================================== -->
+
+    <h2>실습 12. 종합 실습</h2>
+
+    <div class="product12">
+
+        <h3>
+            인기 상품
+        </h3>
+
+        <p>
+            페이지가 열리면 카드가 등장합니다.
+        </p>
+
+        <p>
+            마우스를 올리면 카드가 떠오릅니다.
+        </p>
+
+    </div>
+
+
+</body>
+</html>

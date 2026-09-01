@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Netflix Clone</title>
+
+    <style>
+
+        /*
+        ==========================================================
+        15_practice.html
+        Netflix Clone Coding
+
+        지금까지 배운 CSS를 종합하여
+        실제 OTT 서비스와 비슷한 화면을 만들어봅니다.
+
+        사용한 주요 CSS
+
+        - display
+        - flex
+        - position
+        - z-index
+        - background
+        - box-shadow
+        - border-radius
+        - :hover
+        - ::before
+        - ::after
+        - transition
+        - transform
+        - animation
+        ==========================================================
+        */
+
+
+        /*
+        ==========================================================
+        01. 기본 설정
+        ==========================================================
+        */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            margin: 0;
+
+            background-color: #141414;
+
+            color: white;
+
+            font-family:
+                Arial,
+                "Noto Sans KR",
+                sans-serif;
+        }
+
+
+        a {
+            color: inherit;
+
+            text-decoration: none;
+        }
+
+
+        button {
+            border: 0;
+
+            cursor: pointer;
+
+            font-family: inherit;
+        }
+
+
+
+        /*
+        ==========================================================
+        02. HEADER
+        ==========================================================
+        */
+
+        .header {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 70px;
+
+            padding: 0 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            z-index: 100;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.9),
+                    rgba(0, 0, 0, 0)
+                );
+        }
+
+
+        /*
+        ==========================================================
+        Netflix Logo
+        ==========================================================
+        */
+
+        .logo {
+            font-size: 30px;
+
+            font-weight: 900;
+
+            letter-spacing: -2px;
+
+            color: #e50914;
+        }
+
+
+        /*
+        ==========================================================
+        Navigation
+        ==========================================================
+        */
+
+        .nav {
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+            margin-right: auto;
+
+            margin-left: 40px;
+        }
+
+
+        .nav a {
+            position: relative;
+
+            font-size: 14px;
+
+            color: #ddd;
+
+            transition:
+                color 0.3s;
+        }
+
+
+        .nav a:hover {
+            color: white;
+        }
+
+
+        /*
+        메뉴 밑줄 효과
+
+        ::after
+        position
+        transform
+        transition
+        */
+
+        .nav a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -8px;
+
+            width: 100%;
+            height: 2px;
+
+            background-color: white;
+
+            transform:
+                scaleX(0);
+
+            transform-origin: left;
+
+            transition:
+                transform 0.3s;
+        }
+
+
+        .nav a:hover::after {
+            transform:
+                scaleX(1);
+        }
+
+
+        /*
+        ==========================================================
+        Header 오른쪽 영역
+        ==========================================================
+        */
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .search {
+            font-size: 22px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s;
+        }
+
+
+        .search:hover {
+            transform:
+                scale(1.2);
+        }
+
+
+        .bell {
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+
+        .profile {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #777,
+                    #222
+                );
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s;
+        }
+
+
+        .profile:hover {
+            transform:
+                scale(1.1);
+        }
+
+
+
+        /*
+        ==========================================================
+        03. HERO
+        ==========================================================
+        */
+
+        .hero {
+            position: relative;
+
+            height: 700px;
+
+            padding-left: 60px;
+
+            display: flex;
+
+            align-items: center;
+
+            background-image:
+                url("https://picsum.photos/id/1040/1600/900");
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+
+        /*
+        배경 어둡게 만들기
+
+        ::before를 이용하여
+        Hero 전체에 어두운 레이어를 만든다.
+        */
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 0.9),
+                    rgba(0, 0, 0, 0.3),
+                    rgba(0, 0, 0, 0)
+                );
+        }
+
+
+        /*
+        아래쪽도 어둡게 처리
+        */
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 180px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #141414,
+                    transparent
+                );
+        }
+
+
+        /*
+        ==========================================================
+        Hero Content
+        ==========================================================
+        */
+
+        .hero-content {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 550px;
+
+            animation:
+                heroShow 1s ease-out;
+        }
+
+
+        /*
+        Hero 등장 애니메이션
+        */
+
+        @keyframes heroShow {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .hero-title {
+            margin: 0 0 20px;
+
+            font-size: 60px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            text-shadow:
+                2px 2px 10px
+                rgba(0, 0, 0, 0.8);
+        }
+
+
+        .hero-info {
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .rating {
+            color: #46d369;
+        }
+
+
+        .hero-description {
+            margin: 0 0 25px;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            color: #eee;
+
+            text-shadow:
+                1px 1px 5px
+                rgba(0, 0, 0, 0.8);
+        }
+
+
+        /*
+        ==========================================================
+        Hero Button
+        ==========================================================
+        */
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 10px;
+        }
+
+
+        .play-button,
+        .info-button {
+            padding: 12px 25px;
+
+            border-radius: 5px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition:
+                transform 0.3s,
+                background-color 0.3s;
+        }
+
+
+        .play-button {
+            background-color: white;
+
+            color: black;
+        }
+
+
+        .info-button {
+            background-color:
+                rgba(100, 100, 100, 0.8);
+
+            color: white;
+        }
+
+
+        .play-button:hover,
+        .info-button:hover {
+            transform:
+                scale(1.05);
+        }
+
+
+        .play-button:active,
+        .info-button:active {
+            transform:
+                scale(0.97);
+        }
+
+
+
+        /*
+        ==========================================================
+        04. CONTENT
+        ==========================================================
+        */
+
+        .content {
+            position: relative;
+
+            z-index: 5;
+
+            margin-top: -80px;
+
+            padding: 0 50px 80px;
+        }
+
+
+        /*
+        ==========================================================
+        콘텐츠 섹션
+        ==========================================================
+        */
+
+        .section {
+            margin-bottom: 45px;
+        }
+
+
+        .section-title {
+            margin-bottom: 15px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+
+        /*
+        ==========================================================
+        Movie List
+        ==========================================================
+        */
+
+        .movie-list {
+            display: flex;
+
+            gap: 10px;
+
+            overflow-x: auto;
+
+            padding: 10px 0 20px;
+        }
+
+
+        /*
+        스크롤바 숨기기
+        */
+
+        .movie-list::-webkit-scrollbar {
+            height: 5px;
+        }
+
+
+        .movie-list::-webkit-scrollbar-thumb {
+            background-color: #555;
+
+            border-radius: 10px;
+        }
+
+
+
+        /*
+        ==========================================================
+        Movie Card
+        ==========================================================
+        */
+
+        .movie {
+            position: relative;
+
+            flex: 0 0 220px;
+
+            height: 125px;
+
+            border-radius: 5px;
+
+            overflow: hidden;
+
+            background-color: #222;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s;
+        }
+
+
+        /*
+        카드 hover
+
+        확대 + 위로 이동
+        */
+
+        .movie:hover {
+            transform:
+                scale(1.12)
+                translateY(-5px);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.6);
+
+            z-index: 10;
+        }
+
+
+        .movie img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition:
+                transform 0.4s;
+        }
+
+
+        .movie:hover img {
+            transform:
+                scale(1.05);
+        }
+
+
+        /*
+        이미지 위 어두운 영역
+
+        hover했을 때 나타난다.
+        */
+
+        .movie::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 50%;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.8),
+                    transparent
+                );
+        }
+
+
+        /*
+        영화 제목
+        */
+
+        .movie-title {
+            position: absolute;
+
+            left: 12px;
+            bottom: 10px;
+
+            z-index: 2;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            text-shadow:
+                1px 1px 5px black;
+        }
+
+
+
+        /*
+        ==========================================================
+        05. TOP 10
+        ==========================================================
+        */
+
+        .top-list {
+            display: flex;
+
+            gap: 20px;
+
+            overflow-x: auto;
+
+            padding: 10px 0 20px;
+        }
+
+
+        .top-item {
+            position: relative;
+
+            flex: 0 0 230px;
+
+            height: 150px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            overflow: hidden;
+
+            border-radius: 5px;
+
+            background-color: #222;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s;
+        }
+
+
+        .top-item:hover {
+            transform:
+                scale(1.08);
+        }
+
+
+        .top-number {
+            position: absolute;
+
+            left: -5px;
+            bottom: -15px;
+
+            z-index: 3;
+
+            font-size: 130px;
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            color: #000;
+
+            -webkit-text-stroke:
+                2px #777;
+        }
+
+
+        .top-item img {
+            width: 65%;
+            height: 100%;
+
+            margin-left: auto;
+
+            object-fit: cover;
+        }
+
+
+
+        /*
+        ==========================================================
+        06. EVENT BANNER
+        ==========================================================
+        */
+
+        .event {
+            position: relative;
+
+            margin: 30px 0;
+
+            padding: 50px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #222,
+                    #444
+                );
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.4);
+        }
+
+
+        .event-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .event h2 {
+            margin: 0 0 10px;
+
+            font-size: 30px;
+        }
+
+
+        .event p {
+            margin: 0;
+
+            color: #ccc;
+        }
+
+
+        /*
+        장식용 원
+
+        pseudo-element + position
+        */
+
+        .event::after {
+            content: "";
+
+            position: absolute;
+
+            right: -80px;
+            top: -100px;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(229, 9, 20, 0.25);
+
+            animation:
+                eventCircle 3s infinite alternate;
+        }
+
+
+        @keyframes eventCircle {
+
+            from {
+                transform:
+                    scale(1);
+            }
+
+            to {
+                transform:
+                    scale(1.2);
+            }
+
+        }
+
+
+
+        /*
+        ==========================================================
+        07. FOOTER
+        ==========================================================
+        */
+
+        footer {
+            padding: 50px;
+
+            border-top:
+                1px solid #333;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+
+        .footer-menu {
+            display: flex;
+
+            gap: 25px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .footer-menu a:hover {
+            color: white;
+        }
+
+
+
+        /*
+        ==========================================================
+        08. 반응형
+        ==========================================================
+        */
+
+        @media (max-width: 900px) {
+
+            .header {
+                padding: 0 25px;
+            }
+
+
+            .nav {
+                gap: 15px;
+
+                margin-left: 20px;
+            }
+
+
+            .nav a:nth-child(n+4) {
+                display: none;
+            }
+
+
+            .hero {
+                height: 600px;
+
+                padding-left: 30px;
+            }
+
+
+            .hero-title {
+                font-size: 45px;
+            }
+
+
+            .content {
+                padding-left: 25px;
+
+                padding-right: 25px;
+            }
+
+
+            .movie {
+                flex-basis: 180px;
+
+                height: 105px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                height: 60px;
+            }
+
+
+            .logo {
+                font-size: 24px;
+            }
+
+
+            .nav {
+                display: none;
+            }
+
+
+            .header-right {
+                gap: 12px;
+            }
+
+
+            .hero {
+                height: 550px;
+
+                padding:
+                    0 25px;
+
+                align-items: flex-end;
+
+                padding-bottom: 100px;
+            }
+
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+
+            .content {
+                margin-top: -40px;
+            }
+
+
+            .movie {
+                flex-basis: 160px;
+
+                height: 90px;
+            }
+
+
+            .event {
+                padding: 30px 25px;
+            }
+
+
+            footer {
+                padding: 30px 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!--
+    ==========================================================
+    HEADER
+    ==========================================================
+    -->
+
+    <header class="header">
+
+        <div class="logo">
+            NETFLIX
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="javascript:void(0)">
+                홈
+            </a>
+
+            <a href="javascript:void(0)">
+                시리즈
+            </a>
+
+            <a href="javascript:void(0)">
+                영화
+            </a>
+
+            <a href="javascript:void(0)">
+                최신 콘텐츠
+            </a>
+
+            <a href="javascript:void(0)">
+                나의 Netflix
+            </a>
+
+        </nav>
+
+
+        <div class="header-right">
+
+            <span class="search">
+                🔍
+            </span>
+
+            <span class="bell">
+                🔔
+            </span>
+
+            <div class="profile"></div>
+
+        </div>
+
+    </header>
+
+
+
+    <!--
+    ==========================================================
+    HERO
+    ==========================================================
+    -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1 class="hero-title">
+                THE LAST<br>
+                ADVENTURE
+            </h1>
+
+
+            <div class="hero-info">
+
+                <span class="rating">
+                    98% 일치
+                </span>
+
+                <span>
+                    2026
+                </span>
+
+                <span>
+                    16+
+                </span>
+
+                <span>
+                    2시간 18분
+                </span>
+
+            </div>
+
+
+            <p class="hero-description">
+
+                모든 것이 끝났다고 생각한 순간,
+                새로운 모험이 시작된다.
+                세상을 구하기 위한 마지막 여정에
+                다시 한번 함께하세요.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <button class="play-button">
+                    ▶ 재생
+                </button>
+
+                <button class="info-button">
+                    ⓘ 상세 정보
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!--
+    ==========================================================
+    CONTENT
+    ==========================================================
+    -->
+
+    <main class="content">
+
+
+        <!--
+        ======================================================
+        인기 콘텐츠
+        ======================================================
+        -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                인기 콘텐츠
+            </h2>
+
+
+            <div class="movie-list">
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1011/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        새로운 시작
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1012/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        미지의 세계
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1013/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        마지막 여행
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1015/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        어느 여름날
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1016/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        새로운 도시
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1020/500/300"
+                        alt="영화 포스터"
+                    >
+
+                    <span class="movie-title">
+                        야생의 세계
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!--
+        ======================================================
+        TOP 10
+        ======================================================
+        -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                오늘 대한민국의 TOP 10
+            </h2>
+
+
+            <div class="top-list">
+
+
+                <div class="top-item">
+
+                    <span class="top-number">
+                        1
+                    </span>
+
+                    <img
+                        src="https://picsum.photos/id/1025/500/500"
+                        alt="콘텐츠"
+                    >
+
+                </div>
+
+
+                <div class="top-item">
+
+                    <span class="top-number">
+                        2
+                    </span>
+
+                    <img
+                        src="https://picsum.photos/id/1024/500/500"
+                        alt="콘텐츠"
+                    >
+
+                </div>
+
+
+                <div class="top-item">
+
+                    <span class="top-number">
+                        3
+                    </span>
+
+                    <img
+                        src="https://picsum.photos/id/1035/500/500"
+                        alt="콘텐츠"
+                    >
+
+                </div>
+
+
+                <div class="top-item">
+
+                    <span class="top-number">
+                        4
+                    </span>
+
+                    <img
+                        src="https://picsum.photos/id/1039/500/500"
+                        alt="콘텐츠"
+                    >
+
+                </div>
+
+
+                <div class="top-item">
+
+                    <span class="top-number">
+                        5
+                    </span>
+
+                    <img
+                        src="https://picsum.photos/id/1043/500/500"
+                        alt="콘텐츠"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!--
+        ======================================================
+        계속 시청하기
+        ======================================================
+        -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                계속 시청하기
+            </h2>
+
+
+            <div class="movie-list">
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1048/500/300"
+                        alt="콘텐츠"
+                    >
+
+                    <span class="movie-title">
+                        Episode 1
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1050/500/300"
+                        alt="콘텐츠"
+                    >
+
+                    <span class="movie-title">
+                        Episode 2
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1052/500/300"
+                        alt="콘텐츠"
+                    >
+
+                    <span class="movie-title">
+                        Episode 3
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1060/500/300"
+                        alt="콘텐츠"
+                    >
+
+                    <span class="movie-title">
+                        Episode 4
+                    </span>
+
+                </div>
+
+
+                <div class="movie">
+
+                    <img
+                        src="https://picsum.photos/id/1062/500/300"
+                        alt="콘텐츠"
+                    >
+
+                    <span class="movie-title">
+                        Episode 5
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!--
+        ======================================================
+        EVENT
+        ======================================================
+        -->
+
+        <section class="event">
+
+            <div class="event-content">
+
+                <h2>
+                    새로운 콘텐츠가 추가되었습니다.
+                </h2>
+
+                <p>
+                    매주 새로운 영화와 시리즈를 만나보세요.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!--
+    ==========================================================
+    FOOTER
+    ==========================================================
+    -->
+
+    <footer>
+
+        <div class="footer-menu">
+
+            <a href="javascript:void(0)">
+                자막 및 음성
+            </a>
+
+            <a href="javascript:void(0)">
+                미디어 센터
+            </a>
+
+            <a href="javascript:void(0)">
+                개인정보
+            </a>
+
+            <a href="javascript:void(0)">
+                문의하기
+            </a>
+
+        </div>
+
+
+        <p>
+            Netflix Clone Coding Practice
+        </p>
+
+
+        <p>
+            교육용 HTML / CSS 실습 페이지입니다.
+        </p>
+
+    </footer>
+
+
+</body>
+</html>

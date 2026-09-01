@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation</title>
+
+    <style>
+
+        /*
+        ==================================================
+        01. animation이란?
+        ==================================================
+
+        animation은 요소의 CSS 속성을
+        시간에 따라 여러 단계로 변경하는 기능이다.
+
+        transition은 보통
+
+        기본 상태
+            ↓
+        hover
+            ↓
+        변경된 상태
+
+        처럼 상태가 변경될 때 사용한다.
+
+
+        animation은
+
+        시작
+            ↓
+        중간
+            ↓
+        끝
+
+        과 같이 여러 단계의 움직임을
+        직접 만들 수 있다.
+
+
+        animation은 @keyframes와 함께 사용한다.
+
+
+        ==================================================
+        02. @keyframes
+        ==================================================
+
+        @keyframes는 애니메이션의
+        시작과 끝 또는 중간 상태를 정의한다.
+
+        기본 형태
+
+        @keyframes 이름 {
+
+            from {
+                CSS 속성;
+            }
+
+            to {
+                CSS 속성;
+            }
+
+        }
+
+
+        예)
+
+        @keyframes move {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        ==================================================
+        03. animation-name
+        ==================================================
+
+        사용할 @keyframes의 이름을 지정한다.
+
+        @keyframes move {
+            ...
+        }
+
+
+        animation-name: move;
+
+
+        ==================================================
+        04. animation-duration
+        ==================================================
+
+        애니메이션이 한 번 실행되는 시간을 지정한다.
+
+        1초
+
+        animation-duration: 1s;
+
+
+        2초
+
+        animation-duration: 2s;
+        */
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightblue;
+
+            animation-name: move1;
+            animation-duration: 2s;
+        }
+
+        @keyframes move1 {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        05. from / to
+        ==================================================
+
+        from
+        → 애니메이션 시작 상태
+
+        to
+        → 애니메이션 종료 상태
+
+
+        예
+
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+
+        처음에는 투명하고
+        마지막에는 완전히 보이게 만들 수 있다.
+        */
+
+        .box2 {
+            width: 150px;
+            height: 100px;
+
+            background-color: lightcoral;
+
+            animation:
+                fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        06. %를 이용한 여러 단계
+        ==================================================
+
+        @keyframes에서는
+        from / to 대신 퍼센트를 사용할 수 있다.
+
+        0%
+        → 시작
+
+        50%
+        → 중간
+
+        100%
+        → 끝
+
+
+        여러 단계의 움직임을
+        만들 수 있다.
+        */
+
+        .box3 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightgreen;
+
+            animation:
+                moveBox 3s;
+        }
+
+        @keyframes moveBox {
+
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(200px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        07. animation-iteration-count
+        ==================================================
+
+        애니메이션을 몇 번 반복할지 지정한다.
+
+        1
+        → 한 번 실행
+
+        2
+        → 두 번 실행
+
+        infinite
+        → 무한 반복
+        */
+
+        .box4 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightblue;
+
+            animation:
+                rotateBox 2s infinite;
+        }
+
+        @keyframes rotateBox {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        08. animation-direction
+        ==================================================
+
+        애니메이션의 진행 방향을 지정한다.
+
+        normal
+        → 기본 방향
+
+        reverse
+        → 반대 방향
+
+        alternate
+        → 정방향 → 역방향 반복
+
+        alternate-reverse
+        → 역방향 → 정방향 반복
+        */
+
+        .box5 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightcoral;
+
+            animation:
+                moveDirection 2s infinite alternate;
+        }
+
+        @keyframes moveDirection {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        09. animation-timing-function
+        ==================================================
+
+        애니메이션의 속도 변화를 지정한다.
+
+        ease
+        → 처음과 끝이 부드러움
+
+        linear
+        → 일정한 속도
+
+        ease-in
+        → 천천히 시작
+
+        ease-out
+        → 천천히 끝남
+
+        ease-in-out
+        → 천천히 시작하고 끝남
+        */
+
+        .box6 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightgreen;
+
+            animation:
+                moveTiming 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveTiming {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        10. animation-delay
+        ==================================================
+
+        애니메이션 시작 전에
+        기다리는 시간을 지정한다.
+
+        예
+
+        animation-delay: 2s;
+
+        → 페이지가 로드된 후
+          2초 기다렸다가 애니메이션 시작
+        */
+
+        .box7 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightblue;
+
+            animation:
+                delayBox 2s 1s;
+        }
+
+        @keyframes delayBox {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        11. animation-fill-mode
+        ==================================================
+
+        애니메이션이 실행되기 전이나
+        실행이 끝난 후의 상태를 지정한다.
+
+        none
+        → 기본값
+
+        forwards
+        → 애니메이션 종료 상태 유지
+
+        backwards
+        → 시작 전부터 첫 번째 상태 적용
+
+        both
+        → forwards + backwards
+        */
+
+        .box8 {
+            width: 100px;
+            height: 100px;
+
+            background-color: lightcoral;
+
+            animation:
+                finishBox 2s forwards;
+        }
+
+        @keyframes finishBox {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        12. opacity + transform
+        ==================================================
+
+        animation은 여러 CSS 속성을
+        동시에 변경할 수 있다.
+
+        opacity
+        → 나타나는 효과
+
+        transform
+        → 이동 / 확대 등의 효과
+
+        두 가지를 함께 사용하면
+        화면에 요소가 나타나는 효과를 만들 수 있다.
+        */
+
+        .box9 {
+            width: 250px;
+
+            padding: 20px;
+
+            background-color: lightblue;
+
+            animation:
+                showBox 1s;
+        }
+
+        @keyframes showBox {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        13. 버튼 로딩 효과
+        ==================================================
+
+        animation을 이용하면
+        로딩 표시도 만들 수 있다.
+
+        border를 이용하여
+        회전하는 원을 만든다.
+        */
+
+        .loading {
+            width: 50px;
+            height: 50px;
+
+            border: 5px solid #ddd;
+
+            border-top-color: #333;
+
+            border-radius: 50%;
+
+            animation:
+                loading 1s linear infinite;
+        }
+
+        @keyframes loading {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        14. 여러 단계 애니메이션
+        ==================================================
+
+        0%
+        → 왼쪽
+
+        25%
+        → 위
+
+        50%
+        → 오른쪽
+
+        75%
+        → 아래
+
+        100%
+        → 처음 위치
+
+
+        여러 개의 keyframe을 사용하면
+        복잡한 움직임도 만들 수 있다.
+        */
+
+        .ball {
+            width: 50px;
+            height: 50px;
+
+            background-color: lightgreen;
+
+            border-radius: 50%;
+
+            animation:
+                ballMove 4s infinite;
+        }
+
+        @keyframes ballMove {
+
+            0% {
+                transform:
+                    translate(0, 0);
+            }
+
+            25% {
+                transform:
+                    translate(200px, 0);
+            }
+
+            50% {
+                transform:
+                    translate(200px, 150px);
+            }
+
+            75% {
+                transform:
+                    translate(0, 150px);
+            }
+
+            100% {
+                transform:
+                    translate(0, 0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        15. 카드 등장 애니메이션
+        ==================================================
+
+        웹페이지가 처음 로딩될 때
+        카드가 아래에서 올라오면서
+        나타나는 효과를 만들 수 있다.
+        */
+
+        .card {
+            width: 250px;
+
+            padding: 20px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.15);
+
+            animation:
+                cardShow 0.8s ease-out;
+        }
+
+        @keyframes cardShow {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /*
+        ==================================================
+        16. animation 단축 속성
+        ==================================================
+
+        animation은 여러 속성을
+        한 줄로 작성할 수 있다.
+
+
+        예
+
+        animation:
+            move
+            2s
+            ease-in-out
+            1s
+            infinite
+            alternate;
+
+
+        순서에 따라
+
+        animation-name
+        animation-duration
+        animation-timing-function
+        animation-delay
+        animation-iteration-count
+        animation-direction
+
+        등을 지정할 수 있다.
+        */
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Animation</h1>
+
+
+    <!-- ==================================================
+         01. 기본 animation
+         ================================================== -->
+
+    <h2>1. 기본 animation</h2>
+
+    <div class="box1"></div>
+
+
+    <!-- ==================================================
+         02. opacity
+         ================================================== -->
+
+    <h2>2. opacity animation</h2>
+
+    <div class="box2"></div>
+
+
+    <!-- ==================================================
+         03. 여러 단계
+         ================================================== -->
+
+    <h2>3. 여러 단계 animation</h2>
+
+    <div class="box3"></div>
+
+
+    <!-- ==================================================
+         04. 반복
+         ================================================== -->
+
+    <h2>4. 반복 animation</h2>
+
+    <div class="box4"></div>
+
+
+    <!-- ==================================================
+         05. direction
+         ================================================== -->
+
+    <h2>5. animation-direction</h2>
+
+    <div class="box5"></div>
+
+
+    <!-- ==================================================
+         06. timing-function
+         ================================================== -->
+
+    <h2>6. timing-function</h2>
+
+    <div class="box6"></div>
+
+
+    <!-- ==================================================
+         07. delay
+         ================================================== -->
+
+    <h2>7. animation-delay</h2>
+
+    <div class="box7"></div>
+
+
+    <!-- ==================================================
+         08. fill-mode
+         ================================================== -->
+
+    <h2>8. animation-fill-mode</h2>
+
+    <div class="box8"></div>
+
+
+    <!-- ==================================================
+         09. opacity + transform
+         ================================================== -->
+
+    <h2>9. opacity + transform</h2>
+
+    <div class="box9">
+
+        <h3>
+            새로 나타나는 카드
+        </h3>
+
+        <p>
+            아래에서 위로 올라오면서 나타납니다.
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         10. loading
+         ================================================== -->
+
+    <h2>10. Loading</h2>
+
+    <div class="loading"></div>
+
+
+    <!-- ==================================================
+         11. 여러 단계
+         ================================================== -->
+
+    <h2>11. 여러 단계 움직임</h2>
+
+    <div class="ball"></div>
+
+
+    <!-- ==================================================
+         12. 카드 등장
+         ================================================== -->
+
+    <h2>12. 카드 등장 효과</h2>
+
+    <div class="card">
+
+        <h3>
+            상품 카드
+        </h3>
+
+        <p>
+            페이지가 로딩될 때
+            아래에서 올라옵니다.
+        </p>
+
+    </div>
+
+
+</body>
+</html>

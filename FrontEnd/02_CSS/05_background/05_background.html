@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Background</title>
+
+<!-- 
+    Pexel 에서 bg 받기
+    ByteTools 에서 icon받기 
+-->
+
+<style>
+
+    /*
+    =====================================
+    1. background-color
+    배경색
+    =====================================
+    */
+
+    .bg-color {
+        background-color: lightblue;
+    }
+
+
+    /*
+    =====================================
+    2. background-image
+    배경 이미지
+    =====================================
+    */
+
+    .bg-image {
+        height: 200px;
+
+        background-image:
+            url("images/bg.jpg");
+    }
+
+
+    /*
+    =====================================
+    3. background-repeat
+    반복 여부
+    =====================================
+    */
+
+    .repeat {
+        height: 200px;
+
+        background-image:
+            url("images/icon.png");
+            /* url("https://www.pexels.com/ko-kr/photo/38602214/"); */
+    }
+
+    .no-repeat {
+        height: 200px;
+
+        background-image:
+            url("images/icon.png");
+
+        background-repeat: no-repeat;
+    }
+
+
+    /*
+    =====================================
+    4. background-position
+    위치
+    =====================================
+    */
+
+    .position {
+        height: 200px;
+
+        background-image:
+            url("images/icon.png");
+
+        background-repeat: no-repeat;
+
+        background-position: center;
+    }
+
+
+    /*
+    =====================================
+    5. background-size
+    크기
+    =====================================
+    */
+
+    .size {
+        height: 300px;
+
+        background-image:
+            url("images/bg.jpg");
+
+        background-size: cover;
+    }
+
+
+    /*
+    =====================================
+    6. 축약형
+    =====================================
+    */
+
+    .short {
+
+        height: 300px;
+
+        background:
+            url("images/bg.jpg")
+            no-repeat
+            center
+            / cover;
+    }
+
+</style>
+</head>
+<body>
+
+<h1>background-color</h1>
+
+<div class="bg-color">
+    배경색
+</div>
+
+<hr>
+
+<h1>background-image</h1>
+
+<div class="bg-image">
+</div>
+
+<hr>
+
+<h1>background-repeat</h1>
+
+<div class="repeat">
+</div>
+
+<div class="no-repeat">
+</div>
+
+<hr>
+
+<h1>background-position</h1>
+
+<div class="position">
+</div>
+
+<hr>
+
+<h1>background-size</h1>
+
+<div class="size">
+</div>
+
+<hr>
+
+<h1>background 축약형</h1>
+
+<div class="short">
+</div>
+
+</body>
+</html>

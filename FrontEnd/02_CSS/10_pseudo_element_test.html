@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Pseudo Element 실습</title>
+
+    <style>
+
+        /*
+        ==================================================
+        실습 1. 제목 앞에 아이콘 넣기
+        ==================================================
+
+        h2 앞에 "★" (ㅁ) 문자를 추가하세요.
+
+        ::before와 content를 사용하세요.
+        */
+
+        .title1::before {
+            content: "★ ";
+        }
+
+
+        /*
+        ==================================================
+        실습 2. 제목 뒤에 아이콘 넣기
+        ==================================================
+
+        제목 뒤에 "NEW"라는 문자를 추가하세요.
+
+        ::after와 content를 사용하세요.
+
+        NEW는 제목과 조금 떨어져 있도록
+        margin-left를 적용하세요.
+        */
+
+        .title2::after {
+            content: "NEW";
+
+            margin-left: 10px;
+        }
+
+
+        /*
+        ==================================================
+        실습 3. 메뉴 앞에 화살표 표시
+        ==================================================
+
+        메뉴의 모든 li 앞에
+        "→" 표시를 추가하세요.
+
+        조건
+
+        - ::before 사용
+        - content 사용
+        */
+
+        .menu3 {
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .menu3 li {
+            padding: 10px;
+        }
+
+        .menu3 li::before {
+            content: "→ ";
+            /* (ㅁ) */
+
+            margin-right: 5px;
+        }
+
+
+        /*
+        ==================================================
+        실습 4. 필수 입력 항목 표시
+        ==================================================
+
+        회원가입 폼의 필수 항목 뒤에
+        빨간색 "*" 표시를 추가하세요.
+
+        조건
+
+        - ::after
+        - content: " *"
+        - color: red
+        */
+
+        .required4::after {
+            content: " *";
+
+            color: red;
+        }
+
+
+        /*
+        ==================================================
+        실습 5. 제목 밑에 장식선 만들기
+        ==================================================
+
+        제목 아래에 CSS만으로 선을 만드세요.
+
+        조건
+
+        ::after 사용
+
+        - content: ""
+        - display: block
+        - width: 80px
+        - margin-top: 10px
+        - border-bottom: 3px solid black
+        */
+
+        .title5::after {
+            content: "";
+
+            display: block;
+
+            width: 80px;
+
+            margin-top: 10px;
+
+            border-bottom: 3px solid black;
+        }
+
+
+        /*
+        ==================================================
+        실습 6. 체크 목록 만들기
+        ==================================================
+
+        li 앞에 "✓" (ㄷ) 표시를 추가하세요.
+
+        예
+
+        ✓ HTML
+        ✓ CSS
+        ✓ JavaScript
+
+        조건
+
+        - ::before
+        - content: "✓"
+        - margin-right
+        */
+
+        .check6 {
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .check6 li {
+            padding: 8px;
+        }
+
+        .check6 li::before {
+            content: "✓";
+
+            margin-right: 10px;
+        }
+
+
+        /*
+        ==================================================
+        실습 7. 알림 박스 만들기
+        ==================================================
+
+        알림 박스 왼쪽에
+        느낌표 아이콘을 추가하세요.
+
+        조건
+
+        - ::before
+        - content: "!"
+        - display: inline-block
+        - width: 25px
+        - height: 25px
+        - border
+        - text-align: center
+        - margin-right: 10px
+        */
+
+        .notice7 {
+            padding: 15px;
+
+            border: 1px solid #333;
+        }
+
+        .notice7::before {
+            content: "!";
+
+            display: inline-block;
+
+            width: 25px;
+            height: 25px;
+
+            border: 1px solid #333;
+
+            text-align: center;
+
+            margin-right: 10px;
+        }
+
+
+        /*
+        ==================================================
+        실습 8. 말풍선 만들기
+        ==================================================
+
+        앞에서 배운 position과
+        ::after를 함께 사용하세요.
+
+        아래 메시지 박스에
+        말풍선 꼬리를 만들어보세요.
+
+        조건
+
+        .speech8
+
+        - position: relative
+        - display: inline-block
+        - padding
+        - border
+
+        .speech8::after
+
+        - content: ""
+        - position: absolute
+        - left: 20px
+        - bottom: -10px
+
+        삼각형은 border를 이용합니다.
+        */
+
+        .speech8 {
+            position: relative;
+
+            display: inline-block;
+
+            padding: 15px 20px;
+
+            border: 1px solid black;
+        }
+
+        .speech8::after {
+            content: "";
+
+            position: absolute;
+
+            left: 20px;
+            bottom: -10px;
+
+            border-top: 10px solid black;
+
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+        }
+
+
+        /*
+        ==================================================
+        실습 9. 상품 카드 배지 만들기
+        ==================================================
+
+        상품 카드의 왼쪽 위에
+        "BEST" 배지를 만들어보세요.
+
+        HTML에는 BEST를 작성하지 않습니다.
+
+        CSS의 ::before를 이용해서 만들어야 합니다.
+
+        앞에서 배운 position도 함께 사용합니다.
+
+        .card9
+
+        - position: relative
+        - display: inline-block
+        - width
+        - height
+        - padding
+        - border
+
+        .card9::before
+
+        - content: "BEST"
+        - position: absolute
+        - top: 10px
+        - left: 10px
+        - padding
+        - border
+        */
+
+        .card9 {
+            position: relative;
+
+            display: inline-block;
+
+            width: 220px;
+            height: 200px;
+
+            padding: 20px;
+
+            border: 1px solid #333;
+        }
+
+        .card9::before {
+            content: "BEST";
+
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            padding: 5px 10px;
+
+            border: 1px solid black;
+        }
+
+
+        /*
+        ==================================================
+        실습 10. 상품 카드 종합 실습
+        ==================================================
+
+        쇼핑몰 상품 카드 3개를 만드세요.
+
+        조건
+
+        1. 카드 3개를 가로 배치
+
+        2. 카드에 position: relative 적용
+
+        3. 카드에 ::before를 사용하여
+           NEW 배지 만들기
+
+        4. 카드에 ::after를 사용하여
+           "무료배송" 표시 만들기
+
+        5. 카드에 마우스를 올리면
+           배경색이 변경되도록 만들기
+
+        6. 구매하기 버튼도 hover 효과 적용
+
+        지금까지 배운
+
+        - display
+        - position
+        - padding
+        - margin
+        - :hover
+        - ::before
+        - ::after
+
+        를 모두 조합하는 종합 실습입니다.
+        */
+
+        .product10 {
+            position: relative;
+
+            display: inline-block;
+
+            width: 220px;
+            height: 250px;
+
+            padding: 20px;
+
+            margin: 10px;
+
+            border: 1px solid #333;
+
+            vertical-align: top;
+        }
+
+        .product10:hover {
+            background-color: #eee;
+        }
+
+        .product10::before {
+            content: "NEW";
+
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            padding: 5px 10px;
+
+            border: 1px solid black;
+        }
+
+        .product10::after {
+            content: "무료배송";
+
+            position: absolute;
+
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .buy10 {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border: 1px solid black;
+
+            text-decoration: none;
+
+            color: black;
+        }
+
+        .buy10:hover {
+            background-color: black;
+
+            color: white;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Pseudo Element 실습</h1>
+
+
+    <!-- ==================================================
+         실습 1. 제목 앞 아이콘
+         ================================================== -->
+
+    <h2 class="title1">
+        인기 상품
+    </h2>
+
+
+    <!-- ==================================================
+         실습 2. 제목 뒤 NEW
+         ================================================== -->
+
+    <h2 class="title2">
+        신상품
+    </h2>
+
+
+    <!-- ==================================================
+         실습 3. 메뉴 화살표
+         ================================================== -->
+
+    <h2>실습 3. 메뉴 화살표</h2>
+
+    <ul class="menu3">
+
+        <li>홈</li>
+        <li>상품</li>
+        <li>이벤트</li>
+        <li>고객센터</li>
+
+    </ul>
+
+
+    <!-- ==================================================
+         실습 4. 필수 입력
+         ================================================== -->
+
+    <h2>실습 4. 회원가입</h2>
+
+    <p class="required4">
+        아이디
+    </p>
+
+    <p class="required4">
+        비밀번호
+    </p>
+
+    <p class="required4">
+        이메일
+    </p>
+
+    <p>
+        전화번호
+    </p>
+
+
+    <!-- ==================================================
+         실습 5. 제목 장식선
+         ================================================== -->
+
+    <h2 class="title5">
+        인기 카테고리
+    </h2>
+
+
+    <!-- ==================================================
+         실습 6. 체크 목록
+         ================================================== -->
+
+    <h2>실습 6. 학습 목록</h2>
+
+    <ul class="check6">
+
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+
+    </ul>
+
+
+    <!-- ==================================================
+         실습 7. 알림 박스
+         ================================================== -->
+
+    <h2>실습 7. 알림</h2>
+
+    <div class="notice7">
+        회원가입 후 상품을 구매할 수 있습니다.
+    </div>
+
+
+    <!-- ==================================================
+         실습 8. 말풍선
+         ================================================== -->
+
+    <h2>실습 8. 말풍선</h2>
+
+    <div class="speech8">
+        안녕하세요!
+    </div>
+
+
+    <!-- ==================================================
+         실습 9. 상품 카드 배지
+         ================================================== -->
+
+    <h2>실습 9. BEST 상품</h2>
+
+    <div class="card9">
+
+        <h3>
+            인기 상품
+        </h3>
+
+        <p>
+            가장 많이 판매된 상품입니다.
+        </p>
+
+        <p>
+            59,000원
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         실습 10. 상품 카드 종합
+         ================================================== -->
+
+    <h2>실습 10. 쇼핑몰 상품 카드</h2>
+
+    <div class="product10">
+
+        <h3>
+            운동화
+        </h3>
+
+        <p>
+            편안한 데일리 운동화
+        </p>
+
+        <p>
+            59,000원
+        </p>
+
+        <a href="#" class="buy10">
+            구매하기
+        </a>
+
+    </div>
+
+
+    <div class="product10">
+
+        <h3>
+            백팩
+        </h3>
+
+        <p>
+            실용적인 데일리 백팩
+        </p>
+
+        <p>
+            79,000원
+        </p>
+
+        <a href="#" class="buy10">
+            구매하기
+        </a>
+
+    </div>
+
+
+    <div class="product10">
+
+        <h3>
+            모자
+        </h3>
+
+        <p>
+            가볍게 착용할 수 있는 데일리 모자
+        </p>
+
+        <p>
+            29,000원
+        </p>
+
+        <a href="#" class="buy10">
+            구매하기
+        </a>
+
+    </div>
+
+
+</body>
+</html>

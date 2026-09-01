@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Box Model</title>
+
+    <style>
+        .box {
+            width: 300px;
+            height: 150px;
+
+            padding: 20px;
+            /* padding: 10px 20px; */
+            /* 위/아래: 10px, 좌/우: 20px */
+
+            /* padding: 10px 20px 30px 40px; */
+            /* 위 > 오른쪽 > 아래 > 왼쪽 (시계방향) */
+
+            border: 5px solid black;
+            /* border: 두께 스타일 색상; */
+            /*  
+                border-top: 1px solid black; 
+                border-right: 1px solid black; 
+                border-bottom: 1px solid black; 
+                border-left: 1px solid black; 
+            */
+            margin: 20px;
+            /* margin: 0 auto */
+
+            /* box-sizing: content-box; */
+            /* box-sizing의 defualt 값은 content-box */
+            /* content-box의 경우 width: 300, padding: 20 + 20, border: 5 + 5 총 350 */
+            box-sizing: border-box;
+            /* width: 300 안에 padding과 border 등이 계산됨 */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CSS Box Model</h1>
+
+    <div class="box">
+        Box Model을 공부하고 있습니다.
+    </div>
+
+</body>
+</html>
