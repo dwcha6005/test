@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 Flex Gallery</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        section {
+            margin: 50px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           1. Flex Wrap
+           =========================================================
+
+           화면의 가로 공간이 부족하면
+           Flex Item을 다음 줄로 내려보낼 수 있다.
+
+           display: flex;
+           flex-wrap: wrap;
+
+           브라우저 크기를 줄여보면서 확인한다.
+        */
+
+        .wrap-gallery {
+            display: flex;
+
+            /* 기본값은 nowrap
+               공간이 부족해도 한 줄을 유지하려고 한다. */
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            border: 2px solid royalblue;
+            padding: 20px;
+        }
+
+        .wrap-gallery .item {
+            width: 180px;
+            height: 150px;
+
+            flex-shrink: 0;
+
+            background-color: royalblue;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================================================
+           2. flex-basis
+           =========================================================
+
+           flex-basis
+           → Flex Item의 기본 크기를 지정한다.
+
+           가로 방향(row)에서는
+           width와 비슷하게 사용할 수 있다.
+
+           flex-basis: 200px;
+
+           중요한 점
+
+           width = 일반적인 가로 크기
+           flex-basis = Flex 환경에서 사용할 기본 크기
+        */
+
+        .basis-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .basis-gallery .item {
+            height: 150px;
+
+            /*
+                Flex Item의 기본 크기를 200px로 설정
+            */
+            flex-basis: 200px;
+
+            background-color: tomato;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================================================
+           3. flex-grow
+           =========================================================
+
+           남는 공간을 얼마나 가져갈 것인지 결정한다.
+
+           flex-grow: 1;
+
+           여러 Item이 모두 1이면
+           남는 공간을 동일하게 나누어 가진다.
+
+           예)
+
+           [ item ][ item ][ item ]
+
+           flex-grow: 1
+           flex-grow: 1
+           flex-grow: 1
+
+           → 남는 공간을 1 : 1 : 1로 나눈다.
+        */
+
+        .grow-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .grow-container .item {
+            height: 150px;
+
+            flex-basis: 150px;
+
+            background-color: seagreen;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grow-container .item:nth-child(1) {
+            flex-grow: 1;
+        }
+
+        .grow-container .item:nth-child(2) {
+            flex-grow: 2;
+        }
+
+        .grow-container .item:nth-child(3) {
+            flex-grow: 1;
+        }
+
+        /*
+            남는 공간을
+
+            1 : 2 : 1
+
+            비율로 나누어 가진다.
+        */
+
+
+        /* =========================================================
+           4. flex: 단축 속성
+           =========================================================
+
+           flex는 다음 세 속성을 한 번에 작성할 수 있다.
+
+           flex-grow
+           flex-shrink
+           flex-basis
+
+           예)
+
+           flex: 1 1 200px;
+
+           =
+
+           flex-grow: 1;
+           flex-shrink: 1;
+           flex-basis: 200px;
+        */
+
+
+        /* =========================================================
+           5. 반응형 상품 갤러리
+           =========================================================
+
+           상품 카드가 화면 크기에 따라 줄바꿈된다.
+
+           flex: 1 1 220px;
+
+           → 기본 크기는 220px
+           → 남는 공간은 나누어 가짐
+           → 공간이 부족하면 줄어들 수 있음
+           → 더 이상 들어갈 수 없으면 다음 줄로 이동
+        */
+
+        .product-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product {
+            flex: 1 1 220px;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .product-image {
+            height: 180px;
+
+            background-color: #eee;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 20px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .price {
+            margin: 0;
+
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+
+        /* =========================================================
+           6. flex-grow를 이용한 마지막 카드 문제
+           =========================================================
+
+           다음처럼 작성하면
+
+           flex: 1 1 200px;
+
+           마지막 줄에 Item이 하나만 남았을 때
+           남는 공간을 모두 가져가면서
+           마지막 카드가 지나치게 커질 수 있다.
+
+           이것은 flex-grow가 1이기 때문이다.
+
+           상황에 따라
+
+           flex: 0 0 200px;
+
+           또는
+
+           width: 200px;
+           flex-shrink: 0;
+
+           등을 사용할 수 있다.
+        */
+
+        .fixed-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .fixed-gallery .item {
+            width: 180px;
+
+            flex-shrink: 0;
+
+            height: 120px;
+
+            background-color: #555;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =========================================================
+           7. 정리
+           =========================================================
+
+           flex-wrap
+           → Item을 다음 줄로 내려보낼지 결정
+
+           flex-basis
+           → Item의 기본 크기
+
+           flex-grow
+           → 남는 공간을 얼마나 가져갈지
+
+           flex-shrink
+           → 공간이 부족할 때 얼마나 줄어들지
+
+           flex
+           → grow / shrink / basis를 한 번에 작성
+        */
+
+    </style>
+</head>
+
+<body>
+
+
+    <h1>04. Flex Gallery</h1>
+
+
+    <!-- =========================================================
+         1. Flex Wrap
+         ========================================================= -->
+
+    <section>
+
+        <h2>1. flex-wrap</h2>
+
+        <p>
+            브라우저의 가로 크기를 줄여보세요.
+            공간이 부족하면 Item이 다음 줄로 이동합니다.
+        </p>
+
+        <div class="wrap-gallery">
+
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         2. flex-basis
+         ========================================================= -->
+
+    <section>
+
+        <h2>2. flex-basis</h2>
+
+        <p>
+            각 Item의 기본 크기를 200px로 설정합니다.
+        </p>
+
+        <div class="basis-gallery">
+
+            <div class="item">ITEM 1</div>
+            <div class="item">ITEM 2</div>
+            <div class="item">ITEM 3</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         3. flex-grow
+         ========================================================= -->
+
+    <section>
+
+        <h2>3. flex-grow</h2>
+
+        <p>
+            남는 공간을 1 : 2 : 1 비율로 나누어 가집니다.
+        </p>
+
+        <div class="grow-container">
+
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         4. 반응형 상품 갤러리
+         ========================================================= -->
+
+    <section>
+
+        <h2>4. 반응형 상품 갤러리</h2>
+
+        <p>
+            화면 크기에 따라 상품 카드의 크기가 변하고,
+            공간이 부족하면 다음 줄로 이동합니다.
+        </p>
+
+        <div class="product-gallery">
+
+            <div class="product">
+
+                <div class="product-image">
+                    PRODUCT 1
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">
+                        상품 A
+                    </h3>
+
+                    <p class="price">
+                        29,000원
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+                    PRODUCT 2
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">
+                        상품 B
+                    </h3>
+
+                    <p class="price">
+                        39,000원
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+                    PRODUCT 3
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">
+                        상품 C
+                    </h3>
+
+                    <p class="price">
+                        49,000원
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+                    PRODUCT 4
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">
+                        상품 D
+                    </h3>
+
+                    <p class="price">
+                        59,000원
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="product">
+
+                <div class="product-image">
+                    PRODUCT 5
+                </div>
+
+                <div class="product-info">
+                    <h3 class="product-name">
+                        상품 E
+                    </h3>
+
+                    <p class="price">
+                        69,000원
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         5. 고정 크기 Gallery
+         ========================================================= -->
+
+    <section>
+
+        <h2>5. 고정 크기 Gallery</h2>
+
+        <p>
+            flex-grow를 사용하지 않고 카드의 크기를 일정하게 유지합니다.
+        </p>
+
+        <div class="fixed-gallery">
+
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+
+        </div>
+
+    </section>
+
+
+</body>
+</html>

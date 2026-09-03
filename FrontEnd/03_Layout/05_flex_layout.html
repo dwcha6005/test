@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 Flex Layout</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           1. 전체 페이지를 세로 Flex로 구성하기
+           =========================================================
+
+           웹페이지 전체 구조
+
+           Header
+              ↓
+           Main
+              ↓
+           Footer
+
+
+           body를 Flex Container로 만들고
+           flex-direction: column을 사용하면
+
+           Header
+           Main
+           Footer
+
+           를 세로 방향으로 배치할 수 있다.
+        */
+
+        .page {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================================
+           2. Header
+           ========================================================= */
+
+        header {
+            height: 70px;
+            padding: 0 30px;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+
+            margin-left: auto;
+        }
+
+        nav a {
+            color: white;
+        }
+
+        nav a:hover {
+            color: tomato;
+        }
+
+
+        /* =========================================================
+           3. Main을 남은 공간만큼 차지하게 만들기
+           =========================================================
+
+           Header와 Footer는 자신의 크기를 유지하고
+
+           Main이 남은 공간을 모두 차지하도록 한다.
+
+           flex: 1;
+
+           = flex-grow: 1;
+             flex-shrink: 1;
+             flex-basis: 0%;
+
+           page의 높이가 100vh이므로
+           Main이 화면의 남은 영역을 채운다.
+        */
+
+        main {
+            flex: 1;
+
+            padding: 30px;
+
+            background-color: #f5f5f5;
+        }
+
+
+        /* =========================================================
+           4. Main 내부를 Content + Sidebar로 나누기
+           =========================================================
+
+           Main
+           ├── Content
+           └── Sidebar
+
+           Main 내부에서 다시 Flex를 사용한다.
+
+           이것을 "중첩 Flex"라고 생각하면 된다.
+        */
+
+        .main-container {
+            max-width: 1200px;
+            min-height: 500px;
+
+            margin: 0 auto;
+
+            display: flex;
+            gap: 30px;
+        }
+
+
+        /* =========================================================
+           5. Content
+           =========================================================
+
+           Sidebar보다 Content가 더 넓은 영역을 사용하도록 한다.
+
+           flex: 1;
+
+           Content가 남은 공간을 차지한다.
+        */
+
+        .content {
+            flex: 1;
+
+            padding: 30px;
+
+            background-color: white;
+            border-radius: 10px;
+        }
+
+
+        /* =========================================================
+           6. Sidebar
+           =========================================================
+
+           Sidebar는 고정된 크기로 만든다.
+
+           flex-shrink: 0;
+
+           → 공간이 부족해도 Sidebar가
+             자동으로 줄어드는 것을 방지한다.
+        */
+
+        .sidebar {
+            width: 250px;
+
+            flex-shrink: 0;
+
+            padding: 20px;
+
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            margin: 0;
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .sidebar li {
+            padding: 12px 0;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        /* =========================================================
+           7. Content 내부의 카드 영역
+           =========================================================
+
+           Content 안에서도 Flex를 사용할 수 있다.
+
+           Content
+           └── Card List
+                ├── Card
+                ├── Card
+                └── Card
+        */
+
+        .card-list {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 20px;
+        }
+
+        .card {
+            flex: 1 1 200px;
+
+            padding: 20px;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+
+        /* =========================================================
+           8. Footer
+           ========================================================= */
+
+        footer {
+            min-height: 80px;
+            padding: 20px 30px;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        /* =========================================================
+           9. 반응형 Layout
+           =========================================================
+
+           화면이 좁아지면
+
+           Content
+           Sidebar
+
+           를 가로로 계속 유지하기보다
+
+           Content
+              ↓
+           Sidebar
+
+           형태로 변경한다.
+        */
+
+        @media (max-width: 768px) {
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            header {
+                height: auto;
+                padding: 20px;
+
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                margin-left: 0;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================================================
+         전체 페이지
+         ========================================================= -->
+
+    <div class="page">
+
+
+        <!-- =====================================================
+             Header
+             ===================================================== -->
+
+        <header>
+
+            <div class="logo">
+                MY WEBSITE
+            </div>
+
+            <nav>
+                <a href="javascript:void(0)">HOME</a>
+                <a href="javascript:void(0)">ABOUT</a>
+                <a href="javascript:void(0)">SERVICE</a>
+                <a href="javascript:void(0)">CONTACT</a>
+            </nav>
+
+        </header>
+
+
+        <!-- =====================================================
+             Main
+             ===================================================== -->
+
+        <main>
+
+            <!-- Main 내부의 중첩 Flex -->
+
+            <div class="main-container">
+
+
+                <!-- =============================================
+                     Content
+                     ============================================= -->
+
+                <section class="content">
+
+                    <h1>콘텐츠 영역</h1>
+
+                    <p>
+                        Main 영역 안에서도 Flex를 사용할 수 있습니다.
+                    </p>
+
+                    <p>
+                        Content와 Sidebar를 가로로 배치하고,
+                        화면이 좁아지면 세로로 배치합니다.
+                    </p>
+
+
+                    <!-- Content 내부에서도 다시 Flex -->
+
+                    <div class="card-list">
+
+                        <article class="card">
+
+                            <h3>Card 1</h3>
+
+                            <p>
+                                Flex를 이용한 카드 영역입니다.
+                            </p>
+
+                        </article>
+
+
+                        <article class="card">
+
+                            <h3>Card 2</h3>
+
+                            <p>
+                                화면 크기에 따라 카드가 줄바꿈됩니다.
+                            </p>
+
+                        </article>
+
+
+                        <article class="card">
+
+                            <h3>Card 3</h3>
+
+                            <p>
+                                여러 단계로 Flex를 중첩할 수 있습니다.
+                            </p>
+
+                        </article>
+
+
+                        <article class="card">
+
+                            <h3>Card 4</h3>
+
+                            <p>
+                                하나의 페이지에서 여러 Flex Container를
+                                사용할 수 있습니다.
+                            </p>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     Sidebar
+                     ============================================= -->
+
+                <aside class="sidebar">
+
+                    <h3>카테고리</h3>
+
+                    <ul>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                공지사항
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                자유게시판
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                질문답변
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                자료실
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </aside>
+
+
+            </div>
+
+        </main>
+
+
+        <!-- =====================================================
+             Footer
+             ===================================================== -->
+
+        <footer>
+
+            <div>
+                © 2026 MY WEBSITE
+            </div>
+
+            <div>
+                개인정보처리방침
+            </div>
+
+        </footer>
+
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>01_float 실습</title>
+
+
+
+   <!--
+========================================
+실습
+
+아래 화면처럼 구현하세요
+
+[상품1] [상품2] [상품3] [상품4]
+
+             [더보기]
+
+========================================
+-->
+<style>
+.product{
+    width:200px;
+    height:200px;
+    background:skyblue;
+    float:left;
+    margin-right:20px;
+    text-align:center;
+    line-height:200px;
+}
+
+.more{
+    clear:both;
+    width:150px;
+    margin-top:20px;
+    padding:15px;
+    text-align:center;
+    background:orange;
+}
+
+/*
+========================================
+정답
+========================================
+
+.product{
+    width:200px;
+    height:200px;
+    background:skyblue;
+
+    float:left;
+
+    margin-right:20px;
+
+    text-align:center;
+    line-height:200px;
+}
+
+.more{
+    clear:both;
+
+    width:150px;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    text-align:center;
+
+    background:orange;
+}
+
+*/
+
+
+</style>
+</head>
+<body>
+
+<h1>인기 상품</h1>
+
+<div class="container">
+
+    <div class="product">상품1</div>
+    <div class="product">상품2</div>
+    <div class="product">상품3</div>
+    <div class="product">상품4</div>
+
+</div>
+
+<div class="more">
+    더보기
+</div>
+
+</body>
+</html>

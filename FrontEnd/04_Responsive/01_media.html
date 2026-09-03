@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Media Query</title>
+
+    <style>
+
+        /* =========================================================
+           01. Media Query란?
+           
+           지금까지 배운 Flex와 Grid는
+           화면의 남은 공간에 따라 요소의 크기나 배치를
+           자연스럽게 조절할 수 있었다.
+
+           하지만 다음과 같은 상황에서는
+           화면 크기에 따라 디자인을 "다르게" 만들 필요가 있다.
+
+           예)
+           PC에서는
+           - 메뉴를 가로로 표시
+           - 사이드바 표시
+           - 큰 글자
+
+           모바일에서는
+           - 메뉴를 세로로 표시
+           - 사이드바 숨김
+           - 작은 글자
+
+           이때 사용하는 것이 @media이다.
+        ========================================================= */
+
+
+        /* =========================================================
+           02. 기본 문법
+
+           @media (조건) {
+               선택자 {
+                   속성: 값;
+               }
+           }
+
+           예)
+
+           화면의 가로 크기가 768px 이하라면
+           body의 배경색을 변경한다.
+        ========================================================= */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+        }
+
+        .box {
+            width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+
+        /* 화면의 가로 크기가 768px 이하일 때 */
+        @media (max-width: 768px) {
+
+            body {
+                background-color: lightyellow;
+            }
+
+            .box {
+                width: 90%;
+            }
+        }
+
+
+
+        /* =========================================================
+           03. max-width
+
+           max-width: 768px
+
+           "화면 너비가 768px 이하일 때"
+
+           1920px → 적용 안 됨
+           1200px → 적용 안 됨
+           768px  → 적용됨
+           500px  → 적용됨
+           360px  → 적용됨
+
+           모바일 화면에 대응할 때 자주 사용한다.
+        ========================================================= */
+
+
+
+        /* =========================================================
+           04. min-width
+
+           min-width: 769px
+
+           "화면 너비가 769px 이상일 때"
+
+           500px  → 적용 안 됨
+           768px  → 적용 안 됨
+           769px  → 적용됨
+           1200px → 적용됨
+           1920px → 적용됨
+        ========================================================= */
+
+
+
+        /* =========================================================
+           05. 화면 크기에 따라 글자 크기 변경
+        ========================================================= */
+
+        .title {
+            font-size: 40px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+
+            .title {
+                font-size: 28px;
+            }
+        }
+
+
+
+        /* =========================================================
+           06. 화면 크기에 따라 요소 숨기기
+
+           display: none;
+           → 화면에서 완전히 숨긴다.
+
+           display: block;
+           → 다시 표시한다.
+        ========================================================= */
+
+        .notice {
+            padding: 20px;
+            background-color: lightblue;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+
+            .notice {
+                display: none;
+            }
+        }
+
+
+
+        /* =========================================================
+           07. 화면 크기에 따라 Flex 방향 변경
+
+           PC
+           ┌──────┬──────┬──────┐
+           │ 메뉴 │ 메뉴 │ 메뉴 │
+           └──────┴──────┴──────┘
+
+           모바일
+           ┌──────┐
+           │ 메뉴 │
+           ├──────┤
+           │ 메뉴 │
+           ├──────┤
+           │ 메뉴 │
+           └──────┘
+
+           Flex 자체의 flex-wrap과는 다르게
+           @media를 사용하면 특정 화면 크기에서
+           flex-direction을 직접 변경할 수 있다.
+        ========================================================= */
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: black;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 600px) {
+
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+
+
+        /* =========================================================
+           08. 실전 Header
+
+           PC에서는
+
+           LOGO      HOME ABOUT PRODUCT CONTACT      LOGIN
+
+
+           모바일에서는
+
+           LOGO                         LOGIN
+
+           HOME
+           ABOUT
+           PRODUCT
+           CONTACT
+
+           처럼 변경할 수 있다.
+        ========================================================= */
+
+        header {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            margin-left: auto;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .login {
+            margin-left: 30px;
+            padding: 8px 15px;
+            background-color: black;
+            color: white;
+        }
+
+
+        /* 모바일 화면 */
+        @media (max-width: 600px) {
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            nav {
+                margin-left: 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .login {
+                margin-left: 0;
+            }
+        }
+
+
+
+        /* =========================================================
+           09. Grid와 Media Query
+
+           지금까지 Grid에서
+
+           repeat(auto-fit, minmax(200px, 1fr))
+
+           을 사용하면 @media 없이도
+           화면 크기에 따라 열 개수가 자동으로 변경됐다.
+
+           이것은 "공간에 맞춰 자동으로 배치"하는 것이다.
+
+
+           하지만 다음처럼 특정 크기에서
+           열 개수를 정확하게 지정하고 싶다면
+           @media를 사용할 수 있다.
+        ========================================================= */
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .product {
+            padding: 50px 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+
+        /* 태블릿 */
+        @media (max-width: 900px) {
+
+            .product-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        /* 모바일 */
+        @media (max-width: 600px) {
+
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+        /* =========================================================
+           10. Flex/Grid와 @media의 차이
+
+           Flex / Grid
+           → 사용 가능한 공간에 맞춰
+             요소를 자연스럽게 배치
+
+           @media
+           → 특정 화면 크기에서
+             내가 원하는 디자인으로 변경
+
+
+           예)
+
+           Grid
+           grid-template-columns:
+           repeat(auto-fit, minmax(200px, 1fr));
+
+           → 공간에 따라 열 개수가 자동 변경
+
+
+           Media Query
+
+           @media (max-width: 600px) {
+               .product-list {
+                   grid-template-columns: 1fr;
+               }
+           }
+
+           → 600px 이하에서는
+             무조건 1열로 변경
+
+
+           즉,
+
+           Flex/Grid = "공간에 맞춰 알아서 배치"
+
+           @media = "이 크기에서는 이렇게 바꿔!"
+
+           라고 이해하면 된다.
+        ================================================= */
+
+
+
+        /* =========================================================
+           11. 여러 Media Query 사용
+
+           화면 크기에 따라 단계적으로 디자인을 변경할 수 있다.
+
+           PC
+           900px 초과
+
+           태블릿
+           601px ~ 900px
+
+           모바일
+           600px 이하
+        ========================================================= */
+
+        .responsive-box {
+            padding: 40px;
+            background-color: white;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        @media (max-width: 900px) {
+
+            .responsive-box {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .responsive-box {
+                font-size: 18px;
+                padding: 20px;
+            }
+        }
+
+
+
+        /* =========================================================
+           12. Media Query에서 자주 사용하는 조건
+
+           max-width
+           → ~ 이하
+
+           min-width
+           → ~ 이상
+
+           예)
+
+           @media (max-width: 768px) {
+           }
+
+           → 768px 이하
+
+
+           @media (min-width: 769px) {
+           }
+
+           → 769px 이상
+
+
+           처음에는 max-width를 중심으로 연습하는 것이 좋다.
+        ========================================================= */
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         01. 기본 Media Query 확인
+    ========================================================== -->
+
+    <div class="box">
+        <h1 class="title">Media Query</h1>
+
+        <p>
+            브라우저의 크기를 변경해보세요.
+        </p>
+
+        <div class="notice">
+            600px 이하에서는 사라집니다.
+        </div>
+    </div>
+
+
+    <!-- =========================================================
+         02. Flex + Media Query
+    ========================================================== -->
+
+    <nav class="menu">
+        <a href="javascript:void(0)">HOME</a>
+        <a href="javascript:void(0)">ABOUT</a>
+        <a href="javascript:void(0)">PRODUCT</a>
+        <a href="javascript:void(0)">CONTACT</a>
+    </nav>
+
+
+    <!-- =========================================================
+         03. 실전 Header
+    ========================================================== -->
+
+    <header>
+
+        <div class="logo">
+            MY SHOP
+        </div>
+
+        <nav>
+            <a href="javascript:void(0)">HOME</a>
+            <a href="javascript:void(0)">ABOUT</a>
+            <a href="javascript:void(0)">PRODUCT</a>
+            <a href="javascript:void(0)">CONTACT</a>
+        </nav>
+
+        <div class="login">
+            LOGIN
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         04. Grid + Media Query
+    ========================================================== -->
+
+    <div class="product-list">
+
+        <div class="product">PRODUCT 1</div>
+        <div class="product">PRODUCT 2</div>
+        <div class="product">PRODUCT 3</div>
+        <div class="product">PRODUCT 4</div>
+
+    </div>
+
+
+    <!-- =========================================================
+         05. 여러 단계 Media Query
+    ========================================================== -->
+
+    <div class="responsive-box">
+        화면 크기를 변경해보세요.
+    </div>
+
+</body>
+</html>

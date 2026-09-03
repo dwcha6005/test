@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flex로 Header와 Navigation 만들기</title>
+
+    <style>
+
+        /* =========================================================
+           03. Flex Menu
+
+           이번 수업의 목표
+           ---------------------------------------------------------
+           1. 실제 웹사이트의 Header 구조 이해
+           2. Flex를 이용해 Logo / Menu / Login 배치
+           3. margin-left: auto를 이용한 오른쪽 배치
+           4. nav 자체도 Flex Container로 만들기
+           5. 메뉴 hover 효과 만들기
+           6. 현재 메뉴(active) 표현하기
+
+           ※ 02번에서 배운 Flex 속성을 다시 설명하는 것이 아니라
+              실제 웹사이트 UI를 만드는 데 활용한다.
+           ========================================================= */
+
+
+        /* =========================================================
+           1. 기본 Header 구조
+           =========================================================
+
+           HTML 구조
+
+           <header>
+               <div class="logo">LOGO</div>
+
+               <nav>
+                   <a>HOME</a>
+                   <a>ABOUT</a>
+                   <a>PRODUCT</a>
+                   <a>CONTACT</a>
+               </nav>
+
+               <div class="login">LOGIN</div>
+           </header>
+
+           목표
+
+           LOGO |              MENU              | LOGIN
+        */
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 40px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        /* =========================================================
+           2. Logo
+           ========================================================= */
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           3. Navigation
+
+           nav도 Flex Container로 만든다.
+
+           Header
+              ↓
+           Flex Container
+
+           nav
+              ↓
+           또 하나의 Flex Container
+
+           즉, Flex 안에 Flex를 사용할 수 있다.
+           ========================================================= */
+
+        nav {
+            display: flex;
+            gap: 30px;
+
+            margin-left: auto;
+        }
+
+
+        /* =========================================================
+           4. Navigation 링크
+
+           기본 링크의 밑줄을 제거한다.
+           ========================================================= */
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+
+            padding: 10px 0;
+        }
+
+
+        /* =========================================================
+           5. Hover
+
+           마우스를 메뉴 위에 올렸을 때
+           메뉴 색상이 변경된다.
+           ========================================================= */
+
+        nav a:hover {
+            color: tomato;
+        }
+
+
+        /* =========================================================
+           6. Active
+
+           현재 선택된 메뉴를 표현한다.
+
+           HTML
+
+           <a class="active">HOME</a>
+           ========================================================= */
+
+        nav a.active {
+            color: tomato;
+            font-weight: bold;
+        }
+
+
+        /* =========================================================
+           7. Login
+
+           nav가 margin-left:auto를 사용해서
+           오른쪽 방향으로 밀려 있기 때문에
+
+           LOGIN을 nav와 조금 떨어뜨린다.
+           ========================================================= */
+
+        .login {
+            margin-left: 30px;
+
+            padding: 8px 16px;
+
+            border: 1px solid #333;
+            border-radius: 4px;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           8. Header 구조 확인
+
+           Header 전체
+           ┌────────────────────────────────────────────┐
+           │ LOGO     HOME ABOUT PRODUCT CONTACT  LOGIN │
+           └────────────────────────────────────────────┘
+
+           header
+              display:flex
+                  ↓
+           ┌──────┬──────────────┬───────┐
+           │ logo │     nav      │ login │
+           └──────┴──────────────┴───────┘
+
+           nav
+              display:flex
+                  ↓
+           HOME ABOUT PRODUCT CONTACT
+
+
+           핵심은 margin-left:auto
+
+           logo
+             ↓
+           nav {
+               margin-left: auto;
+           }
+
+           nav 왼쪽의 남는 공간을 자동으로 차지하면서
+           nav를 오른쪽으로 밀어낸다.
+           ========================================================== */
+
+
+        /* =========================================================
+           9. 두 번째 Header 예제
+
+           이번에는 Login 대신 회원가입 / 로그인 버튼을
+           오른쪽에 배치해본다.
+           ========================================================= */
+
+        .header2 {
+            margin-top: 50px;
+
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 40px;
+
+            background-color: #222;
+            color: white;
+        }
+
+        .header2 .logo {
+            color: white;
+        }
+
+        .header2 nav {
+            display: flex;
+            gap: 25px;
+
+            margin-left: auto;
+        }
+
+        .header2 nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .header2 nav a:hover {
+            color: gold;
+        }
+
+        .header2 .user-menu {
+            display: flex;
+            gap: 10px;
+
+            margin-left: 30px;
+        }
+
+        .header2 .user-menu a {
+            padding: 7px 12px;
+
+            border: 1px solid white;
+            border-radius: 4px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .header2 .user-menu a:hover {
+            background-color: white;
+            color: #222;
+        }
+
+
+        /* =========================================================
+           10. 실전 Header
+
+           실제 쇼핑몰을 생각해보자.
+
+           LOGO
+           CATEGORY
+           MENU
+           SEARCH
+           LOGIN
+
+           이번에는 Header 안에 여러 개의 영역을 배치한다.
+           ========================================================= */
+
+        .shop-header {
+            margin-top: 50px;
+
+            height: 90px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 40px;
+
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .shop-header .logo {
+            font-size: 26px;
+        }
+
+        .category {
+            margin-left: 40px;
+
+            padding: 10px 15px;
+
+            border: 1px solid #ddd;
+        }
+
+        .shop-header nav {
+            display: flex;
+            gap: 25px;
+
+            margin-left: 40px;
+        }
+
+        .shop-header nav a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .shop-header nav a:hover {
+            color: tomato;
+        }
+
+        .search {
+            margin-left: auto;
+
+            width: 180px;
+            height: 36px;
+
+            border: 1px solid #ccc;
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 15px;
+
+            color: #888;
+            font-size: 14px;
+        }
+
+        .shop-header .login {
+            margin-left: 20px;
+        }
+
+
+        /* =========================================================
+           11. Header의 핵심 정리
+
+           Header를 Flex Container로 만든다.
+
+               header {
+                   display: flex;
+                   align-items: center;
+               }
+
+           nav도 Flex Container로 만든다.
+
+               nav {
+                   display: flex;
+               }
+
+           오른쪽으로 밀어야 하는 영역에는
+
+               margin-left: auto;
+
+           를 사용할 수 있다.
+
+           ---------------------------------------------
+
+           Flex는 한 번만 사용하는 것이 아니다.
+
+           header
+               └── display:flex
+
+           nav
+               └── display:flex
+
+           user-menu
+               └── display:flex
+
+           하나의 페이지에서 여러 Flex Container를
+           중첩해서 사용할 수 있다.
+           ========================================================= */
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         예제 1. 기본 Header
+         ========================================================= -->
+
+    <h1>Flex로 Header 만들기</h1>
+
+    <header>
+
+        <div class="logo">
+            LOGO
+        </div>
+
+        <nav>
+            <a href="javascript:void(0)">HOME</a>
+            <a href="javascript:void(0)">ABOUT</a>
+            <a href="javascript:void(0)" class="active">PRODUCT</a>
+            <a href="javascript:void(0)">CONTACT</a>
+        </nav>
+
+        <div class="login">
+            LOGIN
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         예제 2. 회원 메뉴가 있는 Header
+         ========================================================= -->
+
+    <header class="header2">
+
+        <div class="logo">
+            MY SHOP
+        </div>
+
+        <nav>
+            <a href="javascript:void(0)">HOME</a>
+            <a href="javascript:void(0)">PRODUCT</a>
+            <a href="javascript:void(0)">EVENT</a>
+            <a href="javascript:void(0)">COMMUNITY</a>
+        </nav>
+
+        <div class="user-menu">
+            <a href="javascript:void(0)">LOGIN</a>
+            <a href="javascript:void(0)">JOIN</a>
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         예제 3. 쇼핑몰 Header
+         ========================================================= -->
+
+    <header class="shop-header">
+
+        <div class="logo">
+            SHOP
+        </div>
+
+        <div class="category">
+            ☰ CATEGORY
+        </div>
+
+        <nav>
+            <a href="javascript:void(0)">NEW</a>
+            <a href="javascript:void(0)">BEST</a>
+            <a href="javascript:void(0)">SALE</a>
+            <a href="javascript:void(0)">EVENT</a>
+        </nav>
+
+        <div class="search">
+            검색
+        </div>
+
+        <div class="login">
+            LOGIN
+        </div>
+
+    </header>
+
+
+</body>
+</html>

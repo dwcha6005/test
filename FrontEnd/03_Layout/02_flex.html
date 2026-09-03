@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flex</title>
+
+    <style>
+        /* =========================================================
+           CSS Flex
+           =========================================================
+
+           Flex는 요소들을 가로 또는 세로 방향으로
+           쉽고 유연하게 배치하기 위한 CSS 레이아웃 방식이다.
+
+           Flex를 사용하려면 부모 요소에
+
+               display: flex;
+
+           를 지정한다.
+
+           부모 → Flex Container
+           자식 → Flex Item
+
+           ※ Flex는 부모에 적용하는 속성과
+              자식에 적용하는 속성이 나누어져 있다.
+        */
+
+
+        /* =========================================================
+           1. display: flex
+           =========================================================
+
+           부모 요소에 display:flex를 지정하면
+           자식 요소들이 Flex Item이 된다.
+
+           기본 방향은 가로(row)이다.
+        */
+
+        .container {
+            display: flex;
+
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        .item {
+            width: 100px;
+            height: 80px;
+
+            background-color: royalblue;
+            color: white;
+
+            text-align: center;
+            line-height: 80px;
+
+            margin: 5px;
+        }
+
+
+        /* =========================================================
+           2. flex-direction
+           =========================================================
+
+           Flex Item이 배치되는 방향을 결정한다.
+
+           row            → 가로
+           row-reverse    → 가로 반대 방향
+           column         → 세로
+           column-reverse → 세로 반대 방향
+        */
+
+        .direction-row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .direction-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================================
+           3. justify-content
+           =========================================================
+
+           주축(Main Axis)을 기준으로 Flex Item을 정렬한다.
+
+           기본값:
+           flex-direction: row
+
+           이 경우 주축은 가로 방향이다.
+
+           flex-start
+           center
+           flex-end
+           space-between
+           space-around
+           space-evenly
+        */
+
+        .justify {
+            display: flex;
+            height: 120px;
+
+            border: 2px solid black;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-evenly {
+            justify-content: space-evenly;
+        }
+
+
+        /* =========================================================
+           4. align-items
+           =========================================================
+
+           교차축(Cross Axis)을 기준으로 Flex Item을 정렬한다.
+
+           flex-direction: row라면
+
+               주축     → 가로
+               교차축   → 세로
+
+           따라서 align-items는 세로 방향 정렬에 사용된다.
+
+           flex-start
+           center
+           flex-end
+           stretch
+        */
+
+        .align {
+            display: flex;
+            align-items: center;
+
+            height: 150px;
+
+            border: 2px solid black;
+        }
+
+
+        /* =========================================================
+           5. justify-content + align-items
+           =========================================================
+
+           두 속성을 함께 사용하면
+           요소를 가로/세로 모두 가운데에 배치할 수 있다.
+        */
+
+        .center-box {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            height: 150px;
+
+            border: 2px solid black;
+        }
+
+
+        /* =========================================================
+           6. gap
+           =========================================================
+
+           Flex Item 사이의 간격을 지정한다.
+
+           기존에는 margin을 이용해서
+           요소 사이의 간격을 만들기도 했다.
+
+           Flex에서는 gap을 사용하면
+           Item 사이의 간격을 쉽게 지정할 수 있다.
+
+               gap: 20px;
+
+           → 가로/세로 모든 방향에 20px
+
+               column-gap: 20px;
+               row-gap: 10px;
+        */
+
+        .gap-container {
+            display: flex;
+            gap: 20px;
+
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+
+        /* =========================================================
+           7. flex-wrap
+           =========================================================
+
+           Flex Item의 크기 때문에 한 줄에 모두 들어가지 않을 때
+           줄바꿈을 할 것인지 결정한다.
+
+           기본값:
+               nowrap
+
+           줄바꿈:
+               wrap
+        */
+
+        .wrap-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            width: 350px;
+
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        .wrap-container .item {
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+
+        /* =========================================================
+           8. flex-shrink
+           =========================================================
+
+           Flex Item의 기본값은
+
+               flex-shrink: 1;
+
+           부모 공간이 부족하면
+           Flex Item이 줄어들 수 있다는 뜻이다.
+
+           줄어들지 않도록 하려면
+
+               flex-shrink: 0;
+
+           을 사용한다.
+
+           ※ flex-shrink는 자식(Flex Item)에 적용한다.
+        */
+
+        .shrink-container {
+            display: flex;
+
+            width: 300px;
+
+            border: 2px solid black;
+        }
+
+        .shrink-container .item {
+            width: 150px;
+
+            /* 공간이 부족하면 기본적으로 줄어든다. */
+        }
+
+        .no-shrink .item {
+            flex-shrink: 0;
+        }
+
+
+        /* =========================================================
+           9. Flex의 주축과 교차축
+           =========================================================
+
+           flex-direction: row
+
+               주축     → 가로
+               교차축   → 세로
+
+           flex-direction: column
+
+               주축     → 세로
+               교차축   → 가로
+
+           따라서
+
+               justify-content
+               → 주축 정렬
+
+               align-items
+               → 교차축 정렬
+
+           ※ justify-content가 무조건 가로 정렬이라는 것은 아니다.
+              flex-direction에 따라 주축의 방향이 달라진다.
+        */
+
+        .axis-row {
+            display: flex;
+            flex-direction: row;
+
+            justify-content: center;
+            align-items: center;
+
+            height: 120px;
+
+            border: 2px solid black;
+        }
+
+        .axis-column {
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            height: 250px;
+
+            border: 2px solid black;
+        }
+
+
+        /* =========================================================
+           예제 영역 공통 스타일
+           ========================================================= */
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .description {
+            margin-bottom: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Flex</h1>
+
+    <!-- =========================================================
+         1. display: flex
+         ========================================================= -->
+
+    <section>
+        <h2>1. display: flex</h2>
+
+        <p class="description">
+            부모 요소에 display:flex를 적용하면
+            자식 요소들이 가로 방향으로 배치된다.
+        </p>
+
+        <div class="container">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         2. flex-direction
+         ========================================================= -->
+
+    <section>
+        <h2>2. flex-direction</h2>
+
+        <p class="description">
+            Flex Item이 배치되는 방향을 변경한다.
+        </p>
+
+        <h3>row - 가로</h3>
+
+        <div class="direction-row">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+
+        <h3>column - 세로</h3>
+
+        <div class="direction-column">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         3. justify-content
+         ========================================================= -->
+
+    <section>
+        <h2>3. justify-content</h2>
+
+        <p class="description">
+            주축을 기준으로 Flex Item을 정렬한다.
+        </p>
+
+        <h3>center</h3>
+
+        <div class="justify justify-center">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+
+        <h3>space-between</h3>
+
+        <div class="justify justify-between">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+
+        <h3>space-evenly</h3>
+
+        <div class="justify justify-evenly">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         4. align-items
+         ========================================================= -->
+
+    <section>
+        <h2>4. align-items</h2>
+
+        <p class="description">
+            교차축을 기준으로 Flex Item을 정렬한다.
+            row에서는 세로 방향 정렬이다.
+        </p>
+
+        <div class="align">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         5. 가운데 정렬
+         ========================================================= -->
+
+    <section>
+        <h2>5. 가로 + 세로 가운데 정렬</h2>
+
+        <p class="description">
+            justify-content와 align-items를 함께 사용하면
+            요소를 가로와 세로 모두 가운데 배치할 수 있다.
+        </p>
+
+        <div class="center-box">
+            <div class="item">CENTER</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         6. gap
+         ========================================================= -->
+
+    <section>
+        <h2>6. gap</h2>
+
+        <p class="description">
+            Flex Item 사이의 간격을 지정한다.
+        </p>
+
+        <div class="gap-container">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         7. flex-wrap
+         ========================================================= -->
+
+    <section>
+        <h2>7. flex-wrap</h2>
+
+        <p class="description">
+            공간이 부족하면 Flex Item을 다음 줄로 이동시킬 수 있다.
+        </p>
+
+        <div class="wrap-container">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         8. flex-shrink
+         ========================================================= -->
+
+    <section>
+        <h2>8. flex-shrink</h2>
+
+        <p class="description">
+            Flex Container의 공간이 부족할 때
+            Flex Item이 줄어들 수 있는지를 결정한다.
+        </p>
+
+        <h3>기본값 : flex-shrink: 1</h3>
+
+        <div class="shrink-container">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+
+        <h3>flex-shrink: 0</h3>
+
+        <div class="shrink-container no-shrink">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         9. 주축과 교차축
+         ========================================================= -->
+
+    <section>
+        <h2>9. 주축(Main Axis)과 교차축(Cross Axis)</h2>
+
+        <p class="description">
+            flex-direction에 따라 주축과 교차축의 방향이 달라진다.
+        </p>
+
+        <h3>row</h3>
+
+        <div class="axis-row">
+            <div class="item">1</div>
+            <div class="item">2</div>
+        </div>
+
+        <h3>column</h3>
+
+        <div class="axis-column">
+            <div class="item">1</div>
+            <div class="item">2</div>
+        </div>
+    </section>
+
+
+</body>
+</html>

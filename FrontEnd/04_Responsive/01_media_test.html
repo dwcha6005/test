@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Media Query 실습</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+        }
+
+
+        /* =========================================================
+           실습 1
+           화면 크기에 따라 박스 크기 변경
+
+           조건
+           - 기본 박스 너비 : 500px
+           - 화면이 600px 이하가 되면 너비를 90%로 변경
+
+           사용 속성
+           @media
+           max-width
+           width
+        ========================================================= */
+
+        .practice1 {
+            width: 500px;
+            margin: 30px auto;
+            padding: 40px;
+            background-color: white;
+            text-align: center;
+
+            /* 작성 */
+            width: 500px;
+        }
+
+
+        /* =========================================================
+           실습 2
+           화면 크기에 따라 글자 크기 변경
+
+           조건
+           - 기본 글자 크기 : 40px
+           - 화면이 768px 이하라면 : 28px
+
+           사용 속성
+           @media
+           max-width
+           font-size
+        ========================================================= */
+
+        .practice2 {
+            margin: 30px;
+            text-align: center;
+            font-size: 40px;
+
+            /* 작성 */
+            font-size: 40px;
+        }
+
+
+        /* =========================================================
+           실습 3
+           모바일에서 요소 숨기기
+
+           조건
+           - 기본적으로 안내문을 표시
+           - 화면이 600px 이하라면 숨김
+
+           사용 속성
+           display
+           none
+        ========================================================= */
+
+        .practice3 {
+            margin: 30px;
+            padding: 30px;
+            background-color: lightblue;
+            text-align: center;
+
+            /* 작성 */
+            display: block;
+        }
+
+
+        /* =========================================================
+           실습 4
+           Flex 방향 변경
+
+           HTML 구조
+
+           메뉴1 메뉴2 메뉴3 메뉴4
+
+           조건
+           - 기본 : 가로 배치
+           - 화면이 600px 이하 : 세로 배치
+
+           사용 속성
+           flex-direction
+        ========================================================= */
+
+        .practice4 {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: black;
+
+            /* 작성 */
+            flex-direction: row;
+        }
+
+        .practice4 a {
+            padding: 15px 25px;
+            color: white;
+            background-color: #444444;
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           실습 5
+           Header 반응형
+
+           PC
+           LOGO       HOME ABOUT PRODUCT CONTACT       LOGIN
+
+           모바일
+           LOGO
+           HOME
+           ABOUT
+           PRODUCT
+           CONTACT
+           LOGIN
+
+           조건
+           - 기본 Header는 가로 배치
+           - 600px 이하에서는 세로 배치
+           - nav도 세로 배치
+           - LOGIN의 margin-left 제거
+
+           사용 속성
+           flex-direction
+           margin-left
+        ========================================================= */
+
+        .practice5-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: white;
+        }
+
+        .practice5-logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .practice5-nav {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+        }
+
+        .practice5-nav a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .practice5-login {
+            margin-left: 30px;
+            padding: 8px 15px;
+            background-color: black;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .practice5-header {
+                /* 작성 */
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .practice5-nav {
+                /* 작성 */
+                flex-direction: column;
+                align-items: center;
+                margin-left: 0;
+                gap: 10px;
+            }
+
+            .practice5-login {
+                /* 작성 */
+                margin-left: 0;
+            }
+        }
+
+
+        /* =========================================================
+           실습 6
+           Grid + Media Query
+
+           조건
+
+           PC
+           4열
+
+           태블릿
+           2열
+
+           모바일
+           1열
+
+           기준
+           - 901px 이상 : 4열
+           - 600px ~ 900px : 2열
+           - 600px 이하 : 1열
+        ========================================================= */
+
+        .practice6 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .practice6 .item {
+            padding: 50px 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+        /* 태블릿 */
+        @media (max-width: 900px) {
+            .practice6 {
+                /* 작성 */
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 모바일 */
+        @media (max-width: 600px) {
+            .practice6 {
+                /* 작성 */
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+        /* =========================================================
+           실습 7
+           직접 반응형 카드 만들기
+
+           조건
+
+           기본
+           - 카드 3개를 가로 배치
+           - 각 카드 flex: 1
+
+           600px 이하
+           - 카드 세로 배치
+
+           힌트
+           display:flex는 이미 작성되어 있다.
+           @media에서 flex-direction을 변경한다.
+        ========================================================= */
+
+        .practice7 {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .practice7 .card {
+            flex: 1;
+            padding: 50px 20px;
+            background-color: white;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+
+            .practice7 {
+
+                /* 작성 */
+
+                flex-direction: column;
+            }
+        }
+
+
+
+        /* =========================================================
+           실습 8
+           종합 실습
+
+           쇼핑몰 상품 목록
+
+           PC
+           4열
+
+           태블릿
+           2열
+
+           모바일
+           1열
+
+
+           조건
+
+           1. 기본 상품 목록은 Grid
+           2. 900px 이하 → 2열
+           3. 600px 이하 → 1열
+           4. 상품 제목은 모바일에서 글자 크기를 줄인다.
+        ========================================================= */
+
+        .practice8 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .practice8 .product {
+            padding: 30px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .practice8 h3 {
+            font-size: 24px;
+        }
+
+
+        @media (max-width: 900px) {
+
+            .practice8 {
+
+                /* 작성 */
+
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .practice8 {
+
+                /* 작성 */
+
+                grid-template-columns: 1fr;
+            }
+
+            .practice8 h3 {
+
+                /* 작성 */
+
+                font-size: 18px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================================================
+         실습 1
+    ========================================================== -->
+
+    <div class="practice1">
+        <h2>실습 1</h2>
+        <p>화면 크기를 줄여보세요.</p>
+    </div>
+
+
+    <!-- =========================================================
+         실습 2
+    ========================================================== -->
+
+    <div class="practice2">
+        Media Query
+    </div>
+
+
+    <!-- =========================================================
+         실습 3
+    ========================================================== -->
+
+    <div class="practice3">
+        모바일에서는 이 안내문을 숨겨주세요.
+    </div>
+
+
+    <!-- =========================================================
+         실습 4
+    ========================================================== -->
+
+    <div class="practice4">
+
+        <a href="javascript:void(0)">HOME</a>
+        <a href="javascript:void(0)">ABOUT</a>
+        <a href="javascript:void(0)">PRODUCT</a>
+        <a href="javascript:void(0)">CONTACT</a>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 5
+    ========================================================== -->
+
+    <header class="practice5-header">
+
+        <div class="practice5-logo">
+            MY SHOP
+        </div>
+
+        <nav class="practice5-nav">
+            <a href="javascript:void(0)">HOME</a>
+            <a href="javascript:void(0)">ABOUT</a>
+            <a href="javascript:void(0)">PRODUCT</a>
+            <a href="javascript:void(0)">CONTACT</a>
+        </nav>
+
+        <div class="practice5-login">
+            LOGIN
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         실습 6
+    ========================================================== -->
+
+    <div class="practice6">
+
+        <div class="item">상품 1</div>
+        <div class="item">상품 2</div>
+        <div class="item">상품 3</div>
+        <div class="item">상품 4</div>
+        <div class="item">상품 5</div>
+        <div class="item">상품 6</div>
+        <div class="item">상품 7</div>
+        <div class="item">상품 8</div>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 7
+    ========================================================== -->
+
+    <div class="practice7">
+
+        <div class="card">
+            CARD 1
+        </div>
+
+        <div class="card">
+            CARD 2
+        </div>
+
+        <div class="card">
+            CARD 3
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 8
+    ========================================================== -->
+
+    <div class="practice8">
+
+        <div class="product">
+            <h3>상품 1</h3>
+            <p>상품 설명입니다.</p>
+        </div>
+
+        <div class="product">
+            <h3>상품 2</h3>
+            <p>상품 설명입니다.</p>
+        </div>
+
+        <div class="product">
+            <h3>상품 3</h3>
+            <p>상품 설명입니다.</p>
+        </div>
+
+        <div class="product">
+            <h3>상품 4</h3>
+            <p>상품 설명입니다.</p>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

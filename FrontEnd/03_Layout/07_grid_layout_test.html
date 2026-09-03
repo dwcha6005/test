@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07 - CSS Grid Layout 실습</title>
+
+    <style>
+
+        /*
+        ============================================================
+        CSS Grid Layout 실습
+        ============================================================
+
+        실습 1
+        → 전체 페이지를 Grid로 구성
+
+        실습 2
+        → Header / Sidebar / Main / Footer 영역 배치
+
+        실습 3
+        → Main 내부에 카드 Grid 만들기
+
+        실습 4
+        → minmax()를 이용한 반응형 카드
+
+        실습 5
+        → auto-fit을 이용한 반응형 Grid
+
+        실습 6
+        → 전체 페이지 반응형 레이아웃
+        */
+
+
+        /* ========================================================
+           실습 1
+           전체 페이지 Grid 만들기
+           ======================================================== */
+
+        /*
+        조건
+
+        .practice1을 Grid Container로 만든다.
+
+        화면을
+
+        Header
+        Sidebar + Main
+        Footer
+
+        형태로 배치한다.
+        */
+
+        .practice1 {
+            min-height: 500px;
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            grid-template-rows: 70px 1fr 60px;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+        .practice1 .header {
+            /* 작성 */
+            grid-area: header;
+
+            background-color: #333;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .practice1 .sidebar {
+            /* 작성 */
+            grid-area: sidebar;
+
+            background-color: #eee;
+
+            padding: 20px;
+        }
+
+        .practice1 .main {
+            /* 작성 */
+            grid-area: main;
+
+            padding: 20px;
+        }
+
+        .practice1 .footer {
+            /* 작성 */
+            grid-area: footer;
+
+            background-color: #333;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ========================================================
+           실습 2
+           Header / Sidebar / Main / Footer
+           ======================================================== */
+
+        /*
+        아래 HTML 구조를 보고
+        각 영역에 맞는 grid-area를 작성한다.
+        */
+
+        .practice2 {
+            min-height: 500px;
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: 70px 1fr 60px;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+        .practice2 header {
+            /* 작성 */
+            grid-area: header;
+
+            background-color: steelblue;
+            color: white;
+        }
+
+        .practice2 aside {
+            /* 작성 */
+            grid-area: sidebar;
+
+            background-color: #eee;
+        }
+
+        .practice2 main {
+            /* 작성 */
+            grid-area: main;
+
+            padding: 20px;
+        }
+
+        .practice2 footer {
+            /* 작성 */
+            grid-area: footer;
+
+            background-color: #333;
+            color: white;
+        }
+
+
+        /* ========================================================
+           실습 3
+           Main 내부에 카드 Grid 만들기
+           ======================================================== */
+
+        /*
+        조건
+
+        .practice3 .card-list를 Grid Container로 만든다.
+
+        카드가 한 줄에 3개씩 나오도록 한다.
+
+        카드 사이의 간격은 20px이다.
+        */
+
+        .practice3 {
+            margin-top: 30px;
+        }
+
+        .practice3 .card-list {
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .practice3 .card {
+            padding: 30px;
+
+            background-color: #eee;
+
+            text-align: center;
+        }
+
+
+        /* ========================================================
+           실습 4
+           minmax()
+           ======================================================== */
+
+        /*
+        조건
+
+        카드의 최소 너비는 200px로 한다.
+
+        공간이 남으면 각 카드가
+        같은 비율로 늘어나도록 한다.
+
+        힌트
+
+        minmax()
+        */
+
+        .practice4 .product-list {
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .practice4 .product {
+            padding: 30px;
+
+            background-color: #ddd;
+
+            text-align: center;
+        }
+
+
+        /* ========================================================
+           실습 5
+           auto-fit
+           ======================================================== */
+
+        /*
+        조건
+
+        화면 크기가 변경되어도
+        카드의 최소 너비가 200px 이하로
+        줄어들지 않도록 한다.
+
+        가능한 열의 개수를 자동으로 조절한다.
+
+        힌트
+
+        repeat()
+        auto-fit
+        minmax()
+        */
+
+        .practice5 .gallery {
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .practice5 .item {
+            min-height: 150px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #ddd;
+        }
+
+
+        /* ========================================================
+           실습 6
+           전체 페이지 반응형
+           ======================================================== */
+
+        /*
+        데스크톱
+
+        ┌──────────────────────────────┐
+        │            HEADER            │
+        ├──────────┬───────────────────┤
+        │ SIDEBAR  │       MAIN        │
+        ├──────────┴───────────────────┤
+        │            FOOTER            │
+        └──────────────────────────────┘
+
+
+        모바일
+
+        ┌──────────────────────────────┐
+        │            HEADER            │
+        ├──────────────────────────────┤
+        │           SIDEBAR            │
+        ├──────────────────────────────┤
+        │             MAIN             │
+        ├──────────────────────────────┤
+        │            FOOTER            │
+        └──────────────────────────────┘
+
+
+        조건
+
+        700px 이하에서는
+
+        Sidebar가 Main 위로 이동하도록 한다.
+        */
+
+        .practice6 {
+            min-height: 600px;
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: 70px 1fr 60px;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+        .practice6 header {
+            /* 작성 */
+            grid-area: header;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .practice6 aside {
+            /* 작성 */
+            grid-area: sidebar;
+
+            background-color: #eee;
+
+            padding: 20px;
+        }
+
+        .practice6 main {
+            /* 작성 */
+            grid-area: main;
+
+            padding: 20px;
+        }
+
+        .practice6 footer {
+            /* 작성 */
+            grid-area: footer;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ========================================================
+           실습 6 - 반응형
+           ======================================================== */
+
+        @media (max-width: 700px) {
+
+            .practice6 {
+
+                /* 작성 */
+                grid-template-columns: 1fr;
+                grid-template-rows:
+                    70px
+                    auto
+                    1fr
+                    60px;
+
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "main"
+                    "footer";
+            }
+        }
+
+
+        /* ========================================================
+           실습 7
+           종합 실습
+           ======================================================== */
+
+        /*
+        쇼핑몰 관리자 페이지를 완성한다.
+
+        데스크톱
+
+        Header
+        ├──────────────┬───────────────┐
+        │              │               │
+        │   Sidebar    │      Main     │
+        │              │               │
+        ├──────────────┴───────────────┤
+        │            Footer            │
+        └──────────────────────────────┘
+
+        Main 안에는 상품 카드가 있다.
+
+        상품 카드는
+
+        4개 → 3개 → 2개 → 1개
+
+        형태로 화면 크기에 맞게 변경한다.
+
+        핵심
+
+        - grid-template-areas
+        - grid-template-columns
+        - repeat()
+        - minmax()
+        - media query
+        */
+
+
+        .practice7 {
+            min-height: 600px;
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            grid-template-rows: 70px 1fr 60px;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+        .practice7 header {
+            /* 작성 */
+            grid-area: header;
+
+            background-color: #222;
+            color: white;
+
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .practice7 aside {
+            /* 작성 */
+            grid-area: sidebar;
+
+            background-color: #eee;
+
+            padding: 20px;
+        }
+
+        .practice7 main {
+            /* 작성 */
+            grid-area: main;
+
+            padding: 30px;
+        }
+
+        .practice7 footer {
+            /* 작성 */
+            grid-area: footer;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .practice7 .product-list {
+
+            /* 작성 */
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .practice7 .product {
+            min-height: 150px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #ddd;
+
+            border-radius: 10px;
+        }
+
+
+        /* ========================================================
+           종합 실습 반응형
+           ======================================================== */
+
+        @media (max-width: 1000px) {
+
+            .practice7 .product-list {
+
+                /* 작성 */
+                grid-template-columns:
+                    repeat(3, minmax(180px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 750px) {
+
+            .practice7 {
+                /* 작성 */
+                grid-template-columns: 1fr;
+                grid-template-rows:
+                    70px
+                    auto
+                    1fr
+                    60px;
+
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "main"
+                    "footer";
+            }
+
+            .practice7 .product-list {
+
+                /* 작성 */
+                grid-template-columns:
+                    repeat(2, minmax(180px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .practice7 .product-list {
+
+                /* 작성 */
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================================================
+         실습 1
+         ========================================================= -->
+
+    <h1>실습 1 - 전체 페이지 Grid</h1>
+
+    <div class="practice1">
+
+        <header class="header">
+            HEADER
+        </header>
+
+        <aside class="sidebar">
+            SIDEBAR
+        </aside>
+
+        <main class="main">
+            MAIN
+        </main>
+
+        <footer class="footer">
+            FOOTER
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 2
+         ========================================================= -->
+
+    <h1>실습 2 - 영역 배치</h1>
+
+    <div class="practice2">
+
+        <header>
+            HEADER
+        </header>
+
+        <aside>
+            SIDEBAR
+        </aside>
+
+        <main>
+            MAIN
+        </main>
+
+        <footer>
+            FOOTER
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 3
+         ========================================================= -->
+
+    <h1>실습 3 - 카드 Grid</h1>
+
+    <div class="practice3">
+
+        <div class="card-list">
+
+            <div class="card">상품 1</div>
+            <div class="card">상품 2</div>
+            <div class="card">상품 3</div>
+            <div class="card">상품 4</div>
+            <div class="card">상품 5</div>
+            <div class="card">상품 6</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 4
+         ========================================================= -->
+
+    <h1>실습 4 - minmax()</h1>
+
+    <div class="practice4">
+
+        <div class="product-list">
+
+            <div class="product">상품 A</div>
+            <div class="product">상품 B</div>
+            <div class="product">상품 C</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 5
+         ========================================================= -->
+
+    <h1>실습 5 - auto-fit</h1>
+
+    <div class="practice5">
+
+        <div class="gallery">
+
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 6
+         ========================================================= -->
+
+    <h1>실습 6 - 반응형 Grid</h1>
+
+    <div class="practice6">
+
+        <header>
+            HEADER
+        </header>
+
+        <aside>
+            SIDEBAR
+        </aside>
+
+        <main>
+            MAIN
+        </main>
+
+        <footer>
+            FOOTER
+        </footer>
+
+    </div>
+
+
+    <!-- =========================================================
+         실습 7
+         ========================================================= -->
+
+    <h1>실습 7 - 쇼핑몰 관리자 페이지</h1>
+
+    <div class="practice7">
+
+        <header>
+            MY SHOP
+        </header>
+
+        <aside>
+
+            <h3>관리 메뉴</h3>
+
+            <p>상품 관리</p>
+            <p>주문 관리</p>
+            <p>회원 관리</p>
+            <p>매출 관리</p>
+
+        </aside>
+
+        <main>
+
+            <h2>상품 관리</h2>
+
+            <div class="product-list">
+
+                <div class="product">상품 1</div>
+                <div class="product">상품 2</div>
+                <div class="product">상품 3</div>
+                <div class="product">상품 4</div>
+                <div class="product">상품 5</div>
+                <div class="product">상품 6</div>
+                <div class="product">상품 7</div>
+                <div class="product">상품 8</div>
+
+            </div>
+
+        </main>
+
+        <footer>
+            COPYRIGHT © MY SHOP
+        </footer>
+
+    </div>
+
+</body>
+</html>

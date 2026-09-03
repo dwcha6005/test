@@ -34,7 +34,7 @@ HTML_CSS/
 │  ├─ 01_float.html
 │  ├─ 02_flex.html
 │  ├─ 03_flex_menu.html
-│  ├─ 04_flex_card.html
+│  ├─ 04_flex_gallery.html
 │  ├─ 05_flex_layout.html
 │  ├─ 06_grid.html
 │  ├─ 07_grid_layout.html

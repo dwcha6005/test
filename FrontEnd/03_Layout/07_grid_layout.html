@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07 - CSS Grid Layout</title>
+
+    <style>
+
+        /*
+        ============================================================
+        07. CSS Grid Layout
+        ============================================================
+
+        06_grid.html
+        → Grid의 기본 문법
+        → 열 / 행
+        → fr
+        → repeat()
+        → gap
+        → 카드 배치
+        → grid-column
+        → grid-template-areas
+
+        07_grid_layout.html
+        → Grid를 이용해서 실제 웹페이지 전체 레이아웃 만들기
+
+        오늘 배울 것
+
+        1. Grid로 전체 페이지 구성
+        2. Header / Sidebar / Main / Footer
+        3. grid-template-areas
+        4. Grid 안에 Grid 사용하기
+        5. minmax()
+        6. auto-fit
+        7. 반응형 Grid Layout
+        */
+
+
+        /* ========================================================
+           1. 전체 페이지
+           ======================================================== */
+
+        /*
+        Grid를 이용해서
+
+        ┌──────────────────────────────┐
+        │            Header            │
+        ├──────────┬───────────────────┤
+        │ Sidebar  │       Main        │
+        │          │                   │
+        │          │                   │
+        ├──────────┴───────────────────┤
+        │            Footer            │
+        └──────────────────────────────┘
+
+        형태의 페이지를 만들어보자.
+        */
+
+        .page {
+            min-height: 100vh;
+
+            display: grid;
+
+            /*
+            화면을
+
+            header
+            sidebar + main
+            footer
+
+            형태로 나누기 위해
+            grid-template-areas를 사용한다.
+            */
+
+            grid-template-columns: 220px 1fr;
+
+            grid-template-rows: 70px 1fr 60px;
+
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+        }
+
+
+        /* ========================================================
+           2. Header
+           ======================================================== */
+
+        .header {
+            grid-area: header;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        /* ========================================================
+           3. Sidebar
+           ======================================================== */
+
+        .sidebar {
+            grid-area: sidebar;
+
+            background-color: #f1f1f1;
+
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 12px 0;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        /* ========================================================
+           4. Main
+           ======================================================== */
+
+        .main {
+            grid-area: main;
+
+            padding: 30px;
+
+            background-color: #fff;
+        }
+
+        .main h1 {
+            margin-top: 0;
+        }
+
+
+        /* ========================================================
+           5. Main 내부의 카드 영역
+           ======================================================== */
+
+        /*
+        중요한 개념
+
+        전체 페이지도 Grid
+        Main 내부도 Grid
+
+        즉,
+
+        Grid
+          └── Main
+                └── Grid
+
+        처럼 Grid를 중첩해서 사용할 수 있다.
+        */
+
+        .card-list {
+            display: grid;
+
+            /*
+            3개의 열을 만든다.
+            */
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .card {
+            padding: 20px;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            background-color: white;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+
+        /* ========================================================
+           6. minmax()
+           ======================================================== */
+
+        /*
+        minmax(최소값, 최대값)
+
+        예:
+
+        minmax(200px, 1fr)
+
+        → 최소 200px
+        → 여유 공간이 있으면 1fr까지 사용
+
+        반응형 레이아웃에서 매우 자주 사용한다.
+        */
+
+        .product-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(200px, 1fr));
+
+            gap: 20px;
+
+            margin-top: 30px;
+        }
+
+        .product {
+            padding: 30px;
+
+            background-color: #eee;
+
+            text-align: center;
+
+            border-radius: 10px;
+        }
+
+
+        /* ========================================================
+           7. auto-fit
+           ======================================================== */
+
+        /*
+        auto-fit
+
+        화면 크기에 따라서
+        들어갈 수 있는 열의 개수를 자동으로 조절한다.
+
+        repeat(auto-fit, minmax(200px, 1fr))
+
+        의미:
+
+        "각 칸의 최소 크기를 200px로 유지하면서
+        가능한 만큼 열을 만들어라."
+
+        화면이 넓으면
+
+        ┌────┐ ┌────┐ ┌────┐ ┌────┐
+        │    │ │    │ │    │ │    │
+        └────┘ └────┘ └────┘ └────┘
+
+        화면이 좁아지면
+
+        ┌────┐ ┌────┐
+        │    │ │    │
+        └────┘ └────┘
+
+        더 좁아지면
+
+        ┌────────┐
+        │        │
+        └────────┘
+
+        형태로 자동 변경된다.
+        */
+
+        .auto-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 20px;
+
+            margin-top: 30px;
+        }
+
+        .auto-item {
+            min-height: 150px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #ddd;
+
+            border-radius: 10px;
+        }
+
+
+        /* ========================================================
+           8. Footer
+           ======================================================== */
+
+        .footer {
+            grid-area: footer;
+
+            background-color: #222;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ========================================================
+           9. 반응형 레이아웃
+           ======================================================== */
+
+        /*
+        화면이 700px 이하가 되면
+
+        기존
+
+        header
+        sidebar | main
+        footer
+
+        에서
+
+        header
+        sidebar
+        main
+        footer
+
+        형태로 변경한다.
+        */
+
+        @media (max-width: 700px) {
+
+            .page {
+                grid-template-columns: 1fr;
+
+                grid-template-rows:
+                    70px
+                    auto
+                    1fr
+                    60px;
+
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "main"
+                    "footer";
+            }
+
+
+            .card-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        /* ========================================================
+           10. 더 작은 화면
+           ======================================================== */
+
+        @media (max-width: 500px) {
+
+            .card-list {
+                grid-template-columns: 1fr;
+            }
+
+            .main {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================================================
+         전체 페이지
+         ========================================================= -->
+
+    <div class="page">
+
+
+        <!-- =====================================================
+             Header
+             ===================================================== -->
+
+        <header class="header">
+
+            <div class="logo">
+                MY SHOP
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             Sidebar
+             ===================================================== -->
+
+        <aside class="sidebar">
+
+            <h2>카테고리</h2>
+
+            <ul>
+                <li>전체상품</li>
+                <li>상의</li>
+                <li>하의</li>
+                <li>신발</li>
+                <li>액세서리</li>
+            </ul>
+
+        </aside>
+
+
+        <!-- =====================================================
+             Main
+             ===================================================== -->
+
+        <main class="main">
+
+            <h1>상품 관리</h1>
+
+            <p>
+                CSS Grid를 이용해서 실제 페이지의 레이아웃을 구성할 수 있습니다.
+            </p>
+
+
+            <!-- =================================================
+                 Main 내부 Grid
+                 ================================================= -->
+
+            <h2>인기 상품</h2>
+
+            <div class="card-list">
+
+                <div class="card">
+                    <h3>상품 1</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+                <div class="card">
+                    <h3>상품 2</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+                <div class="card">
+                    <h3>상품 3</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+                <div class="card">
+                    <h3>상품 4</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+                <div class="card">
+                    <h3>상품 5</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+                <div class="card">
+                    <h3>상품 6</h3>
+                    <p>인기 상품입니다.</p>
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 minmax()
+                 ================================================= -->
+
+            <h2>minmax() 사용</h2>
+
+            <div class="product-list">
+
+                <div class="product">상품 A</div>
+                <div class="product">상품 B</div>
+                <div class="product">상품 C</div>
+
+            </div>
+
+
+            <!-- =================================================
+                 auto-fit
+                 ================================================= -->
+
+            <h2>auto-fit 사용</h2>
+
+            <div class="auto-grid">
+
+                <div class="auto-item">A</div>
+                <div class="auto-item">B</div>
+                <div class="auto-item">C</div>
+                <div class="auto-item">D</div>
+                <div class="auto-item">E</div>
+                <div class="auto-item">F</div>
+
+            </div>
+
+        </main>
+
+
+        <!-- =====================================================
+             Footer
+             ===================================================== -->
+
+        <footer class="footer">
+
+            COPYRIGHT © MY SHOP
+
+        </footer>
+
+    </div>
+
+</body>
+</html>

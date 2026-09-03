@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>01_float</title>
+
+<style>
+
+    /*
+    ========================================
+    float
+
+    요소를 왼쪽(left) 또는 오른쪽(right)으로
+    띄워서 배치하는 속성
+
+    float: left;
+    float: right;
+
+    특징
+    1. 요소가 붕 뜬다.
+    2. 다음 요소들이 빈 공간을 채우려고 한다.
+    3. 부모 높이가 사라질 수 있다.
+    4. clear 속성으로 해제한다.
+    ========================================
+    */
+
+    body{
+        margin:20px;
+    }
+
+    .box{
+        width:150px;
+        height:150px;
+        color:white;
+        text-align:center;
+        line-height:150px;
+        font-size:20px;
+    }
+
+    .red{
+        background:red;
+        float:left;
+    }
+
+    .blue{
+        background:blue;
+        float:left;
+    }
+
+    .green{
+        background:green;
+        float:left;
+    }
+
+    .clear{
+        clear:both;
+    }
+
+    .content{
+        margin-top:20px;
+        padding:20px;
+        background:#eee;
+    }
+
+</style>
+</head>
+<body>
+
+<h1>float:left</h1>
+
+<div class="box red">BOX1</div>
+<div class="box blue">BOX2</div>
+<div class="box green">BOX3</div>
+
+<div class="clear"></div>
+
+<div class="content">
+    clear:both 적용 후 아래쪽에 배치
+</div>
+
+</body>
+</html>
