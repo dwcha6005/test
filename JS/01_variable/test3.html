@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+현재 HTML 문서 내에서 외부 자바스크립트 파일(*.js)을 포함시켜 사용하려면
+<script> 태그에 src 속성을 통해 해당 자바스크립트 파일을 지정해야한다!
+-->
+<script src="test3_javascript.js"></script>
+<!-- 외부 자바스크립트 파일을 포함시킬 때 갯수 제한 없이 여러개의 파일 포함 가능 -->
+<script src="test3_javascript2.js">
+	// 주의! src 속성을 지정하여 외부 자바스크립트 파일을 포함시킨 <script> 태그 사이에
+	// 자바스크립트 코드 작성 시 실행되지 않는다!
+	alert("아무거나 출력하기222222"); // 실행되지 않는 코드!!!
+	// => 따라서, src 속성이 적용되지 않은 별도의 <script> 태그를 통해 자바스크립트 코드 기술해야한다!
+</script>
+
+<script>
+	alert("아무거나 출력하기");
+</script>
+</head>
+<body>
+	<h1>test3.jsp</h1>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
