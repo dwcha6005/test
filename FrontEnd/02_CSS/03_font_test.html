@@ -5,17 +5,11 @@
 <title>Font Practice</title>
 
 <style>
-
     /*
-    =====================================
     실습 1
 
-    h1
-    글자크기 40px
-
-    p
-    글자크기 20px
-    =====================================
+    h1: 글자크기 40px
+    p: 글자크기 20px
     */
     h1 {
         font-size: 40px;
@@ -27,149 +21,107 @@
 
 
     /*
-    =====================================
     실습 2
-
-    .title
-    굵게
-
-    .sub
-    기울임
-    =====================================
+    .title: 굵게
+    .sub: 기울임
     */
-
+    .title {
+        font-weight: bold;
+    }
+    .sub {
+        font-style: italic;
+    }
 
 
     /*
-    =====================================
     실습 3
-
-    .center
-    가운데 정렬
-
-    .right
-    오른쪽 정렬
-    =====================================
+    .center: 가운데 정렬
+    .right: 오른쪽 정렬
     */
-
+    .center {
+        text-align: center;
+    }
+    .right {
+        text-align: right;
+    }
 
 
     /*
-    =====================================
     실습 4
-
-    .menu a
-    밑줄 제거
-    =====================================
+    .menu a: 밑줄 제거
     */
-
+    .menu a {
+        text-decoration: none;
+    }
 
 
     /*
-    =====================================
     실습 5
 
     쇼핑몰 메인 꾸미기
 
-    .shop-title
-    40px
-    가운데 정렬
-
-    .product-title
-    굵게
-
-    .product-desc
-    줄간격 2
-
-    .price
-    취소선
-
-    .sale
-    굵게
+    .shop-title: 40px, 가운데 정렬
+    .product-title: 굵게
+    .product-desc: 줄간격 2
+    .price: 취소선
+    .sale: 굵게
     =====================================
     */
-
-
-
+    .shop-title {
+        font-size: 40px;
+        text-align: center;
+    }
+    .product-title {
+        font-weight: bold;
+    }
+    .product-desc {
+        line-height: 2;
+    }
+    .price {
+        text-decoration: line-through;
+    }
+    .sale {
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
 
 <hr>
 <h2>실습 1</h2>
-
 <h1>웹 개발</h1>
-
-<p>
-    HTML과 CSS를 공부합니다.
-</p>
+<p>HTML과 CSS를 공부합니다.</p>
 
 
 
 <hr>
 <h2>실습 2</h2>
-
-<p class="title">
-    공지사항
-</p>
-
-<p class="sub">
-    신규 강의가 개설되었습니다.
-</p>
-
-
+<p class="title">공지사항</p>
+<p class="sub">신규 강의가 개설되었습니다.</p>
 
 <hr>
 <h2>실습 3</h2>
-
-<p class="center">
-    가운데 정렬
-</p>
-
-<p class="right">
-    오른쪽 정렬
-</p>
-
-
+<p class="center">가운데 정렬</p>
+<p class="right">오른쪽 정렬</p>
 
 <hr>
 <h2>실습 4</h2>
-
 <nav class="menu">
-
     <a href="#">홈</a>
     <a href="#">상품</a>
     <a href="#">게시판</a>
-
 </nav>
-
-
 
 <hr>
 <h2>실습 5 - 쇼핑몰 상품</h2>
-
-<h1 class="shop-title">
-    My Shop
-</h1>
-
-<h3 class="product-title">
-    무선 키보드
-</h3>
-
+<h1 class="shop-title">My Shop</h1>
+<h3 class="product-title">무선 키보드</h3>
 <p class="product-desc">
-
     가볍고 사용하기 편한
     무선 키보드입니다.
-
 </p>
-
-<p class="price">
-    50,000원
-</p>
-
-<p class="sale">
-    39,900원
-</p>
+<p class="price">50,000원</p>
+<p class="sale">39,900원</p>
 
 </body>
 </html>
