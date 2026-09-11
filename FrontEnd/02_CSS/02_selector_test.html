@@ -8,8 +8,7 @@
 
     /*
     실습 1
-    h1 → 파란색
-    p → 회색
+    h1: 파란색, p: 회색
     */
     h1 {
         color: blue;
@@ -22,8 +21,7 @@
 
     /*
     실습 2
-    class="red"
-    빨간색
+    class="red": 빨간색
     */
     .red {
         color: red;
@@ -32,9 +30,7 @@
 
     /*
     실습 3
-    id="title"
-    초록색
-    글자크기 40px
+    id="title": 초록색, 글자크기 40px
     */
     #title {
         color: green;
@@ -44,8 +40,7 @@
 
     /*
     실습 4
-    .menu 안의 p
-    파란색
+    .menu 안의 p: 파란색
     */
     .menu p {
         color: blue;
@@ -54,14 +49,14 @@
 
     /*
     실습 5
-    header 안 h1 → 파란색
-    .menu2 안 a → 빨간색
-    .product 안 p → 초록색
-    .notice 안 p → 주황색
-    모든 h3 → 보라색
+    header 안 h1: 아쿠아
+    .menu2 안 a: 빨간색
+    .product 안 p: 초록색
+    .notice 안 p: 주황색
+    모든 h3: 보라색
     */
     header h1 {
-        color: blue;
+        color: aqua;
     }
 
     .menu2 a {
@@ -98,77 +93,52 @@
 
 <hr>
 <h2>실습 2 - 클래스 선택자</h2>
-
 <p class="red">HTML</p>
-
 <p class="red">CSS</p>
-
 <p>JavaScript</p>
 
 
 
 <hr>
 <h2>실습 3 - 아이디 선택자</h2>
-
-<h1 id="title">
-    나의 홈페이지
-</h1>
-
+<h1 id="title">나의 홈페이지</h1>
 
 
 <hr>
 <h2>실습 4 - 자손 선택자</h2>
-
 <div class="menu">
-
     <p>홈</p>
     <p>상품</p>
     <p>게시판</p>
-
+    <div>
+        <p>로그인</p>
+    </div>
 </div>
 
-<p>로그인</p>
 
 
 
 <hr>
 <h2>실습 5 - 쇼핑몰 메인 페이지</h2>
-
 <header>
-
-    <h1>
-        My Shop
-    </h1>
-
+    <h1>My Shop</h1>
 </header>
 
 <nav class="menu2">
-
     <a href="#">홈</a>
     <a href="#">상품</a>
     <a href="#">게시판</a>
     <a href="#">고객센터</a>
-
 </nav>
 
 <section class="product">
-
     <h3>추천 상품</h3>
-
-    <p>
-        최신 상품을 만나보세요.
-    </p>
-
+    <p>최신 상품을 만나보세요.</p>
 </section>
 
 <section class="notice">
-
     <h3>공지사항</h3>
-
-    <p>
-        추석 연휴 배송 안내
-    </p>
-
+    <p>추석 연휴 배송 안내</p>
 </section>
 
 </body>

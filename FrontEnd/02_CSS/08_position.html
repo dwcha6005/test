@@ -8,9 +8,7 @@
     <style>
 
         /*
-        ==================================================
-        01. position이란?
-        ==================================================
+        < 01. position이란? >
 
         position은 요소의 위치를 지정할 때 사용하는 속성이다.
 
@@ -29,9 +27,7 @@
 
 
         /*
-        ==================================================
-        02. position: static
-        ==================================================
+        < 02. position: static >
 
         모든 요소의 기본 position 값이다.
 
@@ -55,19 +51,13 @@
 
 
         /*
-        ==================================================
-        03. position: relative
-        ==================================================
+        < 03. position: relative >
 
         현재 자신의 원래 위치를 기준으로 이동한다.
-
         원래 위치가 있던 공간은 그대로 유지된다.
 
-        top: 20px;
-        → 원래 위치에서 아래로 20px
-
-        left: 30px;
-        → 원래 위치에서 오른쪽으로 30px
+        top: 20px; 원래 위치에서 아래로 20px
+        left: 30px; 원래 위치에서 오른쪽으로 30px
         */
 
         .relative-box {
@@ -84,9 +74,7 @@
 
 
         /*
-        ==================================================
-        04. position: absolute
-        ==================================================
+        < 04. position: absolute >
 
         absolute는 일반적인 문서 흐름에서 빠져나온다.
 
@@ -120,21 +108,15 @@
 
 
         /*
-        ==================================================
-        05. 부모 relative + 자식 absolute
-        ==================================================
+        < 05. 부모 relative + 자식 absolute >
 
         position을 사용할 때 매우 자주 사용하는 구조이다.
 
-        부모
-
-        position: relative;
+        부모 position: relative;
 
             ↓
 
-        자식
-
-        position: absolute;
+        자식 position: absolute;
 
         자식의 위치를 부모를 기준으로 지정할 수 있다.
         */
@@ -162,10 +144,7 @@
 
 
         /*
-        ==================================================
-        06. position: fixed
-        ==================================================
-
+        < 06. position: fixed >
         fixed는 브라우저 화면을 기준으로 위치가 고정된다.
 
         스크롤해도 같은 위치에 계속 표시된다.
@@ -193,9 +172,7 @@
 
 
         /*
-        ==================================================
-        07. position: sticky
-        ==================================================
+        < 07. position: sticky >
 
         sticky는 일반적인 문서 흐름을 유지하면서
         특정 위치에 도달하면 화면에 고정된다.
@@ -223,40 +200,26 @@
 
 
         /*
-        ==================================================
-        08. top / right / bottom / left
-        ==================================================
+        < 08. top / right / bottom / left >
 
         position이 static이 아닌 경우
         위치를 이동시키기 위해 사용할 수 있다.
 
-        top
-        → 위쪽을 기준으로 이동
-
-        right
-        → 오른쪽을 기준으로 이동
-
-        bottom
-        → 아래쪽을 기준으로 이동
-
-        left
-        → 왼쪽을 기준으로 이동
+        top: 위쪽을 기준으로 이동
+        right: 오른쪽을 기준으로 이동
+        bottom: 아래쪽을 기준으로 이동
+        left: 왼쪽을 기준으로 이동
         */
 
 
         /*
-        ==================================================
-        09. absolute를 이용한 배지 만들기
-        ==================================================
+        < 09. absolute를 이용한 배지 만들기 >
 
         상품 이미지의 오른쪽 위에
         "SALE" 같은 표시를 붙일 때 사용할 수 있다.
 
-        부모
-        → position: relative
-
-        배지
-        → position: absolute
+        부모: position: relative
+        배지: position: absolute
         */
 
         .product {
@@ -281,9 +244,7 @@
 
 
         /*
-        ==================================================
-        10. position + transform
-        ==================================================
+        < 10. position + transform >
 
         position과 transform을 함께 사용하면
         요소를 정확하게 가운데 배치할 수 있다.
@@ -328,156 +289,66 @@
     <h1>CSS Position</h1>
 
 
-    <!-- ==================================================
-         01. position: static
-         ================================================== -->
-
+    <!-- 01. position: static -->
     <h2>1. position: static</h2>
 
-    <div class="static-box">
-        Static
-    </div>
+    <div class="static-box">Static</div>
 
 
-    <!-- ==================================================
-         02. position: relative
-         ================================================== -->
-
+    <!-- 02. position: relative -->
     <h2>2. position: relative</h2>
-
-    <div>
-        원래 위치
-    </div>
-
-    <div class="relative-box">
-        Relative
-    </div>
-
-    <div>
-        다음 요소
-    </div>
+    <div>원래 위치</div>
+    <div class="relative-box">Relative</div>
+    <div>다음 요소</div>
 
 
-    <!-- ==================================================
-         03. position: absolute
-         ================================================== -->
+    <!-- 03. position: absolute -->
 
     <h2>3. position: absolute</h2>
-
     <div class="absolute-parent">
-
         부모 요소
-
-        <div class="absolute-child">
-            자식 요소
-        </div>
-
+        <div class="absolute-child">자식 요소</div>
     </div>
 
 
-    <!-- ==================================================
-         04. 부모 relative + 자식 absolute
-         ================================================== -->
-
+    <!-- 04. 부모 relative + 자식 absolute -->
     <h2>4. 부모 relative + 자식 absolute</h2>
-
     <div class="parent">
-
         부모
-
-        <div class="child">
-            자식
-        </div>
-
+        <div class="child">자식</div>
     </div>
 
 
-    <!-- ==================================================
-         05. position: fixed
-         ================================================== -->
-
+    <!-- 05. position: fixed -->
     <h2>5. position: fixed</h2>
+    <p>화면 오른쪽 아래에 버튼이 고정되어 있다.</p>
+    <p>페이지를 스크롤해도 버튼은 같은 위치에 유지된다.</p>
 
-    <p>
-        화면 오른쪽 아래에 버튼이 고정되어 있다.
-    </p>
-
-    <p>
-        페이지를 스크롤해도 버튼은 같은 위치에 유지된다.
-    </p>
-
-    <div class="fixed-button">
-        TOP
-    </div>
+    <div class="fixed-button">TOP</div>
 
 
-    <!-- ==================================================
-         06. position: sticky
-         ================================================== -->
+    <!-- 06. position: sticky -->
+    <h2 class="sticky-title">6. position: sticky</h2>
+    <p>sticky 요소는 스크롤 위치에 따라 화면에 고정된다.</p>
+    <p>아래 내용을 충분히 만들어 스크롤해보세요.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 
-    <h2 class="sticky-title">
-        6. position: sticky
-    </h2>
-
-    <p>
-        sticky 요소는 스크롤 위치에 따라
-        화면에 고정된다.
-    </p>
-
-    <p>
-        아래 내용을 충분히 만들어 스크롤해보세요.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    </p>
-
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-    </p>
-
-
-    <!-- ==================================================
-         07. absolute를 이용한 배지
-         ================================================== -->
-
+    <!-- 07. absolute를 이용한 배지 -->
     <h2>7. 상품 배지 만들기</h2>
-
     <div class="product">
-
         상품 이미지 영역
-
-        <span class="sale">
-            SALE
-        </span>
-
+        <span class="sale">SALE</span>
     </div>
 
 
-    <!-- ==================================================
-         08. 정중앙 배치
-         ================================================== -->
-
+    <!-- 08. 정중앙 배치 -->
     <h2>8. 요소 정중앙 배치하기</h2>
-
     <div class="center-parent">
-
-        <div class="center-child">
-            CENTER
-        </div>
-
+        <div class="center-child">CENTER</div>
     </div>
 
 
