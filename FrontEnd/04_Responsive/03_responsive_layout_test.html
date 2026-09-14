@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Layout Practice</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+}
+
+
+/* =====================================
+실습1
+
+Grid Layout 만들기
+
+조건
+1. Header
+2. Sidebar
+3. Content
+4. Footer
+
+배치
+
+header header
+sidebar content
+footer footer
+===================================== */
+
+.container{
+
+    min-height:100vh;
+
+    /* 작성 */
+    display:grid;
+
+    grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer";
+
+    grid-template-columns:
+        250px 1fr;
+
+    grid-template-rows:
+        80px 1fr 80px;
+}
+
+
+header{
+    grid-area:header;
+    background:black;
+}
+
+aside{
+    grid-area:sidebar;
+    background:#ddd;
+}
+
+main{
+    grid-area:content;
+    background:#eee;
+}
+
+footer{
+    grid-area:footer;
+    background:black;
+}
+
+
+/* =====================================
+실습2
+
+카드 목록
+
+조건
+1. Grid 사용
+2. auto-fit
+3. minmax(200px,1fr)
+===================================== */
+
+.card-list{
+
+    /* 작성 */
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+
+    gap:20px;
+
+    padding:20px;
+}
+
+.card{
+    height:150px;
+    background:white;
+}
+
+
+/* =====================================
+실습3
+
+태블릿
+
+조건
+900px 이하
+
+Sidebar
+250px → 180px
+===================================== */
+
+@media (max-width:900px){
+
+    .container{
+
+        /* 작성 */
+        grid-template-columns:
+            180px 1fr;
+    }
+
+}
+
+
+/* =====================================
+실습4
+
+모바일
+
+조건
+
+header
+sidebar
+content
+footer
+
+세로 배치
+===================================== */
+
+@media (max-width:768px){
+
+    .container{
+
+        /* 작성 */
+
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "content"
+            "footer";
+
+        grid-template-columns:1fr;
+
+        grid-template-rows:
+            80px
+            auto
+            1fr
+            80px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header></header>
+
+<aside></aside>
+
+<main>
+
+    <div class="card-list">
+
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+
+    </div>
+
+</main>
+
+<footer></footer>
+
+</div>
+
+</body>
+</html>

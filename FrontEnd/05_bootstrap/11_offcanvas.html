@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11 Offcanvas</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+<style>
+.demo{border:1px solid #ddd;padding:20px;margin-bottom:20px;}
+</style> 
+</head>
+<body>
+<div class="container my-5">
+    <h1>Bootstrap Offcanvas</h1>
+    <p>Offcanvas는 화면의 가장자리에서 메뉴나 콘텐츠가 슬라이드되어 나타나는 컴포넌트이다.</p>
+
+    <!-- 기본 Offcanvas -->
+    <div class="demo">
+        <h3>1. 기본 Offcanvas</h3>
+        <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBasic">
+            <i class="bi bi-list"></i> 메뉴 열기
+        </button>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasBasic">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">메뉴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>왼쪽에서 나타나는 Offcanvas입니다.</p>
+                <p>메뉴나 추가 정보를 넣을 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 방향 -->
+    <div class="demo">
+        <h3>2. 나타나는 방향</h3>
+        <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasStart">왼쪽</button>
+        <button class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd">오른쪽</button>
+        <button class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop">위쪽</button>
+        <button class="btn btn-danger" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom">아래쪽</button>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasStart">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">왼쪽 메뉴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">offcanvas-start</div>
+        </div>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">오른쪽 메뉴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">offcanvas-end</div>
+        </div>
+
+        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">위쪽 메뉴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">offcanvas-top</div>
+        </div>
+
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">아래쪽 메뉴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">offcanvas-bottom</div>
+        </div>
+    </div>
+
+    <!-- 메뉴 -->
+    <div class="demo">
+        <h3>3. Offcanvas 메뉴</h3>
+        <button class="btn btn-dark" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
+            <i class="bi bi-list"></i> 전체 메뉴
+        </button>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="menuOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title"><i class="bi bi-shop"></i> MY SHOP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="#"><i class="bi bi-house"></i> 홈</a>
+                    <a class="nav-link" href="#"><i class="bi bi-grid"></i> 상품</a>
+                    <a class="nav-link" href="#"><i class="bi bi-cart"></i> 장바구니</a>
+                    <a class="nav-link" href="#"><i class="bi bi-person"></i> 마이페이지</a>
+                    <a class="nav-link" href="#"><i class="bi bi-gear"></i> 설정</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- 폭 -->
+    <div class="demo">
+        <h3>4. Offcanvas 크기</h3>
+        <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#largeOffcanvas">
+            넓은 메뉴
+        </button>
+
+        <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="largeOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">넓은 Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>Bootstrap Utility 클래스인 <strong>w-50</strong>을 사용하여 폭을 조절할 수 있습니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

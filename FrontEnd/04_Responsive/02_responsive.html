@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 Responsive</title>
+
+<style>
+
+/* =====================================
+01 viewport
+=====================================
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+모바일 브라우저에게
+실제 기기 너비를 사용하라고 알려준다.
+
+반응형 웹의 필수 설정
+*/
+
+
+/* =====================================
+02 width 와 max-width
+===================================== */
+
+.box1{
+    width:800px;
+    height:100px;
+    background:skyblue;
+    margin:20px auto;
+}
+
+.box2{
+    width:100%;
+    max-width:800px;
+    height:100px;
+    background:orange;
+    margin:20px auto;
+}
+
+/*
+width:800px
+→ 무조건 800px
+
+width:100%
+→ 부모 크기만큼
+
+max-width:800px
+→ 최대 800px까지만
+*/
+
+
+/* =====================================
+03 반응형 이미지
+===================================== */
+
+.image-box{
+    width:90%;
+    max-width:800px;
+    margin:30px auto;
+}
+
+.image-box img{
+    width:100%;
+    display:block;
+}
+
+/*
+img{
+    width:100%;
+}
+
+부모 크기에 맞춰
+이미지가 자동으로 줄어든다.
+*/
+
+
+/* =====================================
+04 Flex 반응형
+===================================== */
+
+.flex-container{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+.flex-item{
+    flex:1;
+    height:150px;
+    background:lightgreen;
+}
+
+@media (max-width:768px){
+
+    .flex-container{
+        flex-direction:column;
+    }
+
+}
+
+/*
+PC
+□ □ □
+
+모바일
+□
+□
+□
+*/
+
+
+/* =====================================
+05 Grid 반응형
+===================================== */
+
+.grid-container{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+
+    gap:20px;
+    padding:20px;
+}
+
+.grid-item{
+    height:150px;
+    background:pink;
+}
+
+/*
+auto-fit
+minmax
+
+media 없이도
+열 개수 자동 변경
+*/
+
+
+/* =====================================
+06 실전 카드
+===================================== */
+
+.card-list{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    border:1px solid #ddd;
+}
+
+.card-image{
+    height:180px;
+    background:#eee;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card h3{
+    margin-top:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Responsive Web</h1>
+
+<div class="box1">width:800px</div>
+
+<div class="box2">
+    width:100% + max-width:800px
+</div>
+
+<div class="image-box">
+    <img src="https://picsum.photos/800/400">
+</div>
+
+<div class="flex-container">
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+    <div class="flex-item"></div>
+</div>
+
+<div class="grid-container">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+</div>
+
+<div class="card-list">
+
+    <div class="card">
+        <div class="card-image"></div>
+        <div class="card-body">
+            <h3>상품1</h3>
+            <p>상품 설명</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image"></div>
+        <div class="card-body">
+            <h3>상품2</h3>
+            <p>상품 설명</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-image"></div>
+        <div class="card-body">
+            <h3>상품3</h3>
+            <p>상품 설명</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

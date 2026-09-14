@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utility Practice</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.box{
+    background:#eee;
+    border:1px solid #ccc;
+    padding:20px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container my-5">
+
+    <h1>Utility 실습</h1>
+
+    <!--
+    실습1
+
+    조건
+
+    mt-5
+    p-5 사용
+    -->
+
+    <div class="box mt-5 p-5">
+        연습영역
+    </div>
+
+
+    <!--
+    실습2
+
+    조건
+
+    제목 가운데 정렬
+
+    text-center
+    -->
+
+    <h2 class="text-center mt-5">
+        ITWILL 부산교육센터
+    </h2>
+
+
+    <!--
+    실습3
+
+    조건
+
+    버튼 오른쪽 정렬
+
+    text-end
+    -->
+
+    <div class="text-end mt-4">
+
+        <button class="btn btn-primary">
+            로그인
+        </button>
+
+    </div>
+
+
+    <!--
+    실습4
+
+    조건
+
+    PC만 보이기
+
+    d-none
+    d-md-block
+    -->
+
+    <div class="bg-danger text-white p-3 mt-5 d-none d-md-block">
+        PC 전용 공지사항
+    </div>
+
+
+    <!--
+    실습5
+
+    조건
+
+    모바일만 보이기
+
+    d-block
+    d-md-none
+    -->
+
+    <div class="bg-success text-white p-3 mt-3 d-block d-md-none">
+        모바일 전용 메뉴
+    </div>
+
+
+    <!--
+    실습6
+
+    조건
+
+    img-fluid 사용
+    -->
+
+    <img src="https://picsum.photos/1200/500"
+         class="img-fluid mt-5"
+         alt="">
+
+
+    <!--
+    실습7
+
+    조건
+
+    text-center 사용
+
+    회원수
+    수강생
+    강사
+    취업자
+    -->
+
+    <div class="row mt-5">
+
+        <div class="col-md-3">
+            <div class="box text-center">회원수</div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="box text-center">수강생</div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="box text-center">강사</div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="box text-center">취업자</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!--
+실습8
+
+조건
+
+container-fluid 사용
+
+전체폭 이벤트 배너 만들기
+-->
+
+<div class="container-fluid bg-primary text-white text-center p-5 mt-5">
+    BIG SALE EVENT
+</div>
+
+</body>
+</html>

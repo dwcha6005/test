@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09 Carousel</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.demo{border:1px solid #ddd;padding:20px;margin-bottom:20px;}
+.carousel img{height:400px;object-fit:cover;}
+</style>
+</head>
+<body>
+<div class="container my-5">
+    <h1>Bootstrap Carousel</h1>
+    <p>Carousel은 여러 개의 콘텐츠를 슬라이드 형태로 보여주는 Bootstrap 컴포넌트이다.</p>
+
+    <!-- 기본 Carousel -->
+    <div class="demo">
+        <h3>1. 기본 Carousel</h3>
+        <div id="carouselBasic" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/id/1015/1200/400" class="d-block w-100" alt="첫 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1016/1200/400" class="d-block w-100" alt="두 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1018/1200/400" class="d-block w-100" alt="세 번째 이미지">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 좌우 버튼 -->
+    <div class="demo">
+        <h3>2. Previous / Next 버튼</h3>
+        <div id="carouselControl" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/id/1020/1200/400" class="d-block w-100" alt="첫 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1024/1200/400" class="d-block w-100" alt="두 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1025/1200/400" class="d-block w-100" alt="세 번째 이미지">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselControl" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselControl" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 인디케이터 -->
+    <div class="demo">
+        <h3>3. Indicator</h3>
+        <div id="carouselIndicator" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselIndicator" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselIndicator" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselIndicator" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/id/1035/1200/400" class="d-block w-100" alt="첫 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1036/1200/400" class="d-block w-100" alt="두 번째 이미지">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1039/1200/400" class="d-block w-100" alt="세 번째 이미지">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicator" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicator" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 자동 전환 -->
+    <div class="demo">
+        <h3>4. 자동 전환</h3>
+        <div id="carouselAuto" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img src="https://picsum.photos/id/1040/1200/400" class="d-block w-100" alt="첫 번째 이미지">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://picsum.photos/id/1041/1200/400" class="d-block w-100" alt="두 번째 이미지">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://picsum.photos/id/1042/1200/400" class="d-block w-100" alt="세 번째 이미지">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="demo">
+        <h3>5. Caption</h3>
+        <div id="carouselCaption" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/id/1050/1200/400" class="d-block w-100" alt="여행">
+                    <div class="carousel-caption">
+                        <h3>여행을 시작하세요</h3>
+                        <p>새로운 여행지를 만나보세요.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1051/1200/400" class="d-block w-100" alt="자연">
+                    <div class="carousel-caption">
+                        <h3>자연을 만나보세요</h3>
+                        <p>아름다운 자연 속에서 휴식을 즐겨보세요.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaption" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselCaption" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

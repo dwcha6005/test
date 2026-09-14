@@ -43,9 +43,8 @@ HTML_CSS/
 ├─ 04_responsive/
 │  ├─ 01_media.html
 │  ├─ 02_responsive.html
-│  ├─ 03_mobile.html
-│  ├─ 04_responsive_layout.html
-│  └─ 05_practice.html
+│  ├─ 03_responsive_layout.html
+│  └─ 04_practice.html
 │
 └─ 05_bootstrap/
    ├─ 01_bootstrap.html
@@ -54,5 +53,9 @@ HTML_CSS/
    ├─ 04_form.html
    ├─ 05_navbar.html
    ├─ 06_modal.html
-   ├─ 07_responsive.html
-   └─ 08_practice.html
+   ├─ 07_utility.html
+   ├─ 08_icon.html
+   ├─ 09_carousel.html
+   ├─ 10_accordion.html
+   ├─ 11_offcanvas.html
+   └─ 12_practice.html

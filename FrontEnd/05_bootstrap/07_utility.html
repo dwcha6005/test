@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 Utility</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.demo{border:1px solid #ddd;padding:20px;margin-bottom:20px;}
+.box{background:#eee;border:1px solid #ccc;}
+</style>
+
+</head>
+<body>
+
+<div class="container my-5">
+
+    <h1>Bootstrap Utility</h1>
+
+    <!--
+    Utility Class
+
+    자주 사용하는 CSS를
+    클래스로 제공
+
+    m-* : margin
+    p-* : padding
+    text-* : 정렬
+    w-* : 너비
+    d-* : display
+    img-fluid : 반응형 이미지
+    -->
+
+    <!-- Margin -->
+
+    <div class="demo">
+        <h3>Margin</h3>
+
+        <div class="box m-3">m-3</div>
+        <div class="box mt-5">mt-5</div>
+        <div class="box mb-5">mb-5</div>
+    </div>
+
+    <!-- Padding -->
+
+    <div class="demo">
+        <h3>Padding</h3>
+
+        <div class="box p-2">p-2</div>
+        <div class="box p-5">p-5</div>
+    </div>
+
+    <!-- Text -->
+
+    <div class="demo">
+        <h3>Text Align</h3>
+
+        <p class="text-start">Left</p>
+        <p class="text-center">Center</p>
+        <p class="text-end">Right</p>
+    </div>
+
+    <!-- Width -->
+
+    <div class="demo">
+        <h3>Width</h3>
+
+        <div class="bg-primary text-white w-25">25%</div>
+        <div class="bg-success text-white w-50">50%</div>
+        <div class="bg-danger text-white w-100">100%</div>
+    </div>
+
+    <!-- Display -->
+
+    <div class="demo">
+        <h3>Display</h3>
+
+        <span class="d-inline bg-warning">INLINE</span>
+        <span class="d-inline bg-warning">INLINE</span>
+
+        <div class="d-block bg-info mt-3">
+            BLOCK
+        </div>
+    </div>
+
+    <!-- Responsive Display -->
+
+    <div class="demo">
+        <h3>d-none d-md-block</h3>
+
+        <div class="bg-danger text-white p-3 d-none d-md-block">
+            PC에서만 보임
+        </div>
+    </div>
+
+    <div class="demo">
+        <h3>d-block d-md-none</h3>
+
+        <div class="bg-success text-white p-3 d-block d-md-none">
+            모바일에서만 보임
+        </div>
+    </div>
+
+    <!-- Image -->
+
+    <div class="demo">
+        <h3>img-fluid</h3>
+
+        <img src="https://picsum.photos/1200/400"
+             class="img-fluid"
+             alt="sample">
+    </div>
+
+</div>
+
+<div class="container-fluid bg-dark text-white text-center p-4">
+    container-fluid
+</div>
+
+</body>
+</html>

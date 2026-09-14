@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal Practice</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container my-5">
+
+    <h1>Modal 실습</h1>
+
+
+
+    <!-- =====================================
+    실습1
+
+    기본 Modal 만들기
+
+    조건
+
+    버튼명 : 열기
+
+    제목 : 공지사항
+
+    내용 : Bootstrap Modal 연습
+    ===================================== -->
+
+    <!-- 작성 -->
+
+    <button class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#noticeModal">
+
+        열기
+
+    </button>
+
+    <div class="modal fade"
+         id="noticeModal">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        공지사항
+
+                    </h5>
+
+                    <button class="btn-close"
+                            data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    Bootstrap Modal 연습
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <hr>
+
+
+
+    <!-- =====================================
+    실습2
+
+    삭제 확인 Modal
+
+    조건
+
+    버튼 : 삭제
+
+    제목 : 삭제 확인
+
+    내용 : 정말 삭제하시겠습니까?
+
+    버튼 2개
+
+    취소
+    삭제
+    ===================================== -->
+
+    <!-- 작성 -->
+
+    <button class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteModal">
+
+        삭제
+
+    </button>
+
+    <div class="modal fade"
+         id="deleteModal">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        삭제 확인
+
+                    </h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    정말 삭제하시겠습니까?
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+
+                        취소
+
+                    </button>
+
+                    <button class="btn btn-danger">
+
+                        삭제
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <hr>
+
+
+
+    <!-- =====================================
+    실습3
+
+    로그인 Modal
+
+    조건
+
+    아이디 입력창
+
+    비밀번호 입력창
+
+    로그인 버튼
+
+    form-control 사용
+    ===================================== -->
+
+    <!-- 작성 -->
+
+    <button class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal">
+
+        로그인
+
+    </button>
+
+    <div class="modal fade"
+         id="loginModal">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        로그인
+
+                    </h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="text"
+                           class="form-control mb-3"
+                           placeholder="아이디">
+
+                    <input type="password"
+                           class="form-control"
+                           placeholder="비밀번호">
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-primary">
+
+                        로그인
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <hr>
+
+
+
+    <!-- =====================================
+    실습4
+
+    수강신청 Modal
+
+    조건
+
+    이름
+
+    과정선택
+
+    신청버튼
+
+    select 사용
+    ===================================== -->
+
+    <!-- 작성 -->
+
+    <button class="btn btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#courseModal">
+
+        수강신청
+
+    </button>
+
+    <div class="modal fade"
+         id="courseModal">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        수강신청
+
+                    </h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="text"
+                           class="form-control mb-3"
+                           placeholder="이름">
+
+                    <select class="form-select">
+
+                        <option>Java</option>
+                        <option>Python</option>
+                        <option>React</option>
+
+                    </select>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-primary">
+
+                        신청하기
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

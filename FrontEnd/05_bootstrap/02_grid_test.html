@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grid Practice</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+.box{
+    background:#eeeeee;
+    border:1px solid #cccccc;
+    padding:30px;
+    text-align:center;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- =====================================
+실습1
+
+조건
+
+col-12 1개 만들기
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-12">
+            <div class="box">
+                col-12
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습2
+
+조건
+
+col-6
+col-6
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-6">
+            <div class="box">
+                LEFT
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="box">
+                RIGHT
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습3
+
+조건
+
+col-4
+col-4
+col-4
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-4"><div class="box">1</div></div>
+        <div class="col-4"><div class="box">2</div></div>
+        <div class="col-4"><div class="box">3</div></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습4
+
+조건
+
+자동분할
+
+col
+col
+col
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col">
+            <div class="box">A</div>
+        </div>
+
+        <div class="col">
+            <div class="box">B</div>
+        </div>
+
+        <div class="col">
+            <div class="box">C</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습5
+
+조건
+
+768px 이상
+
+2열
+
+768px 미만
+
+1열
+
+col-md-6 사용
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-md-6">
+            <div class="box">
+                ITEM 1
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                ITEM 2
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습6
+
+조건
+
+PC
+
+8 : 4
+
+모바일
+
+12 : 12
+
+사용
+
+col-12
+col-md-8
+col-md-4
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-12 col-md-8">
+
+            <div class="box">
+                CONTENT
+            </div>
+
+        </div>
+
+        <div class="col-12 col-md-4">
+
+            <div class="box">
+                SIDEBAR
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

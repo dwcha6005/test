@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bootstrap Practice</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+.box{
+    background:#eeeeee;
+    border:1px solid #cccccc;
+    text-align:center;
+    padding:30px;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- =====================================
+실습1
+
+Container 만들기
+
+조건
+
+1. container 사용
+2. h1 출력
+===================================== -->
+
+<div class="container">
+
+    <h1>
+        Bootstrap
+    </h1>
+
+</div>
+
+
+
+<!-- =====================================
+실습2
+
+버튼 만들기
+
+조건
+
+1. Primary 버튼
+2. Success 버튼
+3. Danger 버튼
+===================================== -->
+
+<div class="container mt-5">
+
+    <!-- 작성 -->
+
+    <button class="btn btn-primary">
+        Primary
+    </button>
+
+    <button class="btn btn-success">
+        Success
+    </button>
+
+    <button class="btn btn-danger">
+        Danger
+    </button>
+
+</div>
+
+
+
+<!-- =====================================
+실습3
+
+3열 Grid
+
+조건
+
+1. row 사용
+2. col 사용
+3. 3칸 생성
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col">
+            <div class="box">
+                1
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="box">
+                2
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="box">
+                3
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습4
+
+2열 Grid
+
+조건
+
+1. col-6
+2. col-6
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-6">
+            <div class="box">
+                LEFT
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="box">
+                RIGHT
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+실습5
+
+반응형 Grid
+
+조건
+
+768px 이상
+
+2열
+
+768px 미만
+
+1열
+===================================== -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- 작성 -->
+
+        <div class="col-md-6">
+            <div class="box">
+                ITEM 1
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                ITEM 2
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Practice</title>
+
+<style>
+
+/* =====================================
+실습1
+반응형 박스
+
+조건
+1. width:100%
+2. max-width:800px
+===================================== */
+
+.practice1{
+
+    /* 작성 */
+    width:100%;
+    max-width:800px;
+
+    height:100px;
+    margin:20px auto;
+    background:skyblue;
+}
+
+
+/* =====================================
+실습2
+반응형 이미지
+
+조건
+1. 부모 width 90%
+2. max-width 800px
+3. 이미지 width 100%
+===================================== */
+
+.practice2{
+    width:90%;
+    max-width:800px;
+    margin:20px auto;
+}
+
+.practice2 img{
+
+    /* 작성 */
+    width:100%;
+    display:block;
+}
+
+
+/* =====================================
+실습3
+Flex 반응형
+
+조건
+1. 가로 배치
+2. 768px 이하 세로 배치
+===================================== */
+
+.practice3{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+.practice3 .item{
+    flex:1;
+    height:150px;
+    background:lightgreen;
+}
+
+@media (max-width:768px){
+
+    .practice3{
+
+        /* 작성 */
+        flex-direction:column;
+    }
+}
+
+
+/* =====================================
+실습4
+Grid 자동 반응형
+
+조건
+1. auto-fit
+2. minmax(200px,1fr)
+===================================== */
+
+.practice4{
+    display:grid;
+
+    /* 작성 */
+    grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+
+    gap:20px;
+    padding:20px;
+}
+
+.practice4 .item{
+    height:150px;
+    background:pink;
+}
+
+
+/* =====================================
+실습5
+카드 목록 만들기
+
+조건
+1. Grid 사용
+2. auto-fit
+3. minmax(250px,1fr)
+===================================== */
+
+.practice5{
+    display:grid;
+
+    /* 작성 */
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+    padding:20px;
+}
+
+.practice5 .card{
+    border:1px solid #ddd;
+    padding:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="practice1"></div>
+
+<div class="practice2">
+    <img src="https://picsum.photos/800/400">
+</div>
+
+<div class="practice3">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+
+<div class="practice4">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+</div>
+
+<div class="practice5">
+    <div class="card">상품1</div>
+    <div class="card">상품2</div>
+    <div class="card">상품3</div>
+    <div class="card">상품4</div>
+</div>
+
+</body>
+</html>
