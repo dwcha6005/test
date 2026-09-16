@@ -71,7 +71,6 @@
 
 
         /* < 04. ::before 기본 사용 > */
-
         .before1::before {
             content: "★ ";
             /* (ㅁ) */
@@ -136,7 +135,13 @@
         HTML에 별도의 태그를 추가하지 않고
         장식용 선을 만들 수 있다.
         */
-
+        /*
+        .title1 {
+            border-bottom: 3px solid black;
+            width: 100px;
+            padding-bottom: 10px;
+        }
+        */
         .title1::after {
             content: "";
             display: block;
@@ -159,11 +164,11 @@
 
         .box1::before {
             content: "";
+            border: 1px solid black;
             display: inline-block;
             width: 10px;
             height: 10px;
             margin-right: 10px;
-            border: 1px solid black;
         }
 
 
@@ -183,6 +188,7 @@
             display: inline-block;
             padding: 15px;
             border: 1px solid black;
+            border-radius: 10px 10px 10px 10px;
         }
 
         .speech::after {
@@ -307,7 +313,11 @@
             text-decoration: none;
             color: black;
         }
+        .underline:hover {
+            border-bottom: 2px solid black;
+        }
 
+        /* 
         .underline::after {
             content: "";
             position: absolute;
@@ -320,7 +330,8 @@
 
         .underline:hover::after {
             width: 100%;
-        }
+        } 
+        */
 
 
     </style>

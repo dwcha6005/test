@@ -138,7 +138,8 @@
             width: 200px;
             height: 100px;
             background-color: lightblue;
-            transition: background-color 0.5s 1s;
+            transition: background-color 0.5s; /*0.5s 1s */
+            transition-delay: 1s;
         }
         .box6:hover {
             background-color: lightcoral;
@@ -163,7 +164,15 @@
             transition: transform 0.5s;
         }
         .box7:hover {
-            transform: scale(1.2);
+            /* transform: scale(1.2);
+            transform: rotate(45deg);
+            transform: translate(100px, 0); */
+
+            /* 같이 사용하려면 속성하나에 값 여러개 */
+            transform: 
+                scale(1.2)
+                rotate(45deg)
+                translate(100px, 0);
         }
 
         /*
