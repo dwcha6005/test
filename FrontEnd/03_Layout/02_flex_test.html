@@ -14,23 +14,23 @@
            2. 박스 3개를 가로로 배치한다.
            3. 박스 사이의 간격은 20px로 한다.
         */
-        .practice1 {
+        .box-container1 {
             border: 2px solid black;
             padding: 20px;
-        }
-        .practice1 .box-container {
             /* 여기에 작성 */
             display: flex;
             gap: 20px;
         }
-        .practice1 .box {
+        .box1 {
             width: 100px;
             height: 100px;
             background-color: royalblue;
             color: white;
-            display: flex;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
+            text-align: center;
+            line-height: 100px;
         }
 
 
@@ -42,22 +42,23 @@
            3. 두 번째 박스는 오른쪽에 배치한다.
            4. 두 박스의 세로 위치는 가운데로 맞춘다.
         */
-        .practice2 {
+        .box-container2 {
             border: 2px solid black;
-        }
-        .practice2 .box-container {
             /* 여기에 작성 */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .practice2 .box {
+        .box2 {
             width: 100px;
             height: 60px;
             color: white;
-            display: flex;
+            background-color: rosybrown;
+            /* display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; */
+            text-align: center;
+            line-height: 60px;
         }
 
 
@@ -68,17 +69,15 @@
            2. 박스를 가로 가운데 정렬한다.
            3. 박스를 세로 가운데 정렬한다.
         */
-        .practice3 {
+        .box-container3 {
             height: 200px;
             border: 2px solid black;
-        }
-        .practice3 .box-container {
             /* 여기에 작성 */
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .practice3 .box {
+        .box3 {
             width: 150px;
             height: 80px;
             background-color: seagreen;
@@ -96,17 +95,15 @@
            2. 박스 4개를 세로 방향으로 배치한다.
            3. 박스 사이의 간격은 10px이다.
         */
-        .practice4 {
+        .box-container4 {
             border: 2px solid black;
             padding: 20px;
-        }
-        .practice4 .box-container {
             /* 여기에 작성 */
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-        .practice4 .box {
+        .box4 {
             width: 200px;
             height: 50px;
             background-color: slateblue;
@@ -127,18 +124,16 @@
            4. 박스 사이의 간격은 10px이다.
            5. 박스의 크기는 120px × 80px이다.
         */
-        .practice5 {
+        .box-container5 {
             width: 450px;
             border: 2px solid black;
             padding: 10px;
-        }
-        .practice5 .box-container {
             /* 여기에 작성 */
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .practice5 .box {
+        .box5 {
             width: 120px;
             height: 80px;
             background-color: darkorange;
@@ -158,14 +153,10 @@
            3. 박스들을 세로 가운데에 배치한다.
            4. 박스 사이의 간격은 15px이다.
         */
-        .practice6 {
+        .box-container6 {
             width: 300px;
-            /* height: 300px; */
+            height: 300px;
             border: 2px solid black;
-        }
-        .practice6 .box-container {
-            /* width: 100%;
-            height: 100%; */
             /* 여기에 작성 */
             display: flex;
             flex-direction: column;
@@ -173,7 +164,7 @@
             align-items: center;
             gap: 15px;
         }
-        .practice6 .box {
+        .box6 {
             width: 100px;
             height: 50px;
             background-color: crimson;
@@ -182,68 +173,6 @@
             justify-content: center;
             align-items: center;
         }
-
-
-        /* 
-           < 정답 >
-           
-
-           실습 1
-
-           .practice1 .box-container {
-               display: flex;
-               gap: 20px;
-           }
-
-
-           실습 2
-
-           .practice2 .box-container {
-               display: flex;
-               justify-content: space-between;
-               align-items: center;
-           }
-
-
-           실습 3
-
-           .practice3 .box-container {
-               display: flex;
-               justify-content: center;
-               align-items: center;
-           }
-
-
-           실습 4
-
-           .practice4 .box-container {
-               display: flex;
-               flex-direction: column;
-               gap: 10px;
-           }
-
-
-           실습 5
-
-           .practice5 .box-container {
-               display: flex;
-               flex-wrap: wrap;
-               gap: 10px;
-           }
-
-
-           실습 6
-
-           .practice6 .box-container {
-               display: flex;
-               flex-direction: column;
-               justify-content: center;
-               align-items: center;
-               gap: 15px;
-           }
-
-        */
-
     </style>
 </head>
 
@@ -253,82 +182,57 @@
 
 
     <!-- 실습 1 -->
-    <section class="practice1">
-        <h2>실습 1. 가로 정렬</h2>
-        <p>박스 3개를 가로로 배치해보세요.</p>
-        <div class="box-container">
-            <div class="box">BOX 1</div>
-            <div class="box">BOX 2</div>
-            <div class="box">BOX 3</div>
-        </div>
-    </section>
+    <h2>실습 1. 가로 정렬</h2>
+    <div class="box-container1">
+        <div class="box1">BOX 1</div>
+        <div class="box1">BOX 2</div>
+        <div class="box1">BOX 3</div>
+    </div>
 
 
     <!-- 실습 2 -->
-    <section class="practice2">
-        <h2>실습 2. 양쪽 배치</h2>
-        <p>BOX 1은 왼쪽, BOX 2는 오른쪽에 배치해보세요.</p>
-        <div class="box-container">
-            <div class="box">LEFT</div>
-            <div class="box">RIGHT</div>
-        </div>
-    </section>
+    <h2>실습 2. 양쪽 배치</h2>
+    <div class="box-container2">
+        <div class="box2">LEFT</div>
+        <div class="box2">RIGHT</div>
+    </div>
 
 
     <!-- 실습 3 -->
-    <section class="practice3">
-        <h2>실습 3. 화면 가운데 정렬</h2>
-        <p>BOX를 가로와 세로 모두 가운데에 배치해보세요.</p>
-        <div class="box-container">
-            <div class="box">CENTER</div>
-        </div>
-    </section>
+    <h2>실습 3. 화면 가운데 정렬</h2>
+    <div class="box-container3">
+        <div class="box3">CENTER</div>
+    </div>
 
 
     <!-- 실습 4 -->
-    <section class="practice4">
-        <h2>실습 4. 세로 방향 배치</h2>
-        <p>박스 4개를 세로 방향으로 배치해보세요.</p>
-        <div class="box-container">
-            <div class="box">BOX 1</div>
-            <div class="box">BOX 2</div>
-            <div class="box">BOX 3</div>
-            <div class="box">BOX 4</div>
-        </div>
-    </section>
+    <h2>실습 4. 세로 방향 배치</h2>
+    <div class="box-container4">
+        <div class="box4">BOX 1</div>
+        <div class="box4">BOX 2</div>
+        <div class="box4">BOX 3</div>
+        <div class="box4">BOX 4</div>
+    </div>
 
 
     <!-- 실습 5 -->
-    <section class="practice5">
-        <h2>실습 5. 줄바꿈</h2>
-        <p>
-            박스가 공간을 벗어나지 않고
-            다음 줄로 넘어가도록 만들어보세요.
-        </p>
-        <div class="box-container">
-            <div class="box">BOX 1</div>
-            <div class="box">BOX 2</div>
-            <div class="box">BOX 3</div>
-            <div class="box">BOX 4</div>
-            <div class="box">BOX 5</div>
-            <div class="box">BOX 6</div>
-        </div>
-    </section>
+    <h2>실습 5. 줄바꿈</h2>
+    <div class="box-container5">
+        <div class="box5">BOX 1</div>
+        <div class="box5">BOX 2</div>
+        <div class="box5">BOX 3</div>
+        <div class="box5">BOX 4</div>
+        <div class="box5">BOX 5</div>
+        <div class="box5">BOX 6</div>
+    </div>
 
 
     <!-- 실습 6 -->
-    <section class="practice6">
-        <h2>실습 6. 주축 방향 변경</h2>
-        <p>
-            박스를 세로 방향으로 배치하고
-            가운데 정렬해보세요.
-        </p>
-        <div class="box-container">
-            <div class="box">BOX 1</div>
-            <div class="box">BOX 2</div>
-            <div class="box">BOX 3</div>
-        </div>
-    </section>
-
+    <h2>실습 6. 주축 방향 변경</h2>
+    <div class="box-container6">
+        <div class="box6">BOX 1</div>
+        <div class="box6">BOX 2</div>
+        <div class="box6">BOX 3</div>
+    </div>
 </body>
 </html>

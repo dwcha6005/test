@@ -63,22 +63,86 @@
         padding:20px;
         background:#eee;
     }
+    /* 텍스트가 이미지를 감싸는 예 */
+    img {
+        float: left;
+        /* display: inline; */ 
+        /* img 태그는 원래 inline */
+    }
 
+    p {
+        /* display: inline; */
+    }
+    .divWrap {
+        /* display: flex; */
+    }
+    
+
+    /* ======================== */
+    * {
+        box-sizing: border-box;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        float: left;
+        width: 20%;
+        text-align: center;
+        background: lightblue;
+        border: 1px solid #000;
+        padding: 20px;
+    }
+
+    ul::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
 </style>
 </head>
 <body>
 
-<h1>float:left</h1>
+    <h1>float:left</h1>
 
-<div class="box red">BOX1</div>
-<div class="box blue">BOX2</div>
-<div class="box green">BOX3</div>
+    <div class="box red">BOX1</div>
+    <div class="box blue">BOX2</div>
+    <div class="box green">BOX3</div>
 
-<div class="clear"></div>
+    <div class="clear"></div>
 
-<div class="content">
-    clear:both 적용 후 아래쪽에 배치
-</div>
+    <div class="content">
+        clear:both 적용 후 아래쪽에 배치
+    </div>
+    <hr>
+
+    <div class="divWrap">
+        <img src="https://picsum.photos/200/150" alt="">
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Accusantium, veniam. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Accusantium, veniam.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Accusantium, veniam. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Accusantium, veniam.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Accusantium, veniam.
+        </p>
+    </div>
+    <hr>
+
+    <ul>
+        <li>메뉴1</li>
+        <li>메뉴2</li>
+        <li>메뉴3</li>
+        <li>메뉴4</li>
+        <li>메뉴5</li>
+    </ul>
 
 </body>
 </html>
