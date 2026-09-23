@@ -50,7 +50,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
         }
-        header {
+        .header1 {
             height: 80px;
             display: flex;
             align-items: center;
@@ -59,8 +59,6 @@
         }
 
 
-        /* 
-           < 2. Logo >
         .logo {
             font-size: 24px;
             font-weight: bold;
@@ -321,7 +319,7 @@
 
     <!-- 예제 1. 기본 Header -->
     <h1>Flex로 Header 만들기</h1>
-    <header>
+    <header class="header1">
         <div class="logo">LOGO</div>
         <nav>
             <a href="javascript:void(0)">HOME</a>
@@ -358,10 +356,13 @@
             <a href="javascript:void(0)">SALE</a>
             <a href="javascript:void(0)">EVENT</a>
         </nav>
-        <!-- <div class="search">검색</div> -->
+        
         <input class="search" placeholder="검색">
         <div class="login">LOGIN</div>
     </header>
+
+    <!-- input 대신 있었음 -->
+    <!-- <div class="search">검색</div> -->
 
 </body>
 </html>
