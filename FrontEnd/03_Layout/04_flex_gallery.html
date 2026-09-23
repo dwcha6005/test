@@ -44,14 +44,10 @@
 
         .wrap-gallery {
             display: flex;
-
             /* 기본값은 nowrap
                공간이 부족해도 한 줄을 유지하려고 한다. */
-
             flex-wrap: wrap;
-
             gap: 20px;
-
             border: 2px solid royalblue;
             padding: 20px;
         }
@@ -85,16 +81,16 @@
            flex-basis = Flex 환경에서 사용할 기본 크기
         */
         .basis-gallery {
-            display: flex;
+            /* display: flex; */
             flex-wrap: wrap;
             gap: 20px;
+            width: 500px;
+            border: 1px solid black;
         }
         .basis-gallery .item {
             height: 150px;
-
-            /*
-                Flex Item의 기본 크기를 200px로 설정
-            */
+            width: 200px;
+            /* Flex Item의 기본 크기를 200px로 설정 */
             flex-basis: 200px;
 
             background-color: tomato;
@@ -290,7 +286,6 @@
 
     <h1>04. Flex Gallery</h1>
 
-
     <!-- 1. Flex Wrap -->
     <h2>1. flex-wrap</h2>
     <div class="wrap-gallery">
@@ -301,7 +296,6 @@
         <div class="item">5</div>
         <div class="item">6</div>
     </div>
-
 
     <!-- 2. flex-basis -->
     <h2>2. flex-basis</h2>
