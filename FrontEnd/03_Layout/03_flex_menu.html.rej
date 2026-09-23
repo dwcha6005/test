@@ -1,0 +1,11 @@
+diff a/FrontEnd/03_Layout/03_flex_menu.html b/FrontEnd/03_Layout/03_flex_menu.html	(rejected hunks)
+@@ -58,9 +58,6 @@
+             border-bottom: 1px solid #ddd;
+         }
+ 
+-
+-        /* 
+-           < 2. Logo >
+         .logo {
+             font-size: 24px;
+             font-weight: bold;
