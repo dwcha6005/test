@@ -232,13 +232,13 @@
             grid-template-columns: 1fr 250px;
             grid-template-rows: 70px 1fr 70px;
             grid-template-areas:
-                "header header"
+                "head head"
                 "main   aside"
                 "footer footer";
             min-height: 500px;
         }
         .area-layout header {
-            grid-area: header;
+            grid-area: head;
             background-color: #222;
             color: white;
             display: flex;
@@ -299,32 +299,15 @@
         /* 
            10. 정리
 
-           display: grid
-           → Grid Container 생성
-
-           grid-template-columns
-           → 열의 개수와 크기
-
-           grid-template-rows
-           → 행의 크기
-
-           gap
-           → 행과 열 사이 간격
-
-           fr
-           → 남는 공간을 비율로 나눔
-
-           repeat()
-           → 같은 크기를 반복
-
-           grid-column
-           → Item을 여러 열에 걸쳐 배치
-
-           grid-row
-           → Item을 여러 행에 걸쳐 배치
-
-           grid-template-areas
-           → 영역에 이름을 붙여 레이아웃 구성
+           display: grid: Grid Container 생성
+           grid-template-columns: 열의 개수와 크기
+           grid-template-rows: 행의 크기
+           gap: 행과 열 사이 간격
+           fr: 남는 공간을 비율로 나눔
+           repeat(): 같은 크기를 반복
+           grid-column: Item을 여러 열에 걸쳐 배치
+           grid-row: Item을 여러 행에 걸쳐 배치
+           grid-template-areas: 영역에 이름을 붙여 레이아웃 구성
         */
 
     </style>
