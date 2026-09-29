@@ -10,11 +10,12 @@
         /*
         < 1. 기본설정 >
 
-        모든 요소의 box-sizing을 border-box로 설정한다.
-
-        width를 지정했을 때
-        padding과 border를 포함해서 계산하기 때문에
-        레이아웃을 만들기 편하다.
+        - 모든 요소의 box-sizing을 border-box로 설정한다.
+        - body의 기본적인 margin을 없애고, 
+          글씨체를 Arial, sans-serif로 설정
+          전체 글자색도 #222로 설정
+        - a 태그의 밑줄 제거와 글자색을 #222로 변경
+        - button에 마우스를 올렸을때 손가락 모양이 나오도록 한다.
         */
         * {
             box-sizing: border-box;
@@ -51,7 +52,7 @@
         Header / Main / Footer를
         세로 방향으로 배치한다.
 
-        1fr은 남은 공간을 모두 사용한다.
+        - Header: 80px, Footer: 100px, Main: 나머지
         */
         .page {
             min-height: 100vh;
@@ -67,7 +68,7 @@
 
         Header 내부는 Flex를 사용한다.
         ┌─────────────────────────────────────┐
-        │ LOGO       MENU MENU MENU     LOGIN │
+        │ LOGO          MENU MENU MENU  LOGIN │
         └─────────────────────────────────────┘
         */
         header {
@@ -76,15 +77,19 @@
             display: flex;
             align-items: center;
         }
-        /* < 4. Logo > */
+        /* 
+        < 4. Logo > 
+        - 폰트 크기를 키우고, 굵은 글씨로 변경
+        */
         .logo {
             font-size: 24px;
             font-weight: bold;
         }
         /*
         < 5. Navigation >
-        nav도 Flex Container로 만든다.
-        nav 안의 a 요소들이 가로로 배치된다.
+        - nav도 Flex Container로 만든다.
+          nav 안의 a 요소들이 가로로 배치된다.
+        - 마우스를 올렸을때 royalblue 색으로 변경  
         */
         nav {
             display: flex;
@@ -97,7 +102,13 @@
         nav a:hover {
             color: royalblue;
         }
-        /* < 6. Login > */
+        /* 
+        < 6. Login > 
+        - 테두리를 #222색으로 설정하고 
+          테두리를 둥글게 만든다.
+        - 마우스를 올렸을때 #222색으로 변경하고
+          글자색을 white로 설정한다.
+        */
         .login {
             margin-left: 30px;
             padding: 10px 20px;
@@ -152,7 +163,9 @@
         < 8. Category >
         카테고리 메뉴도 Flex를 사용한다.
 
-        전체 / 상의 / 하의 / 신발 / 가방
+        - 전체 / 상의 / 하의 / 신발 / 가방
+        - 마우스를 올렸을 때 #222색으로 변경하고
+          글자색을 white로 변경한다.
         */
         .category {
             padding: 30px 40px;
@@ -172,10 +185,9 @@
 
         /*
         < 9. 상품 영역 >
-        상품 영역의 최대 너비를 제한한다.
-
-        화면이 너무 넓어져도
-        상품이 지나치게 넓어지지 않도록 한다.
+        - 상품 영역의 최대 너비를 1200px로 제한한다.
+        - 화면이 너무 넓어져도
+         상품이 지나치게 넓어지지 않도록 한다.
         */
         .products {
             max-width: 1200px;
@@ -207,7 +219,10 @@
             gap: 20px;
         }
 
-        /* 11. 상품 */
+        /* 
+        < 11. 상품  >
+        - 이미지와 최대한 비슷하게 수정
+        */
         .product {
             border: 1px solid #ddd;
             border-radius: 10px;
