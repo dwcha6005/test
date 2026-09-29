@@ -59,3 +59,20 @@ HTML_CSS/
    ├─ 10_accordion.html
    ├─ 11_offcanvas.html
    └─ 12_practice.html
+
+bootstrap2
+   01_bootstrap_start
+   02_grid
+   03_utility
+   04_typography_button
+   05_navbar
+   06_card_badge
+   07_form
+   08_table_pagination
+   09_alert_modal_toast
+   10_collapse_accordion_offcanvas
+   11_carousel
+   12_icon
+   13_customizing
+   14_project
+   15_practice
