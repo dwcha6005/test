@@ -89,7 +89,11 @@
         /* 작성 */
         display: block;
     }
-
+    @media (max-width: 600px) {
+        .practice3 {
+            display: none;
+        }
+    }
 
     /* 
     실습 4
@@ -206,18 +210,12 @@
         실습 6
         Grid + Media Query
 
-        조건
+        조건)
+        PC: 4열
+        태블릿: 2열
+        모바일: 1열
 
-        PC
-        4열
-
-        태블릿
-        2열
-
-        모바일
-        1열
-
-        기준
+        기준)
         - 901px 이상 : 4열
         - 600px ~ 900px : 2열
         - 600px 이하 : 1열
@@ -360,24 +358,24 @@
 <body>
 
     <!-- 실습 1 -->
-    <div class="practice1">
+    <!-- <div class="practice1">
         <h2>실습 1</h2>
         <p>화면 크기를 줄여보세요.</p>
-    </div>
+    </div> -->
 
     <!-- 실습 2 -->
-    <div class="practice2">Media Query</div>
+    <!-- <div class="practice2">Media Query</div> -->
 
     <!-- 실습 3 -->
     <div class="practice3">모바일에서는 이 안내문을 숨겨주세요.</div>
 
     <!-- 실습 4 -->
-    <div class="practice4">
+    <!-- <div class="practice4">
         <a href="javascript:void(0)">HOME</a>
         <a href="javascript:void(0)">ABOUT</a>
         <a href="javascript:void(0)">PRODUCT</a>
         <a href="javascript:void(0)">CONTACT</a>
-    </div>
+    </div> -->
 
     <!-- 실습 5 -->
     <header class="practice5-header">
@@ -405,14 +403,14 @@
     </div>
 
     <!-- 실습 7 -->
-    <div class="practice7">
+    <!-- <div class="practice7">
         <div class="card">CARD 1</div>
         <div class="card">CARD 2</div>
         <div class="card">CARD 3</div>
-    </div>
+    </div> -->
 
     <!-- 실습 8 -->
-    <div class="practice8">
+    <!-- <div class="practice8">
         <div class="product">
             <h3>상품 1</h3>
             <p>상품 설명입니다.</p>
@@ -429,7 +427,7 @@
             <h3>상품 4</h3>
             <p>상품 설명입니다.</p>
         </div>
-    </div>
+    </div> -->
 
 
 </body>

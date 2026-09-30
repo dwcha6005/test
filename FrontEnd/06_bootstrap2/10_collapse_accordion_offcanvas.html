@@ -1,0 +1,224 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapse Accordion Offcanvas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+
+    <!--
+        < 1. Collapse >
+
+        Collapse : 특정 영역을 접었다 펼치는 UI
+        : JS 필요
+
+        .collapse
+        : 접혀 있는 영역
+
+        .show
+        : 처음부터 펼쳐진 상태
+
+        data-bs-toggle="collapse"
+        : Collapse 동작을 실행
+
+        data-bs-target="#id"
+        : 버튼과 열고 닫을 영역을 연결
+
+        예)
+        <button data-bs-toggle="collapse" data-bs-target="#info">
+            상세보기
+        </button>
+
+        <div id="info" class="collapse">
+            상세 내용
+        </div>
+    -->
+
+    <div class="container py-5">
+
+        <h1 class="mb-4">Collapse</h1>
+
+        <button class="btn btn-primary"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample">
+            상세 내용 보기
+        </button>
+
+        <div id="collapseExample" class="collapse mt-3">
+            <div class="card card-body">
+                Bootstrap Collapse를 사용하면
+                버튼을 클릭했을 때 특정 영역을 접었다 펼칠 수 있습니다.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--
+        < 2. Accordion >
+
+        Accordion : 여러 개의 Collapse를 하나의 그룹으로 묶은 UI
+        : FAQ, 상품 옵션, 도움말 등에 사용
+        : JS 필요
+
+        .accordion
+        : 전체 Accordion
+
+        .accordion-item
+        : 각각의 항목
+
+        .accordion-header
+        : 제목 영역
+
+        .accordion-button
+        : 열고 닫는 버튼
+
+        .accordion-collapse
+        : 답변 영역
+
+        .accordion-body
+        : 답변 내용
+
+        data-bs-parent="#id"
+        : 같은 그룹의 다른 항목을 자동으로 닫음
+    -->
+
+    <div class="container pb-5">
+
+        <h1 class="mb-4">Accordion</h1>
+
+        <div class="accordion" id="accordionExample">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq1">
+                        수강 신청은 어떻게 하나요?
+                    </button>
+                </h2>
+
+                <div id="faq1"
+                     class="accordion-collapse collapse show"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        홈페이지에서 원하는 과정을 확인한 후
+                        상담 및 신청을 진행할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faq2">
+                        교육 기간은 어떻게 되나요?
+                    </button>
+                </h2>
+
+                <div id="faq2"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        과정에 따라 교육 기간과 수업 시간이 다를 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--
+        < 3. Offcanvas >
+
+        Offcanvas : 화면 바깥에서 패널이 나타나는 UI
+        : JS 필요
+
+        .offcanvas
+        : Offcanvas 영역
+
+        .offcanvas-start
+        : 왼쪽에서 나타남
+
+        .offcanvas-end
+        : 오른쪽에서 나타남
+
+        .offcanvas-top
+        : 위에서 나타남
+
+        .offcanvas-bottom
+        : 아래에서 나타남
+
+        data-bs-toggle="offcanvas"
+        : Offcanvas 실행
+
+        data-bs-target="#id"
+        : 버튼과 Offcanvas 연결
+
+        data-bs-dismiss="offcanvas"
+        : Offcanvas 닫기
+    -->
+
+    <div class="container pb-5">
+
+        <h1 class="mb-4">Offcanvas</h1>
+
+        <button class="btn btn-dark"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample">
+            메뉴 열기
+        </button>
+
+        <div id="offcanvasExample"
+             class="offcanvas offcanvas-start">
+
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">메뉴</h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="offcanvas">
+                </button>
+            </div>
+
+            <div class="offcanvas-body">
+                <ul class="list-group">
+                    <li class="list-group-item">홈</li>
+                    <li class="list-group-item">교육과정</li>
+                    <li class="list-group-item">공지사항</li>
+                    <li class="list-group-item">문의하기</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--
+        < 4. 세 컴포넌트 비교 >
+
+        Collapse
+        : 하나의 영역을 접었다 펼칠 때
+
+        Accordion
+        : 여러 개의 접이식 내용을 하나의 그룹으로 묶을 때
+
+        Offcanvas
+        : 화면 바깥에서 메뉴나 추가 정보를 보여줄 때
+
+        Collapse / Accordion / Offcanvas
+        : Bootstrap JavaScript Bundle이 필요
+    -->
+
+</body>
+</html>
+```

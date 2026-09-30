@@ -1,0 +1,155 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Customizing 실습 - 강사</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /*
+            < 문제 1. 쇼핑몰 버튼 커스터마이징 >
+
+            Bootstrap의 기본 버튼을 쇼핑몰 디자인에 맞게 변경한다.
+
+            ① 기존 btn-primary 버튼의 배경색을 보라색으로 변경한다.
+               (정답 예: background-color: #6f42c1;)
+
+            ② 테두리 색상도 같은 보라색으로 변경한다.
+               (정답 예: border-color: #6f42c1;)
+
+            ③ 버튼 글자색을 흰색으로 변경한다.
+               (정답 예: color: white;)
+
+            ④ 버튼의 모서리를 둥글게 변경한다.
+               (정답 예: border-radius: 30px;)
+
+            ⑤ 마우스를 올렸을 때 조금 더 어두운 보라색으로 변경한다.
+               (정답 예: .shop-btn:hover)
+
+            ※ Bootstrap의 btn-primary를 삭제하지 않고
+               별도의 사용자 클래스를 이용하여 디자인을 변경한다.
+        */
+
+        .shop-btn {
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+            color: white;
+            border-radius: 30px;
+        }
+
+        .shop-btn:hover {
+            background-color: #59359a;
+            border-color: #59359a;
+            color: white;
+        }
+
+        /*
+            < 문제 2. 교육과정 카드 커스터마이징 >
+
+            Bootstrap Card에 사용자 CSS를 추가하여
+            교육과정 카드의 디자인을 변경한다.
+
+            ① 카드 테두리를 2px 실선 초록색으로 변경한다.
+               (정답 예: border: 2px solid #198754;)
+
+            ② 카드 모서리를 20px 둥글게 만든다.
+               (정답 예: border-radius: 20px;)
+
+            ③ 마우스를 올리면 카드가 위로 5px 이동하도록 한다.
+               (정답 예: transform: translateY(-5px);)
+
+            ④ 카드가 이동할 때 자연스럽게 움직이도록 한다.
+               (정답 예: transition: transform 0.2s;)
+
+            ※ 기존 Bootstrap의 shadow, p-4 등의 Utility는
+               그대로 유지한다.
+        */
+
+        .course-card {
+            border: 2px solid #198754;
+            border-radius: 20px;
+            transition: transform 0.2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /*
+            < 문제 3. Bootstrap CSS 변수로 버튼 변경 >
+
+            Bootstrap 버튼의 CSS 변수를 이용하여
+            기존 btn-primary의 색상을 변경한다.
+
+            ① 버튼의 기본 배경색을 주황색으로 변경한다.
+               (정답 예: --bs-btn-bg: #fd7e14;)
+
+            ② 버튼의 테두리 색상도 주황색으로 변경한다.
+               (정답 예: --bs-btn-border-color: #fd7e14;)
+
+            ③ 마우스를 올렸을 때 더 어두운 주황색으로 변경한다.
+               (정답 예: --bs-btn-hover-bg: #e8590c;)
+
+            ④ 마우스를 올렸을 때 테두리도 같은 색으로 변경한다.
+               (정답 예: --bs-btn-hover-border-color: #e8590c;)
+
+            ※ 직접 background-color을 작성하는 것이 아니라
+               Bootstrap이 사용하는 CSS 변수를 변경한다.
+        */
+
+        .course-btn {
+            --bs-btn-bg: #fd7e14;
+            --bs-btn-border-color: #fd7e14;
+            --bs-btn-hover-bg: #e8590c;
+            --bs-btn-hover-border-color: #e8590c;
+        }
+    </style>
+</head>
+<body>
+    <section class="container my-5">
+        <h2 class="mb-4">쇼핑몰 주문하기</h2>
+        <button class="btn btn-primary shop-btn">구매하기</button>
+        <button class="btn btn-primary shop-btn">장바구니</button>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="mb-4">교육과정</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card course-card shadow p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Java 풀스택 개발</h5>
+                        <p class="card-text">웹 개발에 필요한 Front-End와 Back-End를 학습합니다.</p>
+                        <button class="btn btn-success">상세보기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card shadow p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">Python 웹 개발</h5>
+                        <p class="card-text">Python을 이용하여 웹 애플리케이션을 개발합니다.</p>
+                        <button class="btn btn-success">상세보기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card shadow p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">React 개발</h5>
+                        <p class="card-text">React를 이용한 사용자 인터페이스 개발을 학습합니다.</p>
+                        <button class="btn btn-success">상세보기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <h2 class="mb-4">수강 신청</h2>
+        <button class="btn btn-primary course-btn">수강 신청하기</button>
+    </section>
+</body>
+</html>
+```

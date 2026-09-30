@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid 실습</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .box { background-color: #e9ecef; border: 1px solid #adb5bd; padding: 30px 10px; text-align: center; }
+        .product { height: 100%; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; }
+        .sidebar { background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 20px; height: 100%; }
+        .banner { background-color: #212529; color: white; padding: 60px 20px; text-align: center; }
+        .menu { background-color: #f1f3f5; padding: 30px 10px; text-align: center; }
+    </style>
+</head>
+<body>
+<!-- 문제 1. 기본 Grid -->
+<!-- 조건: container, row, 6칸씩 2열, 영역 간격 g-3 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 1. 기본 Grid</h2>
+    <div class="row g-3">
+        <div class="col-6">
+            <div class="box">첫 번째 영역</div>
+        </div>
+        <div class="col-6">
+            <div class="box">두 번째 영역</div>
+        </div>
+    </div>
+</section>
+
+<!-- 문제 2. 3열 Grid -->
+<!-- 조건: 3개 영역을 각각 4칸으로 구성, 모든 화면에서 3열, 간격 g-4 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 2. 3열 Grid</h2>
+    <div class="row g-4">
+        <div class="col-4">
+            <div class="box">HTML</div>
+        </div>
+        <div class="col-4">
+            <div class="box">CSS</div>
+        </div>
+        <div class="col-4">
+            <div class="box">Bootstrap</div>
+        </div>
+    </div>
+</section>
+
+<!-- 문제 3. 반응형 상품 목록 -->
+<!-- 조건: 모바일 1열 / sm 이상 2열 / lg 이상 4열 / 간격 g-4 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 3. 반응형 상품 목록</h2>
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+            <article class="product">
+                <span class="badge text-bg-primary">BEST</span>
+                <h3 class="h5 mt-3">노트북</h3>
+                <p class="text-secondary">사무용 노트북</p>
+                <strong>1,200,000원</strong>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+            <article class="product">
+                <span class="badge text-bg-success">NEW</span>
+                <h3 class="h5 mt-3">태블릿</h3>
+                <p class="text-secondary">휴대용 태블릿</p>
+                <strong>800,000원</strong>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+            <article class="product">
+                <span class="badge text-bg-warning">SALE</span>
+                <h3 class="h5 mt-3">키보드</h3>
+                <p class="text-secondary">기계식 키보드</p>
+                <strong>120,000원</strong>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+            <article class="product">
+                <span class="badge text-bg-danger">HOT</span>
+                <h3 class="h5 mt-3">마우스</h3>
+                <p class="text-secondary">무선 마우스</p>
+                <strong>80,000원</strong>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- 문제 4. 강의 카드 -->
+<!-- 조건: 모바일 1열 / md 이상 2열 / xl 이상 3열 / 간격 g-4 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 4. 강의 카드</h2>
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-xl-4">
+            <article class="product">
+                <span class="badge text-bg-primary">BACKEND</span>
+                <h3 class="h5 mt-3">Java 풀스택</h3>
+                <p class="text-secondary">Java, Spring, Database</p>
+            </article>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <article class="product">
+                <span class="badge text-bg-success">FRONTEND</span>
+                <h3 class="h5 mt-3">React 프론트엔드</h3>
+                <p class="text-secondary">HTML, CSS, JavaScript, React</p>
+            </article>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <article class="product">
+                <span class="badge text-bg-warning">DATA</span>
+                <h3 class="h5 mt-3">Python 데이터 분석</h3>
+                <p class="text-secondary">Python, Pandas, AI</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- 문제 5. 메인 + 사이드바 -->
+<!-- 조건: 모바일에서는 각각 12칸 / lg 이상에서는 메인 8칸 + 사이드바 4칸 / 간격 g-4 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 5. 메인 + 사이드바</h2>
+    <div class="row g-4">
+        <main class="col-12 col-lg-8">
+            <div class="box h-100">
+                <h3 class="h5">공지사항</h3>
+                <p>IT 교육센터의 새로운 소식을 확인하세요.</p>
+            </div>
+        </main>
+        <aside class="col-12 col-lg-4">
+            <div class="sidebar">
+                <h3 class="h5">교육과정</h3>
+                <p>Java</p>
+                <p>React</p>
+                <p>Python</p>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<!-- 문제 6. 비율이 다른 영역 -->
+<!-- 조건: 모바일에서는 각각 12칸 / lg 이상에서는 6칸 + 3칸 + 3칸 / 간격 g-3 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 6. 비율이 다른 영역</h2>
+    <div class="row g-3">
+        <div class="col-12 col-lg-6">
+            <div class="banner">메인 배너</div>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="menu">인기 강의</div>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="menu">이벤트</div>
+        </div>
+    </div>
+</section>
+
+<!-- 문제 7. Grid 응용 -->
+<!-- 조건: 상품 6개 / 모바일 1열 / sm 이상 2열 / lg 이상 3열 / 간격 g-3 -->
+<section class="container py-4">
+    <h2 class="h4 mb-3">문제 7. Grid 응용</h2>
+    <div class="row g-3">
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 1</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 2</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 3</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 4</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 5</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <article class="product">
+                <h3 class="h5">상품 6</h3>
+                <p>상품 설명입니다.</p>
+            </article>
+        </div>
+    </div>
+</section>
+</body>
+</html>

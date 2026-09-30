@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Typography & Button</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Typography -->
+    <!-- Bootstrap Typography는 글자의 크기, 굵기, 색상, 정렬 등을 Utility Class로 쉽게 설정할 수 있다. -->
+
+    <section class="container py-5">
+        <h1 class="display-4 fw-bold">Bootstrap Typography</h1>
+        <p class="lead">HTML에 다양한 Typography Utility를 적용하여 화면의 정보 구조를 표현할 수 있습니다.</p>
+        <p class="text-secondary">일반적인 본문보다 중요한 설명을 lead로 강조할 수 있습니다.</p>
+    </section>
+
+    <!-- Heading -->
+    <!-- h1~h6: HTML 제목 요소 / .h1~.h6: 다른 태그에 제목 크기 적용 -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Heading</h2>
+        <h3 class="h1">h1 크기</h3>
+        <p class="h3">h3 크기</p>
+        <p class="h5">h5 크기</p>
+    </section>
+
+    <!-- Font -->
+    <!-- fw-bold: 굵게 / fw-normal: 기본 굵기 / fw-light: 얇게 -->
+    <!-- fst-italic: 기울임 / text-decoration-underline: 밑줄 -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Font</h2>
+        <p class="fw-bold">굵게 표시</p>
+        <p class="fw-normal">기본 굵기</p>
+        <p class="fw-light">얇게 표시</p>
+        <p class="fst-italic">기울임 표시</p>
+        <p class="text-decoration-underline">밑줄 표시</p>
+    </section>
+
+    <!-- Color / Align -->
+    <!-- text-primary, text-secondary, text-success, text-danger 등 -->
+    <!-- text-start / text-center / text-end -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Color & Align</h2>
+        <p class="text-primary">Primary 색상</p>
+        <p class="text-danger">Danger 색상</p>
+        <p class="text-success">Success 색상</p>
+        <p class="text-center fw-bold">가운데 정렬</p>
+        <p class="text-end text-secondary">오른쪽 정렬</p>
+    </section>
+
+    <!-- Font Size -->
+    <!-- fs-1~fs-6으로 글자 크기를 설정할 수 있다. -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Font Size</h2>
+        <p class="fs-1">fs-1</p>
+        <p class="fs-3">fs-3</p>
+        <p class="fs-5">fs-5</p>
+        <p class="fs-6">fs-6</p>
+    </section>
+
+    <!-- Button -->
+    <!-- .btn + 색상 클래스를 조합하여 버튼을 만든다. -->
+    <!-- btn-primary, btn-secondary, btn-success, btn-danger 등 -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Button</h2>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-secondary">Secondary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+    </section>
+
+    <!-- Outline Button -->
+    <!-- btn-outline-*을 사용하면 배경이 없는 테두리 형태의 버튼을 만들 수 있다. -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Outline Button</h2>
+        <button type="button" class="btn btn-outline-primary">자세히 보기</button>
+        <button type="button" class="btn btn-outline-danger">삭제</button>
+    </section>
+
+    <!-- Button Size -->
+    <!-- btn-lg: 큰 버튼 / btn-sm: 작은 버튼 -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Button Size</h2>
+        <button type="button" class="btn btn-primary btn-lg">큰 버튼</button>
+        <button type="button" class="btn btn-primary">기본 버튼</button>
+        <button type="button" class="btn btn-primary btn-sm">작은 버튼</button>
+    </section>
+
+    <!-- Width -->
+    <!-- w-100을 사용하면 부모 요소의 전체 너비를 사용한다. -->
+    <section class="container pb-5">
+        <h2 class="h4 mb-4">Full Width Button</h2>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary w-100">신청하기</button>
+        </div>
+    </section>
+
+    <!-- 실제 UI -->
+    <section class="container pb-5">
+        <div class="border rounded-3 p-4">
+            <span class="text-primary fw-bold">K-Digital Training</span>
+            <h2 class="display-6 fw-bold mt-2">Java 풀스택 개발자 과정</h2>
+            <p class="lead">Java부터 Spring, React까지 실무에 필요한 기술을 학습합니다.</p>
+            <p class="text-secondary">교육기간 · 6개월 / 교육시간 · 09:00 ~ 18:00</p>
+            <button type="button" class="btn btn-primary btn-lg">수강신청</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg">과정 자세히 보기</button>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+}
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+
+
+  
+.page {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+}
+header {
+    grid-template-columns: 80px;
+
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+header a {
+    margin-left: 20px;
+}
+header a:hover {
+    color: royalblue;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+.page nav {
+    margin-left: auto;
+}
+.login {
+    border: 1px solid #222;
+    border-radius: 5px;
+    margin-left: 20px;
+    padding: 6px 10px 5px 10px;
+}
+.login:hover {
+    background-color: #222;
+    color: white;
+}
+
+
+
+
+main {
+    grid-area: main;
+    grid-template-columns: 1fr;
+}
+
+
+
+.visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    height: 300px;
+}
+.visual h1 {
+    margin: 0%;
+}
+.visual button {
+    background-color: #222;
+    font-size: small;
+    color: white;
+    width: 150px;
+    border: none;
+    padding: 10px;
+    margin-top: 2px;
+    border-radius: 5px;
+}
+.visual button:hover {
+    box-shadow: 5px 5px 5px rgb(141, 141, 141);
+    transform: translateY(-5px);
+    transition: all 0.5s;
+}
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid #ddd;
+    border-radius: 5px;
+}
+.category a {
+    margin: 20px;
+    padding: 5px 10px;
+}
+.category a:hover {
+    background-color: #222;
+    color: white;
+    border-radius: 10px;
+
+    box-shadow: 5px 5px 5px rgb(141, 141, 141);
+    transform: translateY(-5px);
+    transition: 
+        background-color 0.7s,
+        transform 0.7s,
+        box-shadow 0.7s;
+}
+   
+
+
+
+@media (max-width: 1200px) {
+    .products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+.products {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.product {
+    border: 1px solid lightgray;
+    height: 300px;
+    width: 210px;
+    border-radius: 20px;
+    margin: 10px;
+}
+.product:hover {
+    box-shadow: 10px 10px 5px rgb(141, 141, 141);
+    transform: translateY(-10px);
+    transition: all 0.7s;
+}
+.product-image {
+    background-color: #eee;
+    width: 208px;
+    height: 170px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;   
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.product-name {
+    font-weight: bold;
+    margin: 5px;
+}
+.product-price {
+    font-weight: bold;
+    margin: 5px;
+}
+button {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-button {
+    border: 1px solid #222;
+    width: 180px;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.product-button:hover {
+    background-color: #222;
+    color: white;
+    
+    box-shadow: 5px 5px 5px rgb(141, 141, 141);
+    transform: translateY(-5px);
+    transition: all 0.5s;
+}
+
+
+
+
+footer {
+    grid-area: footer;
+    height: 100px;
+    margin-top: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #222;
+    color: white;
+}
+
+</style>
+
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header>
+            <!-- Logo -->
+            <div class="logo">MY SHOP</div>
+            <!-- Navigation -->
+            <nav>
+                <a href="javascript:void(0)">HOME</a>
+                <a href="javascript:void(0)">ABOUT</a>
+                <a href="javascript:void(0)">PRODUCT</a>
+                <a href="javascript:void(0)">CONTACT</a>
+            </nav>
+            <!-- Login -->
+            <div class="login">LOGIN</div>
+        </header>
+
+
+        <!-- Main -->
+        <main>
+            <!-- Main Visual -->
+            <section class="visual">
+                <h1>새로운 상품을 만나보세요</h1>
+                <p>MY SHOP의 다양한 상품을 확인해보세요.</p>
+                <button>상품 보러가기</button>
+            </section>
+
+            <!-- Category -->
+            <section class="category">
+                <a href="javascript:void(0)">전체</a>
+                <a href="javascript:void(0)">상의</a>
+                <a href="javascript:void(0)">하의</a>
+                <a href="javascript:void(0)">신발</a>
+                <a href="javascript:void(0)">가방</a>
+            </section>
+
+            <!-- Product -->
+            <section class="products">
+                <h2>인기 상품</h2>
+                <div class="product-list">
+                    <!-- 상품 1 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 1</div>
+                        <div class="product-info">
+                            <div class="product-name">베이직 티셔츠</div>
+                            <div class="product-price">29,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+                    <!-- 상품 2 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 2</div>
+                        <div class="product-info">
+                            <div class="product-name">데일리 셔츠</div>
+                            <div class="product-price">39,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+                    <!-- 상품 3 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 3</div>
+                        <div class="product-info">
+                            <div class="product-name">와이드 팬츠</div>
+                            <div class="product-price">49,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+
+                    <!-- 상품 4 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 4</div>
+                        <div class="product-info">
+                            <div class="product-name">데일리 운동화</div>
+                            <div class="product-price">69,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+
+                    <!-- 상품 5 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 5</div>
+                        <div class="product-info">
+                            <div class="product-name">후드 집업</div>
+                            <div class="product-price">59,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+
+                    <!-- 상품 6 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 6</div>
+                        <div class="product-info">
+                            <div class="product-name">카고 팬츠</div>
+                            <div class="product-price">55,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+
+                    <!-- 상품 7 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 7</div>
+                        <div class="product-info">
+                            <div class="product-name">캔버스 백</div>
+                            <div class="product-price">35,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+
+                    <!-- 상품 8 -->
+                    <article class="product">
+                        <div class="product-image">PRODUCT 8</div>
+                        <div class="product-info">
+                            <div class="product-name">러닝화</div>
+                            <div class="product-price">79,000원</div>
+                            <button class="product-button">장바구니</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>COPYRIGHT © MY SHOP</footer>
+    </div>
+</body>
+</html>

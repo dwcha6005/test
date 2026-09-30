@@ -1,0 +1,494 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapse Accordion Offcanvas 실습</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+
+    <!--
+        < 실습 1. 상품 상세 정보 >
+
+        1. 상품 정보 영역을 가운데 배치하세요.
+        2. 상품명은 크게 강조하세요.
+        3. 할인 상태와 배송 상태를 Badge로 표시하세요.
+        4. 상품 설명은 처음에는 숨겨진 상태로 만드세요.
+        5. '상품 상세 설명' 버튼을 클릭하면 상품 설명이 나타나도록 하세요.
+        6. 버튼과 상품 설명 영역이 서로 연결되도록 필요한 속성을 작성하세요.
+        7. 색상과 수량 입력 영역은 화면 크기에 따라 1~2열로 배치하세요.
+        8. 장바구니 버튼은 가로 전체를 사용하도록 하세요.
+
+        (정답: row justify-content-center)
+        (정답: col-lg-8)
+        (정답: fs-2 fw-bold)
+        (정답: badge bg-danger / badge bg-secondary)
+        (정답: collapse)
+        (정답: data-bs-toggle="collapse")
+        (정답: data-bs-target="#productDetail")
+        (정답: id="productDetail")
+        (정답: row g-3 + col-md-6)
+        (정답: btn btn-primary w-100)
+    -->
+
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+
+                        <div class="mb-3">
+                            <span class="badge bg-danger">SALE</span>
+                            <span class="badge bg-secondary">무료배송</span>
+                        </div>
+
+                        <h1 class="fs-2 fw-bold">무선 블루투스 헤드폰</h1>
+
+                        <p class="text-secondary mb-1">
+                            고음질 사운드와 편안한 착용감
+                        </p>
+
+                        <p class="text-danger fw-bold fs-3">89,000원</p>
+
+                        <button class="btn btn-outline-secondary mb-3"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#productDetail">
+                            상품 상세 설명
+                        </button>
+
+                        <div id="productDetail" class="collapse mb-4">
+                            <div class="bg-light border rounded p-3">
+                                장시간 사용할 수 있는 배터리와
+                                노이즈 캔슬링 기능을 제공하는 무선 헤드폰입니다.
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+
+                            <div class="col-md-6">
+                                <label class="form-label">색상</label>
+                                <select class="form-select">
+                                    <option>Black</option>
+                                    <option>White</option>
+                                    <option>Blue</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">수량</label>
+                                <input type="number"
+                                       class="form-control"
+                                       value="1">
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+                            장바구니 담기
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--
+        < 실습 2. 자주 묻는 질문 >
+
+        1. FAQ를 4개의 질문으로 구성하세요.
+        2. 각 질문을 클릭하면 해당 답변이 나타나도록 하세요.
+        3. 질문 버튼과 답변 영역이 서로 연결되도록 필요한 속성을 작성하세요.
+        4. FAQ 전체를 하나의 그룹으로 묶으세요.
+        5. 하나의 질문을 열었을 때 다른 질문은 자동으로 닫히도록 하세요.
+        6. 첫 번째 질문만 처음부터 열린 상태로 만드세요.
+        7. FAQ 영역은 너무 넓지 않도록 가운데에 배치하세요.
+
+        (정답: accordion)
+        (정답: accordion-item)
+        (정답: accordion-header)
+        (정답: accordion-button / accordion-button collapsed)
+        (정답: accordion-collapse collapse / collapse show)
+        (정답: data-bs-toggle="collapse")
+        (정답: data-bs-target="#faqOne" 등)
+        (정답: id="faqOne" 등)
+        (정답: data-bs-parent="#faqAccordion")
+        (정답: id="faqAccordion")
+        (정답: row justify-content-center + col-lg-8)
+    -->
+
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <h2 class="fw-bold mb-4">자주 묻는 질문</h2>
+
+                <div class="accordion" id="faqAccordion">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faqOne">
+                                수강 신청은 어떻게 하나요?
+                            </button>
+                        </h2>
+
+                        <div id="faqOne"
+                             class="accordion-collapse collapse show"
+                             data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+                                홈페이지에서 교육과정을 확인한 후
+                                상담 신청을 진행할 수 있습니다.
+                                <strong>상담을 통해 자세한 내용을 확인하세요.</strong>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faqTwo">
+                                교육 기간은 어떻게 되나요?
+                            </button>
+                        </h2>
+
+                        <div id="faqTwo"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+                                과정마다 교육 기간과 수업 시간이 다르며
+                                과정 상세 페이지에서 확인할 수 있습니다.
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faqThree">
+                                개인 노트북이 필요한가요?
+                            </button>
+                        </h2>
+
+                        <div id="faqThree"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+                                실습을 위해 개인 노트북을 준비하는 것을 권장합니다.
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faqFour">
+                                수업에 결석하면 어떻게 하나요?
+                            </button>
+                        </h2>
+
+                        <div id="faqFour"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+
+                            <div class="accordion-body">
+                                교육기관의 출결 및 보강 관련 안내를 확인해주세요.
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--
+        < 실습 3. 교육과정 관리자 화면 >
+
+        1. 제목과 메뉴 버튼을 양쪽에 배치하세요.
+        2. 교육과정 카드를 3열로 배치하고 작은 화면에서는 자동으로 줄바꿈되도록 하세요.
+        3. 과정 상태를 Badge로 표시하세요.
+        4. '상세보기' 버튼을 클릭하면 해당 과정의 설명이 나타나도록 하세요.
+        5. 각 버튼은 자기 과정의 설명 영역과 연결되어야 합니다.
+        6. 메뉴 버튼을 클릭하면 화면 오른쪽에서 관리자 메뉴가 나타나도록 하세요.
+        7. 닫기 버튼을 클릭하면 관리자 메뉴가 닫히도록 하세요.
+        8. 메뉴 안에는 목록과 관리 버튼을 배치하세요.
+
+        (정답: d-flex justify-content-between align-items-center)
+        (정답: row g-4)
+        (정답: col-md-6 col-lg-4)
+        (정답: card h-100)
+        (정답: badge bg-success / badge bg-secondary)
+        (정답: collapse mt-3)
+        (정답: data-bs-toggle="collapse")
+        (정답: data-bs-target="#courseOne" 등)
+        (정답: id="courseOne" 등)
+        (정답: offcanvas offcanvas-end)
+        (정답: data-bs-toggle="offcanvas")
+        (정답: data-bs-target="#adminMenu")
+        (정답: id="adminMenu")
+        (정답: data-bs-dismiss="offcanvas")
+        (정답: list-group + list-group-item list-group-item-action)
+        (정답: btn btn-primary w-100)
+    -->
+
+    <div class="container py-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">교육과정 관리</h2>
+                <p class="text-secondary mb-0">
+                    현재 운영 중인 교육과정입니다.
+                </p>
+            </div>
+
+            <button class="btn btn-dark"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#adminMenu">
+                메뉴
+            </button>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">모집중</span>
+                        <h3 class="card-title fs-5 fw-bold">Java 웹 개발</h3>
+                        <p class="card-text text-secondary">
+                            Java와 Spring을 활용한 웹 개발 과정
+                        </p>
+
+                        <button class="btn btn-outline-primary btn-sm"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#courseOne">
+                            상세보기
+                        </button>
+
+                        <div id="courseOne" class="collapse mt-3">
+                            <div class="border rounded p-3 small">
+                                Java, HTML, CSS, JavaScript, Spring 등을
+                                단계적으로 학습하는 과정입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">모집중</span>
+                        <h3 class="card-title fs-5 fw-bold">프론트엔드 개발</h3>
+                        <p class="card-text text-secondary">
+                            HTML, CSS, JavaScript, React 기반 과정
+                        </p>
+
+                        <button class="btn btn-outline-primary btn-sm"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#courseTwo">
+                            상세보기
+                        </button>
+
+                        <div id="courseTwo" class="collapse mt-3">
+                            <div class="border rounded p-3 small">
+                                웹 표준과 JavaScript를 기반으로
+                                React까지 학습하는 과정입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">마감</span>
+                        <h3 class="card-title fs-5 fw-bold">Python 데이터 분석</h3>
+                        <p class="card-text text-secondary">
+                            Python을 활용한 데이터 분석 과정
+                        </p>
+
+                        <button class="btn btn-outline-primary btn-sm"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#courseThree">
+                            상세보기
+                        </button>
+
+                        <div id="courseThree" class="collapse mt-3">
+                            <div class="border rounded p-3 small">
+                                Python 기초 문법과 데이터 처리,
+                                시각화 등을 학습하는 과정입니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="adminMenu" class="offcanvas offcanvas-end">
+
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">관리자 메뉴</h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas">
+            </button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <div class="list-group mb-4">
+                <a href="javascript:void(0)"
+                   class="list-group-item list-group-item-action">
+                    교육과정 관리
+                </a>
+                <a href="javascript:void(0)"
+                   class="list-group-item list-group-item-action">
+                    수강생 관리
+                </a>
+                <a href="javascript:void(0)"
+                   class="list-group-item list-group-item-action">
+                    공지사항 관리
+                </a>
+            </div>
+
+            <button class="btn btn-primary w-100">
+                상담 신청 관리
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!--
+        < 실습 4. 쇼핑몰 모바일 메뉴 >
+
+        1. 쇼핑몰 상단에 메뉴 버튼을 배치하세요.
+        2. 메뉴 버튼을 클릭하면 화면 오른쪽에서 메뉴 패널이 나타나도록 하세요.
+        3. 메뉴 패널과 메뉴 버튼이 서로 연결되도록 필요한 속성을 작성하세요.
+        4. 메뉴 패널의 닫기 버튼으로 패널을 닫을 수 있도록 하세요.
+        5. 메뉴 목록은 목록 UI로 구성하세요.
+        6. '카테고리'를 클릭하면 하위 카테고리가 나타나도록 하세요.
+        7. 카테고리 버튼과 하위 카테고리 영역이 서로 연결되도록 필요한 속성을 작성하세요.
+        8. 하위 카테고리는 의류, 신발, 가방으로 구성하세요.
+        9. 장바구니와 로그인 버튼을 배치하세요.
+
+        (정답: border rounded p-4 text-center)
+        (정답: offcanvas offcanvas-end)
+        (정답: data-bs-toggle="offcanvas")
+        (정답: data-bs-target="#shopMenu")
+        (정답: id="shopMenu")
+        (정답: data-bs-dismiss="offcanvas")
+        (정답: list-group)
+        (정답: list-group-item list-group-item-action)
+        (정답: collapse)
+        (정답: data-bs-toggle="collapse")
+        (정답: data-bs-target="#shopCategory")
+        (정답: id="shopCategory")
+        (정답: d-grid gap-2)
+        (정답: btn btn-primary / btn btn-outline-secondary)
+    -->
+
+    <div class="container py-5">
+
+        <div class="border rounded p-4 text-center">
+            <h2 class="fw-bold">WEB SHOP</h2>
+            <p class="text-secondary">상품을 둘러보세요.</p>
+
+            <button class="btn btn-dark"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#shopMenu">
+                전체 메뉴
+            </button>
+        </div>
+
+    </div>
+
+    <div id="shopMenu" class="offcanvas offcanvas-end">
+
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold">전체 메뉴</h5>
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas">
+            </button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div class="list-group mb-3">
+                <a href="javascript:void(0)"
+                   class="list-group-item list-group-item-action">
+                    신상품
+                </a>
+                <a href="javascript:void(0)"
+                   class="list-group-item list-group-item-action">
+                    베스트 상품
+                </a>
+                <button class="list-group-item list-group-item-action"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#shopCategory">
+                    카테고리
+                </button>
+            </div>
+
+            <div id="shopCategory" class="collapse mb-3">
+                <div class="list-group">
+                    <a href="javascript:void(0)"
+                       class="list-group-item list-group-item-action">
+                        의류
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="list-group-item list-group-item-action">
+                        신발
+                    </a>
+                    <a href="javascript:void(0)"
+                       class="list-group-item list-group-item-action">
+                        가방
+                    </a>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary">장바구니</button>
+                <button class="btn btn-outline-secondary">로그인</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+```

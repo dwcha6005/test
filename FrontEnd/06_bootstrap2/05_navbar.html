@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Bootstrap Navbar -->
+
+<!--
+    Navbar: 웹사이트의 상단 메뉴를 구성할 때 사용하는 Bootstrap 컴포넌트
+
+    기본 구조)
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand">사이트 이름</a>
+
+            <div class="navbar-nav">
+                <a class="nav-link">메뉴</a>
+                <a class="nav-link">메뉴</a>
+            </div>
+        </div>
+    </nav>
+-->
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="javascript:void(0)">CODE CAMP</a>
+        <div class="navbar-nav">
+            <a class="nav-link active" href="javascript:void(0)">홈</a>
+            <a class="nav-link" href="javascript:void(0)">교육과정</a>
+            <a class="nav-link" href="javascript:void(0)">수강후기</a>
+            <a class="nav-link" href="javascript:void(0)">문의하기</a>
+        </div>
+    </div>
+</nav>
+<hr>
+<!--
+    navbar
+    : Navbar 영역임을 지정
+
+    navbar-expand-lg
+    : lg 크기 이상에서는 메뉴를 가로로 펼침
+    : lg보다 작은 화면에서는 모바일 형태로 변경할 수 있음
+
+    navbar-brand
+    : 사이트 이름이나 로고 영역
+
+    navbar-nav
+    : 네비게이션 메뉴 영역
+
+    nav-link
+    : 각각의 메뉴 링크
+
+    active
+    : 현재 선택된 메뉴를 표시할 때 사용
+-->
+
+<!-- 배경색 -->
+<nav class="navbar bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="javascript:void(0)">CODE CAMP</a>
+        <div class="navbar-nav flex-row gap-3">
+            <a class="nav-link active" href="javascript:void(0)">홈</a>
+            <a class="nav-link" href="javascript:void(0)">과정</a>
+            <a class="nav-link" href="javascript:void(0)">커뮤니티</a>
+        </div>
+    </div>
+</nav>
+<hr>
+<!--
+    navbar-light / navbar-dark
+    : Navbar의 밝은 배경 / 어두운 배경에 맞게 글자 색상 등을 변경
+
+    Bootstrap 5에서는 text 색상이나 배경색 Utility와 함께 사용할 수도 있음.
+-->
+
+<nav class="navbar bg-primary navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="javascript:void(0)">DEV BOOTCAMP</a>
+        <div class="navbar-nav flex-row gap-3">
+            <a class="nav-link active" href="javascript:void(0)">홈</a>
+            <a class="nav-link" href="javascript:void(0)">교육과정</a>
+            <a class="nav-link" href="javascript:void(0)">취업지원</a>
+        </div>
+    </div>
+</nav>
+<hr>
+<!--
+    반응형 Navbar
+
+    모바일에서는 메뉴를 모두 펼쳐놓으면 공간을 많이 차지할 수 있음.
+
+    Navbar의 메뉴를 접었다 펼치는 구조를 만들 수 있음.
+
+    핵심 구조
+
+    navbar-toggler
+    : 모바일 메뉴 버튼
+
+    navbar-collapse
+    : 접었다 펼쳐지는 메뉴 영역
+
+    collapse
+    : Bootstrap의 Collapse 기능
+
+    data-bs-toggle="collapse"
+    : 버튼을 클릭했을 때 Collapse 기능을 실행
+
+    data-bs-target="#navbarMenu"
+    : 어떤 영역을 열고 닫을지 지정
+-->
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="javascript:void(0)">DEV BOOTCAMP</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="메뉴 열기">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:void(0)">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">교육과정</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">수강후기</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">취업지원</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr>
+<!--
+    위 Navbar를 브라우저 너비를 줄여가면서 확인해보자.
+
+    큰 화면
+    → 메뉴가 가로로 표시됨
+
+    작은 화면
+    → 메뉴가 접히고 버튼이 표시됨
+
+    버튼 클릭
+    → 메뉴가 펼쳐짐
+
+    navbar-expand-lg
+    → lg 기준으로 Navbar의 펼침 상태를 결정
+
+    navbar-toggler
+    → 모바일에서 사용하는 메뉴 버튼
+
+    navbar-collapse
+    → 버튼으로 열고 닫는 메뉴 영역
+-->
+
+<!-- Dropdown -->
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="javascript:void(0)">DEV BOOTCAMP</a>
+
+        <div class="navbar-nav">
+            <a class="nav-link" href="javascript:void(0)">홈</a>
+
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    교육과정
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="javascript:void(0)">Java 웹 개발</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)">프론트엔드 개발</a></li>
+                    <li><a class="dropdown-item" href="javascript:void(0)">Python & AI</a></li>
+                </ul>
+            </div>
+
+            <a class="nav-link" href="javascript:void(0)">수강후기</a>
+        </div>
+    </div>
+</nav>
+<hr>
+<!--
+    Dropdown
+
+    dropdown
+    : Dropdown 영역
+
+    dropdown-toggle
+    : 클릭하여 메뉴가 열리는 버튼
+
+    dropdown-menu
+    : 펼쳐지는 메뉴 영역
+
+    dropdown-item
+    : Dropdown 안의 각각의 메뉴
+
+    Dropdown도 data-bs-toggle="dropdown"을 사용하므로
+    Bootstrap JavaScript가 필요함.
+-->
+
+<!-- Navbar + 검색 -->
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="javascript:void(0)">DEV BOOTCAMP</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#searchNavbar" aria-controls="searchNavbar" aria-expanded="false" aria-label="메뉴 열기">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="searchNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="javascript:void(0)">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">과정</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">공지사항</a>
+                </li>
+            </ul>
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="검색어 입력">
+                <button class="btn btn-outline-primary" type="submit">검색</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!--
+    Navbar 안에는 일반적인 HTML 요소와 Bootstrap Utility도 함께 사용할 수 있음.
+
+    예:
+    - form-control → 입력창
+    - btn → 버튼
+    - d-flex → Flex
+    - me-auto → 오른쪽에 자동 여백
+    - ms-auto → 왼쪽에 자동 여백
+
+    Navbar는 별도의 특별한 영역이라기보다
+    Bootstrap의 여러 컴포넌트와 Utility를 조합해서 사용하는 대표적인 사례.
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

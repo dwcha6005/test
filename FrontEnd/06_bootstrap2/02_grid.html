@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--
+        ============================================================
+        Bootstrap Grid
+        ============================================================
+
+        - Bootstrap Grid는 화면을 12개의 열(column)로 나누고
+          콘텐츠를 그 안에 배치하는 방식이다.
+
+        기본 구조)
+        container
+            └── row
+                  ├── col
+                  ├── col
+                  └── col
+
+        container: 전체 콘텐츠 영역
+
+        row
+        : column을 배치하기 위한 행
+
+        col
+        : row 안에 배치되는 column
+
+        Bootstrap Grid의 핵심은
+        "화면 크기에 따라 column의 너비를 다르게 지정하는 것"이다.
+    -->
+
+    <style>
+        .demo-box {
+            min-height: 100px;
+            background: #e9ecef;
+            border: 1px solid #ced4da;
+        }
+
+        .course-card {
+            height: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            padding: 24px;
+            background: white;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+            transition: 0.2s;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <!--
+        < 1. 12-column Grid >
+
+        Bootstrap은 기본적으로 한 줄을 12개의 column으로 나눈다.
+
+        col-12: 12칸 사용
+        col-6: 6칸 사용
+        col-4: 4칸 사용
+        col-3: 3칸 사용
+
+        따라서
+
+        col-6 + col-6 = 12
+        col-4 + col-4 + col-4 = 12
+        col-3 + col-3 + col-3 + col-3 = 12
+    -->
+
+    <main class="container py-5">
+
+        <h1 class="h2 fw-bold mb-2">Bootstrap Grid</h1>
+        <p class="text-secondary mb-5">
+            12개의 column을 조합하여 다양한 화면 구조를 만들 수 있습니다.
+        </p>
+
+        <!-- 2. 기본 Grid -->
+        <section class="mb-5">
+            <h2 class="h4 fw-bold mb-3">01. 12개의 Column</h2>
+            <div class="row">
+                <div class="col-6">
+                    <div class="demo-box p-3">col-6</div>
+                </div>
+
+                <div class="col-6">
+                    <div class="demo-box p-3">col-6</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <div class="row g-3">
+                <div class="col-4">
+                    <div class="demo-box p-3">col-4</div>
+                </div>
+                <div class="col-4">
+                    <div class="demo-box p-3">col-4</div>
+                </div>
+                <div class="col-4">
+                    <div class="demo-box p-3">col-4</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--
+            < 3. col만 사용하는 경우 >
+
+            다음처럼 col만 작성할 수도 있다.
+
+            <div class="row">
+                <div class="col">1</div>
+                <div class="col">2</div>
+                <div class="col">3</div>
+            </div>
+
+            각각 동일한 너비로 자동 분배된다.
+
+            3개 → 각각 4칸
+            4개 → 각각 3칸
+            6개 → 각각 2칸
+
+            단, 실제 반응형 화면을 만들 때는
+            breakpoint를 명확하게 지정하는 것이 더 유용한 경우가 많다.
+        -->
+
+
+        <!-- 
+             < 4. 반응형 Grid >
+
+             Bootstrap Grid의 핵심 부분.
+
+             col-md-6
+
+             md 이상에서는 6칸
+             md보다 작은 화면에서는 기본적으로 한 줄 전체 사용
+
+             예)
+             col-12 col-md-6
+
+             모바일 → 12칸
+             태블릿 이상 → 6칸
+
+             따라서
+
+             모바일
+             ┌──────────────┐
+             │     1        │
+             ├──────────────┤
+             │     2        │
+             └──────────────┘
+
+             PC
+             ┌───────┬───────┐
+             │   1   │   2   │
+             └───────┴───────┘
+        -->
+        <section class="mb-5">
+            <h2 class="h4 fw-bold mb-3">02. 반응형 Grid</h2>
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <div class="demo-box p-3">
+                        모바일 12 / MD 이상 6
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="demo-box p-3">
+                        모바일 12 / MD 이상 6
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+            < 5. 여러 breakpoint 사용 >
+
+            col-12 col-sm-6 col-lg-3
+
+            의미)
+            모바일 → 12칸 → 1개씩
+            sm 이상 → 6칸 → 2개씩
+            lg 이상 → 3칸 → 4개씩
+        -->
+        <section class="mb-5">
+            <h2 class="h4 fw-bold mb-3">
+                03. 여러 Breakpoint 사용
+            </h2>
+            <div class="row g-3">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="demo-box p-3">1</div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="demo-box p-3">2</div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="demo-box p-3">3</div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="demo-box p-3">4</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--
+            < 6. Bootstrap Breakpoint >
+            - Bootstrap 5의 기본 breakpoint
+
+            xs: 기본값
+            sm: 576px 이상
+            md: 768px 이상
+            lg: 992px 이상
+            xl: 1200px 이상
+            xxl: 1400px 이상
+
+            예)
+            col-md-4
+
+            768px 이상 → 4칸
+            768px 미만 → 기본적으로 12칸
+        -->
+
+
+        <!-- 
+             < 7. Grid와 Gap >
+
+             - row에 g-*를 사용할 수 있다.
+             - g-3 → 가로 + 세로 간격
+             - gx-3 → 가로 간격
+             - gy-3 → 세로 간격
+        -->
+        <section class="mb-5">
+            <h2 class="h4 fw-bold mb-3">04. Grid 간격</h2>
+            <div class="row g-4">
+                <div class="col-6 col-lg-3">
+                    <div class="demo-box p-3">A</div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="demo-box p-3">B</div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="demo-box p-3">C</div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="demo-box p-3">D</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--
+            < 8. 서로 다른 너비 조합 >
+
+            - 모든 column의 너비가 같을 필요는 없다.
+            예)
+            col-lg-8
+            col-lg-4
+            => 8 + 4 = 12
+        -->
+        <section class="mb-5">
+            <h2 class="h4 fw-bold mb-3">05. 서로 다른 Column</h2>
+            <div class="row g-4">
+                <div class="col-12 col-lg-8">
+                    <div class="demo-box p-4">
+                        Main Content
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="demo-box p-4">
+                        Sidebar
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--
+            < 9. 실제 UI에 Grid 적용 >
+
+            - 이제 단순한 박스가 아니라 실제 콘텐츠에 Grid를 적용한다.
+            PC: 4개
+            태블릿: 2개
+            모바일: 1개
+            => col-12 col-sm-6 col-lg-3
+        -->
+
+        <section>
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <p class="text-primary fw-bold mb-1">COURSES</p>
+                    <h2 class="h3 fw-bold mb-1">추천 교육과정</h2>
+                    <p class="text-secondary mb-0">
+                        실무 프로젝트 중심의 교육과정입니다.
+                    </p>
+                </div>
+                <a href="courses.html" class="text-decoration-none">
+                    전체보기
+                </a>
+            </div>
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="course-card">
+                        <span class="badge text-bg-primary mb-3">
+                            BACKEND
+                        </span>
+                        <h3 class="h5 fw-bold">
+                            Java 풀스택
+                        </h3>
+                        <p class="text-secondary small">
+                            Java, Spring, Database
+                        </p>
+                        <a href="java.html" class="btn btn-outline-primary btn-sm">
+                            자세히 보기
+                        </a>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="course-card">
+                        <span class="badge text-bg-success mb-3">
+                            FRONTEND
+                        </span>
+                        <h3 class="h5 fw-bold">
+                            React 개발
+                        </h3>
+                        <p class="text-secondary small">
+                            HTML, CSS, JavaScript, React
+                        </p>
+                        <a href="react.html" class="btn btn-outline-primary btn-sm">
+                            자세히 보기
+                        </a>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="course-card">
+                        <span class="badge text-bg-warning mb-3">
+                            AI
+                        </span>
+                        <h3 class="h5 fw-bold">
+                            Python & AI
+                        </h3>
+                        <p class="text-secondary small">
+                            Python, AI, Web Application
+                        </p>
+                        <a href="python.html" class="btn btn-outline-primary btn-sm">
+                            자세히 보기
+                        </a>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <article class="course-card">
+                        <span class="badge text-bg-dark mb-3">
+                            DATABASE
+                        </span>
+                        <h3 class="h5 fw-bold">
+                            데이터베이스
+                        </h3>
+                        <p class="text-secondary small">
+                            SQL, MySQL, 데이터 설계
+                        </p>
+                        <a href="database.html" class="btn btn-outline-primary btn-sm">
+                            자세히 보기
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

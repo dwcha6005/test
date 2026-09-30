@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography & Button 실습</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 문제 1. 교육과정 제목 -->
+    <!-- 작성 조건
+    1. 전체 영역은 container로 설정한다.
+    2. 제목은 display-5 크기로 설정한다.
+    3. 제목은 fw-bold로 강조한다.
+    4. 설명은 lead를 사용한다.
+    5. 보조 설명은 text-secondary를 사용한다.
+    -->
+    <section class="">
+        <span class="">ABC 개발자 아카데미</span>
+        <h1 class="">웹 개발자 취업 과정</h1>
+        <p class="">HTML, CSS부터 Java, Spring, React까지 실무 중심으로 학습합니다.</p>
+        <p class="">비전공자도 기초부터 단계적으로 학습할 수 있습니다.</p>
+    </section>
+
+    <!-- 문제 2. 교육 정보 -->
+    <!-- 작성 조건
+    1. 제목은 h4 크기를 사용한다.
+    2. 항목 이름은 fw-bold로 강조한다.
+    3. 날짜와 시간은 text-secondary를 사용한다.
+    4. 항목 사이에 mb-2를 적용한다.
+    -->
+    <section class="">
+        <h2 class="">교육 정보</h2>
+        <p class=""><strong class="">교육기간</strong> <span class="">2026.10.01 ~ 2027.03.31</span></p>
+        <p class=""><strong class="">교육시간</strong> <span class="">09:00 ~ 18:00</span></p>
+        <p class=""><strong class="">교육장소</strong> <span class="">ABC 개발자 아카데미</span></p>
+    </section>
+
+    <!-- 문제 3. 신청 버튼 -->
+    <!-- 작성 조건
+    1. 신청하기 버튼은 primary 색상을 사용한다.
+    2. 자세히 보기 버튼은 outline-primary를 사용한다.
+    3. 신청하기 버튼은 btn-lg로 크게 만든다.
+    4. 두 버튼 사이에 me-2를 적용한다.
+    -->
+    <section class="">
+        <h2 class="">수강 신청</h2>
+        <button type="button" class="">신청하기</button>
+        <button type="button" class="">자세히 보기</button>
+    </section>
+
+    <!-- 문제 4. 상품 정보 -->
+    <!-- 작성 조건
+    1. 상품명을 h3 크기로 표시한다.
+    2. 상품명을 fw-bold로 강조한다.
+    3. 할인 가격은 fs-3, fw-bold, text-danger를 사용한다.
+    4. 기존 가격에는 text-decoration-line-through를 적용한다.
+    5. 구매 버튼은 primary 버튼으로 만든다.
+    -->
+    <section class="">
+        <div class="">
+            <span class="">BEST</span>
+            <h3 class="">무선 블루투스 헤드폰</h3>
+            <p class="">고음질 사운드와 편안한 착용감을 제공합니다.</p>
+            <p class=""><span class="">129,000원</span></p>
+            <p class="">89,000원</p>
+            <button type="button" class="">구매하기</button>
+        </div>
+    </section>
+
+    <!-- 문제 5. 공지사항 -->
+    <!-- 작성 조건
+    1. 제목은 h4를 사용한다.
+    2. 공지 제목은 fw-bold로 표시한다.
+    3. 날짜는 small과 text-secondary를 사용한다.
+    4. 자세히 보기 버튼은 btn-sm과 outline-secondary를 사용한다.
+    -->
+    <section class="">
+        <h2 class="">공지사항</h2>
+        <div class="">
+            <p class="">10월 교육과정 모집 안내</p>
+            <p class="">2026.09.30</p>
+            <button type="button" class="">자세히 보기</button>
+        </div>
+    </section>
+
+    <!-- 문제 6. 과정 소개 페이지 -->
+    <!-- 작성 조건
+    1. 제목은 display-6과 fw-bold를 사용한다.
+    2. 설명은 lead를 사용한다.
+    3. 핵심 정보는 fw-bold로 강조한다.
+    4. 수강신청 버튼은 btn-primary btn-lg를 사용한다.
+    5. 문의하기 버튼은 btn-outline-dark btn-lg를 사용한다.
+    -->
+    <section class="">
+        <div class="">
+            <p class="">K-Digital Training</p>
+            <h2 class="">AI 활용 웹 개발자 과정</h2>
+            <p class="">AI와 웹 기술을 활용하여 실무 프로젝트를 완성합니다.</p>
+            <p class="">교육기간 <strong class="">6개월</strong> · 프로젝트 중심 교육</p>
+            <button type="button" class="">수강신청</button>
+            <button type="button" class="">문의하기</button>
+        </div>
+    </section>
+
+</body>
+</html>

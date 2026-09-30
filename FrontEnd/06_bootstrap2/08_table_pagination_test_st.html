@@ -1,0 +1,389 @@
+```html id="9r2q4w"
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Table & Pagination 실습</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container py-5">
+
+        <!--
+            문제 1. 회원 관리 화면
+            회원 관리 영역을 하나의 카드처럼 보이도록 구성한다.
+            제목은 크게 굵게 표시하고, 회원 등급과 상태는 눈에 띄게 구분한다.
+            관리 버튼은 서로 다른 용도로 구분하고,
+            회원 정보가 들어가는 표는 마우스를 올렸을 때 행이 강조되도록 한다.
+
+            [활용 내용]
+            앞에서 배운 Bootstrap 기능을 적절하게 조합하여 사용한다.
+        -->
+        <h2>문제 1. 회원 관리</h2>
+
+        <section class="">
+            <div class="">
+                <div>
+                    <h3 class="">회원 관리</h3>
+                    <p class="">현재 가입된 회원을 관리할 수 있습니다.</p>
+                </div>
+                <button type="button" class="">회원 등록</button>
+            </div>
+
+            <div class="">
+                <table class="">
+                    <thead class="">
+                        <tr>
+                            <th>회원번호</th>
+                            <th>이름</th>
+                            <th>등급</th>
+                            <th>가입일</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1001</td>
+                            <td>김민수</td>
+                            <td><span class="">일반</span></td>
+                            <td>2026.09.01</td>
+                            <td><span class="">정상</span></td>
+                            <td>
+                                <button type="button" class="">수정</button>
+                                <button type="button" class="">삭제</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1002</td>
+                            <td>이서연</td>
+                            <td><span class="">VIP</span></td>
+                            <td>2026.09.05</td>
+                            <td><span class="">정상</span></td>
+                            <td>
+                                <button type="button" class="">수정</button>
+                                <button type="button" class="">삭제</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1003</td>
+                            <td>박지훈</td>
+                            <td><span class="">일반</span></td>
+                            <td>2026.09.10</td>
+                            <td><span class="">휴면</span></td>
+                            <td>
+                                <button type="button" class="">수정</button>
+                                <button type="button" class="">삭제</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="회원 목록 페이지">
+                <ul class="">
+                    <li class="">
+                        <a class="" href="javascript:void(0)">이전</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">2</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">3</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">다음</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <!--
+            문제 2. 쇼핑몰 주문 관리
+            주문 관리 화면을 만든다.
+            상단에는 현재 주문 건수를 표시하고,
+            주문 상태는 색상으로 구분한다.
+            화면이 좁아졌을 때 표가 깨지지 않도록 처리한다.
+            표 아래에는 페이지 이동 영역을 배치한다.
+
+            [활용 내용]
+            앞에서 배운 Bootstrap 기능을 적절하게 조합하여 사용한다.
+        -->
+        <h2 class="">문제 2. 쇼핑몰 주문 관리</h2>
+
+        <section>
+            <div class="">
+                <div>
+                    <h3 class="">주문 관리</h3>
+                    <p class="">총 <strong>128건</strong>의 주문이 있습니다.</p>
+                </div>
+                <button type="button" class="">엑셀 다운로드</button>
+            </div>
+
+            <div class="">
+                <table class="">
+                    <thead class="">
+                        <tr>
+                            <th>주문번호</th>
+                            <th>상품명</th>
+                            <th>구매자</th>
+                            <th>결제금액</th>
+                            <th>주문일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ORD-2026</td>
+                            <td>블루투스 이어폰</td>
+                            <td>김민수</td>
+                            <td>129,000원</td>
+                            <td>2026.09.30</td>
+                            <td><span class="">배송중</span></td>
+                        </tr>
+                        <tr>
+                            <td>ORD-2025</td>
+                            <td>노트북 거치대</td>
+                            <td>이서연</td>
+                            <td>45,000원</td>
+                            <td>2026.09.29</td>
+                            <td><span class="">배송완료</span></td>
+                        </tr>
+                        <tr>
+                            <td>ORD-2024</td>
+                            <td>기계식 키보드</td>
+                            <td>박지훈</td>
+                            <td>89,000원</td>
+                            <td>2026.09.29</td>
+                            <td><span class="">주문취소</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="주문 목록 페이지">
+                <ul class="">
+                    <li class="">
+                        <a class="" href="javascript:void(0)">이전</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">2</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">3</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">다음</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <!--
+            문제 3. 교육과정 관리
+            교육과정을 카드 형태로 먼저 보여주고,
+            각 과정의 신청 현황을 표로 구성한다.
+            카드 영역은 화면 크기에 따라 여러 열로 배치한다.
+            모집 상태는 눈에 띄게 구분하고,
+            상세보기 버튼을 추가한다.
+            아래의 표에는 신청자 목록을 표시하고 페이지 이동 영역을 구성한다.
+
+            [활용 내용]
+            앞에서 배운 Grid, Card, Badge, Button, Table, Pagination 등을
+            하나의 화면에 조합하여 사용한다.
+        -->
+        <h2 class="">문제 3. 교육과정 관리</h2>
+
+        <div class="">
+            <div class="">
+                <article class="">
+                    <div class="">
+                        <h3 class="">Java 웹 개발</h3>
+                        <p class="">웹 애플리케이션 개발에 필요한 기술을 학습합니다.</p>
+                        <span class="">모집중</span>
+                        <button type="button" class="">상세보기</button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="">
+                <article class="">
+                    <div class="">
+                        <h3 class="">프론트엔드 개발</h3>
+                        <p class="">HTML, CSS, JavaScript와 React를 학습합니다.</p>
+                        <span class="">모집중</span>
+                        <button type="button" class="">상세보기</button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="">
+                <article class="">
+                    <div class="">
+                        <h3 class="">Python 데이터 분석</h3>
+                        <p class="">Python을 활용한 데이터 분석 기초를 학습합니다.</p>
+                        <span class="">마감</span>
+                        <button type="button" class="">상세보기</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="">
+            <h3 class="">최근 신청자</h3>
+
+            <div class="">
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>신청 과정</th>
+                            <th>신청일</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>김민수</td>
+                            <td>Java 웹 개발</td>
+                            <td>2026.09.30</td>
+                            <td><span class="">상담중</span></td>
+                        </tr>
+                        <tr>
+                            <td>이서연</td>
+                            <td>프론트엔드 개발</td>
+                            <td>2026.09.29</td>
+                            <td><span class="">등록완료</span></td>
+                        </tr>
+                        <tr>
+                            <td>박지훈</td>
+                            <td>Python 데이터 분석</td>
+                            <td>2026.09.28</td>
+                            <td><span class="">대기중</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="신청자 목록 페이지">
+                <ul class="">
+                    <li class="">
+                        <a class="" href="javascript:void(0)">이전</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">2</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">3</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">다음</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--
+            문제 4. 게시판 관리자 페이지
+            실제 게시판 관리자 화면처럼 구성한다.
+            상단에는 제목과 게시글 작성 버튼을 배치한다.
+            게시글 표에는 공지 여부와 게시글 상태를 눈에 띄게 표시한다.
+            표 아래에는 페이지 이동 영역을 배치한다.
+            전체 화면의 여백과 정렬도 Bootstrap Utility를 활용해 구성한다.
+
+            [활용 내용]
+            지금까지 배운 Bootstrap 기능을 자유롭게 조합한다.
+        -->
+        <h2 class="">문제 4. 게시판 관리자</h2>
+
+        <section class="">
+            <div class="">
+                <div>
+                    <h3 class="">게시판 관리</h3>
+                    <p class="">게시글을 확인하고 관리할 수 있습니다.</p>
+                </div>
+                <button type="button" class="">게시글 작성</button>
+            </div>
+
+            <div class="">
+                <table class="">
+                    <thead class="">
+                        <tr>
+                            <th>번호</th>
+                            <th>구분</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
+                            <th>상태</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>102</td>
+                            <td><span class="">공지</span></td>
+                            <td>10월 교육 일정 안내</td>
+                            <td>관리자</td>
+                            <td>2026.09.30</td>
+                            <td>125</td>
+                            <td><span class="">게시중</span></td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>일반</td>
+                            <td>수강 신청 관련 문의드립니다.</td>
+                            <td>김민수</td>
+                            <td>2026.09.29</td>
+                            <td>42</td>
+                            <td><span class="">게시중</span></td>
+                        </tr>
+                        <tr>
+                            <td>100</td>
+                            <td>일반</td>
+                            <td>교육장 위치를 알고 싶습니다.</td>
+                            <td>이서연</td>
+                            <td>2026.09.28</td>
+                            <td>31</td>
+                            <td><span class="">비공개</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="게시판 페이지">
+                <ul class="">
+                    <li class="">
+                        <a class="" href="javascript:void(0)">이전</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">1</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">2</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">3</a>
+                    </li>
+                    <li class="">
+                        <a class="" href="javascript:void(0)">다음</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+    </div>
+
+</body>
+</html>
+```

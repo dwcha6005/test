@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Card & Badge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Bootstrap Card & Badge -->
+
+<!--
+    Card
+    : 상품, 게시글, 프로필, 강의 정보처럼
+      하나의 콘텐츠를 하나의 박스 형태로 묶을 때 사용
+
+    기본 구조
+
+    <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">제목</h5>
+            <p class="card-text">내용</p>
+            <a href="javascript:void(0)" class="btn btn-primary">버튼</a>
+        </div>
+    </div>
+-->
+
+<div class="card" style="width: 18rem;">
+    <img src="https://picsum.photos/400/250?random=1" class="card-img-top" alt="상품 이미지">
+    <div class="card-body">
+        <h5 class="card-title">무선 블루투스 헤드폰</h5>
+        <p class="card-text">편안한 착용감과 선명한 음질을 제공하는 무선 헤드폰입니다.</p>
+        <a href="javascript:void(0)" class="btn btn-primary">자세히 보기</a>
+    </div>
+</div>
+
+<!--
+    card
+    : Card 전체 영역
+
+    card-img-top
+    : Card 위쪽에 이미지를 배치
+
+    card-body
+    : Card의 본문 영역
+
+    card-title
+    : Card 제목
+
+    card-text
+    : Card 설명
+
+    Card 안에는 일반 HTML 요소와 Bootstrap Utility,
+    Button 등을 자유롭게 조합할 수 있음.
+-->
+
+<!-- Card Header / Footer -->
+
+<div class="card mt-4" style="width: 22rem;">
+    <div class="card-header">
+        인기 강의
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Java 웹 개발자 과정</h5>
+        <p class="card-text">Java, Spring, React를 활용한 웹 개발을 학습합니다.</p>
+        <a href="javascript:void(0)" class="btn btn-primary">과정 보기</a>
+    </div>
+    <div class="card-footer text-secondary">
+        수강생 128명
+    </div>
+</div>
+
+<!--
+    card-header
+    : Card의 상단 영역
+
+    card-footer
+    : Card의 하단 영역
+
+    Card는 반드시 card-body만 사용하는 것은 아님.
+
+    header / body / footer를 필요에 따라 조합할 수 있음.
+-->
+
+<!-- Card 이미지 -->
+
+<div class="card mt-4 overflow-hidden" style="width: 22rem;">
+    <img src="https://picsum.photos/500/300?random=2" class="card-img-top" alt="개발자 이미지">
+    <div class="card-body">
+        <h5 class="card-title">프론트엔드 개발</h5>
+        <p class="card-text">HTML, CSS, JavaScript, React를 활용한 웹 화면 개발 과정</p>
+    </div>
+</div>
+
+<!--
+    이미지와 Card를 함께 사용할 때
+    card-img-top을 사용하면 이미지를 Card의 상단에 배치할 수 있음.
+
+    이미지가 Card 영역을 벗어나는 문제가 있다면
+    overflow-hidden 등의 Utility를 함께 사용할 수 있음.
+-->
+
+<!-- Badge -->
+
+<div class="mt-5">
+    <span class="badge text-bg-primary">NEW</span>
+    <span class="badge text-bg-success">수강 가능</span>
+    <span class="badge text-bg-danger">BEST</span>
+    <span class="badge text-bg-warning">SALE</span>
+</div>
+
+<!--
+    Badge
+    : 상태, 카테고리, 숫자 등의 정보를 작게 강조할 때 사용
+
+    text-bg-primary
+    : 배경색과 글자색을 함께 설정
+
+    Bootstrap의 색상 Utility와 조합해서 사용할 수 있음.
+-->
+
+<!-- Badge + Card -->
+
+<div class="card mt-4" style="width: 22rem;">
+    <img src="https://picsum.photos/500/300?random=3" class="card-img-top" alt="강의 이미지">
+    <div class="card-body">
+        <div class="mb-2">
+            <span class="badge text-bg-danger">BEST</span>
+            <span class="badge text-bg-primary">수강 가능</span>
+        </div>
+        <h5 class="card-title">Java 웹 개발자 과정</h5>
+        <p class="card-text">웹 개발의 기본부터 Spring 기반 서버 개발까지 학습합니다.</p>
+        <p class="fw-bold fs-5">월 300,000원</p>
+        <a href="javascript:void(0)" class="btn btn-primary">수강 신청</a>
+    </div>
+</div>
+
+<!--
+    Badge는 Card 내부에서도 사용할 수 있음.
+
+    예:
+    - 상품의 NEW / BEST / SALE
+    - 강의의 인기 / 신규 / 모집중
+    - 게시글의 공지 / 이벤트
+    - 주문의 배송중 / 완료
+
+    Badge 자체의 모양과 위치보다
+    어떤 정보를 강조하기 위해 사용하는지를 이해하는 것이 중요함.
+-->
+
+<!-- Card Grid -->
+
+<section class="container py-5">
+    <h2 class="mb-4">추천 교육과정</h2>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://picsum.photos/500/300?random=4" class="card-img-top" alt="Java 과정">
+                <div class="card-body">
+                    <span class="badge text-bg-primary mb-2">모집중</span>
+                    <h5 class="card-title">Java 웹 개발</h5>
+                    <p class="card-text">Java와 Spring을 활용하여 웹 애플리케이션을 개발합니다.</p>
+                    <a href="javascript:void(0)" class="btn btn-outline-primary">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://picsum.photos/500/300?random=5" class="card-img-top" alt="프론트엔드 과정">
+                <div class="card-body">
+                    <span class="badge text-bg-success mb-2">인기</span>
+                    <h5 class="card-title">프론트엔드 개발</h5>
+                    <p class="card-text">HTML, CSS, JavaScript, React를 활용한 화면 개발을 학습합니다.</p>
+                    <a href="javascript:void(0)" class="btn btn-outline-primary">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+                <img src="https://picsum.photos/500/300?random=6" class="card-img-top" alt="Python 과정">
+                <div class="card-body">
+                    <span class="badge text-bg-warning mb-2">NEW</span>
+                    <h5 class="card-title">Python & AI</h5>
+                    <p class="card-text">Python을 활용하여 AI와 웹 애플리케이션 개발을 경험합니다.</p>
+                    <a href="javascript:void(0)" class="btn btn-outline-primary">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
+    Card + Grid
+
+    Card를 여러 개 배치할 때는
+    Bootstrap Grid와 함께 사용하는 경우가 많음.
+
+    Card의 크기를 직접 지정하기보다
+    Grid의 column 크기를 이용하면
+    화면 크기에 따라 자연스럽게 배치할 수 있음.
+
+    h-100
+    : 같은 행에 있는 Card의 높이를 맞추는 데 활용할 수 있음.
+-->
+
+<!-- 실제 UI 예제 -->
+
+<section class="container pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <span class="badge text-bg-primary mb-2">추천 과정</span>
+            <h2 class="mb-0">개발자 취업 과정</h2>
+        </div>
+        <a href="javascript:void(0)" class="btn btn-outline-secondary">전체보기</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+                <img src="https://picsum.photos/400/250?random=7" class="card-img-top" alt="웹 개발">
+                <div class="card-body">
+                    <span class="badge text-bg-danger mb-2">BEST</span>
+                    <h5 class="card-title">Java 웹 개발자</h5>
+                    <p class="card-text text-secondary">Spring 기반 웹 서비스 개발</p>
+                    <p class="fw-bold mb-3">6개월 과정</p>
+                    <a href="javascript:void(0)" class="btn btn-primary w-100">과정 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+                <img src="https://picsum.photos/400/250?random=8" class="card-img-top" alt="프론트엔드">
+                <div class="card-body">
+                    <span class="badge text-bg-success mb-2">인기</span>
+                    <h5 class="card-title">프론트엔드 개발</h5>
+                    <p class="card-text text-secondary">JavaScript와 React 기반 개발</p>
+                    <p class="fw-bold mb-3">4개월 과정</p>
+                    <a href="javascript:void(0)" class="btn btn-primary w-100">과정 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+                <img src="https://picsum.photos/400/250?random=9" class="card-img-top" alt="Python">
+                <div class="card-body">
+                    <span class="badge text-bg-warning mb-2">NEW</span>
+                    <h5 class="card-title">Python & AI</h5>
+                    <p class="card-text text-secondary">Python과 AI를 활용한 프로젝트</p>
+                    <p class="fw-bold mb-3">3개월 과정</p>
+                    <a href="javascript:void(0)" class="btn btn-primary w-100">과정 보기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+                <img src="https://picsum.photos/400/250?random=10" class="card-img-top" alt="데이터 분석">
+                <div class="card-body">
+                    <span class="badge text-bg-secondary mb-2">모집중</span>
+                    <h5 class="card-title">데이터 분석</h5>
+                    <p class="card-text text-secondary">Python을 활용한 데이터 분석</p>
+                    <p class="fw-bold mb-3">3개월 과정</p>
+                    <a href="javascript:void(0)" class="btn btn-primary w-100">과정 보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
