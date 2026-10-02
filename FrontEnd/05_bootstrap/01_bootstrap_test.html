@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Bootstrap Practice</title>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -35,35 +34,25 @@ Container 만들기
     <h1>Bootstrap</h1>
 </div>
 
-
-
-<!-- =====================================
-실습2
-
-버튼 만들기
+<!-- 
+< 실습2 버튼 만들기 >
 
 조건)
-1. Primary 버튼
-2. Success 버튼
-3. Danger 버튼
-===================================== -->
+1. 파란 버튼
+2. 초록 버튼
+3. 빨강 버튼 
+-->
 <div class="container mt-5">
-    <button class="btn btn-primary">Primary</button>
-    <button class="btn btn-success">Success</button>
-    <button class="btn btn-danger">Danger</button>
+    <button class="btn btn-primary">확인</button>
+    <button class="btn btn-success">저장</button>
+    <button class="btn btn-danger">삭제</button>
 </div>
-
-<!-- =====================================
-실습3
-
-3열 Grid
-
-조건
-
-1. row 사용
-2. col 사용
-3. 3칸 생성
-===================================== -->
+<div class="">
+    <button class="">확인</button>
+    <button class="">저장</button>
+    <button class="">삭제</button>
+</div>
+<!-- < 실습3 3열 Grid > -->
 <div class="container mt-5">
     <div class="row">
         <div class="col">
@@ -77,17 +66,21 @@ Container 만들기
         </div>
     </div>
 </div>
+<div class="">
+    <div class="">
+        <div class="">
+            <div class="box">1</div>
+        </div>
+        <div class="">
+            <div class="box">2</div>
+        </div>
+        <div class="">
+            <div class="box">3</div>
+        </div>
+    </div>
+</div>
 
-<!-- =====================================
-실습4
-
-2열 Grid
-
-조건
-
-1. col-6
-2. col-6
-===================================== -->
+<!-- < 실습4 2열 Grid > -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-6">
@@ -98,28 +91,41 @@ Container 만들기
         </div>
     </div>
 </div>
+<div class="">
+    <div class="">
+        <div class="">
+            <div class="box">LEFT</div>
+        </div>
+        <div class="">
+            <div class="box">RIGHT</div>
+        </div>
+    </div>
+</div>
 
-<!-- =====================================
-실습5
+<!-- 
+< 실습5 반응형 Grid >
 
-반응형 Grid
-
-조건
-
-768px 이상
-
-2열
-
-768px 미만
-
-1열
-===================================== -->
+조건)
+768px 이상: 2열
+768px 미만: 1열
+-->
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">
             <div class="box">ITEM 1</div>
         </div>
         <div class="col-md-6">
+            <div class="box">ITEM 2</div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="">
+        <div class="">
+            <div class="box">ITEM 1</div>
+        </div>
+        <div class="">
             <div class="box">ITEM 2</div>
         </div>
     </div>

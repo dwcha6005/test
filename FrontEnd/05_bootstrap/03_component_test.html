@@ -15,38 +15,29 @@
 
     <h1>Bootstrap 실습</h1>
 
-    <!-- =====================================
-    실습1
+    <!-- 
+    < 실습1 >
 
-    회원가입 완료 메시지
+    - 회원가입 완료 메시지
 
-    조건
-
-    1. Success Alert 사용
+    조건)
+    1. 초록색 Alert 사용
     2. "회원가입 완료"
-    ===================================== -->
-
-    <!-- 작성 -->
-
+     -->
     <div class="alert alert-success">
         회원가입 완료
     </div>
 
 
 
-    <!-- =====================================
-    실습2
+    <!-- 
+    < 실습2 >
+    - 게시판 제목
 
-    게시판 제목
-
-    조건
-
-    1. h3
-    2. NEW Badge
-    ===================================== -->
-
-    <!-- 작성 -->
-
+    조건)
+    1. h3 "공지사항"
+    2. 공지사항 뒤에 "NEW" 빨간 Badge 
+    -->
     <h3>
         공지사항
         <span class="badge bg-danger">
@@ -56,208 +47,207 @@
 
 
 
-    <!-- =====================================
-    실습3
+    <!-- 
+    < 실습3 >
+    - 상품 카드 만들기
 
-    상품 카드 만들기
-
-    조건
-
+    조건)
     1. Card 사용
-    2. 상품명
-    3. 가격
-    4. 구매 버튼
-    ===================================== -->
-
-    <!-- 작성 -->
-
+    2. 상품명 (h5)
+    3. 가격 (p)
+    4. 구매 버튼 (파란 버튼)
+     -->
     <div class="card mb-4">
-
         <div class="card-body">
-
             <h5 class="card-title">
                 무선 마우스
             </h5>
-
             <p>
                 29,000원
             </p>
-
             <button class="btn btn-primary">
                 구매하기
             </button>
-
         </div>
-
     </div>
 
 
 
-    <!-- =====================================
-    실습4
+    <!-- 
+    < 실습4 >
+    - 상품 목록
 
-    상품 목록
-
-    조건
-
+    조건)
     1. Grid 사용
-    2. col-md-4
+    2. 768px 이상: 3열, 768px 이하: 1열
     3. 카드 3개
-
-    응용
-    Grid + Card 같이 사용
-    ===================================== -->
-
+     -->
     <div class="row">
-
-        <!-- 작성 -->
-
         <div class="col-md-4">
-
             <div class="card">
-
                 <div class="card-body">
-
                     <h5>상품1</h5>
-
                     <button class="btn btn-success">
                         구매
                     </button>
-
                 </div>
-
             </div>
-
         </div>
-
-
         <div class="col-md-4">
-
             <div class="card">
-
                 <div class="card-body">
-
                     <h5>상품2</h5>
-
                     <button class="btn btn-success">
                         구매
                     </button>
-
                 </div>
-
             </div>
-
         </div>
-
-
         <div class="col-md-4">
-
             <div class="card">
-
                 <div class="card-body">
-
                     <h5>상품3</h5>
-
                     <button class="btn btn-success">
                         구매
                     </button>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
+    <!-- 
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h5>상품1</h5>
+                    <button class="">
+                        구매
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h5>상품2</h5>
+                    <button class="">
+                        구매
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h5>상품3</h5>
+                    <button class="">
+                        구매
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+     -->
 
 
+    <!-- 
+    < 실습5 >
+    - 수강생 관리 테이블
 
-    <!-- =====================================
-    실습5
-
-    수강생 관리 테이블
-
-    조건
-
-    1. table 사용
-    2. table-striped 사용
-    3. 상태 Badge 사용
-
-    응용
-    Table + Badge 조합
-    ===================================== -->
-
+    조건)
+    1. 짝수 행마다 배경색이 적용된 table 사용
+    2. 상태 Badge 사용
+       => 수강중: 초록, 완료: 파랑, 탈락: 빨강
+     -->
     <table class="table table-striped mt-5">
-
         <thead>
-
             <tr>
                 <th>이름</th>
                 <th>과정</th>
                 <th>상태</th>
             </tr>
-
         </thead>
-
         <tbody>
-
             <tr>
-
                 <td>홍길동</td>
-
                 <td>Java</td>
-
                 <td>
-
                     <span class="badge bg-success">
                         수강중
                     </span>
-
                 </td>
-
             </tr>
-
             <tr>
-
                 <td>김학생</td>
-
                 <td>Spring</td>
-
                 <td>
-
                     <span class="badge bg-primary">
                         완료
                     </span>
-
                 </td>
-
             </tr>
-
+            <tr>
+                <td>이학생</td>
+                <td>Bootstrap</td>
+                <td>
+                    <span class="badge bg-danger">
+                        탈락
+                    </span>
+                </td>
+            </tr>
         </tbody>
-
     </table>
 
+    <!-- 
+    <table class="">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>과정</th>
+                <th>상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>홍길동</td>
+                <td>Java</td>
+                <td>
+                    <span class="">
+                        수강중
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>김학생</td>
+                <td>Spring</td>
+                <td>
+                    <span class="">
+                        완료
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>이학생</td>
+                <td>Bootstrap</td>
+                <td>
+                    <span class="">
+                        탈락
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     -->
 
     <!-- =====================================
-    실습6
+    < 실습6 >
+    - 나만의 대시보드
 
-    나만의 대시보드
-
-    조건
-
-    Card 4개
-
-    회원수
-    수강생수
-    강사수
-    취업자수
-
-    응용
-    Grid + Card
+    조건)
+    - Card 4개 (회원수, 수강생수, 강사수, 취업자수)
+    - 768px 이상: 4열, 768px 미만: 1열
     ===================================== -->
-
     <div class="row mt-5">
-
         <div class="col-md-3">
             <div class="card text-center">
                 <div class="card-body">
@@ -266,7 +256,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="card text-center">
                 <div class="card-body">
@@ -275,7 +264,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="card text-center">
                 <div class="card-body">
@@ -284,7 +272,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="card text-center">
                 <div class="card-body">
@@ -293,8 +280,45 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!-- 
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h3>120</h3>
+                    <p>회원수</p>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h3>80</h3>
+                    <p>수강생수</p>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h3>12</h3>
+                    <p>강사수</p>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="">
+                    <h3>65</h3>
+                    <p>취업자수</p>
+                </div>
+            </div>
+        </div>
+    </div> 
+    -->
+
 
 </div>
 
