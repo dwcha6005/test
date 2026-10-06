@@ -14,142 +14,109 @@
 
     <h1>회원가입 폼 만들기</h1>
 
-    <!-- =====================================
-    실습1
+    <!-- 
+    < 실습1 >
+    - 이름 입력창 만들기
 
-    이름 입력창 만들기
-
-    조건
-
+    조건)
     1. label 사용
     2. form-control 사용
-    ===================================== -->
+    -->
 
-    <div class="mb-3">
-
-        <label class="form-label">
+    <div class="mb-3 row">
+        <label class="form-label col-2" for="name">
             이름
         </label>
-
         <!-- 작성 -->
         <input type="text"
-               class="form-control">
-
+               id="name"
+               class="form-control col-10">
     </div>
 
-
-
     <!-- =====================================
-    실습2
+    < 실습2 >
+    - 로그인 폼
 
-    로그인 폼
-
-    조건
-
+    조건)
     1. 아이디
     2. 비밀번호
     3. form-control 사용
     ===================================== -->
-
     <div class="mb-3">
-
-        <label class="form-label">
+        <label class="form-label" for="id">
             아이디
         </label>
-
         <!-- 작성 -->
         <input type="text"
+                id="id"
                class="form-control">
-
     </div>
 
     <div class="mb-3">
-
         <label class="form-label">
             비밀번호
         </label>
-
         <!-- 작성 -->
         <input type="password"
                class="form-control">
-
     </div>
 
-
-
     <!-- =====================================
-    실습3
+    < 실습3 >
+    - 관심분야 선택
 
-    관심분야 선택
-
-    조건
-
+    조건)
     1. checkbox
     2. Java
     3. Spring
     4. React
     ===================================== -->
-
     <div class="mb-3">
-
         <div class="form-check">
-
             <!-- 작성 -->
             <input type="checkbox"
                    class="form-check-input"
                    id="java">
-
             <label class="form-check-label"
                    for="java">
                 Java
             </label>
-
         </div>
 
         <div class="form-check">
-
             <input type="checkbox"
                    class="form-check-input"
                    id="spring">
-
             <label class="form-check-label"
                    for="spring">
                 Spring
             </label>
-
         </div>
 
         <div class="form-check">
-
             <input type="checkbox"
                    class="form-check-input"
                    id="react">
-
             <label class="form-check-label"
                    for="react">
                 React
             </label>
-
         </div>
-
     </div>
 
 
 
     <!-- =====================================
-    실습4
+    < 실습4 >
+    - 성별 선택
 
-    성별 선택
-
-    조건
-
+    조건)
     1. radio
     2. 남자
     3. 여자
     ===================================== -->
 
     <div class="mb-3">
-
         <div class="form-check">
 
             <!-- 작성 -->
@@ -157,31 +124,23 @@
                    class="form-check-input"
                    name="gender"
                    id="male">
-
             <label class="form-check-label"
                    for="male">
                 남자
             </label>
-
         </div>
 
         <div class="form-check">
-
             <input type="radio"
                    class="form-check-input"
                    name="gender"
                    id="female">
-
             <label class="form-check-label"
                    for="female">
                 여자
             </label>
-
         </div>
-
     </div>
-
-
 
     <!-- =====================================
     실습5

@@ -21,20 +21,13 @@
 ===================================== */
 
 
-/* =====================================
+/* 
 02 Bootstrap Form Class
 
-form-control
-→ input
-
-form-select
-→ select
-
-form-check
-→ checkbox
-→ radio
-===================================== */
-
+form-control: input
+form-select: select
+form-check: checkbox, radio
+ */
 .demo{
     border:1px solid #ddd;
     padding:20px;
@@ -49,210 +42,131 @@ form-check
 
     <h1>Bootstrap Form</h1>
 
-    <!-- =====================================
-    03 Text Input
-    ===================================== -->
-
+    <!-- 03 Text Input -->
     <div class="demo">
-
         <h3>Text Input</h3>
-
         <label class="form-label">
             이름
         </label>
-
         <input type="text"
                class="form-control"
                placeholder="이름 입력">
-
     </div>
 
 
-    <!-- =====================================
-    04 Password
-    ===================================== -->
-
+    <!-- 04 Password -->
     <div class="demo">
-
         <h3>Password</h3>
-
         <label class="form-label">
             비밀번호
         </label>
-
         <input type="password"
                class="form-control"
                placeholder="비밀번호 입력">
-
     </div>
 
 
-    <!-- =====================================
-    05 Email
-    ===================================== -->
-
+    <!-- 05 Email -->
     <div class="demo">
-
         <h3>Email</h3>
-
         <input type="email"
                class="form-control"
                placeholder="email@example.com">
-
     </div>
 
 
-    <!-- =====================================
-    06 Textarea
-    ===================================== -->
-
+    <!-- 06 Textarea -->
     <div class="demo">
-
         <h3>Textarea</h3>
-
         <textarea class="form-control"
                   rows="4"
                   placeholder="내용 입력"></textarea>
-
     </div>
 
 
-    <!-- =====================================
-    07 Select
-    ===================================== -->
-
+    <!-- 07 Select -->
     <div class="demo">
-
         <h3>Select</h3>
-
         <select class="form-select">
-
             <option>Java</option>
             <option>Python</option>
             <option>React</option>
-
         </select>
-
     </div>
 
 
-    <!-- =====================================
-    08 Checkbox
-    ===================================== -->
-
+    <!-- 08 Checkbox -->
     <div class="demo">
-
         <h3>Checkbox</h3>
-
         <div class="form-check">
-
             <input type="checkbox"
                    class="form-check-input"
                    id="java">
-
             <label class="form-check-label"
                    for="java">
                 Java
             </label>
-
         </div>
-
         <div class="form-check">
-
             <input type="checkbox"
                    class="form-check-input"
                    id="jsp">
-
             <label class="form-check-label"
                    for="jsp">
                 JSP
             </label>
-
         </div>
-
     </div>
 
 
-    <!-- =====================================
-    09 Radio
-    ===================================== -->
-
+    <!-- 09 Radio -->
     <div class="demo">
-
         <h3>Radio</h3>
-
         <div class="form-check">
-
             <input type="radio"
                    class="form-check-input"
                    name="gender"
                    id="male">
-
             <label class="form-check-label"
                    for="male">
                 남자
             </label>
-
         </div>
-
         <div class="form-check">
-
             <input type="radio"
                    class="form-check-input"
                    name="gender"
                    id="female">
-
             <label class="form-check-label"
                    for="female">
                 여자
             </label>
-
         </div>
-
     </div>
 
 
-    <!-- =====================================
-    10 Grid Form
-    ===================================== -->
-
+    <!-- 10 Grid Form -->
     <div class="demo">
-
         <h3>Grid Form</h3>
-
         <div class="row">
-
             <div class="col-md-6">
-
                 <label class="form-label">
                     이름
                 </label>
-
                 <input type="text"
                        class="form-control">
-
             </div>
-
             <div class="col-md-6">
-
                 <label class="form-label">
                     이메일
                 </label>
-
                 <input type="email"
                        class="form-control">
-
             </div>
-
         </div>
-
     </div>
 
-
-    <!-- =====================================
-    11 Button
-    ===================================== -->
-
+    <!-- 11 Button -->
     <button class="btn btn-primary">
         회원가입
     </button>
