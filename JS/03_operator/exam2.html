@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    - 함수와 연산자에 전달되는 값은 대부분 적절한 데이터타입(자료형)으로 자동 형변환 일어남
+    ex) prompt() 함수로 입력받은 숫자는 string 타입이며 number 타입과 연산 시 
+        number 타입으로 자동 형변환이 일어남(타입을 일치시킨 후 연산을 수행)
+    - 상황에 따라 개발자가 의도한 타입으로 변환하는 것을 강제 형변환(= 명시적 형변환)이라고 함
+    => 자바스크립트에서 명시적 형변환을 수행하는 방법 : 타입(데이터)
+    => 주의! 자바에서 명시적 형변환과 소괄호 위치가 다름! => (타입)데이터
+    => 주의! 대표적인 타입 이름(string, number, boolean 등)의 첫글자를 대문자로 지정
+        ex) 변수 num 의 값을 string 타입으로 변환 시 : String(num)
+    => 단, 어떤 데이터를 문자열로 변환 시 형변환 연산자 대신 널스트링("")과 결합 연산해도 동일함
+        ex) 정수 10 + "" = 문자열 "10" 으로 변환됨
+    */
+
+    // 1. 문자열(string) 타입으로 변환
+    // => string 타입으로 명시적 형변환 방법 : String(데이터)
+    let value = 10;
+    document.write(value + " 변환 전 타입 : " + typeof(value) + "<br>");
+
+    // number 타입 변수 value 를 문자열 타입(string) 으로 강제 형변환
+    //let strValue = String(value);
+    //document.write(value + " 변환 후 타입 : " + typeof(strValue) + "<br>");
+
+    // 어떤 데이터(x) 를 문자열로 변환 시 형변환 연산 대신 널스트링("")과 결합 연산시에도 동일하게 처리됨
+    let strValue = value + "";
+    document.write(value + " 변환 후 타입222 : " + typeof(strValue) + "<br>");
+    // ---------------------------------------------------------------------------------
+
+    let value2 = true;
+    document.write(value2 + " 변환 전 타입 : " + typeof(value2) + "<br>");
+
+    // boolean 타입 변수 value2 를 문자열 타입(string) 으로 강제 형변환
+    let strValue2 = String(value2);
+    document.write(value2 + " 변환 후 타입 : " + typeof(strValue2) + "<br>");
+    document.write("<hr>");
+    // ====================================================================================
+    // 2. 숫자(number) 타입으로 변환
+    // - 수학과 관련된 함수 및 수치 연산 과정 등에서 자동으로 number 타입으로 변환 일어남
+    //   ex) 문자열숫자("10") / 문자열숫자("2") = 10 / 2 로 변환되어 연산 수행됨 = 5
+    //   => 단, 덧셈연산자(+)의 경우 피연산자가 문자열이면 연결연산자로 바뀌므로 산술 연산 일어나지 않음
+    //      따라서, 산술연산자로 연산 수행해야할 경우 강제로 숫자 타입으로 형변환 후 연산 수행해야한다!
+    // - 강제 형변환 방법 : Number(데이터)
+    document.write("10" / "2" + "<br>"); // 두 문자열을 정수로 변환한 후 나눗셈 연산 수행 = 10 / 2 = 5
+    document.write("10" + "2" + "<br>"); // "10" + "2" = 문자열 결합으로 인해 "102" 출력
+    // 10 + 2 형태로 덧셈 연산을 수행하려면 "10" 과 "2" 를 number 타입으로 강제형변환 후 연산 필수!
+    document.write(Number("10") + Number("2") + "<br>"); // "10" + "2" = 문자열 결합으로 인해 "102" 출력
+
+    // ------------------------------
+    // 두 숫자를 prompt() 함수를 통해 입력받을 경우 string 타입으로 입력되므로
+    // 덧셈 연산 시에 반드시 number 타입으로 변환 후 덧셈 연산을 수행해야한다!
+    //let num1 = prompt("정수1 입력");
+    //let num2 = prompt("정수2 입력");
+    //document.write(num1 + " 변환 전 타입 : " + typeof(num1) + "<br>");
+    //document.write(num2 + " 변환 전 타입 : " + typeof(num2) + "<br>");
+    //
+    //let sum = num1 + num2; // 입력받은 두 수가 string 타입이므로 덧셈이 아닌 연결 연산이 수행됨
+    //document.write(sum + "<br>"); // 두 수를 연결한 값이 출력됨
+    //// => 따라서, 입력받은 두 수를 number 타입으로 형변환 후에 덧셈 연산 수행 필수!
+    //let sum2 = Number(num1) + Number(num2); // 입력받은 두 수가 string 타입이므로 덧셈이 아닌 연결 연산이 수행됨
+    //document.write(sum2 + "<br>"); // 두 수를 연결한 값이 출력됨
+    // -------------------------------------
+    // 주의!! string -> number 변환 과정에서 문자열 내에 숫자 데이터 외의 다른 데이터가 포함됐을 경우
+    // 변환 과정에서 숫자 형태로의 타입 변환은 되지만 숫자 데이터가 아닌 데이터를 변환하게 되므로
+    // 결과값도 숫자가 아니게 되어서 NaN 이라는 특수값이 저장(사용)됨
+    // => NaN : Not a Number = 숫자가 아님
+    let num3 = "1234a";
+    document.write(num3 + " 변환 전 타입 : " + typeof(num3) + "<br>");
+
+    // string 타입 변수 num3 값을 number 타입으로 강제 형변환 후 다시 num3 에 저장
+    num3 = Number(num3);
+    document.write(num3 + " 변환 후 타입 : " + typeof(num3) + "<br>");
+    // => 단, number 타입으로 변환이 되었더라도 데이터 자체는 숫자가 아닌 데이터이므로 NaN 값 출력됨
+    document.write("<hr>");
+    // =============================================================================================
+    // boolean 타입으로 변환 시에는 [ 변환 대상 데이터가 존재하기만 하면 ] 무조건 true 로 변환됨
+    // => 문자열이 비어있지 않거나, 배열 등의 객체 크기가 0 이 아닌 경우 데이터가 존재한다고 판단
+    //let data = "true"; // 문자열이 true 인 사실은 불필요, 문자열이 비어있지 않으므로 true 로 변환됨
+    //let data = "false"; // 문자열이 false 인 사실은 불필요, 문자열이 비어있지 않으므로 true 로 변환됨
+    //let data = "1234"; // 문자열이 1234 인 사실은 불필요, 문자열이 비어있지 않으므로 true 로 변환됨
+    //let data = 1234; // 정수 데이터 1234 가 존재하므로 true 로 변환됨
+    //let data = -10; // 정수 데이터 -10 이 존재하므로 true 로 변환됨
+
+    // false 값으로 변환되는 경우
+    //let data = 0; // 0 또는 -0 값은
+    //let data = -0; // 둘 다 boolean 타입의 false 로 변환됨
+    //let data = ""; // 널스트링은 문자열 데이터가 존재하지 않으므로 false 로 변환됨
+    //let data = null; // null 값은 객체가 존재하지 않으므로 false 로 변환됨(나중에 배움)
+    //let data = undefined; // undefined 값은 값이 존재하지 않으므로 false 로 변환됨
+    let data; // 변수 초기화하지 않을 경우 undefined 이므로 false 로 변환됨
+    document.write(data + " 변환 전 타입 : " + typeof(data) + "<br>");
+
+    // 변수 data 값을 boolean 타입으로 변환하여 다시 변수 data 에 저장
+    data = Boolean(data);
+    document.write(data + " 변환 후 타입 : " + typeof(data) + "<br>");
+    document.write("<hr>");
+    
+    // =================================================================================
+    // parseInt() 함수 활용하면 문자열 -> 정수로 변환 가능함
+    // parseInt() 함수로 문자열 -> 정수로 변환 시 숫자 뒤의 문자들은 자동으로 제거해준다! (ABC 제거됨)
+    //let data2 = "123ABC"; // => 123 으로 변환됨
+    // 단, 숫자 앞의 문자 또는 숫자 사이의 문자는 제거 불가능
+    //let data2 = "ABC123"; // => NaN 으로 변환됨
+    // 실수 데이터는 소수점 부분을 제거하여 정수로 변환해준다!
+    let data2 = "456.78"; // => 456 으로 변환됨
+
+    //data2 = Number(data2); // Number() 함수를 활용하여 변환 시 문자열이 있을 경우 NaN 값으로 변환됨
+
+    data2 = parseInt(data2);
+    document.write(data2 + " 변환 후 타입 : " + typeof(data2) + "<br>");
+
+</script>
+
+<body>
+    
+</body>
+</html>

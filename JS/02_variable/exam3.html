@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // 변수에 값 저장 및 내장 함수 활용 연습
+    // --------------------------------------------------
+    // 변수 name 선언 및 자신의 이름 저장
+    let name = "이연태";
+    // alert() 함수를 활용하여 name 변수값 출력
+    //alert(name);
+
+    // 참고> alert() 함수는 줄바꿈 수행 시 이스케이프문자 \n 활용하여 줄바꿈 처리
+    //alert(name + " 회원님, 가입을 축하드립니다.\n적립금 3000원이 적립되었습니다.");
+
+    // 참고2> document.write() 함수는 줄바꿈 수행 시 HTML 태그 <br> 활용하여 줄바꿈 처리
+    // => 주의! \n 사용 시 공백으로 처리됨
+    document.write(name + " 회원님, 가입을 축하드립니다.<br>적립금 3000원이 적립되었습니다.<br>");
+
+    // console.log() 활용하여 name 변수값을 콘솔에 출력
+    console.log(name);
+    // --------------------------------------------------
+    // prompt() 함수는 확인 버튼 클릭 시 입력받은 데이터를 리턴(return)하므로
+    // prompt() 함수 좌변에 변수 선언하여 대입연산자를 통해 입력받은 데이터를 좌변의 변수에 저장 가능
+    // => 주의! 입력되는 모든 데이터는 무조건 string 타입(문자)으로 취급됨
+    //let inputData = prompt("이름을 입력하세요"); // 입력받은 데이터가 inputData 변수에 저장됨
+    //let inputData = prompt("이름을 입력하세요", "홍길동"); // 입력창에 기본값으로 "홍길동" 미리 입력됨
+    //document.write(inputData + " : " + typeof(inputData) + "<br>");
+    // ----------------------------------------------------------------------
+    //let isExit = confirm("종료하시겠습니까?");
+    //document.write(isExit + " : " + typeof(isExit) + "<br>");
+
+    // =============================================================================================
+    // ` : 백틱(Backticks)
+    // => 백틱은 템플릿 리터럴에서 문자열을 대체하기 위한 용도로 전체 문자열을 감싸는데 사용하는 기호
+    let name2 = "홍길동";
+    let point = 3000;
+    document.write(name2 + " 회원님, 가입을 축하드립니다.<br>적립금 " + point + "원이 적립되었습니다.<br>");
+    document.write(`${name2} 회원님, 가입을 축하드립니다.<br>적립금 ${point}원이 적립되었습니다.<br>`);
+</script>
+
+<body>
+    
+</body>
+</html>

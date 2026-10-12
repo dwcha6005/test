@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+     /*
+        < 4. 대입 연산자와 복합(확장)대입 연산자 >
+        = : 오른쪽 값을 왼쪽 변수에 대입
+        += : 더한 후 대입
+        -= : 뺀 후 대입
+        *= : 곱한 후 대입
+        /= : 나눈 후 대입
+        %= : 나머지를 구한 후 대입
+    */
+    // 1. 대입연산자(=) : 연산자 우변의 값을 
+    //    좌변의 변수에 저장(대입 = 할당 = 저장 = 초기화)
+    // 변수 a 선언 및 정수 10 으로 초기화
+    let a = 10;
+
+    // 2. 산술연산자(+, - , *, /, %)
+    // 변수 a 값에 5를 더한 결과값을 다시 변수 a 에 저장
+    a = a + 5;
+    console.log("a = " + a);
+
+    // 복합 대입연산자(확장 대입연산자)를 활용하여 변수 a 값을 5만큼 증가(a 값에 a + 5 값을 저장)
+    a += 5;
+    console.log("a = " + a);
+
+    let score = 10;
+    score += 5;
+    console.log(score); // 15
+
+    score -= 3;
+    console.log(score); // 12
+
+    score *= 2;
+    console.log(score); // 24
+
+    score /= 4;
+    console.log(score); // 6
+
+    score %= 4;
+    console.log(score); // 2
+
+</script>
+
+<body>
+    
+</body>
+</html>

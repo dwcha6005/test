@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    [ 자바스크립트 변수 ]
+    - 데이터를 저장하는 공간
+    - 변수명: 데이터를 저장하고 필요할 때 사용하기 위한 이름
+    - 변수 선언 기본 문법 : 변수선언키워드 변수명 = 값; (선언문과 초기화 문장 분리도 가능)
+    - 다만, 자바와 달리 데이터타입을 별도로 지정하지 않고 var 또는 let 또는 const 로 선언
+    (세 가지 선언 방식은 각각 다른 특징이 부여됨)
+        let : 선언 후 값을 변경할 수 있음
+        const : 선언 후 다른 값을 재할당할 수 없음
+        const도 객체나 배열 내부의 값은 변경할 수 있음
+
+    변수명 작성 규칙
+        - 숫자로 시작할 수 없음
+        - 공백을 사용할 수 없음
+        - 대소문자를 구분함
+        - 예약어(키워드)를 변수명으로 사용할 수 없음
+        - 일반적으로 camelCase 사용
+
+    - 사용되는 데이터 타입은 문자(= 문자열, string), 숫자(number), 논리(boolean), 
+    특수값 undefined, null 등 사용됨
+    => 변수 선언 및 값 할당 시 자동으로 해당 변수의 데이터타입이 결정됨
+    - 변수 또는 데이터의 데이터타입 확인 방법 : typeof 키워드 사용
+    => 기본문법1) typeof 변수명 또는 typeof 데이터
+    => 기본문법2) typeof(변수명) 또는 typeof(데이터)
+
+    String : 문자열
+    Number : 숫자 (정수와 실수를 별도 타입으로 구분하지 않음)
+    Boolean : true 또는 false
+    Undefined : 값이 할당되지 않은 상태
+    Null : 값이 없음을 의도적으로 나타냄
+    Object : 객체, 배열, 함수 등
+    BigInt : 매우 큰 정수
+    Symbol : 고유한 식별자
+    */
+
+    
+
+    // 변수 선언 기초
+    //var num; // 오류 없음
+    //let num2; // 오류 없음
+
+    //const num3; // 상수로 취급되므로 값을 할당(저장)하지 않으면 오류 발생! (= 나중에 자세히 배움)
+    // --------------------------------------------------------------------------------------------
+    // 변수 선언 및 다양한 데이터 저장
+    var str; // 변수 str 선언(아직 데이터(값)은 저장되지 않은 상태)
+    console.log("str = " + str); // 초기화되지 않은 변수도 접근 가능(단, undefined 값 출력됨)
+    console.log("str 변수의 데이터타입 = " + typeof(str)); // 변수 str 의 데이터타입 출력
+    // => 데이터가 확정되지 않았으므로 데이터타입도 확정되지 않음 = undefined
+    // => 결론! 초기화 되지 않은 변수의 값과 데이터타입은 모두 undefined
+
+    // 변수 str2 선언
+    var str2;
+    // str2 변수에 "자바스크립트" 문자열 데이터 저장
+    str2 = "자바스크립트";
+    console.log("str2 = " + str2);
+    console.log("str2 변수의 데이터타입 = " + typeof(str2));
+
+    // 변수 str3 선언과 동시에 "자바스크립트" 로 초기화(위의 두 문장을 한 문장으로 결합)
+    var str3 = "자바스크립트";
+    console.log("str3 = " + str3 + ", str3 변수의 데이터타입 = " + typeof(str3));
+
+    // alert() 함수를 사용하여 웹브라우저 알림창에 데이터 출력
+    //alert("str3 = " + str3 + ", str3 변수의 데이터타입 = " + typeof(str3));
+
+    // document.write() 함수 사용하여 웹브라우저 화면 영역에 출력
+    document.write("str3 = " + str3 + ", str3 변수의 데이터타입 = " + typeof(str3));
+    // -------------------------------------------------------------------------------
+    // 변수 num 선언 및 정수 100 으로 초기화(저장) 후 변수값 출력
+    var num = 100;
+    console.log("num = " + num + ", num 변수의 데이터타입 = " + typeof(num));
+    // => num = 100, num 변수의 데이터타입 = number
+
+    // 변수 num2 선언 및 실수 3.14 로 초기화(저장) 후 변수값 출력
+    var num2 = 3.14;
+    console.log("num2 = " + num2 + ", num2 변수의 데이터타입 = " + typeof(num2));
+    // => num2 = 3.14, num2 변수의 데이터타입 = number
+    // -------------------------------------------------------------------------------
+    // 변수 b 선언 및 논리값 true 저장 후 출력
+    var b = true;
+    console.log("b = " + b + ", b 변수의 데이터타입 = " + typeof(b));
+    // => b = true, b 변수의 데이터타입 = boolean
+
+
+    // ----------- 주의! 특수 데이터타입 ----------
+    var v1; // 변수 선언 시 아무 데이터도 저장하지 않았을 경우 undefined 로 취급
+    var v2 = null; // 특수 값인 null 값도 변수에 저장 가능
+    console.log("v1 = " + v1 + ", v1 변수의 데이터타입 = " + typeof(v1));
+    // => v1 = undefined, v1 변수의 데이터타입 = undefined
+    console.log("v2 = " + v2 + ", v2 변수의 데이터타입 = " + typeof(v2));
+    // => v2 = null, v2 변수의 데이터타입 = object
+</script>
+
+<body>
+    
+</body>
+</html>
