@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+        < 증감 연산자, 단항 연산자 >
+        ++ : 1 증가
+        -- : 1 감소
+
+        변수 앞에 사용 : 전위
+        변수 뒤에 사용 : 후위
+        다른 연산과 함께 사용하면 결과가 달라질 수 있음
+    */
+    let count = 5;
+
+    count++;
+    console.log(count); // 6
+
+    count--;
+    console.log(count); // 5
+
+    let a = 10;
+    let b = a++;
+    console.log(a); // 11
+    console.log(b); // 10
+
+    let c = 10;
+    let d = ++c;
+    console.log(c); // 11
+    console.log(d); // 11
+
+    let x = 10;
+    let y = 5;
+    let z = ++x + y--;
+    console.log(x + ", " + y + ", " + z);
+</script>
+
+<body>
+    
+</body>
+</html>

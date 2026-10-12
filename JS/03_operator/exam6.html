@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // 3. 논리연산자 : 피연산자가 논리적인 조건에 부합되는지 검사
+    // => 논리연산에 사용되는 피연산자(데이터)는 무조건 boolean 타입(true/false) 만 사용
+    // 1) AND 연산자(&&) : 두 피연산자 모두 true 일 때 true, 하나라도 false 일 때 false
+    // 2) OR 연산자(||) : 두 피연산자 모두 false 일 때 false, 하나라도 true 일 때 true
+    // 3) NOT 연산자(!) : 단항연산자. 피연산자의 현재 boolean 값 반전. true -> false, false -> true
+    console.log("false && false = " + (false && false)); // false
+    console.log("false && true = " + (false && true)); // false
+    console.log("true && false = " + (true && false)); // false
+    console.log("true && true = " + (true && true)); // true
+
+    console.log("false || false = " + (false || false)); // false
+    console.log("false || true = " + (false || true)); // true
+    console.log("true || false = " + (true || false)); // true
+    console.log("true || true = " + (true || true)); // true
+
+    // NOT 연산자는 단항연산자로 피연산자의 앞쪽(= 좌측)에 표기
+    console.log("!false = " + (!false)); // flase 의 반대값이 true
+    console.log("!true = " + (!true)); // true 의 반대값이 false
+
+    let num1 = 10;
+    let num2 = 20;
+    let result = num1 < num2; // 10 이 20 보다 크지 않으므로 false 값 저장됨
+    console.log("result = " + result + "<br>");
+    console.log("result 변수값이 true 입니까? " + (result === true));
+    console.log("result 변수값이 true 입니까? " + (result !== false));
+
+    console.log("result 변수값의 상태 반전 결과 : " + !result);
+</script>
+
+<body>
+    
+</body>
+</html>
