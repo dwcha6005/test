@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+if문
+- 특정 조건에 따라 문장을 실행하는 조건문
+- 자바에서의 if문과 거의 동일
+- 조건식은 반드시 결과가 true 또는 false 인 식만 사용 가능하며, 변수 사용도 가능
+  => 자바스크립트의 모든 값은 true 또는 false 로 나타낼 수 있으므로 약간 다름
+     (0, -0, "", '', undefined, null, NaN 등은 false 로, 나머지는 true 로 취급됨)
+
+1. 단일 if문
+- if문에 주어진 조건을 판별하여 true 일 때 지정된 블럭{} 내의 문장들을 수행하는 if문
+
+< 기본 문법 >
+문장1;
+
+if(조건식) {
+	// 조건식 판별 결과가 true 일 때 실행할 문장들...
+	문장2;
+}
+
+문장3;
+
+=> 조건식 판별 결과가 true 일 때 : 문장1 -> 문장2 -> 문장3 순으로 실행됨
+=> 조건식 판별 결과가 false 일 때 : 문장1 -> 문장3 순으로 실행됨(문장2 실행은 생략됨)
+*/
+
+// 변수 num 선언 및 정수 10 으로 초기화
+let num = -10;
+document.write(num + "<br>"); // 문장1(무조건 실행되는 문장)
+
+// 단일 if문을 사용하여 변수 num 값이 0 보다 큰지 판별(= 조건 : 변수 num 이 0 보다 큰가?)
+// => 만약, 0 보다 클 경우 "0 보다 크다!" 출력
+if(num > 0) { // 조건식
+	// num 이 0 보다 클 경우 현재 중괄호 블럭{} 내의 문장들이 차례대로 실행됨
+	// 만약, num 이 0 보다 크지 않으면 현재 블럭 내의 문장들은 실행되지 못한다!
+	document.write("0 보다 크다!<br>"); // 문장2(조건식 결과에 따라 실행 여부가 결정되는 문장)
+}
+
+document.write("이 문장은 if 문 조건식 결과와 상관없이 무조건 실행됨!<br>"); // 문장3(무조건 실행되는 문장)
+document.write("<hr>");
+
+// < 스코프 >
+// 스코프란? 스코프(Scope)는 변수에 접근할 수 있는 유효 범위
+if (true) {
+    var a = 10;
+    let b = 20;
+    const c = 30;
+}
+
+console.log(a); // 10
+console.log(b); // ReferenceError
+console.log(c); // ReferenceError
+// var — 함수 레벨 스코프
+// if 블록으로 범위가 제한되지 않아. 따라서 블록 밖에서도 접근할 수 있어.
+// let, const — 블록 레벨 스코프
+// { }로 만들어진 블록 안에서만 유효해. if, for, while 등의 블록에서도 마찬가지야.
+
+let age = 20;
+
+if (true) {
+    let age = 30;
+    console.log(age); // 30
+}
+
+console.log(age); // 20
+
+// =======================================================================================
+// [ 단일 if 문 연습 ]
+// 변수 num2 선언 후 아무 정수 1개 저장
+let num2 = 4;
+document.write(num2 + "<br>"); // 문장1(무조건 실행되는 문장)
+
+// 단일 if 문을 사용하여 변수 num 값이 "짝수" 인지 판별
+// => 만약, 짝수일 경우 "xxx : 짝수입니다!" 출력
+// => 짝수란? 어떤 수(num2) 를 2로 나눈 나머지가 0
+if(num2 % 2 == 0) {
+	document.write(num2 + " : 짝수입니다!<br>");
+}
+
+document.write("짝수 판별 종료!<br>");
+document.write("<hr>");
+// --------------------------------------------------------------
+// confirm() 함수를 통해 "종료하시겠습니까?" 메세지를 출력하고
+// 사용자로부터 [확인]/[취소] 버튼을 입력받았을 때
+// 입력받은 버튼이 [확인] 버튼일 경우 "프로그램을 종료합니다!" 출력
+let isFinish = confirm("종료하시겠습니까?"); // true 또는 false 값 리턴됨
+document.write(isFinish + "<br>");
+
+// 확인 버튼 판별을 위해 isFinish 값이 true 인지 판별(= isFinish 값이 true 와 같은지 판별)
+//if(isFinish == true) { // 주의! isFinish 값이 true 와 같은가에 대한 결과가 true 일 때 true 가 됨(연산 2번 일어남)
+//	document.write("프로그램을 종료합니다!<br>");
+//}
+// 따라서, 위의 코드는 if 문 조건식 내에서 isFinish == true 를 먼저 판별한 후
+// 해당 결과값을 다시 if 문을 통해 판별하므로 두 번의 연산을 거쳐서 중괄호 블럭을 실행하게 됨
+ 
+if(isFinish) { // isFinish 값이 true 이면 if 문 조건식 결과가 자동으로 true 가 됨
+	document.write("프로그램을 종료합니다222!<br>");
+}
+// 결론, if 문 조건식에 boolean 타입 변수값을 주고 true 인지 판별할 경우에는
+// 변수에 대한 연산자 없이 해당 boolean 타입 변수만 전달하면 true 일 때 중괄호 블럭을 실행하게 됨
+// -----------------------------------------
+if(isFinish == false) { // isFinish 값이 false 인가 질문에 대한 답이 true 일 때 블럭을 실행
+	document.write("취소 버튼 클릭됨!<br>");
+}
+// => 위의 코드에서 중복 제거 시
+if(!isFinish) { // true 값이 전달되면 false, false 값이 전달되면 true 로 반전되어 if 문으로 판별
+	document.write("취소 버튼 클릭됨!<br>");
+}
+
+</script>
+
+<body>
+    
+</body>
+</html>

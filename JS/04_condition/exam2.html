@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    2. if ~ else 문
+    - if문에 주어진 조건 판별 후 true 일 경우 if 문 내의 문장을 수행하고,
+    false 일 경우 else 문의 문장을 수행하는 조건문
+    
+    < 기본 문법 >
+    문장1;
+
+    if(조건식) {
+        // 조건식 판별 결과가 true 일 때 실행할 문장들...	
+        문장2;
+    } else {
+        // 조건식 판별 결과가 false 일 때 실행할 문장들...
+        문장3;
+    }
+
+    문장4;
+
+    => 조건식 판별 결과가 true 일 때 : 문장1 -> 문장2 -> 문장4 순으로 실행됨(문장3 생략됨)
+    => 조건식 판별 결과가 false 일 때 : 문장1 -> 문장3 -> 문장4 순으로 실행됨(문장2 생략됨)
+    */	
+
+    // 변수 num 선언 및 정수 10 으로 초기화
+    let num = 0;
+    document.write(num + "<br>"); // 문장1(무조건 실행되는 문장)
+
+    // 변수 num 값이 0 보다 크면 "xxx : 0 보다 크다!" 출력
+    // 아니면, "xxx : 0 보다 크지 않다!"
+    if(num > 0) { // 조건식
+        // 조건식 결과가 true 일 때 실행할 문장들...
+        document.write(num + " : 0 보다 크다!<br>"); // 문장2
+    } else {
+        // 조건식 결과가 false 일 때 실행할 문장들...
+        document.write(num + " : 0 보다 크지 않다!<br>"); // 문장3
+    }
+
+    document.write("이 문장은 if 문 조건식 결과와 상관없이 무조건 실행됨!<br>"); // 문장4(무조건 실행되는 문장)
+    document.write("<hr>");
+    // ===============================================================
+    // [ if ~ else 문 연습 ]
+    // 변수 num2 의 값이 "짝수" or "짝수 아님" 판별하여 출력
+    let num2 = 3;
+    document.write(num2 + "<br>"); // 문장1(무조건 실행되는 문장)
+
+    if(num2 % 2 == 0) {
+        document.write(num2 + " : 짝수입니다!<br>");
+    } else {
+        document.write(num2 + " : 홀수입니다!<br>");
+    }
+
+    document.write("홀짝 판별 종료!<br>");
+    document.write("<hr>");
+    // ----------------------------------------
+    // confirm() 함수를 통해 "종료하시겠습니까?" 메세지를 출력하고
+    // 사용자로부터 [확인]/[취소] 버튼을 입력받았을 때
+    // 입력받은 버튼이 [확인] 버튼일 경우 "프로그램을 종료합니다!" 출력하고
+    // 아닐 경우, "취소합니다!" 출력
+    //let isFinish = confirm("종료하시겠습니까?"); // true 또는 false 값 리턴됨
+    //
+    //if(isFinish) { // isFinish 값이 true 이면 if 문 조건식 결과가 자동으로 true 가 됨
+    //	document.write("프로그램을 종료합니다!<br>");
+    //} else {
+    //	document.write("취소합니다!<br>");
+    //}
+
+    // 만약, isFinish 변수를 if 문에서 단 한 번 사용 후 더 이상 사용하지 않을 경우
+    // 별도의 변수 없이 confirm() 함수를 if 문 조건식에 그대로 사용해도 동일하다!
+    //if(confirm("종료하시겠습니까?")) { // isFinish 값이 true 이면 if 문 조건식 결과가 자동으로 true 가 됨
+    //	document.write("프로그램을 종료합니다!<br>");
+    //} else {
+    //	document.write("취소합니다!<br>");
+    //}
+    // ----------------------------------------------------------
+    // passwd 변수에 prompt() 함수를 사용하여 패스워드 1개 입력받아 저장("패스워드를 입력하세요")
+    let passwd = prompt("패스워드를 입력하세요");
+    document.write("입력받은 패스워드 : " + passwd + "<br>");
+
+    // ------- 자바 스크립트의 특이사항 -------
+    // => 패스워드를 입력하지 않았을 경우 alert() 함수를 사용하여 "패스워드 입력 필수!" 출력하기
+    //if(passwd == null || passwd == "") {
+    //	alert("패스워드 입력 필수!");
+    //}
+
+
+    // 입력받은 패스워드가 "1234" 일 경우 "로그인 성공!" 출력, 아니면 "로그인 실패!" 출력
+    //if(passwd === "1234") {
+    //	document.write("로그인 성공!<br>");
+    //} else {
+    //	document.write("로그인 실패!<br>");
+    //}
+
+    // 입력값이 null 또는 널스트링을 통합하여 if 문으로 판별할 때
+    // 각각의 값을 비교하는 대신 해당 값이 없을 경우에만 if 문 블럭을 실행할 수 있도록 해야한다.
+    // 이 때, if 문 조건식에 값을 입력받아 저장하는 변수만 전달하면 해당 값이 입력되었을 경우 true 이고
+    // 변수앞에 ! 연산자를 붙였을 경우 해당 값이 입력되지 않았을 경우 true 이다!
+    if(!passwd) { // 패스워드가 입력되지 않았을 경우 if 문 블록 내의 문장이 실행된다!
+        alert("패스워드 입력 필수2222!");
+    } else { // 패스워드를 입력했을 경우 패스워드 일치 여부 판별
+        if(passwd === "1234") {
+            document.write("로그인 성공!<br>");
+        } else {
+            document.write("로그인 실패!<br>");
+        }
+    }
+</script>
+
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    3. if ~ else if 문(= 다중 else if 문)
+    - if문에 주어진 조건을 판별하여 true 일 경우 if 문의 블럭 내의 문장들을 수행하고,
+    false 일 경우 다음 if 문(else if)의 조건을 판별 후 true 이면 else if 내의 문장들을 수행,
+    아니면 다음 if 문 조건을 계속 판별함
+    => 만약, 모든 조건식의 판별 결과가 false 이면 else 문이 있을 경우 해당 블럭 문장 수행
+        (단, else 문은 생략 가능함)
+    - 주의! if문은 위에서부터 순서대로 조건을 판별하므로
+    else 문은 항상 가장 마지막 조건으로 기술해야한다!
+
+    < 기본 문법 >
+    if(조건식1) {
+        // 조건식1 판별 결과가 true 일 때 실행할 문장들...		
+    } else if(조건식2) {
+        // 조건식1 판별 결과가 false 이고, 조건식2 판별 결과가 true 일 때 실행할 문장들...
+    } else if(조건식n) {
+        // 조건식1, 2 판별 결과가 false 이고, 조건식n 판별 결과가 true 일 때 실행할 문장들...
+    } else {
+        // 위의 모든 조건식 판별 결과가 false 일 때 실행할 문장들... (else 문은 생략 가능)
+    }
+    */
+    // 변수 num 선언 및 정수 10 으로 초기화
+    let num = 0;
+    document.write(num + "<br>"); // 문장1(무조건 실행되는 문장)
+
+    // 변수 num 값에 대해 "0보다 크다!", "0보다 작다!", "0 이다!" 세 가지 경우의 수 판별
+    // => 위의 세 가지 조건 사이에는 순서가 없으므로 아무거나 판별해도 무관
+    if(num > 0) {
+        document.write(num + " : 0 보다 크다!<br>");
+    } else if(num < 0) {
+        document.write(num + " : 0 보다 작다!<br>");
+    } else { // 자동으로 num == 0 인 조건과 동일하게 취급됨(= 위의 모든 조건이 거짓일 경우)
+        document.write(num + " : 0 이다!<br>");
+    }
+
+    // 위의 if 문에서 else 문 대신 마지막 남은 조건도 else if 문으로 판별 가능하며
+    // 순서를 변경해도 결과는 동일함
+    if(num == 0) {
+        document.write(num + " : 0 이다!<br>");
+    } else if(num < 0) {
+        document.write(num + " : 0 보다 작다!<br>");
+    } else if(num > 0) { 
+        document.write(num + " : 0 보다 크다!<br>");
+    }
+
+    document.write("이 문장은 if 문 조건식 결과와 상관없이 무조건 실행됨!<br>"); // 문장4(무조건 실행되는 문장)
+    document.write("<hr>");
+</script>
+
+<body>
+    
+</body>
+</html>

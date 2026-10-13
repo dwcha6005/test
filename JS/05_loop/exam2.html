@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    * [ while문 ]
+    * - for문과 마찬가지로 특정 조건식의 판별 결과가 true일 동안 반복
+    * - for문과 달리 조건식 위치만 정해져 있고,
+    *   초기식과 증감식의 위치는 유동적으로 변함(생략도 가능)
+    *   (개발자가 정해야 함!)
+    * - for문은 주로 반복 횟수가 정해져 있는 경우 사용하며,
+    *   while문은 주로 반복 횟수가 정해져 있지 않은 경우 사용
+    * - for문과 while문은 100% 상호 변환이 가능함!
+    * 
+    * < 기본 문법 >
+    * [초기식;] // while문 보다 위에 위치해야함(생략도 가능)
+    * 
+    * while(조건식) {
+    * 		[증감식;]		
+    * 		// 조건식 결과가 true일 때 반복 실행할 문장
+    *  	[증감식;] // 증감식 위치는 반복할 문장보다 위에 올 수도 있다!
+    * }
+    */
+
+    // for 문을 사용하여 1 ~ 10 까지 1씩 증가하면서 i 값 출력
+    for(let i = 1; i <= 10; i++) {
+        document.write(i + " ");
+    }
+    document.write("<hr>");
+
+    // 위의 for 문을 while 문으로 변경
+    let i = 1; // 초기식
+
+    while(i <= 10) { // 조건식
+        document.write(i + " ");
+        i++;
+    }
+    document.write("<hr>");
+    // =================================================================
+    document.write("<table border='1'>");
+    document.write("	<tr>");
+    document.write("		<td>i값</td>");
+    document.write("		<td>이미지</td>");
+    document.write("	</tr>");
+
+    // while 문을 활용하여 i값이 1 ~ 3 까지 1씩 증가하면서 반복
+    i = 1;
+
+    while(i <= 3) {
+        document.write("	<tr>");
+        document.write("		<td>" + i + "</td>");
+        document.write("		<td><img src='" + i + ".jpg' width='100' height='70'></td>");
+        document.write("	</tr>");
+        i++;
+    }
+
+    document.write("</table>");
+    document.write("<hr>");
+    // =================================================================
+    // 패스워드를 입력받기
+    // => 단, 패스워드를 입력하지 않았을 경우(= 널스트링) 계속 입력받기 반복
+    // => 또한, 취소 버튼을 클릭했을 경우 "작업을 종료합니다" 출력하고
+    //    아니면, 입력받은 패스워드 : xxx 출력
+    let passwd = "";
+
+    // 입력받은 패스워드가 널스트링일 동안 반복
+    while(passwd == "") {
+        // 널스트링일 경우 새로운 패스워드를 다시 입력받아 변수 passwd 에 저장
+        passwd = prompt("패스워드를 입력하세요"); // 주의! 변수 선언부 let 제거(기존 변수에 값 저장)
+    }
+    // => 패스워드를 입력하지 않고 확인 버튼 클릭(또는 엔터키) 시 패스워드 입력이 계속 반복되고
+    //    취소 버튼 클릭(또는 ESC 키 누름)하거나 패스워드 입력 후 확인 버튼 클릭 시 반복 종료됨
+
+    if(passwd == null) {
+        document.write("작업을 종료합니다.<br>");
+    } else {
+        document.write("입력받은 패스워드 : " + passwd + "<br>");
+    }
+
+</script>
+
+<body>
+    
+</body>
+</html>

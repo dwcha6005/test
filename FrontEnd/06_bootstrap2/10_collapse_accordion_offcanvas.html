@@ -15,19 +15,11 @@
         < 1. Collapse >
 
         Collapse : 특정 영역을 접었다 펼치는 UI
-        : JS 필요
+        .collapse: 접혀 있는 영역
+        .show: 처음부터 펼쳐진 상태
 
-        .collapse
-        : 접혀 있는 영역
-
-        .show
-        : 처음부터 펼쳐진 상태
-
-        data-bs-toggle="collapse"
-        : Collapse 동작을 실행
-
-        data-bs-target="#id"
-        : 버튼과 열고 닫을 영역을 연결
+        data-bs-toggle="collapse": Collapse 동작을 실행
+        data-bs-target="#id": 버튼과 열고 닫을 영역을 연결
 
         예)
         <button data-bs-toggle="collapse" data-bs-target="#info">
@@ -40,22 +32,18 @@
     -->
 
     <div class="container py-5">
-
         <h1 class="mb-4">Collapse</h1>
-
         <button class="btn btn-primary"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample">
             상세 내용 보기
         </button>
-
         <div id="collapseExample" class="collapse mt-3">
             <div class="card card-body">
                 Bootstrap Collapse를 사용하면
                 버튼을 클릭했을 때 특정 영역을 접었다 펼칠 수 있습니다.
             </div>
         </div>
-
     </div>
 
 
@@ -63,27 +51,12 @@
         < 2. Accordion >
 
         Accordion : 여러 개의 Collapse를 하나의 그룹으로 묶은 UI
-        : FAQ, 상품 옵션, 도움말 등에 사용
-        : JS 필요
-
-        .accordion
-        : 전체 Accordion
-
-        .accordion-item
-        : 각각의 항목
-
-        .accordion-header
-        : 제목 영역
-
-        .accordion-button
-        : 열고 닫는 버튼
-
-        .accordion-collapse
-        : 답변 영역
-
-        .accordion-body
-        : 답변 내용
-
+        .accordion: 전체 Accordion
+        .accordion-item: 각각의 항목
+        .accordion-header: 제목 영역
+        .accordion-button: 열고 닫는 버튼
+        .accordion-collapse: 답변 영역
+        .accordion-body: 답변 내용
         data-bs-parent="#id"
         : 같은 그룹의 다른 항목을 자동으로 닫음
     -->
@@ -140,31 +113,17 @@
         < 3. Offcanvas >
 
         Offcanvas : 화면 바깥에서 패널이 나타나는 UI
-        : JS 필요
+        .offcanvas: Offcanvas 영역
 
-        .offcanvas
-        : Offcanvas 영역
+        .offcanvas-start: 왼쪽에서 나타남
+        .offcanvas-end: 오른쪽에서 나타남
+        .offcanvas-top: 위에서 나타남
+        .offcanvas-bottom: 아래에서 나타남
 
-        .offcanvas-start
-        : 왼쪽에서 나타남
+        data-bs-toggle="offcanvas": Offcanvas 실행
+        data-bs-target="#id": 버튼과 Offcanvas 연결
 
-        .offcanvas-end
-        : 오른쪽에서 나타남
-
-        .offcanvas-top
-        : 위에서 나타남
-
-        .offcanvas-bottom
-        : 아래에서 나타남
-
-        data-bs-toggle="offcanvas"
-        : Offcanvas 실행
-
-        data-bs-target="#id"
-        : 버튼과 Offcanvas 연결
-
-        data-bs-dismiss="offcanvas"
-        : Offcanvas 닫기
+        data-bs-dismiss="offcanvas": Offcanvas 닫기
     -->
 
     <div class="container pb-5">
@@ -206,14 +165,9 @@
     <!--
         < 4. 세 컴포넌트 비교 >
 
-        Collapse
-        : 하나의 영역을 접었다 펼칠 때
-
-        Accordion
-        : 여러 개의 접이식 내용을 하나의 그룹으로 묶을 때
-
-        Offcanvas
-        : 화면 바깥에서 메뉴나 추가 정보를 보여줄 때
+        Collapse: 하나의 영역을 접었다 펼칠 때
+        Accordion: 여러 개의 접이식 내용을 하나의 그룹으로 묶을 때
+        Offcanvas: 화면 바깥에서 메뉴나 추가 정보를 보여줄 때
 
         Collapse / Accordion / Offcanvas
         : Bootstrap JavaScript Bundle이 필요

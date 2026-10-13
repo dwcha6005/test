@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    문제 1. 성적 등급 판별하기
+    점수를 입력받아 다음 기준에 따라 등급을 출력하세요.
+    점수	등급
+    90점 이상	A
+    80점 이상	B
+    70점 이상	C
+    60점 이상	D
+    60점 미만	F
+    0 ~ 100점 사이의 값이 아닐 경우: 잘못된 점수입니다.
+    예시: 85점 → B
+
+
+    */
+
+   // 문제 3. 계절 출력
+   let month = 12;
+
+    switch (month) {
+        case 3:
+        case 4:
+        case 5:
+            console.log("봄");
+            break;
+        case 6:
+        case 7:
+        case 8:
+            console.log("여름");
+            break;
+        case 9:
+        case 10:
+        case 11:
+            console.log("가을");
+            break;
+        case 12:
+        case 1:
+        case 2:
+            console.log("겨울");
+            break;
+        default:
+            console.log("잘못된 월");
+    }
+
+    // 포인트 등급
+    let price = 50000;
+    let grade = "GOLD";
+    switch (grade) {
+        case "VIP":
+            console.log("10% 할인");
+            break;
+        case "GOLD":
+            console.log("7% 할인");
+            break;
+        case "SILVER":
+            console.log("5% 할인");
+            break;
+        case "NORMAL":
+            console.log("할인 없음");
+            break;
+        default:
+            console.log("잘못된 등급");
+    }
+</script>
+
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // switch문
+
+    // let menu = 2;
+    // if (menu === 1) {
+    //     console.log("햄버거");
+    // } else if (menu === 2) {
+    //     console.log("피자");
+    // } else if (menu === 3) {
+    //     console.log("파스타");
+    // } else {
+    //     console.log("잘못된 메뉴입니다.");
+    // }
+
+    // 위 코드를 switch문으로 변경
+    let menu = 2;
+    switch (menu) {
+        case 1:
+            console.log("햄버거");
+            break;
+        case 2:
+            console.log("피자");
+            break;
+        case 3:
+            console.log("파스타");
+            break;
+        default:
+            console.log("잘못된 메뉴입니다.");
+    }
+
+    // switch문 기본문법
+    // switch (표현식) {
+    //     case 값1:
+    //         // 표현식의 값이 값1과 일치할 때 실행
+    //         break;
+    //     case 값2:
+    //         // 표현식의 값이 값2와 일치할 때 실행
+    //         break;
+    //     default:
+    //         // 어떤 case와도 일치하지 않을 때 실행
+    // }
+    // 1. switch의 표현식을 평가한다.
+    // 2. 위에서부터 case의 값과 일치하는지 확인한다.
+    // 3. 일치하는 case의 코드를 실행한다.
+    // 4. break를 만나면 switch문을 빠져나온다.
+    // 5. 일치하는 case가 없고 default가 있다면 default를 실행한다.
+
+    // switch문은 표현식의 결과와 각 case의 값을 
+    // 엄격한 동등 비교(===) 방식으로 비교한다.
+    let num = "2";
+    switch (num) {
+        case 2:
+            console.log("숫자 2입니다.");
+            break;
+        case "2":
+            console.log("문자열 2입니다.");
+            break;
+    }
+
+    // break문
+    // let num = 2;
+
+    // switch (num) {
+    //     case 1:
+    //         console.log("A");
+    //     case 2:
+    //         console.log("B");
+    //     case 3:
+    //         console.log("C");
+    //     default:
+    //         console.log("D");
+    // }
+</script>
+
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // break vs continue
+    //while(true) { // 무한루프(= 종료 조건이 없는 반복문 = 무한반복)
+    //	let num = prompt("4의 배수를 입력하세요!");
+    ////	alert("입력한 값 : " + num);
+    //
+    //	// 4의 배수인지 판별
+    //	if(num % 4 == 0) {
+    ////		alert("입력한 값 : " + num + " => 4의 배수!");
+    //		document.write("입력한 값 : " + num + " => 4의 배수!");
+    //		// 4의 배수를 입력했을 경우에만 현재 동작중인 while 문을 종료하고 빠져나가기
+    //		break; // while 이 끝나는 위치로 빠져나감 = 반복 종료
+    //	} else {
+    //		alert("입력한 값 : " + num + " => 4의 배수가 아님!");
+    //	}
+    //	
+    //} // while 문 끝
+
+    // ===============================================================
+    // 정수 1부터 1씩 증가하면서 합계를 누적 반복
+    // => 이 때, 누적 합계가 500 이상이 되는 시점에 정수값이 얼마인지 출력
+    let sum = 0; // 합계 누적 변수
+
+    for(let i = 1; true; i++) {
+        // i 값을 변수 sum 에 누적
+        sum += i; // sum = sum + i;
+    //	document.write("sum = " + sum + "<br>");
+        
+        if(sum >= 500) { // 누적변수 sum 이 500 이상일 경우 판별
+            document.write("sum = " + sum + "<br>");
+            document.write("i = " + i + "<br>");
+            break; // 반복문 종료하고 빠져나감	
+        }
+    } // for 문 끝
+    // ===================================================================
+    document.write("<hr>");
+    // continue 문
+    // => break 문은 실행 시 소속된 반복문 블럭을 빠져나가지만
+    //    continue 문은 소속된 반복문의 현재 반복 상의 나머지 코드 실행을 생략하고
+    //    다음 반복을 진행하는 용도로 사용
+    for(let i = 1; i <= 10; i++) {
+        document.write("i = " + i + "<br>");
+        
+        if(i % 2 == 0) {
+    //		break; // 현재 반복문(for)을 종료하고 빠져나감
+            continue; // 현재 반복문 내에서 continue 문장 아래쪽의 문장 생략 후 다음 반복 진행
+            // => continue 문 실행 시 코드 흐름은 다음 반복을 위해 반복문의 증감식(i++) 부분으로 이동
+        }
+        
+        // 이 부분의 코드들은 continue 문을 만나면 실행되지 못하는 코드들이다!
+        document.write(i + " : 짝수가 아님!<br>");
+    }
+    // break 문을 만나면 빠져나오는 위치
+
+    document.write("반복문 종료<br>");
+</script>
+
+<body>
+    
+</body>
+</html>
