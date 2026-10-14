@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 콜백 기반 배열 메서드 >
+
+    < 45. 배열 메서드 활용 : map() >
+
+    map()은 각 요소를 변환한 결과로 새로운 배열을 만든다.
+    */
+    let numbers8 = [1, 2, 3, 4, 5];
+
+    let doubled = numbers8.map(function(num) {
+        return num * 2;
+    });
+
+    console.log(doubled); // [2, 4, 6, 8, 10]
+    console.log(numbers8); // [1, 2, 3, 4, 5]
+
+    // 콜백 함수와 return을 배운 이후에 자세히 학습한다.
+
+
+    /*
+    < 46. 배열 메서드 활용 : filter() >
+
+    filter()는 조건을 만족하는 요소만 모아 새로운 배열을 만든다.
+    */
+    let numbers9 = [10, 15, 20, 25, 30];
+
+    let filtered = numbers9.filter(function(num) {
+        return num >= 20;
+    });
+
+    console.log(filtered); // [20, 25, 30]
+    console.log(numbers9); // [10, 15, 20, 25, 30]
+
+
+    /*
+    < 47. 배열 메서드 활용 : find() >
+
+    find()는 조건을 만족하는 첫 번째 요소를 반환한다.
+    조건을 만족하는 요소가 없으면 undefined를 반환한다.
+    */
+    let numbers10 = [10, 20, 30, 40, 50];
+
+    let foundNumber = numbers10.find(function(num) {
+        return num >= 30;
+    });
+
+    console.log(foundNumber); // 30
+
+
+    /*
+    < 48. map(), filter(), find() 비교 >
+
+    map()    : 모든 요소를 변환한 새 배열
+    filter() : 조건을 만족하는 모든 요소를 담은 새 배열
+    find()   : 조건을 만족하는 첫 번째 요소 하나
+
+    세 메서드는 원본 배열을 직접 변경하지 않는다.
+    콜백 함수 개념을 학습한 이후 자세히 다룬다.
+    */
+</script>
+
+<body>
+    
+</body>
+</html>

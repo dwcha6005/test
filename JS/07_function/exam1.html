@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+// JavaScript Function
+// 1. 함수란?
+// - 함수(Function) : 특정 작업을 수행하도록 작성한 코드의 묶음
+// - 함수를 사용하면 동일한 코드를 반복해서 작성하지 않아도 된다.
+// - 필요할 때 함수를 호출하여 실행할 수 있다.
+
+// 함수 없이 작성
+console.log("안녕하세요.");
+console.log("자바스크립트 수업입니다.");
+console.log("안녕하세요.");
+console.log("자바스크립트 수업입니다.");
+
+// 함수로 작성
+function greeting() {
+    console.log("안녕하세요.");
+    console.log("자바스크립트 수업입니다.");
+}
+
+greeting();
+greeting();
+
+// 2. 함수 선언과 호출
+
+// 함수 선언(Function Declaration)
+// function 함수이름() {
+//     // 실행할 코드
+// }
+// - `function` : 함수를 선언하는 키워드
+// - `함수이름` : 함수를 구분하는 이름
+// - `{ }` : 함수가 실행할 코드의 범위
+
+// 함수 호출(Function Call)
+function hello() {
+    console.log("Hello JavaScript!");
+}
+
+hello(); // 함수 호출
+hello(); // 다시 호출
+// - 함수를 선언하는 것만으로는 일반적으로 함수 내부의 코드가 실행되지 않는다.
+// - 함수 이름 뒤에 `()`를 작성하면 함수를 호출할 수 있다.
+// - 한 번 선언한 함수는 여러 번 호출할 수 있다.
+
+// 3. 매개변수와 인자
+// 매개변수(Parameter)
+// - 함수가 외부로부터 전달받은 값을 저장하는 변수
+// - 함수를 선언할 때 작성한다.
+
+// 인자(Argument)
+// - 함수를 호출할 때 전달하는 실제 값
+function greeting(name) {
+    console.log(name + "님, 안녕하세요!");
+}
+
+greeting("김철수");
+greeting("이영희");
+greeting("홍길동");
+
+// 실행 결과)
+// 김철수님, 안녕하세요!
+// 이영희님, 안녕하세요!
+// 홍길동님, 안녕하세요!
+
+// - `name` : 매개변수
+// - `"김철수"` : 인자
+// - 호출할 때 전달한 값이 매개변수에 저장된다.
+
+// 매개변수 여러 개 사용하기
+function introduce(name, age) {
+    console.log("이름 : " + name);
+    console.log("나이 : " + age);
+}
+
+introduce("김철수", 25);
+introduce("이영희", 30);
+// - 매개변수는 여러 개 작성할 수 있다.
+// - 매개변수와 인자는 순서대로 대응한다.
+function printSum(num1, num2) {
+    console.log(num1 + num2);
+}
+
+printSum(10, 20); // 30
+printSum(100, 200); // 300
+
+// 4. 반환값(Return)
+// - `return` : 함수의 실행 결과를 호출한 곳으로 돌려주는 키워드
+// - 반환된 값은 변수에 저장하거나 다른 연산에 사용할 수 있다.
+
+// return 사용하기
+function add(num1, num2) {
+    return num1 + num2;
+}
+
+let result = add(10, 20);
+
+console.log(result); // 30
+console.log(add(100, 200)); // 300
+
+// 실행 과정)
+// 1. `add(10, 20)` 함수를 호출한다.
+// 2. `num1 + num2`를 계산한다.
+// 3. 계산 결과인 `30`을 반환한다.
+// 4. 반환된 값 `30`이 변수 `result`에 저장된다.
+
+// console.log()와 return의 차이
+function add1(num1, num2) {
+    console.log(num1 + num2);
+}
+
+function add2(num1, num2) {
+    return num1 + num2;
+}
+
+let result1 = add1(10, 20);
+let result2 = add2(10, 20);
+
+console.log(result1);
+console.log(result2);
+
+// 실행 결과)
+// 30
+// 30
+// undefined
+// 30
+// - `console.log()` : 값을 콘솔에 출력한다.
+// - `return` : 값을 함수 외부로 반환한다.
+// - `return`이 없는 함수는 별도로 반환하지 않는 한 `undefined`를 반환한다.
+// - 함수에서 반환된 값은 다른 변수에 저장하거나 계산에 활용할 수 있다.
+
+// return의 실행 종료 기능
+function checkAge(age) {
+    if (age < 0) {
+        return "잘못된 나이입니다.";
+    }
+
+    return "나이 : " + age;
+}
+
+console.log(checkAge(-5));
+console.log(checkAge(20));
+// - return을 실행하면 해당 함수의 실행이 즉시 종료된다.
+// - return아래에 작성된 코드는 해당 실행 흐름에서 실행되지 않는다.
+
+// 5. 매개변수가 없는 함수와 반환값이 없는 함수
+function welcome() {
+    console.log("환영합니다.");
+}
+
+function getNumber() {
+    return 100;
+}
+
+welcome();
+
+let number = getNumber();
+console.log(number);
+
+// 함수는 매개변수와 반환값의 유무에 따라 다양하게 작성할 수 있다.
+// | 구분 | 예시 |
+// | 매개변수 X, 반환값 X | function hello() { console.log("안녕"); }
+// | 매개변수 O, 반환값 X | function print(num) { console.log(num); }
+// | 매개변수 X, 반환값 O | function getNum() { return 10; }
+// | 매개변수 O, 반환값 O | function add(a, b) { return a + b; }
+
+// 6. 기본 매개변수(Default Parameter)
+// - 함수 호출 시 인자를 전달하지 않았을 때 사용할 기본값을 지정할 수 있다.
+function greeting(name = "손님") {
+    console.log(name + "님, 환영합니다.");
+}
+
+greeting("김철수");
+greeting();
+
+// 실행 결과)
+// 김철수님, 환영합니다.
+// 손님님, 환영합니다.
+
+// - 인자를 전달하면 전달한 값이 사용된다.
+// - 인자를 생략하거나 `undefined`를 전달하면 기본값이 사용된다.
+// - `null`을 전달하면 기본값이 적용되지 않는다.
+
+// 7. 함수와 변수의 범위(Scope)
+// 지역변수(Local Variable)
+// - 함수 내부에서 선언한 변수
+// - 기본적으로 해당 함수 내부에서 사용할 수 있다.
+
+function test() {
+    let message = "지역변수";
+    console.log(message);
+}
+
+test();
+
+// console.log(message); // 오류
+
+// 전역변수(Global Variable)
+// - 함수 외부에서 선언하여 여러 코드 영역에서 접근할 수 있는 변수
+let message = "전역변수";
+function test() {
+    console.log(message);
+}
+test();
+console.log(message);
+// - 전역변수는 접근 가능한 여러 위치에서 사용할 수 있다.
+// - 지역변수와 전역변수의 이름이 같으면 지역 범위에서는 일반적으로 지역변수가 우선한다.
+
+let num = 100;
+function test() {
+    let num = 200;
+    console.log(num);
+}
+test();
+console.log(num);
+
+// 실행 결과
+// 200
+// 100
+</script>
+
+<body>
+    
+</body>
+</html>

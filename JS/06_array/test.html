@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+
+/*
+< 종합 실습 : 학급 성적 분석 시스템 >
+
+< 문제 설명 >
+
+한 학급의 학생 6명은 국어, 영어, 수학 시험을 치렀다.
+학생 이름과 점수는 각각 1차원 배열과 2차원 배열에 저장되어 있다.
+
+다음 요구사항을 모두 만족하는 성적 분석 프로그램을 작성하시오.
+
+※ 객체는 사용하지 않는다.
+※ 주어진 배열의 원본 데이터는 직접 변경하지 않는다.
+※ 모든 결과는 주어진 배열을 활용하여 계산한다.
+*/
+
+
+let names = ["김민수", "이영희", "박철수", "최지우", "정수진", "강현우"];
+
+let scores = [
+    [85, 70, 90],
+    [60, 95, 80],
+    [45, 65, 55],
+    [90, 85, 95],
+    [75, 80, 70],
+    [50, 40, 60]
+];
+
+let subjects = ["국어", "영어", "수학"];
+
+
+/*
+< 1. 학생별 성적 분석 >
+
+각 학생의 총점과 평균을 계산하시오.
+
+- 총점과 평균을 저장할 새로운 배열을 각각 만드시오.
+- 평균은 소수점 첫째 자리까지 출력하시오.
+- 학생 이름, 총점, 평균을 한 줄씩 출력하시오.
+
+실행 결과 형식
+
+김민수 : 총점 245점, 평균 81.7점
+이영희 : 총점 235점, 평균 78.3점
+...
+
+조건
+- 2차원 배열과 중첩 반복문을 활용할 것
+- map()을 사용하여 학생별 총점 또는 평균을 계산하는 배열을 만들 것
+*/
+
+
+/*
+< 2. 합격자 선발 >
+
+다음 조건을 모두 만족하는 학생만 최종 합격자로 선발하시오.
+
+1) 평균 점수가 70점 이상
+2) 모든 과목 점수가 50점 이상
+
+합격자의 이름과 평균 점수를 출력하시오.
+합격자가 몇 명인지도 출력하시오.
+
+조건
+- filter()를 사용할 것
+- 1번에서 만든 학생별 평균 배열을 활용할 것
+- 과목별 점수 조건도 검사할 것
+- 이름 배열과 점수 배열의 인덱스 관계를 유지할 것
+
+주의
+평균 점수만으로 합격 여부를 결정하면 안 된다.
+*/
+
+
+/*
+< 3. 과목별 평균과 최고 점수 >
+
+국어, 영어, 수학의 평균 점수를 각각 계산하시오.
+각 과목의 최고 점수도 구하고, 해당 점수를 받은 학생 이름을 출력하시오.
+
+실행 결과 형식
+
+국어 평균 : 67.5점
+국어 최고 점수 : 90점
+국어 최고 점수 학생 : 최지우
+
+영어 평균 : ...
+...
+
+조건
+- 2차원 배열을 과목별로 순회할 것
+- forEach()를 활용할 것
+- 최고 점수가 같은 학생이 여러 명이면 모두 출력할 것
+*/
+
+
+/*
+< 4. 재시험 대상자 명단 >
+
+다음 조건 중 하나라도 만족하는 학생을 재시험 대상자로 선정하시오.
+
+1) 평균 점수가 60점 미만
+2) 한 과목이라도 50점 미만
+
+재시험 대상자의 이름을 새로운 배열로 만들고 출력하시오.
+
+단, 이름 배열을 직접 수정하지 마시오.
+
+조건
+- filter()를 사용할 것
+- 학생별 평균 배열과 원본 점수 배열을 함께 활용할 것
+*/
+
+
+/*
+< 5. 과목별 점수 순위 >
+
+각 과목의 점수를 내림차순으로 정렬한 새로운 배열을 만드시오.
+정렬된 점수 배열을 출력하시오.
+
+추가로 각 과목의 최고 점수와 최저 점수를 출력하시오.
+
+조건
+- slice()를 활용하여 원본 점수 배열을 보호할 것
+- sort()를 활용할 것
+- 숫자 크기 기준으로 정렬할 것
+- 원본 scores 배열의 순서가 바뀌면 안 된다.
+*/
+
+
+/*
+< 6. 특정 학생 검색 >
+
+사용자가 검색할 학생 이름을 지정하면 해당 학생의 성적 정보를 출력하시오.
+
+예시
+let searchName = "박철수";
+
+출력 형식
+이름 : 박철수
+국어 : 45점
+영어 : 65점
+수학 : 55점
+총점 : 165점
+평균 : 55.0점
+결과 : 재시험 대상
+
+학생이 존재하지 않으면
+"해당 학생을 찾을 수 없습니다."를 출력하시오.
+
+조건
+- find()를 사용하여 학생 이름이 일치하는 위치를 찾을 것
+- 이름 배열과 점수 배열의 인덱스를 활용할 것
+- 1번에서 계산한 총점 및 평균 배열을 재사용할 것
+*/
+
+
+/*
+< 7. 성적 통계 요약 >
+
+다음 통계를 계산하여 출력하시오.
+
+1) 전체 학생 평균 점수
+2) 전체 과목 중 가장 높은 점수
+3) 전체 과목 중 가장 낮은 점수
+4) 합격자 수
+5) 재시험 대상자 수
+
+조건
+- 1~4번에서 만든 결과 배열을 최대한 재사용할 것
+- 전체 점수를 확인할 때는 중첩 반복문을 사용할 것
+- 합격자 수와 재시험 대상자 수는 별도로 계산할 것
+*/
+
+
+/*
+< 8. 최종 성적 보고서 >
+
+지금까지 계산한 결과를 이용해 다음 순서대로 출력하시오.
+
+[전체 학생 성적]
+학생별 총점과 평균
+
+[합격자 명단]
+합격자 이름과 평균
+
+[재시험 대상자 명단]
+재시험 대상자 이름
+
+[과목별 통계]
+과목별 평균, 최고 점수, 최저 점수
+
+[종합 결과]
+전체 학생 평균
+합격자 수
+재시험 대상자 수
+
+조건
+- 기존에 만든 배열을 재사용할 것
+- 같은 계산을 불필요하게 반복하지 말 것
+- 출력 부분에서는 forEach()를 적극 활용할 것
+*/
+
+
+/*
+< 필수 조건 >
+
+1. names, scores, subjects 원본 배열을 직접 변경하지 않는다.
+2. 학생별 총점과 평균을 저장하는 배열을 새로 만든다.
+3. map(), filter(), find(), forEach()를 모두 한 번 이상 사용한다.
+4. 2차원 배열과 중첩 반복문을 활용한다.
+5. 조건문을 사용하여 합격자와 재시험 대상자를 판별한다.
+6. 객체는 사용하지 않는다.
+7. 결과를 계산하는 과정과 출력하는 과정을 가능한 한 구분한다.
+8. 같은 계산을 여러 번 작성하지 않고, 계산 결과를 배열에 저장해 재사용한다.
+*/
+    
+/*
+< 종합 실습 정답 : 학급 성적 분석 시스템 >
+*/
+
+// < 데이터들 >
+// let names = ["김민수", "이영희", "박철수", "최지우", "정수진", "강현우"];
+// let scores = [
+//     [85, 70, 90],
+//     [60, 95, 80],
+//     [45, 65, 55],
+//     [90, 85, 95],
+//     [75, 80, 70],
+//     [50, 40, 60]
+// ];
+// let subjects = ["국어", "영어", "수학"];
+
+
+/* < 1. 학생별 총점과 평균 > */
+
+// map()으로 학생별 총점 계산
+let totals = scores.map(function(row) {
+    let total = 0;
+
+    for (let i = 0; i < row.length; i++) {
+        total += row[i];
+    }
+
+    return total;
+});
+
+// map()으로 학생별 평균 계산
+let averages = totals.map(function(total, index) {
+    return total / scores[index].length;
+});
+
+// 학생별 결과 출력
+names.forEach(function(name, index) {
+    console.log(
+        name + " : 총점 " + totals[index] + "점, 평균 " +
+        averages[index].toFixed(1) + "점"
+    );
+});
+
+
+/* < 2. 합격자 선발 > */
+
+// 학생별 50점 미만 과목 개수 계산
+let lowCounts = scores.map(function(row) {
+    return row.filter(function(score) {
+        return score < 50;
+    }).length;
+});
+
+// 평균 70점 이상이고 모든 과목이 50점 이상인 학생의 인덱스 추출
+let passIndexes = names
+    .map(function(name, index) {
+        return index;
+    })
+    .filter(function(index) {
+        return averages[index] >= 70 && lowCounts[index] === 0;
+    });
+
+// 합격자 이름과 평균 출력
+console.log("\n[합격자 명단]");
+
+passIndexes.forEach(function(index) {
+    console.log(names[index] + " : " + averages[index].toFixed(1) + "점");
+});
+
+console.log("합격자 수 : " + passIndexes.length + "명");
+
+
+/* < 3. 과목별 평균과 최고 점수 > */
+
+console.log("\n[과목별 통계]");
+
+subjects.forEach(function(subject, subjectIndex) {
+    let subjectScores = scores.map(function(row) {
+        return row[subjectIndex];
+    });
+
+    let total = 0;
+
+    subjectScores.forEach(function(score) {
+        total += score;
+    });
+
+    let average = total / subjectScores.length;
+    let maxScore = subjectScores[0];
+
+    // 최고 점수 구하기
+    subjectScores.forEach(function(score) {
+        if (score > maxScore) {
+            maxScore = score;
+        }
+    });
+
+    console.log(subject + " 평균 : " + average.toFixed(1) + "점");
+    console.log(subject + " 최고 점수 : " + maxScore + "점");
+
+    // 최고 점수를 받은 학생 모두 출력
+    console.log(subject + " 최고 점수 학생:");
+
+    subjectScores.forEach(function(score, index) {
+        if (score === maxScore) {
+            console.log(names[index]);
+        }
+    });
+});
+
+
+/* < 4. 재시험 대상자 명단 > */
+
+// 평균이 60점 미만이거나 50점 미만 과목이 있는 학생
+let retestNames = names.filter(function(name, index) {
+    return averages[index] < 60 || lowCounts[index] > 0;
+});
+
+console.log("\n[재시험 대상자]");
+
+retestNames.forEach(function(name) {
+    console.log(name);
+});
+
+console.log("재시험 대상자 수 : " + retestNames.length + "명");
+
+
+/* < 5. 과목별 점수 순위 > */
+
+console.log("\n[과목별 점수 정렬]");
+
+subjects.forEach(function(subject, subjectIndex) {
+    // map()으로 해당 과목 점수만 추출
+    let subjectScores = scores.map(function(row) {
+        return row[subjectIndex];
+    });
+
+    // slice()로 복사한 뒤 정렬하여 원본 배열 보호
+    let sortedScores = subjectScores.slice();
+
+    sortedScores.sort(function(a, b) {
+        return b - a;
+    });
+
+    console.log(subject + " 내림차순 : " + sortedScores);
+    console.log(subject + " 최고 점수 : " + sortedScores[0]);
+    console.log(subject + " 최저 점수 : " + sortedScores[sortedScores.length - 1]);
+});
+
+
+/* < 6. 특정 학생 검색 > */
+
+let searchName = "박철수";
+
+// find()로 이름 검색
+let foundName = names.find(function(name) {
+    return name === searchName;
+});
+
+console.log("\n[학생 검색]");
+
+if (foundName !== undefined) {
+    // 찾은 이름의 인덱스로 점수 배열 연결
+    let index = names.indexOf(foundName);
+
+    console.log("이름 : " + foundName);
+
+    scores[index].forEach(function(score, subjectIndex) {
+        console.log(subjects[subjectIndex] + " : " + score + "점");
+    });
+
+    console.log("총점 : " + totals[index] + "점");
+    console.log("평균 : " + averages[index].toFixed(1) + "점");
+
+    if (averages[index] < 60 || lowCounts[index] > 0) {
+        console.log("결과 : 재시험 대상");
+    } else if (averages[index] >= 70) {
+        console.log("결과 : 합격");
+    } else {
+        console.log("결과 : 보충 학습 대상");
+    }
+} else {
+    console.log("해당 학생을 찾을 수 없습니다.");
+}
+
+
+/* < 7. 성적 통계 요약 > */
+
+// 전체 점수 합계
+let allTotal = 0;
+let highestScore = scores[0][0];
+let lowestScore = scores[0][0];
+
+scores.forEach(function(row) {
+    row.forEach(function(score) {
+        allTotal += score;
+
+        if (score > highestScore) {
+            highestScore = score;
+        }
+
+        if (score < lowestScore) {
+            lowestScore = score;
+        }
+    });
+});
+
+let allAverage = allTotal / (names.length * subjects.length);
+
+console.log("\n[종합 통계]");
+console.log("전체 학생 평균 : " + allAverage.toFixed(1) + "점");
+console.log("전체 최고 점수 : " + highestScore + "점");
+console.log("전체 최저 점수 : " + lowestScore + "점");
+console.log("합격자 수 : " + passIndexes.length + "명");
+console.log("재시험 대상자 수 : " + retestNames.length + "명");
+
+
+/* < 8. 최종 성적 보고서 > */
+
+console.log("\n========== 최종 성적 보고서 ==========");
+
+console.log("\n[전체 학생 성적]");
+
+names.forEach(function(name, index) {
+    console.log(
+        name + " | 총점: " + totals[index] +
+        " | 평균: " + averages[index].toFixed(1)
+    );
+});
+
+console.log("\n[합격자 명단]");
+
+passIndexes.forEach(function(index) {
+    console.log(names[index] + " (" + averages[index].toFixed(1) + "점)");
+});
+
+console.log("\n[재시험 대상자 명단]");
+
+retestNames.forEach(function(name) {
+    console.log(name);
+});
+
+console.log("\n[과목별 통계]");
+
+subjects.forEach(function(subject, subjectIndex) {
+    let subjectScores = scores.map(function(row) {
+        return row[subjectIndex];
+    });
+
+    let total = 0;
+    let maxScore = subjectScores[0];
+    let minScore = subjectScores[0];
+
+    subjectScores.forEach(function(score) {
+        total += score;
+
+        if (score > maxScore) {
+            maxScore = score;
+        }
+
+        if (score < minScore) {
+            minScore = score;
+        }
+    });
+
+    console.log(
+        subject + " | 평균: " + (total / subjectScores.length).toFixed(1) +
+        " | 최고: " + maxScore +
+        " | 최저: " + minScore
+    );
+});
+
+console.log("\n[종합 결과]");
+console.log("전체 학생 평균 : " + allAverage.toFixed(1) + "점");
+console.log("합격자 수 : " + passIndexes.length + "명");
+console.log("재시험 대상자 수 : " + retestNames.length + "명");
+
+console.log("======================================");
+
+</script>
+
+<body>
+    
+</body>
+</html>

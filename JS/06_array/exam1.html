@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+// JavaScript Array
+// 배열 : 여러 개의 데이터를 하나의 변수로 관리하는 자료구조
+
+/*
+< 1. 배열이란? >
+배열(Array) : 여러 개의 데이터를 하나의 변수에 저장하는 자료구조
+
+일반 변수는 하나의 값만 저장하는 용도로 사용한다.
+배열은 여러 개의 값을 순서대로 저장할 수 있다.
+
+일반 변수
+*/
+let name = "홍길동";
+let age = 20;
+let address = "부산";
+
+/*
+배열을 사용하면 여러 값을 하나로 묶어서 관리할 수 있다.
+*/
+let student = ["홍길동", 20, "부산"];
+console.log(student);
+
+
+/*
+< 2. 배열 생성하기 >
+
+방법 1. 배열 리터럴 사용하기
+대괄호 [] 안에 데이터를 작성한다.
+*/
+let numbers = [10, 20, 30, 40, 50];
+let fruits = ["사과", "바나나", "포도"];
+let emptyArray = [];
+
+console.log(numbers);
+console.log(fruits);
+console.log(emptyArray);
+
+
+// 방법 2. Array 생성자 사용하기 (객체 파트에서 자세히)
+let arr1 = new Array();
+let arr2 = new Array(10, 20, 30);
+
+console.log(arr1);
+console.log(arr2);
+
+// 주의 : 숫자 하나를 전달하면 해당 숫자만큼의 빈 슬롯을 가진 배열이 만들어진다.
+let arr3 = new Array(5);
+
+console.log(arr3);
+console.log(arr3.length);
+// 초급 단계에서는 배열 리터럴 [] 사용을 권장한다.
+
+
+/*
+< 3. 배열의 특징 >
+
+1. 여러 종류의 자료형을 함께 저장할 수 있다.
+2. 데이터가 저장된 순서대로 인덱스가 부여된다.
+3. 인덱스는 0부터 시작한다.
+4. 배열의 길이는 length 속성으로 확인한다.
+5. 배열의 요소는 추가, 수정, 삭제할 수 있다.
+*/
+let mixed = [10, "hello", true, null, undefined];
+
+console.log(mixed);
+
+
+/*
+< 4. 배열의 인덱스(Index) >
+
+인덱스 : 배열 요소의 위치를 나타내는 번호
+첫 번째 요소의 인덱스는 0이다.
+*/
+let colors = ["빨강", "초록", "파랑", "노랑"];
+
+console.log(colors[0]); // 빨강
+console.log(colors[1]); // 초록
+console.log(colors[2]); // 파랑
+console.log(colors[3]); // 노랑
+
+// 배열의 마지막 요소는 length - 1 인덱스에 위치한다.
+console.log(colors.length); // 4
+console.log(colors[colors.length - 1]); // 노랑
+
+
+/*
+< 5. 배열 요소 수정하기 >
+
+인덱스를 이용해 특정 위치의 값을 변경할 수 있다.
+*/
+let scores = [80, 70, 90];
+
+console.log(scores);
+
+scores[1] = 100;
+
+console.log(scores); // [80, 100, 90]
+
+
+/*
+< 6. 배열 요소 추가하기 >
+
+인덱스를 이용하여 값을 대입할 수도 있다.
+*/
+let animals = ["강아지", "고양이"];
+
+animals[2] = "토끼";
+
+console.log(animals); // ["강아지", "고양이", "토끼"]
+
+// 기존 배열의 마지막 인덱스보다 큰 위치에 값을 대입할 수도 있다.
+animals[5] = "호랑이";
+
+console.log(animals);
+console.log(animals.length);
+
+// 중간에 비어 있는 슬롯이 생길 수 있으므로 일반적인 추가에는 push()를 권장한다.
+
+
+/*
+< 7. 배열의 length >
+
+length : 배열의 길이, 즉 배열의 슬롯 수를 나타내는 속성
+
+마지막 인덱스 = length - 1
+*/
+let data = [10, 20, 30, 40];
+
+console.log(data.length); // 4
+console.log(data[data.length - 1]); // 40
+
+// length를 직접 변경할 수도 있다.
+data.length = 2;
+
+console.log(data); // [10, 20]
+console.log(data.length); // 2
+
+// length를 줄이면 뒤쪽 요소가 제거된다.
+// length를 늘리면 빈 슬롯이 생긴다.
+
+
+/*
+< 8. 존재하지 않는 인덱스 접근 >
+
+존재하지 않는 인덱스에 접근하면 undefined가 반환된다.
+*/
+let nums = [10, 20, 30];
+
+console.log(nums[0]); // 10
+console.log(nums[2]); // 30
+console.log(nums[3]); // undefined
+console.log(nums[-1]); // undefined
+
+// nums[-1]은 일반적인 배열의 마지막 요소를 의미하지 않는다.
+// 마지막 요소는 nums[nums.length - 1]로 접근한다.
+
+
+/*
+< 9. 배열과 반복문 >
+배열은 반복문과 함께 사용하면 편리하다.
+*/
+let subjects = ["국어", "영어", "수학", "과학"];
+
+for (let i = 0; i < subjects.length; i++) {
+    console.log(subjects[i]);
+}
+// 배열의 길이가 바뀌어도 반복 조건에 length를 사용하면 대응할 수 있다.
+
+
+/*
+< 10. 배열의 합계 구하기 >
+
+배열에 저장된 숫자를 반복문으로 순회하며 합계를 계산한다.
+*/
+let points = [10, 20, 30, 40, 50];
+let total = 0;
+
+for (let i = 0; i < points.length; i++) {
+    total += points[i];
+}
+
+console.log("합계 : " + total); // 150
+
+
+/*
+< 11. 배열의 평균 구하기 >
+*/
+let grades = [80, 90, 70, 100, 60];
+let sum = 0;
+
+for (let i = 0; i < grades.length; i++) {
+    sum += grades[i];
+}
+
+let average = sum / grades.length;
+
+console.log("합계 : " + sum);
+console.log("평균 : " + average); // 80
+
+
+/*
+< 12. 배열에서 최댓값 구하기 >
+
+첫 번째 요소를 최댓값으로 가정하고 비교한다.
+*/
+let values = [35, 80, 12, 95, 47];
+let max = values[0];
+
+for (let i = 1; i < values.length; i++) {
+    if (values[i] > max) {
+        max = values[i];
+    }
+}
+
+console.log("최댓값 : " + max); // 95
+
+
+/*
+< 13. 배열에서 최솟값 구하기 >
+*/
+let values2 = [35, 80, 12, 95, 47];
+let min = values2[0];
+
+for (let i = 1; i < values2.length; i++) {
+    if (values2[i] < min) {
+        min = values2[i];
+    }
+}
+
+console.log("최솟값 : " + min); // 12
+
+
+/*
+< 14. 배열에서 특정 값 찾기 >
+
+반복문과 조건문을 사용하여 특정 값이 존재하는지 확인한다.
+*/
+let members = ["홍길동", "김철수", "이영희", "박민수"];
+let searchName = "이영희";
+let found = false;
+
+for (let i = 0; i < members.length; i++) {
+    if (members[i] === searchName) {
+        found = true;
+        break;
+    }
+}
+console.log(found); // true
+
+
+/*
+< 15. 배열의 요소 개수 세기 >
+조건에 맞는 요소의 개수를 셀 수 있다.
+*/
+let testScores = [80, 45, 90, 65, 100, 55];
+let count = 0;
+
+for (let i = 0; i < testScores.length; i++) {
+    if (testScores[i] >= 80) {
+        count++;
+    }
+}
+
+console.log("80점 이상 : " + count + "명"); // 3명
+
+
+/*
+< 16. 배열의 모든 요소 출력하기 : for...of (향상된 for문, forEach문) >
+
+for...of는 배열에서 요소를 하나씩 꺼내는 반복문이다.
+인덱스가 필요하지 않을 때 편리하다.
+*/
+let cities = ["부산", "서울", "대구"];
+
+for (let city of cities) {
+    console.log(city);
+}
+
+// 인덱스가 필요한 작업은 일반 for문이 더 편리할 수 있다.
+
+
+
+
+
+/*
+< 36. 배열을 const로 선언하기 >
+
+const로 선언한 배열도 요소를 변경할 수 있다.
+const는 변수에 다른 배열을 다시 대입하지 못하게 할 뿐이다.
+*/
+const scores2 = [80, 90, 70];
+
+scores2[0] = 100;
+scores2.push(85);
+
+console.log(scores2); // [100, 90, 70, 85]
+
+// 다음 코드는 오류가 발생한다.
+// scores2 = [10, 20, 30];
+
+
+/*
+< 37. 배열의 참조 >
+
+배열은 객체의 일종이다.
+배열을 다른 변수에 대입하면 배열 자체가 복제되는 것이 아니라
+같은 배열을 가리키는 참조가 복사된다.
+*/
+let arrA = [10, 20, 30];
+let arrB = arrA;
+
+arrB[0] = 100;
+
+console.log(arrA); // [100, 20, 30]
+console.log(arrB); // [100, 20, 30]
+
+// 두 변수가 같은 배열을 참조한다.
+
+
+/*
+< 38. 배열 복사하기 >
+
+slice()를 사용하면 새로운 배열을 만들 수 있다.
+*/
+let arrC = [10, 20, 30];
+let arrD = arrC.slice();
+
+arrD[0] = 100;
+
+console.log(arrC); // [10, 20, 30]
+console.log(arrD); // [100, 20, 30]
+
+// 전개 구문으로도 배열을 복사할 수 있다.
+let arrE = [...arrC];
+
+console.log(arrE); // [10, 20, 30]
+
+// slice()와 전개 구문은 얕은 복사를 수행한다.
+// 배열 안에 객체나 다른 배열이 있으면 내부 요소까지 독립적으로 복사하지는 않는다.
+
+
+/*
+< 39. 배열인지 확인하기 >
+
+typeof는 배열도 object라고 반환한다.
+Array.isArray()를 사용하면 배열인지 확인할 수 있다.
+*/
+let arrF = [10, 20, 30];
+let obj = { name: "홍길동" };
+
+console.log(typeof arrF); // object
+console.log(Array.isArray(arrF)); // true
+console.log(Array.isArray(obj)); // false
+
+
+/*
+< 44. 배열의 배열 메서드 활용 : forEach() >
+
+forEach()는 배열의 요소마다 전달한 함수를 실행한다.
+콜백 함수라는 개념이 필요하므로 함수 단원에서 자세히 학습한다.
+*/
+let languages = ["Java", "JavaScript", "Python"];
+
+languages.forEach(function(language) {
+    console.log(language);
+});
+
+
+
+
+
+/*
+< 49. 배열 실습 문제 >
+
+문제 6. 다음 배열의 마지막 요소를 제거하고 결과를 출력하시오.
+let colors = ["빨강", "초록", "파랑"];
+
+문제 7. 다음 배열의 두 번째 요소를 "자바스크립트"로 변경하시오.
+let subjects = ["HTML", "CSS", "Java"];
+
+문제 8. 다음 배열에서 30과 40을 제거하시오.
+let nums = [10, 20, 30, 40, 50];
+
+문제 9. 다음 배열의 요소를 오름차순으로 정렬하시오.
+let nums = [40, 10, 30, 20, 50];
+
+문제 10. 다음 2차원 배열의 모든 요소의 합계를 구하시오.
+let nums = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+];
+
+문제 11. 다음 배열에서 80점 이상인 점수의 개수를 구하시오.
+let scores = [70, 85, 90, 65, 100, 75, 80];
+
+문제 12. 배열을 다른 변수에 대입했을 때 두 변수가 같은 배열을
+참조하는지 확인하고, 그 이유를 설명하시오.
+
+문제 13. slice()를 이용해 배열을 복사한 후 복사본을 수정하시오.
+원본 배열이 어떻게 되는지 확인하시오.
+
+문제 14. 다음 배열의 모든 요소를 하나의 문자열로 결합하시오.
+let words = ["JavaScript", "HTML", "CSS"];
+
+문제 15. 다음 배열의 각 행을 반복문으로 순회하여 출력하시오.
+let table = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

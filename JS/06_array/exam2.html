@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 17. 배열 메서드 >
+
+    메서드(Method) : 객체에 연결되어 있는 함수
+    배열은 다양한 내장 메서드를 제공한다.
+
+    주요 메서드
+    push()    : 마지막에 추가
+    pop()     : 마지막 요소 제거
+    unshift() : 처음에 추가
+    shift()   : 첫 번째 요소 제거
+    splice()  : 특정 위치의 요소 추가, 삭제, 교체
+    slice()   : 배열의 일부를 복사
+    indexOf() : 값의 인덱스 검색
+    includes(): 값의 포함 여부 확인
+    join()    : 요소를 문자열로 결합
+    reverse() : 순서 뒤집기
+    sort()    : 정렬
+    */
+
+
+    /*
+    < 18. push() : 마지막에 요소 추가 >
+
+    배열의 마지막에 요소를 추가한다.
+    원본 배열이 변경된다.
+    반환값은 변경된 배열의 length이다.
+    */
+    let foods = ["김밥", "라면"];
+
+    let pushResult = foods.push("떡볶이");
+
+    console.log(foods); // ["김밥", "라면", "떡볶이"]
+    console.log(pushResult); // 3
+
+    foods.push("순대", "튀김");
+
+    console.log(foods);
+
+
+    /*
+    < 19. pop() : 마지막 요소 제거 >
+
+    배열의 마지막 요소를 제거하고 제거한 값을 반환한다.
+    */
+    let fruits2 = ["사과", "바나나", "포도"];
+
+    let removedFruit = fruits2.pop();
+
+    console.log(removedFruit); // 포도
+    console.log(fruits2); // ["사과", "바나나"]
+
+
+    /*
+    < 20. unshift() : 처음에 요소 추가 >
+
+    배열의 맨 앞에 요소를 추가한다.
+    원본 배열이 변경된다.
+    반환값은 변경된 배열의 length이다.
+    */
+    let queue = ["김철수", "이영희"];
+
+    let newLength = queue.unshift("홍길동");
+
+    console.log(queue); // ["홍길동", "김철수", "이영희"]
+    console.log(newLength); // 3
+
+
+    /*
+    < 21. shift() : 첫 번째 요소 제거 >
+
+    배열의 첫 번째 요소를 제거하고 제거한 값을 반환한다.
+    */
+    let queue2 = ["홍길동", "김철수", "이영희"];
+
+    let first = queue2.shift();
+
+    console.log(first); // 홍길동
+    console.log(queue2); // ["김철수", "이영희"]
+
+
+    /*
+    < 22. push(), pop(), unshift(), shift() 비교 >
+
+    push()    : 끝에 추가
+    pop()     : 끝에서 제거
+    unshift() : 앞에 추가
+    shift()   : 앞에서 제거
+
+    이 네 가지 메서드는 원본 배열을 변경한다.
+    */
+
+
+    /*
+    < 23. splice() : 요소 삭제 >
+
+    splice(시작 인덱스, 삭제할 개수)
+    원본 배열을 변경한다.
+    */
+    let animals2 = ["강아지", "고양이", "토끼", "햄스터"];
+
+    animals2.splice(1, 1);
+
+    console.log(animals2); // ["강아지", "토끼", "햄스터"]
+
+
+    /*
+    < 24. splice() : 요소 추가 >
+
+    splice(시작 인덱스, 0, 추가할 값)
+    삭제하지 않고 지정한 위치에 요소를 추가한다.
+    */
+    let colors2 = ["빨강", "파랑"];
+
+    colors2.splice(1, 0, "초록");
+
+    console.log(colors2); // ["빨강", "초록", "파랑"]
+
+
+    /*
+    < 25. splice() : 요소 교체 >
+
+    splice(시작 인덱스, 삭제할 개수, 새 값)
+    기존 요소를 삭제하고 새 요소를 추가할 수 있다.
+    */
+    let colors3 = ["빨강", "초록", "파랑"];
+
+    colors3.splice(1, 1, "노랑");
+
+    console.log(colors3); // ["빨강", "노랑", "파랑"]
+
+
+    /*
+    < 26. splice()의 반환값 >
+
+    splice()는 제거한 요소들을 배열로 반환한다.
+    */
+    let numbers2 = [10, 20, 30, 40, 50];
+
+    let deleted = numbers2.splice(1, 2);
+
+    console.log(numbers2); // [10, 40, 50]
+    console.log(deleted); // [20, 30]
+
+
+    /*
+    < 27. slice() : 배열의 일부 복사 >
+
+    slice(시작 인덱스, 끝 인덱스)
+    시작 인덱스는 포함하고 끝 인덱스는 포함하지 않는다.
+    원본 배열은 변경되지 않는다.
+    */
+    let numbers3 = [10, 20, 30, 40, 50];
+
+    let sliced = numbers3.slice(1, 4);
+
+    console.log(sliced); // [20, 30, 40]
+    console.log(numbers3); // [10, 20, 30, 40, 50]
+
+
+    /*
+    < 28. slice()의 인자 생략 >
+
+    slice(시작 인덱스)
+    시작 인덱스부터 끝까지 복사한다.
+    */
+    let numbers4 = [10, 20, 30, 40, 50];
+
+    console.log(numbers4.slice(2)); // [30, 40, 50]
+    console.log(numbers4.slice()); // 배열의 얕은 복사본
+
+
+    /*
+    < 29. splice()와 slice() 비교 >
+
+    splice() : 원본 배열을 변경하며 요소를 추가, 삭제, 교체한다.
+    slice()  : 원본 배열을 유지하고 일부를 복사한다.
+    */
+    let original1 = [10, 20, 30, 40];
+    let original2 = [10, 20, 30, 40];
+
+    original1.splice(1, 2);
+
+    let copied = original2.slice(1, 3);
+
+    console.log(original1); // [10, 40]
+    console.log(copied); // [20, 30]
+    console.log(original2); // [10, 20, 30, 40]
+
+
+    /*
+    < 30. indexOf() : 요소의 인덱스 검색 >
+
+    값이 처음 등장하는 인덱스를 반환한다.
+    값이 없으면 -1을 반환한다.
+    */
+    let fruits3 = ["사과", "바나나", "포도", "바나나"];
+
+    console.log(fruits3.indexOf("포도")); // 2
+    console.log(fruits3.indexOf("바나나")); // 1
+    console.log(fruits3.indexOf("수박")); // -1
+
+
+    /*
+    < 31. includes() : 요소 포함 여부 확인 >
+
+    값이 존재하면 true, 없으면 false를 반환한다.
+    */
+    let fruits4 = ["사과", "바나나", "포도"];
+
+    console.log(fruits4.includes("바나나")); // true
+    console.log(fruits4.includes("수박")); // false
+
+    // 단순히 존재 여부만 확인할 때는 includes()가 편리하다.
+
+
+    /*
+    < 32. join() : 문자열로 결합 >
+
+    배열의 요소들을 하나의 문자열로 결합한다.
+    인자로 전달한 구분 문자를 요소 사이에 넣는다.
+    */
+    let words = ["JavaScript", "HTML", "CSS"];
+
+    console.log(words.join()); // JavaScript,HTML,CSS
+    console.log(words.join(" ")); // JavaScript HTML CSS
+    console.log(words.join(" / ")); // JavaScript / HTML / CSS
+
+    // join()은 원본 배열을 변경하지 않는다.
+
+
+    /*
+    < 33. reverse() : 배열 순서 뒤집기 >
+
+    원본 배열의 순서를 반대로 변경한다.
+    */
+    let numbers5 = [10, 20, 30, 40];
+
+    numbers5.reverse();
+
+    console.log(numbers5); // [40, 30, 20, 10]
+
+
+    /*
+    < 34. sort() : 배열 정렬 >
+
+    기본적으로 요소를 문자열로 변환한 뒤 정렬한다.
+    숫자를 기본 sort()로 정렬하면 예상과 다른 결과가 나올 수 있다.
+    */
+    let numbers6 = [1, 10, 2, 30, 20];
+
+    numbers6.sort();
+
+    console.log(numbers6); // [1, 10, 2, 20, 30]
+
+    // 숫자를 오름차순으로 정렬하려면 비교 함수를 사용한다.
+    let numbers7 = [1, 10, 2, 30, 20];
+
+    numbers7.sort((a, b) => a - b);
+
+    console.log(numbers7); // [1, 2, 10, 20, 30]
+
+    // 내림차순 정렬
+    numbers7.sort((a, b) => b - a);
+
+    console.log(numbers7); // [30, 20, 10, 2, 1]
+
+    // 비교 함수는 함수를 배운 이후에 자세히 학습한다.
+
+
+    /*
+    < 35. 배열 메서드 정리 >
+
+    push()     : 끝에 추가
+    pop()      : 끝에서 제거
+    unshift()  : 앞에 추가
+    shift()    : 앞에서 제거
+    splice()   : 특정 위치에서 추가, 삭제, 교체
+    slice()    : 일부 복사
+    indexOf()  : 인덱스 검색
+    includes() : 포함 여부 확인
+    join()     : 문자열로 결합
+    reverse()  : 순서 뒤집기
+    sort()     : 정렬
+
+    원본 배열 변경 여부를 구분하는 것이 중요하다.
+    */
+</script>
+
+<body>
+    
+</body>
+</html>
