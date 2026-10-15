@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 17. 실습 문제 >
+
+    문제 1. Book 클래스
+
+    다음 조건을 만족하는 Book 클래스를 작성하시오.
+
+    프로퍼티:
+    - title
+    - author
+    - price
+
+    메서드:
+    - showInfo() : 제목, 저자, 가격을 출력한다.
+
+    다음 인스턴스를 생성하시오.
+    - 자바스크립트, 홍길동, 25000
+    - HTML과 CSS, 김철수, 30000
+
+    각 인스턴스의 showInfo()를 호출하시오.
+
+
+    문제 2. Car 클래스
+
+    다음 조건을 만족하는 Car 클래스를 작성하시오.
+
+    프로퍼티:
+    - model
+    - color
+    - speed
+
+    메서드:
+    - accelerate() : speed를 10 증가시키고 현재 속도를 출력한다.
+    - brake() : speed를 10 감소시킨다.
+      단, 속도가 0보다 작아지지 않도록 한다.
+
+    소나타(흰색, 속도 0) 인스턴스를 생성하고
+    가속 2회, 감속 1회 실행한 뒤 속도를 출력하시오.
+
+
+    문제 3. Member 클래스
+
+    다음 조건을 만족하는 Member 클래스를 작성하시오.
+
+    프로퍼티:
+    - id
+    - point
+
+    메서드:
+    - addPoint(amount) : 포인트를 증가시킨다.
+    - showPoint() : 회원 아이디와 포인트를 출력한다.
+
+    user01(100점) 인스턴스를 생성하고
+    50점을 추가한 뒤 포인트를 출력하시오.
+*/
+
+
+/*
+    < 18. 실습 문제 정답 >
+
+    문제 1. Book 클래스
+*/
+
+{
+    class Book {
+        constructor(title, author, price) {
+            this.title = title;
+            this.author = author;
+            this.price = price;
+        }
+
+        showInfo() {
+            console.log("제목 : " + this.title);
+            console.log("저자 : " + this.author);
+            console.log("가격 : " + this.price + "원");
+        }
+    }
+
+    let book1 = new Book("자바스크립트", "홍길동", 25000);
+    let book2 = new Book("HTML과 CSS", "김철수", 30000);
+
+    book1.showInfo();
+    book2.showInfo();
+}
+
+
+/*
+    문제 2. Car 클래스
+*/
+
+{
+    class Car {
+        constructor(model, color, speed) {
+            this.model = model;
+            this.color = color;
+            this.speed = speed;
+        }
+
+        accelerate() {
+            this.speed += 10;
+            console.log(this.model + " 현재 속도 : " + this.speed);
+        }
+
+        brake() {
+            this.speed -= 10;
+
+            if (this.speed < 0) {
+                this.speed = 0;
+            }
+
+            console.log(this.model + " 현재 속도 : " + this.speed);
+        }
+    }
+
+    let car1 = new Car("소나타", "흰색", 0);
+
+    car1.accelerate();
+    car1.accelerate();
+    car1.brake();
+
+    console.log(car1.speed); // 10
+}
+
+
+/*
+    문제 3. Member 클래스
+*/
+
+{
+    class Member {
+        constructor(id, point) {
+            this.id = id;
+            this.point = point;
+        }
+
+        addPoint(amount) {
+            this.point += amount;
+        }
+
+        showPoint() {
+            console.log(this.id + " 포인트 : " + this.point);
+        }
+    }
+
+    let member1 = new Member("user01", 100);
+
+    member1.addPoint(50);
+    member1.showPoint(); // user01 포인트 : 150
+}
+</script>
+
+<body>
+    
+</body>
+</html>

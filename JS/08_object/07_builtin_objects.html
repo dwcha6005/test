@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    08_builtin_objects.js
+
+    < 학습 목표 >
+    1. JavaScript 내장 객체의 개념을 이해한다.
+    2. Math 객체를 이용해 수학 연산과 난수를 처리한다.
+    3. Date 객체를 이용해 날짜와 시간을 다룬다.
+    4. Number 객체와 숫자 변환 기능을 이해한다.
+    5. String 객체의 주요 메서드를 활용한다.
+    6. Object 객체를 이용해 객체의 프로퍼티를 확인하고 관리한다.
+*/
+
+/*
+    < 1. 내장 객체란? >
+
+    내장 객체(Built-in Object)
+    : JavaScript에서 기본적으로 제공하는 객체
+
+    별도의 객체를 직접 만들지 않아도 다양한 기능을 사용할 수 있다.
+
+    Math   : 수학 계산
+    Date   : 날짜와 시간
+    Number : 숫자 관련 기능
+    String : 문자열 관련 기능
+    Object : 객체 관련 기능
+
+    예)
+    Math.max(10, 20)        : 두 숫자 중 큰 값
+    new Date()              : 현재 날짜와 시간
+    Number("123")           : 문자열을 숫자로 변환
+    "hello".toUpperCase()   : 문자열을 대문자로 변환
+    Object.keys(obj)        : 객체의 프로퍼티 이름을 배열로 반환
+
+    주의)
+    Math는 일반적으로 new를 사용하지 않는다.
+    Date는 new Date() 형태로 날짜 객체를 생성한다.
+    Number와 String은 변환 기능과 객체 생성 기능을 구분해서 사용한다.
+*/
+
+
+/*
+    < 2. Math 객체 >
+
+    Math : 수학 계산에 필요한 기능을 제공하는 내장 객체
+    Math 객체는 new로 생성하지 않고 바로 사용한다.
+*/
+
+{
+    // < 2-1. 주요 상수 >
+
+    console.log(Math.PI);   // 원주율 약 3.141592...
+    console.log(Math.E);    // 자연상수 약 2.718281...
+
+    // 원의 넓이 = 반지름 * 반지름 * 원주율
+    let radius = 5;
+    let area = radius * radius * Math.PI;
+
+    console.log(area);      // 약 78.5398...
+}
+
+
+/*
+    < 2-2. 반올림, 올림, 내림 >
+
+    Math.round(숫자) : 가장 가까운 정수로 반올림
+    Math.ceil(숫자)  : 소수점이 있으면 위쪽 정수로 올림
+    Math.floor(숫자) : 소수점 아래를 버리고 아래쪽 정수로 내림
+    Math.trunc(숫자) : 소수점 아래를 버리고 0 방향으로 절삭
+
+    주의)
+    양수에서는 floor와 trunc가 같은 결과를 내지만,
+    음수에서는 결과가 다를 수 있다.
+*/
+
+{
+    console.log(Math.round(3.4));   // 3
+    console.log(Math.round(3.5));   // 4
+
+    console.log(Math.ceil(3.1));    // 4
+    console.log(Math.ceil(3.9));    // 4
+    console.log(Math.ceil(-3.1));   // -3
+
+    console.log(Math.floor(3.9));   // 3
+    console.log(Math.floor(-3.1));  // -4
+
+    console.log(Math.trunc(3.9));   // 3
+    console.log(Math.trunc(-3.9));  // -3
+}
+
+
+/*
+    < 2-3. 최댓값과 최솟값 >
+
+    Math.max(값1, 값2, ...) : 가장 큰 값
+    Math.min(값1, 값2, ...) : 가장 작은 값
+*/
+
+{
+    console.log(Math.max(10, 30, 20, 50));  // 50
+    console.log(Math.min(10, 30, 20, 50));  // 10
+
+    let score1 = 85;
+    let score2 = 92;
+    let score3 = 78;
+
+    console.log(Math.max(score1, score2, score3));  // 92
+    console.log(Math.min(score1, score2, score3));  // 78
+
+    // 주의)
+    // Math.max([10, 20, 30])처럼 배열을 그대로 전달하면 NaN이 된다.
+    // 배열의 최댓값을 구하려면 Math.max(...배열)을 사용할 수 있다.
+
+    let scores = [10, 20, 30];
+
+    console.log(Math.max(...scores));  // 30
+}
+
+
+/*
+    < 2-4. 절댓값과 거듭제곱, 제곱근 >
+
+    Math.abs(숫자)       : 절댓값
+    Math.pow(밑, 지수)   : 거듭제곱
+    Math.sqrt(숫자)      : 제곱근
+*/
+
+{
+    console.log(Math.abs(-10));       // 10
+    console.log(Math.abs(10));        // 10
+
+    console.log(Math.pow(2, 3));      // 8
+    console.log(2 ** 3);              // 8, 거듭제곱 연산자
+
+    console.log(Math.sqrt(25));       // 5
+    console.log(Math.sqrt(2));        // 약 1.4142...
+
+    // 피타고라스 정리
+    // 빗변의 길이 = √(가로² + 세로²)
+
+    let width = 3;
+    let height = 4;
+
+    let diagonal = Math.sqrt(width ** 2 + height ** 2);
+
+    console.log(diagonal);            // 5
+}
+
+
+/*
+    < 2-5. 난수 생성 >
+
+    Math.random()
+    : 0 이상 1 미만의 난수를 반환한다.
+
+    반환 가능한 범위
+    0 <= 결과 < 1
+
+    정수 범위의 난수를 만들려면 계산식을 추가한다.
+
+    Math.floor(Math.random() * 개수) + 시작값
+
+    예)
+    1~10 사이의 정수
+    Math.floor(Math.random() * 10) + 1
+*/
+
+{
+    console.log(Math.random());  // 0 이상 1 미만의 난수
+
+    // 0~9
+    let random1 = Math.floor(Math.random() * 10);
+    console.log(random1);
+
+    // 1~10
+    let random2 = Math.floor(Math.random() * 10) + 1;
+    console.log(random2);
+
+    // 5~15
+    // 가능한 정수 개수: 15 - 5 + 1 = 11개
+    let random3 = Math.floor(Math.random() * 11) + 5;
+    console.log(random3);
+
+    // < 일반적인 공식 >
+    // min 이상 max 이하의 정수
+    // Math.floor(Math.random() * (max - min + 1)) + min
+
+    let min = 20;
+    let max = 30;
+
+    let random4 = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(random4);
+}
+
+
+/*
+    < 2-6. 난수 활용 예제 >
+
+    주사위: 1~6
+    로또 번호 하나: 1~45
+
+    주의)
+    Math.random()은 일반적인 게임 예제나 간단한 무작위 선택에 적합하다.
+    보안이 중요한 비밀번호나 인증번호 생성에는 사용하지 않는다.
+*/
+
+{
+    let dice = Math.floor(Math.random() * 6) + 1;
+    console.log("주사위:", dice);
+
+    let lotto = Math.floor(Math.random() * 45) + 1;
+    console.log("로또 번호:", lotto);
+}
+
+
+/*
+    < 3. Date 객체 >
+
+    Date : 날짜와 시간을 다루는 내장 객체
+
+    new Date()           : 현재 날짜와 시간
+    new Date(연, 월, 일) : 지정한 날짜
+
+    주의)
+    Date의 월은 0부터 시작한다.
+
+    0  : 1월
+    1  : 2월
+    ...
+    11 : 12월
+*/
+
+{
+    // < 3-1. 현재 날짜와 시간 >
+
+    let now = new Date();
+
+    console.log(now);
+    console.log(typeof now);  // "object"
+
+    // Date 객체는 브라우저나 실행 환경의 현지 시간대에 따라
+    // 날짜와 시간을 표시할 수 있다.
+}
+
+
+/*
+    < 3-2. 특정 날짜 생성하기 >
+
+    new Date(년, 월, 일, 시, 분, 초, 밀리초)
+
+    월은 0부터 시작한다.
+    시, 분, 초, 밀리초는 생략할 수 있다.
+
+    주의)
+    아래 숫자 인수를 사용하는 방식에서 연도는 일반적으로 4자리 연도를 사용한다.
+*/
+
+{
+    let birthday = new Date(2000, 0, 15);
+
+    console.log(birthday);
+    // 2000년 1월 15일
+
+    let appointment = new Date(2026, 9, 15, 14, 30);
+
+    console.log(appointment);
+    // 2026년 10월 15일 14시 30분
+    // 월 9는 10월이다.
+
+    // 날짜 문자열을 전달하는 방식도 있다.
+    let date1 = new Date("2026-10-15");
+
+    console.log(date1);
+}
+
+
+/*
+    < 3-3. 날짜와 시간 정보 가져오기 >
+
+    getFullYear()     : 연도
+    getMonth()        : 월 (0~11)
+    getDate()         : 일 (1~31)
+    getDay()          : 요일 (일요일 0 ~ 토요일 6)
+    getHours()        : 시
+    getMinutes()      : 분
+    getSeconds()      : 초
+    getMilliseconds(): 밀리초
+*/
+
+{
+    let now = new Date();
+
+    console.log("연도:", now.getFullYear());
+    console.log("월:", now.getMonth() + 1);
+    console.log("일:", now.getDate());
+
+    console.log("요일:", now.getDay());
+
+    console.log("시:", now.getHours());
+    console.log("분:", now.getMinutes());
+    console.log("초:", now.getSeconds());
+
+    // getMonth()는 0부터 시작하므로 화면에 표시할 때 +1을 한다.
+    // getDay()는 날짜가 아니라 요일을 숫자로 반환한다.
+}
+
+
+/*
+    < 3-4. 요일을 문자열로 변환하기 >
+
+    getDay()의 반환값을 배열의 인덱스로 활용할 수 있다.
+*/
+
+{
+    let now = new Date();
+
+    let days = ["일", "월", "화", "수", "목", "금", "토"];
+
+    let day = days[now.getDay()];
+
+    console.log("오늘은 " + day + "요일입니다.");
+}
+
+
+/*
+    < 3-5. 날짜와 시간 변경하기 >
+
+    setFullYear() : 연도 변경
+    setMonth()    : 월 변경
+    setDate()     : 일 변경
+    setHours()    : 시 변경
+    setMinutes()  : 분 변경
+    setSeconds()  : 초 변경
+
+    주의)
+    setMonth() 역시 월을 0부터 사용한다.
+    날짜를 변경할 때 월말이나 윤년 등으로 인해 날짜가 자동 보정될 수 있다.
+*/
+
+{
+    let date = new Date(2026, 0, 15);
+
+    date.setFullYear(2027);
+    date.setMonth(5);
+    date.setDate(20);
+
+    console.log(date);
+    // 2027년 6월 20일
+}
+
+
+/*
+    < 3-6. 날짜 계산하기 >
+
+    Date 객체의 날짜를 변경해 며칠 뒤나 며칠 전을 계산할 수 있다.
+    setDate()에 현재 일자보다 큰 값을 넣으면 다음 달로 넘어갈 수 있다.
+*/
+
+{
+    let today = new Date(2026, 9, 15);
+
+    let after7Days = new Date(today);
+
+    after7Days.setDate(after7Days.getDate() + 7);
+
+    console.log("오늘:", today);
+    console.log("7일 후:", after7Days);
+
+    let before3Days = new Date(today);
+
+    before3Days.setDate(before3Days.getDate() - 3);
+
+    console.log("3일 전:", before3Days);
+}
+
+
+/*
+    < 3-7. 타임스탬프 >
+
+    getTime()
+    : 1970년 1월 1일 00:00:00 UTC부터
+      해당 날짜까지 경과한 밀리초를 반환한다.
+
+    밀리초(ms)
+    1초 = 1,000ms
+    1분 = 60,000ms
+    1시간 = 3,600,000ms
+    1일 = 86,400,000ms
+
+    타임스탬프를 활용하면 날짜 차이를 계산할 수 있다.
+*/
+
+{
+    let start = new Date(2026, 0, 1);
+    let end = new Date(2026, 0, 10);
+
+    let difference = end.getTime() - start.getTime();
+
+    console.log(difference);
+
+    let days = difference / (1000 * 60 * 60 * 24);
+
+    console.log("날짜 차이:", days);
+    // 9
+
+    // 주의)
+    // 밀리초를 24시간 단위로 나누는 방식은 경과 시간을 계산하는 것이다.
+    // 현지 시간대의 일광 절약 시간제 등으로 인해 실제 달력 날짜의 차이와
+    // 단순한 밀리초 계산 결과가 달라지는 경우도 있다.
+}
+
+
+/*
+    < 3-8. 날짜를 문자열로 표현하기 >
+
+    toString()        : 날짜와 시간 정보 문자열
+    toDateString()    : 날짜 부분 중심의 문자열
+    toTimeString()    : 시간 부분 중심의 문자열
+    toISOString()     : ISO 8601 형식의 UTC 문자열
+*/
+
+{
+    let now = new Date();
+
+    console.log(now.toString());
+    console.log(now.toDateString());
+    console.log(now.toTimeString());
+    console.log(now.toISOString());
+
+    // toISOString()은 UTC 기준으로 표현한다.
+    // 한국 시간과 표시되는 시각이 다를 수 있다.
+}
+
+
+/*
+    < 4. Number 객체와 숫자 변환 >
+
+    Number : 숫자와 관련된 기능을 제공한다.
+
+    Number("123") : 숫자로 변환
+    Number("3.14"): 숫자로 변환
+    Number("abc") : NaN
+
+    주의)
+    Number는 숫자 변환 함수로도 사용할 수 있다.
+    new Number()로 객체를 만드는 방식은 일반적인 숫자 처리에서 권장하지 않는다.
+*/
+
+{
+    // < 4-1. Number()를 이용한 변환 >
+
+    console.log(Number("123"));       // 123
+    console.log(Number("3.14"));      // 3.14
+    console.log(Number(""));          // 0
+    console.log(Number("   "));       // 0
+    console.log(Number("123abc"));    // NaN
+    console.log(Number(true));        // 1
+    console.log(Number(false));       // 0
+    console.log(Number(null));        // 0
+    console.log(Number(undefined));   // NaN
+
+    // Number()는 문자열 전체가 숫자로 해석될 수 있어야 한다.
+}
+
+
+/*
+    < 4-2. parseInt()와 parseFloat() >
+
+    parseInt(값)   : 문자열 앞부분에서 정수를 해석
+    parseFloat(값) : 문자열 앞부분에서 실수를 해석
+
+    Number()와의 차이
+
+    Number("123abc")    -> NaN
+    parseInt("123abc")  -> 123
+
+    parseInt("3.99")    -> 3
+    parseFloat("3.99")  -> 3.99
+*/
+
+{
+    console.log(parseInt("123"));        // 123
+    console.log(parseInt("3.99"));       // 3
+    console.log(parseFloat("3.99"));     // 3.99
+
+    console.log(parseInt("123abc"));     // 123
+    console.log(parseFloat("3.14px"));   // 3.14
+
+    console.log(Number("123abc"));       // NaN
+
+    // 진법 지정
+    console.log(parseInt("101", 2));     // 5
+    console.log(parseInt("FF", 16));     // 255
+}
+
+
+/*
+    < 4-3. NaN 확인하기 >
+
+    NaN : Not a Number
+    숫자로 변환하거나 계산할 수 없는 결과를 나타내는 값
+
+    NaN은 자기 자신과 비교해도 true가 되지 않는다.
+    따라서 Number.isNaN()을 사용하는 것이 명확하다.
+*/
+
+{
+    let value = Number("hello");
+
+    console.log(value);                    // NaN
+    console.log(value === NaN);            // false
+    console.log(Number.isNaN(value));      // true
+
+    console.log(Number.isNaN(100));        // false
+    console.log(Number.isNaN("hello"));    // false
+
+    // Number.isNaN()은 전달한 값이 실제 NaN인지 확인한다.
+}
+
+
+/*
+    < 4-4. 유한한 숫자인지 확인하기 >
+
+    Number.isFinite(값)
+    : 값이 유한한 숫자인지 확인한다.
+
+    Infinity  : 무한대
+    -Infinity : 음의 무한대
+    NaN       : 숫자가 아님
+*/
+
+{
+    console.log(Number.isFinite(100));        // true
+    console.log(Number.isFinite(3.14));       // true
+    console.log(Number.isFinite(Infinity));   // false
+    console.log(Number.isFinite(-Infinity));  // false
+    console.log(Number.isFinite(NaN));        // false
+
+    // 숫자 문자열은 숫자로 자동 변환되지 않는다.
+    console.log(Number.isFinite("100"));      // false
+}
+
+
+/*
+    < 4-5. 숫자의 소수점 표현 >
+
+    toFixed(자릿수)
+    : 소수점 이하 자릿수를 지정한 문자열을 반환한다.
+
+    주의)
+    toFixed()의 반환값은 숫자가 아니라 문자열이다.
+*/
+
+{
+    let price = 1234.5678;
+
+    console.log(price.toFixed(0));  // "1235"
+    console.log(price.toFixed(1));  // "1234.6"
+    console.log(price.toFixed(2));  // "1234.57"
+
+    let result = price.toFixed(2);
+
+    console.log(typeof result);     // "string"
+
+    // 숫자로 다시 사용하려면 변환한다.
+    let roundedPrice = Number(price.toFixed(2));
+
+    console.log(roundedPrice);      // 1234.57
+    console.log(typeof roundedPrice); // "number"
+}
+
+
+/*
+    < 4-6. 숫자의 안전한 정수 범위 >
+
+    Number.MAX_SAFE_INTEGER: 정확하게 표현할 수 있는 가장 큰 안전한 정수
+    Number.MIN_SAFE_INTEGER: 정확하게 표현할 수 있는 가장 작은 안전한 정수
+
+    큰 정수를 다룰 때는 정밀도 문제를 고려해야 한다.
+*/
+
+{
+    console.log(Number.MAX_SAFE_INTEGER);
+    // 9007199254740991
+
+    console.log(Number.MIN_SAFE_INTEGER);
+    // -9007199254740991
+
+    console.log(Number.isSafeInteger(100));       // true
+    console.log(Number.isSafeInteger(3.14));      // false
+    console.log(Number.isSafeInteger(9007199254740992)); // false
+}
+
+
+/*
+    < 4-7. 실무에서 자주 발생하는 숫자 변환 문제 >
+
+    prompt()는 사용자가 입력한 값을 문자열로 반환한다.
+    따라서 입력값을 계산에 사용할 때는 숫자 변환이 필요하다.
+*/
+
+{
+    // 브라우저에서 실행할 때 사용한다.
+
+    // let input1 = prompt("첫 번째 숫자");
+    // let input2 = prompt("두 번째 숫자");
+    //
+    // console.log(input1 + input2);
+    // 입력값이 "10", "20"이면 결과는 "1020"
+    //
+    // let num1 = Number(input1);
+    // let num2 = Number(input2);
+    //
+    // console.log(num1 + num2);
+    // 결과는 30
+
+    // 실제 입력값을 처리할 때는 빈 문자열이나 잘못된 입력도 검증해야 한다.
+}
+
+
+/*
+    < 5. String 객체 >
+
+    String : 문자열을 다루는 기능을 제공한다.
+
+    문자열은 따옴표로 만들 수 있다.
+    "hello"
+    'hello'
+    `hello`
+
+    문자열은 원시값이지만 다양한 메서드를 사용할 수 있다.
+    JavaScript는 문자열에서 메서드를 사용할 수 있도록 필요한 처리를 제공한다.
+
+    주의)
+    문자열 메서드는 일반적으로 원본 문자열을 변경하지 않고
+    새로운 문자열이나 다른 결과를 반환한다.
+*/
+
+
+/*
+    < 5-1. 문자열의 길이 >
+
+    length: 문자열의 길이를 반환한다.
+
+    주의)
+    length는 메서드가 아니라 프로퍼티이므로 괄호를 붙이지 않는다.
+*/
+
+{
+    let text = "JavaScript";
+
+    console.log(text.length);  // 10
+
+    let korean = "안녕하세요";
+
+    console.log(korean.length); // 5
+
+    let empty = "";
+
+    console.log(empty.length); // 0
+}
+
+
+/*
+    < 5-2. 대소문자 변환 >
+
+    toUpperCase() : 대문자로 변환
+    toLowerCase() : 소문자로 변환
+*/
+
+{
+    let text = "JavaScript";
+
+    console.log(text.toUpperCase()); // "JAVASCRIPT"
+    console.log(text.toLowerCase()); // "javascript"
+
+    console.log(text);               // "JavaScript"
+
+    // 원본 문자열은 변경되지 않았다.
+}
+
+
+/*
+    < 5-3. 공백 제거 >
+
+    trim()      : 양쪽 끝의 공백 제거
+    trimStart() : 앞쪽 공백 제거
+    trimEnd()   : 뒤쪽 공백 제거
+
+    문자열 중간에 있는 공백은 제거하지 않는다.
+*/
+
+{
+    let text = "   hello world   ";
+
+    console.log(text.trim());       // "hello world"
+    console.log(text.trimStart());  // "hello world   "
+    console.log(text.trimEnd());    // "   hello world"
+
+    console.log(text);              // 원본은 그대로
+
+    // 입력값 검증에 자주 사용한다.
+    let userId = "   student01   ";
+
+    console.log(userId.trim());     // "student01"
+}
+
+
+/*
+    < 5-4. 문자열에서 문자 가져오기 >
+
+    charAt(인덱스) : 해당 위치의 문자 반환
+    at(인덱스)     : 해당 위치의 문자 반환
+
+    인덱스는 0부터 시작한다.
+    at()은 음수 인덱스를 사용할 수 있다.
+*/
+
+{
+    let text = "JavaScript";
+
+    console.log(text.charAt(0));  // "J"
+    console.log(text.charAt(4));  // "S"
+
+    console.log(text.at(0));      // "J"
+    console.log(text.at(-1));     // "t"
+    console.log(text.at(-2));     // "p"
+
+    // 인덱스가 범위를 벗어났을 때
+    console.log(text.charAt(100)); // ""
+    console.log(text.at(100));     // undefined
+}
+
+
+/*
+    < 5-5. 문자열 일부 추출 >
+
+    slice(시작 인덱스, 끝 인덱스)
+    : 시작 인덱스부터 끝 인덱스 직전까지 추출한다.
+
+    끝 인덱스는 결과에 포함되지 않는다.
+    끝 인덱스를 생략하면 문자열 끝까지 추출한다.
+    음수 인덱스는 문자열 뒤쪽을 기준으로 계산한다.
+*/
+
+{
+    let text = "JavaScript";
+
+    console.log(text.slice(0, 4));   // "Java"
+    console.log(text.slice(4, 10));  // "Script"
+    console.log(text.slice(4));      // "Script"
+    console.log(text.slice(-6));     // "Script"
+
+    // 문자열 전체 길이를 기준으로 끝 인덱스를 생략할 수 있다.
+    console.log(text.slice(0, 2));   // "Ja"
+}
+
+
+/*
+    < 5-6. 문자열 검색 >
+
+    includes(문자열)
+    : 특정 문자열이 포함되어 있는지 확인한다. (true / false)
+
+    indexOf(문자열)
+    : 처음 발견된 위치를 반환한다. 없으면 -1
+
+    lastIndexOf(문자열)
+    : 마지막으로 발견된 위치를 반환한다. 없으면 -1
+
+    대소문자를 구분한다.
+*/
+
+{
+    let text = "JavaScript is easy";
+
+    console.log(text.includes("Java"));       // true
+    console.log(text.includes("java"));       // false
+
+    console.log(text.indexOf("Script"));      // 4
+    console.log(text.indexOf("Python"));      // -1
+
+    let message = "banana";
+
+    console.log(message.indexOf("a"));        // 1
+    console.log(message.lastIndexOf("a"));    // 5
+}
+
+
+/*
+    < 5-7. 문자열의 시작과 끝 확인 >
+
+    startsWith(문자열) : 해당 문자열로 시작하는지 확인
+    endsWith(문자열)   : 해당 문자열로 끝나는지 확인
+*/
+
+{
+    let email = "student@example.com";
+
+    console.log(email.startsWith("student")); // true
+    console.log(email.startsWith("admin"));   // false
+
+    console.log(email.endsWith(".com"));      // true
+    console.log(email.endsWith(".net"));      // false
+}
+
+
+/*
+    < 5-8. 문자열 교체 >
+
+    replace(찾을 문자열, 바꿀 문자열)
+    : 첫 번째로 발견된 일치 항목을 교체한다.
+
+    replaceAll(찾을 문자열, 바꿀 문자열)
+    : 일치하는 모든 항목을 교체한다.
+*/
+
+{
+    let text = "apple apple apple";
+
+    console.log(text.replace("apple", "banana"));
+    // "banana apple apple"
+
+    console.log(text.replaceAll("apple", "banana"));
+    // "banana banana banana"
+
+    console.log(text);
+    // "apple apple apple"
+
+    // 원본 문자열은 변경되지 않는다.
+}
+
+
+/*
+    < 5-9. 문자열 분리 >
+
+    split(구분자)
+    : 문자열을 구분자 기준으로 나누어 배열로 반환한다.
+*/
+
+{
+    let fruits = "apple,banana,orange";
+
+    let arr = fruits.split(",");
+
+    console.log(arr);
+    // ["apple", "banana", "orange"]
+
+    console.log(arr[0]); // "apple"
+    console.log(arr[1]); // "banana"
+
+    let date = "2026-10-15";
+
+    console.log(date.split("-"));
+    // ["2026", "10", "15"]
+
+    // 빈 문자열을 구분자로 전달하면 문자열을 UTF-16 코드 단위 기준으로 나눈다.
+    console.log("ABC".split(""));
+    // ["A", "B", "C"]
+}
+
+
+/*
+    < 5-10. 문자열 연결과 반복 >
+
+    concat(문자열)
+    : 문자열을 연결한다.
+
+    repeat(횟수)
+    : 문자열을 지정한 횟수만큼 반복한다.
+*/
+
+{
+    let first = "Hello";
+    let second = "JavaScript";
+
+    console.log(first.concat(" ", second));
+    // "Hello JavaScript"
+
+    console.log("*".repeat(5));
+    // "*****"
+
+    console.log("ha".repeat(3));
+    // "hahaha"
+
+    // 문자열 연결은 + 연산자나 템플릿 리터럴로도 자주 처리한다.
+    console.log(first + " " + second);
+    console.log(`${first} ${second}`);
+}
+
+
+/*
+    < 5-11. 문자열을 이용한 입력값 처리 >
+
+    실무에서는 사용자가 입력한 값에 불필요한 공백이 포함될 수 있다.
+    trim()과 대소문자 변환을 활용하면 입력값을 정리할 수 있다.
+*/
+
+{
+    let inputEmail = "  Student@Example.com  ";
+
+    let email = inputEmail.trim().toLowerCase();
+
+    console.log(email);
+    // "student@example.com"
+
+    // 주의)
+    // 이메일 주소의 실제 유효성 검사나 계정 식별 규칙은
+    // 단순히 소문자로 변환하는 것만으로 완성되지 않는다.
+}
+
+
+/*
+    < 6. Object 객체 >
+
+    Object : 객체를 다루는 기본 기능을 제공하는 내장 객체
+
+    객체 리터럴로 객체를 만들 수 있다.
+
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    Object 객체의 주요 메서드
+
+    Object.keys(obj)       : 프로퍼티 이름 배열
+    Object.values(obj)     : 프로퍼티 값 배열
+    Object.entries(obj)    : [이름, 값] 형태의 배열
+    Object.assign()        : 프로퍼티 복사
+    Object.hasOwn()        : 객체 자신의 프로퍼티인지 확인
+*/
+
+
+/*
+    < 6-1. Object.keys() >
+
+    Object.keys(객체)
+    : 객체가 직접 가지고 있는 열거 가능한 문자열 키들을 배열로 반환한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25,
+        job: "개발자"
+    };
+
+    let keys = Object.keys(person);
+
+    console.log(keys);
+    // ["name", "age", "job"]
+
+    console.log(keys.length); // 3
+    console.log(keys[0]);     // "name"
+}
+
+
+/*
+    < 6-2. Object.values() >
+
+    Object.values(객체)
+    : 객체가 직접 가지고 있는 열거 가능한 문자열 키에 대응하는
+      값들을 배열로 반환한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25,
+        job: "개발자"
+    };
+
+    let values = Object.values(person);
+
+    console.log(values);
+    // ["홍길동", 25, "개발자"]
+}
+
+
+/*
+    < 6-3. Object.entries() >
+
+    Object.entries(객체)
+    : [프로퍼티 이름, 프로퍼티 값] 형태의 배열을 반환한다.
+
+    반환 형태
+    [
+        ["name", "홍길동"],
+        ["age", 25],
+        ["job", "개발자"]
+    ]
+
+    반복문과 함께 사용하면 객체의 모든 프로퍼티를 처리하기 편하다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25,
+        job: "개발자"
+    };
+
+    let entries = Object.entries(person);
+
+    console.log(entries);
+
+    for (let entry of entries) {
+        console.log(entry[0], entry[1]);
+    }
+
+    // 구조 분해 할당을 사용하면 더 간결하게 작성할 수 있다.
+    for (let [key, value] of Object.entries(person)) {
+        console.log(key, value);
+    }
+}
+
+
+/*
+    < 6-4. 객체의 프로퍼티 반복 처리 >
+
+    Object.keys(), Object.values(), Object.entries()는
+    객체를 배열 형태로 변환해 반복문이나 배열 메서드로 처리할 수 있게 한다.
+*/
+
+{
+    let scores = {
+        국어: 90,
+        영어: 85,
+        수학: 95
+    };
+
+    let total = 0;
+
+    for (let score of Object.values(scores)) {
+        total += score;
+    }
+
+    console.log("총점:", total);          // 270
+    console.log("평균:", total / Object.keys(scores).length); // 90
+}
+
+
+/*
+    < 6-5. Object.assign() >
+
+    Object.assign(대상 객체, 원본 객체들...)
+    : 원본 객체들의 열거 가능한 자체 프로퍼티를 대상 객체에 복사한다.
+
+    반환값은 대상 객체다.
+
+    주의)
+    Object.assign()은 중첩 객체까지 재귀적으로 복사하지 않는다.
+    따라서 얕은 복사(Shallow Copy)에 해당한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy = Object.assign({}, person);
+
+    console.log(copy);
+    // { name: "홍길동", age: 25 }
+
+    copy.age = 30;
+
+    console.log(copy.age);    // 30
+    console.log(person.age);  // 25
+
+    // 최상위 프로퍼티는 별도 객체에 복사되었다.
+}
+
+
+/*
+    < 6-6. 객체의 프로퍼티 수정과 복사 >
+
+    Object.assign()은 기존 대상 객체에 프로퍼티를 덮어쓸 수도 있다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let update = {
+        age: 30,
+        job: "개발자"
+    };
+
+    Object.assign(person, update);
+
+    console.log(person);
+    // { name: "홍길동", age: 30, job: "개발자" }
+
+    // 동일한 프로퍼티 이름이 있으면 뒤에 전달한 값으로 덮어쓴다.
+}
+
+
+/*
+    < 6-7. Object.hasOwn() >
+
+    Object.hasOwn(객체, 프로퍼티 이름)
+    : 해당 객체가 그 프로퍼티를 직접 가지고 있는지 확인한다.
+
+    반환값: true 또는 false
+
+    주의)
+    프로퍼티의 값이 undefined여도 프로퍼티가 존재하면 true다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: undefined
+    };
+
+    console.log(Object.hasOwn(person, "name"));   // true
+    console.log(Object.hasOwn(person, "age"));    // true
+    console.log(Object.hasOwn(person, "job"));    // false
+
+    // 값이 undefined인지와 프로퍼티가 존재하는지는 다른 문제다.
+}
+
+
+/*
+    < 6-8. in 연산자와 Object.hasOwn() >
+
+    "프로퍼티 이름" in 객체
+    : 해당 객체 또는 프로토타입 체인에 프로퍼티가 존재하는지 확인한다.
+
+    Object.hasOwn(객체, "프로퍼티 이름")
+    : 해당 객체가 직접 가지고 있는 프로퍼티인지 확인한다.
+
+    지금은 기본 객체를 기준으로 차이를 확인한다.
+    프로토타입 체인의 자세한 내용은 다음 심화 단원에서 다룬다.
+*/
+
+{
+    let person = {
+        name: "홍길동"
+    };
+
+    console.log("name" in person);               // true
+    console.log(Object.hasOwn(person, "name"));  // true
+
+    console.log("job" in person);                // false
+    console.log(Object.hasOwn(person, "job"));   // false
+
+    // 프로토타입 체인에 있는 프로퍼티는 두 결과가 다를 수 있다.
+}
+
+
+/*
+    < 6-9. Object.freeze() >
+
+    Object.freeze(객체)
+    : 객체의 프로퍼티 추가, 삭제, 값 변경을 제한한다.
+
+    반환값은 전달한 객체다.
+
+    주의)
+    기본적인 사용에서는 객체의 최상위 프로퍼티를 고정한다.
+    중첩 객체까지 자동으로 고정하는 것은 아니다.
+    일반적인 JavaScript 실행에서는 엄격 모드 여부에 따라
+    변경 시도가 실패하는 방식이 다를 수 있다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    Object.freeze(person);
+
+    person.age = 30;
+    person.job = "개발자";
+    delete person.name;
+
+    console.log(person);
+    // { name: "홍길동", age: 25 }
+
+    console.log(Object.isFrozen(person)); // true
+}
+
+
+/*
+    < 6-10. Object.seal() >
+
+    Object.seal(객체)
+    : 객체의 프로퍼티 추가와 삭제를 제한한다.
+      기존 프로퍼티의 값은 변경할 수 있다.
+
+    freeze()와의 차이
+
+    freeze() : 추가 불가, 삭제 불가, 값 변경 불가
+    seal()   : 추가 불가, 삭제 불가, 값 변경 가능
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    Object.seal(person);
+
+    person.age = 30;
+    person.job = "개발자";
+    delete person.name;
+
+    console.log(person);
+    // { name: "홍길동", age: 30 }
+
+    console.log(Object.isSealed(person)); // true
+}
+
+
+/*
+    < 6-11. Object 객체 메서드 정리 >
+
+    Object.keys(obj)
+    : 프로퍼티 이름을 배열로 반환
+
+    Object.values(obj)
+    : 프로퍼티 값을 배열로 반환
+
+    Object.entries(obj)
+    : [이름, 값] 배열로 반환
+
+    Object.assign(target, source)
+    : 프로퍼티를 대상 객체에 복사
+
+    Object.hasOwn(obj, key)
+    : 객체가 해당 프로퍼티를 직접 가지고 있는지 확인
+
+    Object.freeze(obj)
+    : 프로퍼티 추가, 삭제, 값 변경 제한
+
+    Object.seal(obj)
+    : 프로퍼티 추가, 삭제 제한
+*/
+
+
+
+
+
+/*
+    < 11. 핵심 정리 >
+
+    Math: 수학 계산, 반올림, 최댓값·최솟값, 난수
+    Date: 날짜 생성, 날짜 정보 조회, 날짜 변경, 날짜 계산
+    Number: 숫자 변환, NaN 확인, 유한한 숫자 확인, 소수점 표현
+    String: 문자열 검색, 추출, 교체, 분리, 공백 제거
+    Object: 객체의 프로퍼티 조회, 복사, 존재 여부 확인, 변경 제한
+
+    다음 단원에서는 객체의 프로퍼티를 탐색하고
+    메서드를 공유하는 내부 원리인 프로토타입을 학습한다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

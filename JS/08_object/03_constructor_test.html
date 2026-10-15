@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 12. 실습 문제 >
+
+    < 문제 1 >
+    Book 생성자 함수를 작성하시오.
+
+    프로퍼티: title, author, price
+
+    다음 객체를 생성하시오.
+    - 자바스크립트, 홍길동, 25000
+    - HTML과 CSS, 김철수, 30000
+
+    각 객체의 제목과 가격을 출력하시오.
+
+
+    < 문제 2 >
+    Car 생성자 함수를 작성하시오.
+
+    프로퍼티: model, color, speed
+
+    메서드:
+    - accelerate() : speed를 10 증가시키고 현재 속도를 출력한다.
+
+    다음 객체를 생성하시오.
+    - 소나타, 흰색, 속도 0
+    - 아반떼, 검은색, 속도 20
+
+    각 자동차의 accelerate()를 한 번씩 호출하시오.
+
+
+    < 문제 3 >
+    Member 생성자 함수를 작성하시오.
+
+    프로퍼티: id, point
+
+    메서드:
+    - addPoint(amount) : point를 amount만큼 증가시킨다.
+
+    다음 객체를 생성하시오.
+    - user01, 포인트 100
+    - user02, 포인트 500
+
+    user01의 포인트를 50 증가시킨 뒤
+    두 회원의 포인트를 각각 출력하시오.
+*/
+
+
+/*
+    < 13. 실습 문제 정답 >
+
+    문제 1. Book
+*/
+
+{
+    function Book(title, author, price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    let book1 = new Book("자바스크립트", "홍길동", 25000);
+    let book2 = new Book("HTML과 CSS", "김철수", 30000);
+
+    console.log(book1.title, book1.price);
+    console.log(book2.title, book2.price);
+}
+
+
+/*
+    문제 2. Car
+*/
+
+{
+    function Car(model, color, speed) {
+        this.model = model;
+        this.color = color;
+        this.speed = speed;
+
+        this.accelerate = function() {
+            this.speed += 10;
+            console.log(this.model + " 현재 속도 : " + this.speed);
+        };
+    }
+
+    let car1 = new Car("소나타", "흰색", 0);
+    let car2 = new Car("아반떼", "검은색", 20);
+
+    car1.accelerate();
+    car2.accelerate();
+}
+
+
+/*
+    문제 3. Member
+*/
+
+{
+    function Member(id, point) {
+        this.id = id;
+        this.point = point;
+
+        this.addPoint = function(amount) {
+            this.point += amount;
+        };
+    }
+
+    let member1 = new Member("user01", 100);
+    let member2 = new Member("user02", 500);
+
+    member1.addPoint(50);
+
+    console.log(member1.id, member1.point); // user01 150
+    console.log(member2.id, member2.point); // user02 500
+}
+</script>
+
+<body>
+    
+</body>
+</html>

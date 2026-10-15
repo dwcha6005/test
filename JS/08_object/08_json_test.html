@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 26. 실습 문제 >
+
+    문제 1.
+    다음 객체를 JSON 문자열로 변환하시오.
+    들여쓰기는 두 칸을 적용하시오.
+
+    let student = {
+        name: "김학생",
+        age: 24,
+        major: "컴퓨터공학"
+    };
+
+
+    문제 2.
+    다음 JSON 문자열을 JavaScript 객체로 변환하고
+    상품명과 가격을 출력하시오.
+
+    let json = '{"name":"키보드","price":39000}';
+
+
+    문제 3.
+    다음 JSON 문자열을 배열로 변환하고
+    모든 과목명을 출력하시오.
+
+    let json = '["Java","JavaScript","React","SQL"]';
+
+
+    문제 4.
+    다음 객체에서 함수가 JSON 문자열로 변환될 때
+    어떤 결과가 나오는지 확인하시오.
+
+    let user = {
+        name: "홍길동",
+        greet: function() {
+            return "안녕하세요";
+        }
+    };
+
+
+    문제 5.
+    다음 JSON 문자열을 객체로 변환한 뒤
+    이름과 주소의 도시를 출력하시오.
+
+    let json = `{
+        "name": "이학생",
+        "address": {
+            "city": "부산",
+            "district": "남구"
+        }
+    }`;
+
+
+    문제 6.
+    다음 객체를 JSON 문자열로 변환한 후 다시 객체로 복원하시오.
+    원본 객체와 복원된 객체가 서로 다른 객체인지 확인하시오.
+
+    let product = {
+        id: 100,
+        name: "모니터",
+        price: 220000
+    };
+
+
+    문제 7.
+    다음 JSON 문자열은 올바르지 않다.
+    오류가 발생하는 이유를 설명하시오.
+
+    let json = "{'name':'홍길동','age':25,}";
+
+
+    문제 8.
+    다음 JSON 문자열을 JavaScript 객체로 변환하고
+    평균 점수를 계산하시오.
+
+    let json = `{
+        "name": "김학생",
+        "scores": [80, 90, 100]
+    }`;
+*/
+
+
+/*
+    < 27. 실습 문제 정답 >
+*/
+
+// 문제 1
+{
+    let student = {
+        name: "김학생",
+        age: 24,
+        major: "컴퓨터공학"
+    };
+
+    let json = JSON.stringify(student, null, 2);
+
+    console.log(json);
+}
+
+
+// 문제 2
+{
+    let json = '{"name":"키보드","price":39000}';
+
+    let product = JSON.parse(json);
+
+    console.log(product.name);
+    console.log(product.price);
+}
+
+
+// 문제 3
+{
+    let json = '["Java","JavaScript","React","SQL"]';
+
+    let subjects = JSON.parse(json);
+
+    for (let subject of subjects) {
+        console.log(subject);
+    }
+}
+
+
+// 문제 4
+{
+    let user = {
+        name: "홍길동",
+        greet: function() {
+            return "안녕하세요";
+        }
+    };
+
+    let json = JSON.stringify(user);
+
+    console.log(json);
+    // {"name":"홍길동"}
+}
+
+
+// 문제 5
+{
+    let json = `{
+        "name": "이학생",
+        "address": {
+            "city": "부산",
+            "district": "남구"
+        }
+    }`;
+
+    let student = JSON.parse(json);
+
+    console.log(student.name);
+    console.log(student.address.city);
+}
+
+
+// 문제 6
+{
+    let product = {
+        id: 100,
+        name: "모니터",
+        price: 220000
+    };
+
+    let json = JSON.stringify(product);
+    let copy = JSON.parse(json);
+
+    console.log(copy);
+    console.log(product === copy); // false
+}
+
+
+// 문제 7
+{
+    // 잘못된 JSON 문자열의 문제점
+    // 1. JSON 문자열 값과 프로퍼티 이름에 작은따옴표를 사용했다.
+    // 2. 마지막 프로퍼티 뒤에 불필요한 쉼표가 있다.
+
+    // let json = "{'name':'홍길동','age':25,}";
+    // JSON.parse(json); // SyntaxError
+}
+
+
+// 문제 8
+{
+    let json = `{
+        "name": "김학생",
+        "scores": [80, 90, 100]
+    }`;
+
+    let student = JSON.parse(json);
+
+    let total = 0;
+
+    for (let score of student.scores) {
+        total += score;
+    }
+
+    let average = total / student.scores.length;
+
+    console.log("이름:", student.name);
+    console.log("평균 점수:", average);
+}
+</script>
+
+<body>
+    
+</body>
+</html>

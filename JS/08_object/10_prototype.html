@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    파일명 : 07_prototype.js
+    주제 : Prototype(프로토타입)
+
+    학습 목표
+    1. 프로토타입이 필요한 이유를 설명할 수 있다.
+    2. 생성자 함수로 생성한 객체들이 메서드를 공유하는 원리를 이해한다.
+    3. prototype과 __proto__의 차이를 설명할 수 있다.
+    4. 객체의 속성을 탐색하는 프로토타입 체인을 이해한다.
+    5. 프로토타입에 속성과 메서드를 추가할 수 있다.
+    6. 생성자 함수와 프로토타입을 이용한 상속을 구현할 수 있다.
+    7. class 문법과 prototype의 관계를 이해한다.
+*/
+
+/*
+    < 1. 프로토타입이란? >
+
+    Prototype : JavaScript에서 객체가 다른 객체의 속성과 메서드를
+                사용할 수 있도록 연결해 주는 객체
+
+    JavaScript 객체는 자신의 속성에 원하는 값이 없을 때
+    프로토타입으로 연결된 객체에서 해당 속성을 찾을 수 있다.
+
+    이러한 연결 관계를 이용하면 여러 객체가 같은 메서드를
+    공유하도록 만들 수 있다.
+
+    예를 들어 학생 객체 100개를 만들 때
+    모든 학생 객체에 같은 introduce() 메서드를 각각 만들 필요가 없다.
+
+    공통 메서드를 프로토타입에 한 번 정의하면
+    여러 학생 객체가 해당 메서드를 함께 사용할 수 있다.
+*/
+
+/*
+    < 2. 프로토타입이 필요한 이유 >
+
+    먼저 생성자 함수 내부에서 메서드를 정의하는 방법을 살펴보자.
+*/
+
+// < 2-1. 생성자 함수에서 속성과 메서드 정의하기 >
+
+{
+    function Student(name, score) {
+        this.name = name;
+        this.score = score;
+
+        this.introduce = function () {
+            console.log(
+                this.name + "의 점수는 " + this.score + "점입니다."
+            );
+        };
+    }
+
+    let student1 = new Student("홍길동", 80);
+    let student2 = new Student("김철수", 90);
+
+    student1.introduce();
+    // 홍길동의 점수는 80점입니다.
+
+    student2.introduce();
+    // 김철수의 점수는 90점입니다.
+
+    console.log(student1.introduce === student2.introduce);
+    // false
+
+    /*
+        생성자 함수 내부에서 다음과 같이 메서드를 정의했다.
+
+        this.introduce = function () {
+            ...
+        };
+
+        new Student()를 실행할 때마다 introduce 함수가 새로 만들어진다.
+
+        student1.introduce ───> 함수 A
+        student2.introduce ───> 함수 B
+
+        두 함수의 코드가 같더라도 서로 다른 함수 객체다.
+
+        객체를 많이 생성하면 동일한 역할을 하는 메서드가
+        객체마다 별도로 만들어진다.
+    */
+}
+
+// < 2-2. 객체가 여러 개일 때 메서드가 각각 만들어지는지 확인하기 >
+
+{
+    function Product(name, price) {
+        this.name = name;
+        this.price = price;
+
+        this.getPrice = function () {
+            return this.price;
+        };
+    }
+
+    let product1 = new Product("키보드", 50000);
+    let product2 = new Product("마우스", 30000);
+    let product3 = new Product("모니터", 200000);
+
+    console.log(product1.getPrice()); // 50000
+    console.log(product2.getPrice()); // 30000
+    console.log(product3.getPrice()); // 200000
+
+    console.log(product1.getPrice === product2.getPrice); // false
+    console.log(product2.getPrice === product3.getPrice); // false
+
+    /*
+        각 객체는 서로 다른 getPrice 함수를 가지고 있다.
+
+        객체의 개수가 많아지고 공통 메서드도 많아지면
+        동일한 기능을 가진 함수가 여러 개 만들어질 수 있다.
+    */
+}
+
+/*
+    < 3. prototype을 이용한 메서드 공유 >
+
+    생성자 함수의 prototype에 메서드를 정의하면
+    해당 생성자 함수로 만든 객체들이 그 메서드를 공유할 수 있다.
+
+    생성자 함수의 prototype은
+    생성자 함수와 관련된 프로토타입 객체를 가리킨다.
+*/
+
+// < 3-1. prototype에 메서드 정의하기 >
+
+{
+    function Student(name, score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    Student.prototype.introduce = function () {
+        console.log(
+            this.name + "의 점수는 " + this.score + "점입니다."
+        );
+    };
+
+    let student1 = new Student("홍길동", 80);
+    let student2 = new Student("김철수", 90);
+
+    student1.introduce();
+    // 홍길동의 점수는 80점입니다.
+
+    student2.introduce();
+    // 김철수의 점수는 90점입니다.
+
+    console.log(student1.introduce === student2.introduce);
+    // true
+
+    /*
+        introduce 메서드는 Student.prototype에 한 번 정의되어 있다.
+
+        Student.prototype
+            └── introduce : 함수
+
+        student1과 student2는 각각 자신의 introduce 함수를
+        가지고 있는 것이 아니다.
+
+        두 객체 모두 프로토타입을 통해 같은 메서드를 사용한다.
+
+        student1 ───┐
+                    ├──> Student.prototype
+        student2 ───┘          └── introduce
+
+        이처럼 공통 메서드를 프로토타입에 정의하면
+        객체마다 같은 함수를 별도로 생성할 필요가 없다.
+    */
+}
+
+// < 3-2. 생성자 함수 내부의 메서드와 prototype 메서드 비교 >
+
+{
+    function StudentA(name) {
+        this.name = name;
+
+        this.introduce = function () {
+            console.log(this.name);
+        };
+    }
+
+    function StudentB(name) {
+        this.name = name;
+    }
+
+    StudentB.prototype.introduce = function () {
+        console.log(this.name);
+    };
+
+    let a1 = new StudentA("홍길동");
+    let a2 = new StudentA("김철수");
+
+    let b1 = new StudentB("홍길동");
+    let b2 = new StudentB("김철수");
+
+    console.log(a1.introduce === a2.introduce); // false
+    console.log(b1.introduce === b2.introduce); // true
+
+    /*
+        StudentA
+        - introduce 함수가 각 객체에 만들어진다.
+        - 객체마다 별도의 함수가 존재한다.
+
+        StudentB
+        - introduce 함수가 프로토타입에 한 번 정의된다.
+        - 여러 객체가 같은 함수를 사용한다.
+
+        일반적인 공통 메서드는 prototype에 정의하는 방식이
+        메서드 공유 측면에서 유리하다.
+    */
+}
+
+/*
+    < 4. prototype과 __proto__의 차이 >
+
+    두 용어는 비슷해 보이지만 의미가 다르다.
+
+    prototype
+    - 일반적인 생성자 함수가 가지고 있는 속성
+    - 해당 함수로 생성된 객체의 프로토타입이 될 객체를 가리킨다.
+
+    __proto__
+    - 객체가 자신의 프로토타입을 확인할 때 사용할 수 있는 접근자
+    - 표준화된 접근자이지만 코드에서는 Object.getPrototypeOf()를
+      사용하는 편이 명확하다.
+
+    참고
+    - 모든 함수에 prototype이 있는 것은 아니다.
+    - 예를 들어 화살표 함수는 일반적인 prototype 속성을 가지지 않는다.
+*/
+
+// < 4-1. 생성자 함수의 prototype 확인하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    console.log(Person.prototype);
+    // Person 생성자 함수의 프로토타입 객체
+
+    console.log(typeof Person.prototype);
+    // object
+
+    /*
+        Person.prototype은 Person이라는 함수의 속성이다.
+
+        이 객체에는 일반적으로 constructor 속성이 존재하며,
+        Person.prototype에 메서드를 추가할 수도 있다.
+    */
+}
+
+// < 4-2. 생성된 객체의 프로토타입 확인하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.__proto__ === Person.prototype);
+    // true
+
+    console.log(Object.getPrototypeOf(person1) === Person.prototype);
+    // true
+
+    /*
+        person1.__proto__는 person1의 프로토타입 객체를 가리킨다.
+
+        Object.getPrototypeOf(person1)은
+        person1의 프로토타입 객체를 반환한다.
+
+        person1.__proto__와 Person.prototype은
+        동일한 프로토타입 객체를 가리킨다.
+    */
+}
+
+// < 4-3. prototype과 __proto__의 관계 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    console.log(person1.__proto__ === Person.prototype); // true
+    console.log(person2.__proto__ === Person.prototype); // true
+
+    console.log(person1.__proto__ === person2.__proto__); // true
+
+    /*
+        Person.prototype
+             ↑       ↑
+             │       │
+        person1     person2
+
+        두 객체는 같은 프로토타입 객체를 사용한다.
+    */
+}
+
+// < 4-4. prototype은 모든 함수에 존재하는가? >
+
+{
+    function normalFunction() {
+        console.log("일반 함수");
+    }
+
+    const arrowFunction = () => {
+        console.log("화살표 함수");
+    };
+
+    console.log(normalFunction.prototype);
+    // 일반적인 함수의 prototype 객체
+
+    console.log(arrowFunction.prototype);
+    // undefined
+
+    /*
+        일반적인 함수 선언 및 함수 표현식으로 만든 함수는
+        보통 prototype 속성을 가진다.
+
+        화살표 함수는 생성자 함수로 사용할 수 없으며
+        일반적인 prototype 속성도 가지지 않는다.
+
+        따라서 다음 코드는 사용할 수 없다.
+
+        new arrowFunction();
+
+        실행하면 TypeError가 발생한다.
+    */
+}
+
+/*
+    < 5. 객체의 속성 탐색 >
+
+    객체에서 속성을 사용하면 JavaScript는 먼저
+    해당 객체가 직접 가지고 있는 속성을 찾는다.
+
+    직접 가지고 있는 속성이 없다면 프로토타입에서 찾는다.
+
+    프로토타입에서도 찾지 못하면 그 상위 프로토타입을 탐색한다.
+
+    이처럼 객체에서 시작하여 연결된 프로토타입을 따라
+    속성을 탐색하는 구조를 프로토타입 체인(Prototype Chain)이라고 한다.
+*/
+
+// < 5-1. 자신의 속성 사용하기 >
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    let person1 = new Person("홍길동", 25);
+
+    console.log(person1.name); // 홍길동
+    console.log(person1.age);  // 25
+
+    /*
+        name과 age는 생성자 함수의 this에 저장했다.
+
+        new Person()으로 생성된 person1이 직접 가지고 있는 속성이다.
+    */
+}
+
+// < 5-2. 프로토타입에서 속성 찾기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    console.log(person1.name); // 홍길동
+    console.log(person2.name); // 김철수
+
+    console.log(person1.job); // 개발자
+    console.log(person2.job); // 개발자
+
+    /*
+        person1과 person2는 job 속성을 직접 가지고 있지 않다.
+
+        JavaScript는 객체에서 job을 찾지 못하면
+        프로토타입 객체에서 job을 찾는다.
+
+        Person.prototype.job이 있으므로 해당 값을 반환한다.
+    */
+}
+
+// < 5-3. 객체가 속성을 직접 가지고 있는지 확인하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.name); // 홍길동
+    console.log(person1.job);  // 개발자
+
+    console.log(Object.hasOwn(person1, "name")); // true
+    console.log(Object.hasOwn(person1, "job"));  // false
+
+    /*
+        Object.hasOwn(객체, 속성명)
+
+        해당 객체가 속성을 직접 가지고 있는지 확인한다.
+        프로토타입을 통해 사용할 수 있는 속성은 true로 판단하지 않는다.
+
+        name
+        - person1이 직접 가지고 있다.
+        - true
+
+        job
+        - Person.prototype에 있다.
+        - person1이 직접 가지고 있지 않다.
+        - false
+    */
+}
+
+// < 5-4. in 연산자로 속성 확인하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    console.log("name" in person1); // true
+    console.log("job" in person1);  // true
+
+    /*
+        in 연산자는 객체 자신뿐 아니라
+        프로토타입 체인을 통해 사용할 수 있는 속성도 확인한다.
+
+        Object.hasOwn()
+        - 객체가 직접 가지고 있는 속성인가?
+
+        in
+        - 객체 또는 프로토타입 체인에서 사용할 수 있는 속성인가?
+    */
+}
+
+// < 5-5. 프로토타입에서 찾을 수 없는 속성 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.name);    // 홍길동
+    console.log(person1.address); // undefined
+
+    /*
+        address는 person1에도 없고
+        프로토타입 체인에서도 찾을 수 없다.
+
+        따라서 undefined가 반환된다.
+    */
+}
+
+/*
+    < 6. 프로토타입 체인 >
+
+    일반적인 객체의 프로토타입 구조는 다음과 같다.
+
+    person1
+       |
+       v
+    Person.prototype
+       |
+       v
+    Object.prototype
+       |
+       v
+    null
+
+    일반 객체의 프로토타입은 보통 Object.prototype으로 이어진다.
+    Object.prototype의 프로토타입은 null이다.
+
+    null은 더 이상 연결된 프로토타입 객체가 없다는 의미다.
+*/
+
+// < 6-1. 프로토타입 연결 확인하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(
+        Object.getPrototypeOf(person1) === Person.prototype
+    );
+    // true
+
+    console.log(
+        Object.getPrototypeOf(Person.prototype) === Object.prototype
+    );
+    // true
+
+    console.log(
+        Object.getPrototypeOf(Object.prototype)
+    );
+    // null
+}
+
+// < 6-2. Object.prototype의 메서드 사용하기 >
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    console.log(person.toString());
+    // 일반적인 객체의 문자열 표현
+
+    console.log(person.hasOwnProperty("name")); // true
+    console.log(person.hasOwnProperty("job"));  // false
+
+    /*
+        person 객체에 toString()이나 hasOwnProperty()를
+        직접 정의하지 않았더라도 사용할 수 있다.
+
+        프로토타입 체인을 따라 올라가면
+        Object.prototype에서 해당 메서드를 찾을 수 있기 때문이다.
+
+        참고:
+        객체가 Object.prototype을 상속하지 않는 특수한 경우에는
+        이 메서드들이 제공되지 않을 수 있다.
+        또한 속성 이름이 hasOwnProperty인 경우에도 직접 호출에 주의해야 한다.
+    */
+}
+
+// < 6-3. 프로토타입 체인을 따라 메서드 찾기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    let dog = new Animal("강아지");
+
+    dog.eat();
+    // 강아지이(가) 먹습니다.
+
+    /*
+        dog.eat()을 실행할 때의 탐색 과정
+
+        1. dog 객체에서 eat을 찾는다.
+        2. dog에 eat이 없으므로 Animal.prototype에서 찾는다.
+        3. Animal.prototype.eat을 발견한다.
+        4. 해당 함수를 실행한다.
+
+        메서드가 프로토타입에 정의되어 있어도
+        메서드 호출 시 this는 일반적으로 호출한 객체인 dog를 가리킨다.
+    */
+}
+
+/*
+    < 7. 프로토타입 속성과 객체 자신의 속성 >
+
+    객체가 직접 가지고 있는 속성과 프로토타입에 있는 속성의
+    이름이 같으면 어떻게 될까?
+
+    객체 자신의 속성이 우선한다.
+    이를 속성 가리기(Property Shadowing)라고 한다.
+*/
+
+// < 7-1. 객체 자신의 속성이 우선한다 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.job); // 개발자
+
+    person1.job = "디자이너";
+
+    console.log(person1.job); // 디자이너
+    console.log(Person.prototype.job); // 개발자
+
+    /*
+        person1.job = "디자이너"를 실행하면
+        프로토타입의 job을 수정하는 것이 아니다.
+
+        person1 객체에 새로운 job 속성을 생성한다.
+
+        person1.job
+        - 디자이너
+        - 객체 자신의 속성
+
+        Person.prototype.job
+        - 개발자
+        - 프로토타입의 속성
+
+        두 속성은 서로 다른 위치에 존재한다.
+    */
+}
+
+// < 7-2. 객체 자신의 속성을 삭제하면 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    person1.job = "디자이너";
+
+    console.log(person1.job); // 디자이너
+
+    delete person1.job;
+
+    console.log(person1.job); // 개발자
+
+    /*
+        delete person1.job은 person1이 직접 가지고 있는 job을 삭제한다.
+
+        프로토타입의 job은 삭제하지 않는다.
+
+        자신의 job이 삭제되면 프로토타입 체인을 다시 탐색하므로
+        프로토타입에 있는 "개발자"가 반환된다.
+    */
+}
+
+// < 7-3. 프로토타입의 속성 변경하기 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    Person.prototype.job = "강사";
+
+    console.log(person1.job); // 강사
+    console.log(person2.job); // 강사
+
+    /*
+        두 객체 모두 자신의 job을 가지고 있지 않다.
+
+        Person.prototype.job을 변경하면
+        해당 프로토타입을 통해 job을 사용하는 객체에서
+        변경된 값을 확인할 수 있다.
+    */
+}
+
+// < 7-4. 프로토타입의 메서드도 같은 원리다 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.introduce = function () {
+        console.log("안녕하세요. " + this.name + "입니다.");
+    };
+
+    let person1 = new Person("홍길동");
+
+    person1.introduce();
+    // 안녕하세요. 홍길동입니다.
+
+    person1.introduce = function () {
+        console.log("반갑습니다. " + this.name + "입니다.");
+    };
+
+    person1.introduce();
+    // 반갑습니다. 홍길동입니다.
+
+    /*
+        person1.introduce에 함수를 대입하면
+        person1이 직접 introduce 메서드를 가지게 된다.
+
+        프로토타입의 introduce는 그대로 유지된다.
+
+        person1에서 introduce를 찾으면 자신의 메서드를 먼저 발견하므로
+        프로토타입의 메서드는 가려진다.
+    */
+}
+
+/*
+    < 8. 프로토타입에 속성과 메서드 추가하기 >
+
+    생성자 함수로 객체를 생성한 뒤에도
+    해당 생성자 함수의 prototype에 속성과 메서드를 추가할 수 있다.
+
+    이미 생성된 객체도 같은 프로토타입 객체를 사용하고 있다면
+    새로 추가된 메서드를 사용할 수 있다.
+*/
+
+// < 8-1. 생성 후 프로토타입에 메서드 추가하기 >
+
+{
+    function Member(name) {
+        this.name = name;
+    }
+
+    let member1 = new Member("홍길동");
+    let member2 = new Member("김철수");
+
+    Member.prototype.sayHello = function () {
+        console.log("안녕하세요. " + this.name + "입니다.");
+    };
+
+    member1.sayHello();
+    // 안녕하세요. 홍길동입니다.
+
+    member2.sayHello();
+    // 안녕하세요. 김철수입니다.
+
+    /*
+        member1과 member2를 생성한 이후에 메서드를 추가했다.
+
+        두 객체는 생성될 때부터 Member.prototype을 프로토타입으로
+        연결하고 있었으므로 새로 추가된 메서드를 사용할 수 있다.
+    */
+}
+
+// < 8-2. 프로토타입에 공통 속성 추가하기 >
+
+{
+    function Member(name) {
+        this.name = name;
+    }
+
+    Member.prototype.school = "개발자 교육센터";
+
+    let member1 = new Member("홍길동");
+    let member2 = new Member("김철수");
+
+    console.log(member1.school); // 개발자 교육센터
+    console.log(member2.school); // 개발자 교육센터
+
+    /*
+        모든 Member 객체가 공통으로 사용할 값을
+        프로토타입에 저장할 수 있다.
+
+        다만 프로토타입에 있는 객체나 배열을 직접 변경하면
+        해당 프로토타입을 공유하는 모든 객체에서 변경이 보일 수 있다.
+
+        객체마다 달라야 하는 값은 보통 생성자 함수의 this에 저장한다.
+    */
+}
+
+// < 8-3. 객체마다 달라야 하는 속성과 공통 메서드 구분하기 >
+
+{
+    function Member(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    Member.prototype.introduce = function () {
+        console.log(
+            "이름 : " + this.name +
+            ", 나이 : " + this.age
+        );
+    };
+
+    let member1 = new Member("홍길동", 25);
+    let member2 = new Member("김철수", 30);
+
+    member1.introduce();
+    // 이름 : 홍길동, 나이 : 25
+
+    member2.introduce();
+    // 이름 : 김철수, 나이 : 30
+
+    /*
+        name, age
+        - 객체마다 값이 다르다.
+        - this를 이용하여 각 객체에 저장한다.
+
+        introduce()
+        - 공통 기능이다.
+        - prototype에 한 번 정의하여 공유한다.
+
+        메서드 내부의 this는 메서드를 호출한 객체를 가리키므로
+        같은 메서드를 사용하더라도 객체마다 다른 결과가 나온다.
+    */
+}
+
+/*
+    < 9. constructor 속성 >
+
+    일반적인 생성자 함수의 prototype 객체에는
+    constructor라는 속성이 존재한다.
+
+    기본 상태에서 Student.prototype.constructor는 Student를 가리킨다.
+*/
+
+// < 9-1. constructor 확인하기 >
+
+{
+    function Student(name) {
+        this.name = name;
+    }
+
+    let student1 = new Student("홍길동");
+
+    console.log(Student.prototype.constructor === Student);
+    // true
+
+    console.log(student1.constructor === Student);
+    // true
+
+    /*
+        student1이 constructor를 직접 가지고 있지 않아도
+        프로토타입의 constructor를 통해 값을 찾을 수 있다.
+
+        따라서 student1.constructor === Student가 true라고 해서
+        student1이 constructor 속성을 직접 소유한다는 뜻은 아니다.
+    */
+}
+
+// < 9-2. constructor는 반드시 객체 자신의 속성인가? >
+
+{
+    function Student(name) {
+        this.name = name;
+    }
+
+    let student1 = new Student("홍길동");
+
+    console.log(Object.hasOwn(student1, "constructor"));
+    // false
+
+    console.log(Object.hasOwn(Student.prototype, "constructor"));
+    // true
+
+    /*
+        student1.constructor는 프로토타입 체인을 통해 찾는다.
+
+        기본 상태에서 constructor는 Student.prototype에 존재한다.
+    */
+}
+
+// < 9-3. prototype 객체를 통째로 교체할 때 주의하기 >
+
+{
+    function Student(name) {
+        this.name = name;
+    }
+
+    Student.prototype = {
+        introduce: function () {
+            console.log("이름 : " + this.name);
+        }
+    };
+
+    let student1 = new Student("홍길동");
+
+    student1.introduce();
+
+    console.log(student1.constructor === Student);
+    // false
+
+    console.log(student1.constructor === Object);
+    // true
+
+    /*
+        Student.prototype을 새로운 객체로 통째로 교체했다.
+
+        새로 만든 객체에는 constructor 속성이 직접 정의되어 있지 않다.
+        따라서 프로토타입 체인을 따라가면 Object.prototype의
+        constructor를 찾게 된다.
+
+        결과적으로 student1.constructor는 Object가 된다.
+
+        일반적으로 생성자 함수의 prototype 객체를 통째로 교체할 때는
+        constructor를 다시 설정하는 것이 좋다.
+    */
+}
+
+// < 9-4. constructor 복구하기 >
+
+{
+    function Student(name) {
+        this.name = name;
+    }
+
+    Student.prototype = {
+        constructor: Student,
+
+        introduce: function () {
+            console.log("이름 : " + this.name);
+        }
+    };
+
+    let student1 = new Student("홍길동");
+
+    student1.introduce();
+
+    console.log(student1.constructor === Student);
+    // true
+
+    console.log(Object.hasOwn(Student.prototype, "constructor"));
+    // true
+
+    /*
+        prototype 객체를 교체할 때 constructor를 명시적으로 설정했다.
+
+        constructor 속성은 객체를 생성하는 데 필요한 필수 엔진 설정값은
+        아니지만, 관례적으로 생성자 함수를 가리키도록 유지한다.
+    */
+}
+
+/*
+    < 10. instanceof 연산자 >
+
+    instanceof는 객체가 특정 생성자 함수의 prototype을
+    프로토타입 체인에서 가지고 있는지 확인할 때 사용한다.
+*/
+
+// < 10-1. 기본 사용법 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1 instanceof Person); // true
+    console.log(person1 instanceof Object); // true
+
+    /*
+        person1의 프로토타입 체인에
+        Person.prototype이 존재하므로 true다.
+
+        일반 객체의 프로토타입 체인에는 보통 Object.prototype도 있으므로
+        person1 instanceof Object도 true다.
+    */
+}
+
+// < 10-2. 생성자 함수가 다른 경우 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    function Animal(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1 instanceof Person); // true
+    console.log(person1 instanceof Animal); // false
+}
+
+// < 10-3. instanceof는 단순히 constructor 속성을 확인하지 않는다 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1 instanceof Person); // true
+
+    /*
+        instanceof는 객체의 프로토타입 체인에
+        Person.prototype이 존재하는지를 기준으로 판단한다.
+
+        단순히 person1.constructor === Person인지 확인하는 연산자가 아니다.
+    */
+}
+
+/*
+    < 11. 생성자 함수와 프로토타입을 이용한 상속 >
+
+    상속(Inheritance)은 기존 객체의 기능을 재사용하면서
+    새로운 기능을 추가할 수 있도록 하는 개념이다.
+
+    예를 들어 모든 동물은 이름을 가지고 먹을 수 있다.
+    강아지는 동물의 공통 기능을 사용하면서 짖는 기능을 추가할 수 있다.
+
+    생성자 함수 기반 상속에서는 일반적으로
+    부모 생성자 호출과 프로토타입 연결을 함께 설정한다.
+*/
+
+// < 11-1. 부모 생성자 함수 만들기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    let animal1 = new Animal("동물");
+
+    animal1.eat();
+    // 동물이(가) 먹습니다.
+}
+
+// < 11-2. 자식 생성자 함수 만들기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    function Dog(name, breed) {
+        Animal.call(this, name);
+        this.breed = breed;
+    }
+
+    /*
+        Animal.call(this, name)
+
+        Animal 생성자 함수의 코드를 실행하되
+        그 함수 안의 this가 현재 Dog 객체를 가리키도록 한다.
+
+        이 과정을 통해 name 속성을 Dog 객체에 설정한다.
+
+        하지만 이것만으로는 Animal.prototype의 메서드를
+        상속받은 것이 아니다.
+    */
+
+    let dog1 = new Dog("초코", "푸들");
+
+    console.log(dog1.name);  // 초코
+    console.log(dog1.breed); // 푸들
+
+    // dog1.eat();
+    // TypeError: dog1.eat is not a function
+
+    /*
+        Animal.call()은 Animal 생성자 함수의 초기화 작업을 실행한다.
+        부모 프로토타입과 자식 프로토타입을 연결하는 작업은 별도로 필요하다.
+    */
+}
+
+// < 11-3. Object.create()로 프로토타입 연결하기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    function Dog(name, breed) {
+        Animal.call(this, name);
+        this.breed = breed;
+    }
+
+    Dog.prototype = Object.create(Animal.prototype);
+
+    /*
+        Object.create(Animal.prototype)은
+        Animal.prototype을 프로토타입으로 가지는 새 객체를 만든다.
+
+        그 새 객체를 Dog.prototype으로 지정하면
+        Dog.prototype과 Animal.prototype이 연결된다.
+    */
+
+    let dog1 = new Dog("초코", "푸들");
+
+    console.log(dog1.name);  // 초코
+    console.log(dog1.breed); // 푸들
+
+    dog1.eat();
+    // 초코이(가) 먹습니다.
+
+    /*
+        프로토타입 체인
+
+        dog1
+          |
+          v
+        Dog.prototype
+          |
+          v
+        Animal.prototype
+          |
+          v
+        Object.prototype
+          |
+          v
+        null
+
+        dog1에서 eat을 찾지 못하면
+        Dog.prototype에서 찾고,
+        여기에서도 찾지 못하면 Animal.prototype에서 찾는다.
+    */
+}
+
+// < 11-4. 상속 후 constructor 설정하기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    function Dog(name, breed) {
+        Animal.call(this, name);
+        this.breed = breed;
+    }
+
+    Dog.prototype = Object.create(Animal.prototype);
+
+    Dog.prototype.constructor = Dog;
+
+    /*
+        Dog.prototype을 교체했으므로
+        constructor를 Dog로 다시 설정한다.
+
+        Object.create()로 연결한 프로토타입에는
+        기본적으로 Dog를 가리키는 constructor가 없다.
+    */
+
+    Dog.prototype.bark = function () {
+        console.log(this.name + "이(가) 짖습니다.");
+    };
+
+    let dog1 = new Dog("초코", "푸들");
+
+    dog1.eat();
+    // 초코이(가) 먹습니다.
+
+    dog1.bark();
+    // 초코이(가) 짖습니다.
+
+    console.log(dog1.constructor === Dog); // true
+    console.log(dog1 instanceof Dog);      // true
+    console.log(dog1 instanceof Animal);   // true
+}
+
+// < 11-5. 부모 메서드와 자식 메서드 함께 사용하기 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    function Dog(name, breed) {
+        Animal.call(this, name);
+        this.breed = breed;
+    }
+
+    Dog.prototype = Object.create(Animal.prototype);
+    Dog.prototype.constructor = Dog;
+
+    Dog.prototype.bark = function () {
+        console.log(this.name + "이(가) 짖습니다.");
+    };
+
+    let dog1 = new Dog("초코", "푸들");
+
+    dog1.eat();  // 부모 프로토타입의 메서드
+    dog1.bark(); // 자식 프로토타입의 메서드
+
+    /*
+        Animal.prototype.eat()
+        - 동물 공통 기능
+
+        Dog.prototype.bark()
+        - 강아지의 추가 기능
+
+        Dog는 Animal의 공통 기능을 사용하면서
+        자신만의 기능을 추가할 수 있다.
+    */
+}
+
+/*
+    < 12. 프로토타입과 class의 관계 >
+
+    JavaScript의 class 문법은 기존 프로토타입 기반 객체 모델을
+    더 편리하게 작성하도록 제공하는 문법이다.
+
+    class로 만든 메서드도 일반적으로 클래스의 prototype에 저장된다.
+
+    따라서 class로 생성한 객체들도 프로토타입 체인을 사용한다.
+*/
+
+// < 12-1. class로 메서드 정의하기 >
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log("안녕하세요. " + this.name + "입니다.");
+        }
+    }
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    person1.introduce();
+    person2.introduce();
+
+    console.log(Person.prototype);
+    console.log(person1.__proto__ === Person.prototype);
+    // true
+
+    console.log(person1.introduce === person2.introduce);
+    // true
+
+    /*
+        constructor()
+        - 객체마다 필요한 초기 속성을 설정한다.
+        - name은 각 객체의 own property가 된다.
+
+        introduce()
+        - 클래스의 prototype에 정의된다.
+        - 여러 인스턴스가 같은 메서드를 공유한다.
+    */
+}
+
+// < 12-2. class 메서드가 prototype에 있는지 확인하기 >
+
+{
+    class Product {
+        constructor(name, price) {
+            this.name = name;
+            this.price = price;
+        }
+
+        getPrice() {
+            return this.price;
+        }
+    }
+
+    let product1 = new Product("키보드", 50000);
+
+    console.log(Object.hasOwn(product1, "name"));    // true
+    console.log(Object.hasOwn(product1, "price"));   // true
+    console.log(Object.hasOwn(product1, "getPrice")); // false
+
+    console.log(Object.hasOwn(Product.prototype, "getPrice"));
+    // true
+
+    console.log(product1.getPrice()); // 50000
+
+    /*
+        name, price
+        - product1이 직접 가지고 있는 속성
+
+        getPrice
+        - Product.prototype이 가지고 있는 메서드
+        - product1은 프로토타입 체인을 통해 사용한다.
+    */
+}
+
+// < 12-3. class 상속과 prototype >
+
+{
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        eat() {
+            console.log(this.name + "이(가) 먹습니다.");
+        }
+    }
+
+    class Dog extends Animal {
+        constructor(name, breed) {
+            super(name);
+            this.breed = breed;
+        }
+
+        bark() {
+            console.log(this.name + "이(가) 짖습니다.");
+        }
+    }
+
+    let dog1 = new Dog("초코", "푸들");
+
+    dog1.eat();
+    dog1.bark();
+
+    console.log(dog1 instanceof Dog);    // true
+    console.log(dog1 instanceof Animal); // true
+
+    /*
+        class의 extends와 super는
+        앞에서 직접 작성한 프로토타입 연결 작업을 편리하게 처리한다.
+
+        extends
+        - 상속 관계를 선언한다.
+
+        super(name)
+        - 부모 클래스의 constructor를 호출한다.
+
+        Dog.prototype은 Animal.prototype을 상속하는 구조로 연결된다.
+    */
+}
+
+/*
+    < 13. Object.create()로 특정 프로토타입을 가진 객체 만들기 >
+
+    객체를 생성할 때 특정 객체를 프로토타입으로 지정할 수도 있다.
+
+    Object.create(프로토타입 객체)
+    - 전달한 객체를 프로토타입으로 가지는 새 객체를 생성한다.
+*/
+
+// < 13-1. 공통 기능을 가진 프로토타입 객체 만들기 >
+
+{
+    const animalPrototype = {
+        eat: function () {
+            console.log(this.name + "이(가) 먹습니다.");
+        }
+    };
+
+    let dog = Object.create(animalPrototype);
+
+    dog.name = "초코";
+
+    dog.eat();
+    // 초코이(가) 먹습니다.
+
+    console.log(Object.getPrototypeOf(dog) === animalPrototype);
+    // true
+
+    /*
+        dog는 animalPrototype을 프로토타입으로 사용한다.
+
+        dog 자체에 eat 메서드가 없어도
+        프로토타입 체인을 통해 eat을 사용할 수 있다.
+    */
+}
+
+// < 13-2. Object.create(null) >
+
+{
+    let dictionary = Object.create(null);
+
+    dictionary.name = "홍길동";
+    dictionary.age = 25;
+
+    console.log(dictionary.name); // 홍길동
+    console.log(dictionary.age);  // 25
+
+    console.log(Object.getPrototypeOf(dictionary));
+    // null
+
+    /*
+        Object.create(null)은 프로토타입이 null인 객체를 만든다.
+
+        일반 객체와 달리 Object.prototype을 상속하지 않는다.
+
+        따라서 toString()이나 hasOwnProperty() 같은
+        Object.prototype의 메서드를 기본적으로 사용할 수 없다.
+
+        특수한 키-값 저장 구조를 만들 때 활용할 수 있지만
+        일반적인 객체를 만들 때 무조건 사용할 방식은 아니다.
+    */
+}
+
+/*
+    < 14. 프로토타입 관련 실무 주의사항 >
+
+    1. 공통 메서드는 prototype에 정의하면 공유할 수 있다.
+
+    2. 객체마다 다른 값은 일반적으로 생성자 함수의 this에 저장한다.
+
+    3. 프로토타입에 있는 객체나 배열을 변경하면
+       같은 프로토타입을 사용하는 여러 객체에 영향이 갈 수 있다.
+
+    4. 객체의 속성을 확인할 때
+       Object.hasOwn()과 in의 차이를 이해해야 한다.
+
+    5. prototype 객체를 통째로 교체하면 constructor 연결을 확인해야 한다.
+
+    6. __proto__는 이해를 위해 알아둘 만하지만
+       프로토타입을 확인할 때는 Object.getPrototypeOf()를 사용하는 편이 좋다.
+
+    7. 프로토타입 체인은 객체에서 속성을 찾는 구조다.
+       상속 관계를 만들 때는 이 연결을 의도적으로 구성해야 한다.
+*/
+
+// < 14-1. 프로토타입에 배열을 두었을 때 발생하는 문제 >
+
+{
+    function TeamMember(name) {
+        this.name = name;
+    }
+
+    TeamMember.prototype.tasks = [];
+
+    let member1 = new TeamMember("홍길동");
+    let member2 = new TeamMember("김철수");
+
+    member1.tasks.push("HTML 작성");
+
+    console.log(member1.tasks);
+    // ["HTML 작성"]
+
+    console.log(member2.tasks);
+    // ["HTML 작성"]
+
+    /*
+        tasks 배열은 각 객체의 속성이 아니라
+        TeamMember.prototype에 있는 배열이다.
+
+        member1과 member2 모두 같은 배열을 사용한다.
+
+        객체마다 별도의 배열이 필요하다면 생성자 함수에서 초기화한다.
+    */
+}
+
+// < 14-2. 객체마다 별도의 배열 생성하기 >
+
+{
+    function TeamMember(name) {
+        this.name = name;
+        this.tasks = [];
+    }
+
+    TeamMember.prototype.addTask = function (task) {
+        this.tasks.push(task);
+    };
+
+    let member1 = new TeamMember("홍길동");
+    let member2 = new TeamMember("김철수");
+
+    member1.addTask("HTML 작성");
+    member2.addTask("CSS 작성");
+
+    console.log(member1.tasks);
+    // ["HTML 작성"]
+
+    console.log(member2.tasks);
+    // ["CSS 작성"]
+
+    /*
+        tasks는 객체마다 별도로 생성한다.
+        addTask는 공통 기능이므로 prototype에 정의한다.
+
+        이처럼 속성과 메서드의 역할을 구분하면
+        참조 공유로 인한 실수를 줄일 수 있다.
+    */
+}
+
+/*
+    < 15. 연습문제 >
+
+    정답을 보기 전에 직접 코드를 작성하고 실행 결과를 예상하자.
+*/
+
+// < 문제 1. 메서드 공유 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. Employee 생성자 함수를 만든다.
+    2. 매개변수로 name과 salary를 전달받는다.
+    3. name과 salary를 객체 자신의 속성으로 저장한다.
+    4. prototype에 introduce() 메서드를 정의한다.
+    5. introduce()는 다음 형식으로 출력한다.
+
+       홍길동의 월급은 300만원입니다.
+
+    6. 직원 두 명을 생성하고 introduce()를 호출한다.
+    7. 두 직원의 introduce 메서드가 같은 함수인지 비교한다.
+*/
+
+// < 문제 2. prototype과 own property >
+
+/*
+    다음 코드를 작성하고 결과를 확인하시오.
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    확인할 내용
+    1. person1.name의 값
+    2. person1.job의 값
+    3. Object.hasOwn(person1, "name")의 결과
+    4. Object.hasOwn(person1, "job")의 결과
+    5. "job" in person1의 결과
+*/
+
+// < 문제 3. 속성 가리기 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. Person 생성자 함수에 name을 저장한다.
+    2. Person.prototype에 job을 "개발자"로 설정한다.
+    3. person1을 생성한다.
+    4. person1.job을 출력한다.
+    5. person1.job을 "강사"로 변경한다.
+    6. person1.job과 Person.prototype.job을 각각 출력한다.
+    7. person1.job을 삭제한 뒤 다시 출력한다.
+
+    각 단계에서 어떤 값이 출력되는지 설명하시오.
+*/
+
+// < 문제 4. 생성자 함수 상속 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. Animal 생성자 함수는 name을 저장한다.
+    2. Animal.prototype에 eat() 메서드를 정의한다.
+    3. Dog 생성자 함수는 name과 breed를 저장한다.
+    4. Animal.call(this, name)을 사용한다.
+    5. Object.create(Animal.prototype)으로 프로토타입을 연결한다.
+    6. Dog.prototype.constructor를 Dog로 설정한다.
+    7. Dog.prototype에 bark() 메서드를 정의한다.
+    8. Dog 객체를 생성한 뒤 eat()과 bark()를 모두 호출한다.
+    9. instanceof를 이용해 상속 관계를 확인한다.
+*/
+
+// < 문제 5. 프로토타입 배열 공유 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. Member 생성자 함수를 만든다.
+    2. 각 객체는 name을 가진다.
+    3. 모든 객체가 공통으로 사용하는 메서드 introduce()를
+       prototype에 정의한다.
+    4. 객체마다 별도의 hobbies 배열을 가져야 한다.
+    5. hobbies에 서로 다른 취미를 추가한다.
+    6. 두 객체의 hobbies가 서로 영향을 주지 않는지 확인한다.
+*/
+
+/*
+    < 16. 연습문제 정답 >
+*/
+
+// < 문제 1 정답 >
+
+{
+    function Employee(name, salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    Employee.prototype.introduce = function () {
+        console.log(
+            this.name + "의 월급은 " + this.salary + "만원입니다."
+        );
+    };
+
+    let employee1 = new Employee("홍길동", 300);
+    let employee2 = new Employee("김철수", 350);
+
+    employee1.introduce();
+    // 홍길동의 월급은 300만원입니다.
+
+    employee2.introduce();
+    // 김철수의 월급은 350만원입니다.
+
+    console.log(employee1.introduce === employee2.introduce);
+    // true
+}
+
+// < 문제 2 정답 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.name); // 홍길동
+    console.log(person1.job);  // 개발자
+
+    console.log(Object.hasOwn(person1, "name")); // true
+    console.log(Object.hasOwn(person1, "job"));  // false
+
+    console.log("job" in person1); // true
+}
+
+// < 문제 3 정답 >
+
+{
+    function Person(name) {
+        this.name = name;
+    }
+
+    Person.prototype.job = "개발자";
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.job); // 개발자
+
+    person1.job = "강사";
+
+    console.log(person1.job);           // 강사
+    console.log(Person.prototype.job);  // 개발자
+
+    delete person1.job;
+
+    console.log(person1.job); // 개발자
+}
+
+// < 문제 4 정답 >
+
+{
+    function Animal(name) {
+        this.name = name;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log(this.name + "이(가) 먹습니다.");
+    };
+
+    function Dog(name, breed) {
+        Animal.call(this, name);
+        this.breed = breed;
+    }
+
+    Dog.prototype = Object.create(Animal.prototype);
+    Dog.prototype.constructor = Dog;
+
+    Dog.prototype.bark = function () {
+        console.log(this.name + "이(가) 짖습니다.");
+    };
+
+    let dog1 = new Dog("초코", "푸들");
+
+    dog1.eat();
+    // 초코이(가) 먹습니다.
+
+    dog1.bark();
+    // 초코이(가) 짖습니다.
+
+    console.log(dog1 instanceof Dog);    // true
+    console.log(dog1 instanceof Animal); // true
+}
+
+// < 문제 5 정답 >
+
+{
+    function Member(name) {
+        this.name = name;
+        this.hobbies = [];
+    }
+
+    Member.prototype.introduce = function () {
+        console.log("제 이름은 " + this.name + "입니다.");
+    };
+
+    let member1 = new Member("홍길동");
+    let member2 = new Member("김철수");
+
+    member1.hobbies.push("축구");
+    member2.hobbies.push("독서");
+
+    member1.introduce();
+    member2.introduce();
+
+    console.log(member1.hobbies); // ["축구"]
+    console.log(member2.hobbies); // ["독서"]
+
+    console.log(member1.introduce === member2.introduce);
+    // true
+
+    console.log(member1.hobbies === member2.hobbies);
+    // false
+}
+
+/*
+    < 17. 최종 정리 >
+
+    1. prototype은 일반적인 생성자 함수가 가지고 있는 속성이다.
+       해당 생성자 함수로 생성한 객체의 프로토타입이 될 객체를 가리킨다.
+    2. __proto__는 객체의 프로토타입에 접근하는 데 사용할 수 있는
+       접근자다. Object.getPrototypeOf()로 확인할 수도 있다.
+    3. 생성자 함수 내부에서 this.method = function () {...}으로 정의하면
+       객체를 생성할 때마다 메서드가 별도로 만들어진다.
+    4. 생성자 함수의 prototype에 메서드를 정의하면
+       여러 객체가 같은 메서드를 공유할 수 있다.
+    5. 객체에서 속성을 찾을 때 자신의 속성을 먼저 확인하고,
+       없으면 프로토타입 체인을 따라 탐색한다.
+    6. 객체 자신의 속성과 프로토타입의 속성 이름이 같으면
+       객체 자신의 속성이 우선한다.
+    7. constructor는 기본적으로 프로토타입 객체에서
+       해당 생성자 함수를 가리키는 속성이다.
+    8. instanceof는 프로토타입 체인에 특정 생성자 함수의
+       prototype이 포함되어 있는지를 확인한다.
+    9. 생성자 함수 기반 상속에서는 부모 생성자 호출과
+       프로토타입 연결을 구분해서 이해해야 한다.
+    10. class 문법도 프로토타입 기반 객체 모델을 사용한다.
+        class의 일반 메서드는 보통 클래스의 prototype에 정의된다.
+    11. 객체마다 달라야 하는 속성은 생성자 함수에서 초기화하고,
+        여러 객체가 공유하는 메서드는 prototype에 정의하는 것이
+        일반적인 설계 방식이다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

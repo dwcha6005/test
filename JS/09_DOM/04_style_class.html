@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="04_style_class.js" defer></script>
+    <title>Document</title>
+</head>
+
+<style>
+    .title {
+        color: navy;
+        font-size: 30px;
+    }
+    .highlight {
+        background-color: yellow;
+        color: red;
+    }
+    .card {
+        width: 300px;
+        padding: 20px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: white;
+        transition: 0.3s;
+    }
+    .active {
+        background-color: #dbeafe;
+        border: 2px solid royalblue;
+    }
+    .dark {
+        background-color: #222;
+        color: white;
+    }
+    .hidden {
+        display: none;
+    }
+    .large {
+        font-size: 24px;
+    }
+    .error {
+        color: red;
+        border: 2px solid red;
+    }
+    .success {
+        color: green;
+        border: 2px solid green;
+    }
+</style>
+
+<body>
+
+    <h1 id="title" class="title">DOM 스타일 실습</h1>
+
+    <p id="message">스타일을 변경해 봅시다.</p>
+
+    <div id="card" class="card">
+        카드 영역입니다.
+    </div>
+
+    <input type="text" id="username" placeholder="이름 입력">
+
+    <p id="notice">안내 메시지입니다.</p>
+
+    <button id="btn">버튼</button>
+</body>
+</html>

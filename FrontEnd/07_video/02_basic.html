@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Video 실습</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            color: #222;
+        }
+        h1 {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+        h2 {
+            margin-top: 45px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        h3 {
+            margin-top: 28px;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 15px;
+            background: #f4f4f4;
+            border-radius: 6px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        .example {
+            margin: 15px 0 25px;
+            padding: 20px;
+            background: #f7f9fc;
+            border: 1px solid #d9e0ea;
+            border-radius: 8px;
+        }
+        .note {
+            padding: 12px 16px;
+            background: #fff8e6;
+            border-left: 4px solid #e5ad32;
+        }
+        .video-box {
+            margin: 15px 0;
+        }
+        video {
+            max-width: 100%;
+        }
+        .task {
+            margin: 20px 0;
+            padding: 18px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+        }
+        .task h3 {
+            margin-top: 0;
+        }
+        .small {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Video 실습</h1>
+    <p>이번 수업에서는 video 태그를 직접 작성하고 속성을 변경하면서 영상의 재생 방식과 화면 표시가 어떻게 달라지는지 확인한다.</p>
+
+    <!-- < 1. 가장 기본적인 video 태그 > -->
+    <h2>1. 가장 기본적인 video 태그</h2>
+    <p>video 태그는 HTML 문서에 동영상을 삽입하는 요소다. 먼저 영상 파일의 주소를 src 속성으로 연결해 보자.</p>
+
+    <pre><code>&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"&gt;&lt;/video&gt;</code></pre>
+
+    <p>위 코드를 실행하면 영상 요소는 존재하지만 재생 버튼과 같은 기본 조작 UI가 표시되지 않는다.</p>
+    <p>사용자가 직접 재생할 수 있도록 controls 속성을 추가한다.</p>
+
+    <pre><code>&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls&gt;&lt;/video&gt;</code></pre>
+
+    <div class="example">
+        <h3>실행 결과</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls></video>
+        <p class="small">재생, 일시정지, 볼륨 등의 조작 UI를 확인해 보자.</p>
+    </div>
+
+    <p><strong>실습 1.</strong> controls 속성을 삭제한 경우와 추가한 경우를 비교하시오.</p>
+
+    <!-- < 2. src와 controls > -->
+    <h2>2. src와 controls</h2>
+    <h3>2-1. src 속성</h3>
+    <p>src는 재생할 영상 파일의 주소를 지정한다.</p>
+
+    <pre><code>&lt;video src="영상파일주소" controls&gt;&lt;/video&gt;</code></pre>
+
+    <p>영상 파일 주소는 로컬 프로젝트의 상대 경로 또는 외부 서버의 URL을 사용할 수 있다.</p>
+
+    <pre><code>&lt;video src="videos/sample.mp4" controls&gt;&lt;/video&gt;</code></pre>
+
+    <p>위 예제는 현재 HTML 파일을 기준으로 videos 폴더 안의 sample.mp4 파일을 찾는다.</p>
+
+    <h3>2-2. controls 속성</h3>
+    <p>controls는 브라우저가 기본 재생 조작 UI를 표시하도록 한다.</p>
+
+    <div class="example">
+        <h3>controls 사용</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls></video>
+        <h3>controls 미사용</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video>
+        <p class="small">두 영상의 차이를 확인하자. 두 번째 영상은 기본 재생 조작 UI가 없다.</p>
+    </div>
+
+    <p><strong>실습 2.</strong> 두 번째 영상에도 controls 속성을 추가하고 결과를 비교하시오.</p>
+
+    <!-- < 3. width와 height > -->
+    <h2>3. width와 height</h2>
+    <p>width와 height는 영상 요소의 표시 너비와 높이를 지정한다.</p>
+
+    <pre><code>&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="320"&gt;&lt;/video&gt;
+
+&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="640"&gt;&lt;/video&gt;</code></pre>
+
+    <div class="example">
+        <h3>너비 320px</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="320"></video>
+        <h3>너비 640px</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="640"></video>
+    </div>
+
+    <p>width만 지정하면 브라우저는 영상의 원래 비율을 고려해 높이를 계산할 수 있다.</p>
+    <p>반면 width와 height를 모두 지정하면 지정된 표시 영역에 맞춰진다. 원본 비율과 지정한 비율이 다를 경우 CSS 설정에 따라 영상이 찌그러져 보일 수 있다.</p>
+
+    <pre><code>&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="640" height="200"&gt;&lt;/video&gt;</code></pre>
+
+    <div class="example">
+        <h3>너비와 높이를 모두 지정한 경우</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="640" height="200"></video>
+        <p class="small">원본 영상의 비율과 표시 영역의 비율이 다를 때 어떤 현상이 나타나는지 확인하자.</p>
+    </div>
+
+    <p><strong>실습 3.</strong> 너비를 480px로 변경하고, 너비와 높이를 모두 지정했을 때의 차이를 확인하시오.</p>
+
+    <!-- < 4. poster 속성 > -->
+    <h2>4. poster 속성</h2>
+    <p>poster는 영상이 재생되기 전에 표시할 대표 이미지를 지정한다.</p>
+
+    <pre><code>&lt;video
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    controls
+    width="640"
+    poster="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+&gt;&lt;/video&gt;</code></pre>
+
+    <p class="note">주의: poster에는 이미지 파일을 지정해야 한다. 위 코드의 flower.webm은 영상 파일이므로 poster 예제로 적합하지 않다. 아래에서는 실제 이미지 URL을 사용한다.</p>
+
+    <pre><code>&lt;video
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    controls
+    width="640"
+    poster="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.jpg"
+&gt;&lt;/video&gt;</code></pre>
+
+    <div class="example">
+        <h3>poster 적용 예시</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="640" poster="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.jpg"></video>
+        <p class="small">영상이 재생되기 전 표시되는 이미지를 확인하자. 외부 이미지 주소가 변경되거나 제공되지 않으면 표시되지 않을 수 있다.</p>
+    </div>
+
+    <p><strong>실습 4.</strong> poster 속성을 제거한 뒤 영상이 재생되기 전의 화면을 비교하시오.</p>
+
+    <!-- < 5. autoplay, muted, loop > -->
+    <h2>5. autoplay, muted, loop</h2>
+    <p>세 속성은 영상의 자동 재생, 음소거, 반복 재생 동작을 설정한다.</p>
+
+    <pre><code>&lt;video
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+&gt;&lt;/video&gt;</code></pre>
+
+    <ul>
+        <li>autoplay : 자동 재생을 시도한다.</li>
+        <li>muted : 음소거 상태로 시작한다.</li>
+        <li>loop : 영상이 끝나면 반복 재생한다.</li>
+        <li>playsinline : 지원하는 모바일 환경에서 페이지 안에서 재생하도록 요청한다.</li>
+    </ul>
+
+    <div class="example">
+        <h3>자동 재생 및 반복 재생</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" autoplay muted loop playsinline width="480"></video>
+        <p class="small">브라우저 정책에 따라 자동 재생 여부는 달라질 수 있다. 자동 재생을 시도할 때 muted를 함께 사용하는 이유를 생각해 보자.</p>
+    </div>
+
+    <p><strong>실습 5.</strong> muted를 제거한 뒤 자동 재생 여부를 확인하시오. 그다음 loop를 제거하고 영상이 끝난 뒤의 동작을 비교하시오.</p>
+
+    <!-- < 6. preload 속성 > -->
+    <h2>6. preload 속성</h2>
+    <p>preload는 브라우저가 영상 데이터를 미리 불러오는 방식에 대한 힌트다.</p>
+
+    <pre><code>&lt;video src="영상파일주소" controls preload="none"&gt;&lt;/video&gt;
+&lt;video src="영상파일주소" controls preload="metadata"&gt;&lt;/video&gt;
+&lt;video src="영상파일주소" controls preload="auto"&gt;&lt;/video&gt;</code></pre>
+
+    <ul>
+        <li>none : 미리 로딩하지 않도록 요청한다.</li>
+        <li>metadata : 길이 등 미디어 정보를 우선 불러오도록 요청한다.</li>
+        <li>auto : 재생에 필요한 데이터를 미리 불러올 수 있도록 요청한다.</li>
+    </ul>
+    <p>preload는 브라우저가 반드시 그대로 따라야 하는 명령은 아니다. 네트워크 상황이나 autoplay 설정 등에 따라 실제 동작이 달라질 수 있다.</p>
+
+    <p><strong>실습 6.</strong> preload 값을 바꾸어 보고 개발자 도구의 Network 탭에서 영상 파일 요청과 데이터 전송량을 비교하시오. 캐시와 브라우저 정책에 따라 결과가 달라질 수 있다.</p>
+
+    <!-- < 7. source 태그 > -->
+    <h2>7. source 태그</h2>
+    <p>source는 video 요소 안에서 재생할 미디어 파일과 형식을 지정한다.</p>
+
+    <pre><code>&lt;video controls width="640"&gt;
+    &lt;source src="videos/sample.mp4" type="video/mp4"&gt;
+    브라우저에서 영상을 재생할 수 없습니다.
+&lt;/video&gt;</code></pre>
+
+    <p>source를 사용하면 여러 형식의 파일을 제공할 수 있다.</p>
+
+    <pre><code>&lt;video controls&gt;
+    &lt;source src="videos/sample.webm" type="video/webm"&gt;
+    &lt;source src="videos/sample.mp4" type="video/mp4"&gt;
+    브라우저에서 영상을 재생할 수 없습니다.
+&lt;/video&gt;</code></pre>
+
+    <p>브라우저는 재생 가능한 소스를 선택하려고 한다. 단, 파일의 실제 코덱과 서버 응답 등도 재생 가능 여부에 영향을 준다.</p>
+
+    <!-- < 8. 영상 파일 경로 실습 > -->
+    <h2>8. 영상 파일 경로 실습</h2>
+    <p>실제 프로젝트에서는 영상 파일을 별도의 폴더에 저장하고 상대 경로로 연결할 수 있다.</p>
+
+    <pre><code>project/
+├── 02_video_basic.html
+└── videos/
+    └── sample.mp4</code></pre>
+
+    <p>위 구조라면 다음과 같이 작성한다.</p>
+
+    <pre><code>&lt;video src="videos/sample.mp4" controls width="640"&gt;&lt;/video&gt;</code></pre>
+
+    <p>경로가 잘못되었거나 파일이 존재하지 않으면 영상이 재생되지 않는다. 개발자 도구의 Network 탭에서 파일 요청 결과를 확인하면 원인을 찾는 데 도움이 된다.</p>
+
+    <!-- < 9. 종합 실습 > -->
+    <h2>9. 종합 실습 : 영상 소개 페이지 만들기</h2>
+    <p>지금까지 배운 속성을 활용하여 영상 소개 페이지를 작성하시오.</p>
+
+    <div class="task">
+        <h3>실습 조건</h3>
+        <ol>
+            <li>페이지 제목을 작성한다.</li>
+            <li>video 태그를 사용해 영상을 삽입한다.</li>
+            <li>사용자가 재생을 조작할 수 있도록 한다.</li>
+            <li>영상 너비를 640px로 지정한다.</li>
+            <li>영상이 재생되기 전에 표시할 대표 이미지를 지정한다.</li>
+            <li>영상이 모바일 화면에서도 넘치지 않도록 CSS를 작성한다.</li>
+            <li>영상 아래에 영상에 대한 간단한 설명을 작성한다.</li>
+        </ol>
+        <p class="small">공개 샘플 영상 또는 본인이 가진 영상 파일을 사용할 수 있다.</p>
+    </div>
+
+    <h3>완성 예시</h3>
+    <pre><code>&lt;h1&gt;오늘의 영상&lt;/h1&gt;
+&lt;video
+    src="videos/sample.mp4"
+    controls
+    width="640"
+    poster="images/cover.jpg"
+&gt;&lt;/video&gt;
+&lt;p&gt;이번 영상에서는 웹에서 동영상을 삽입하는 방법을 알아봅니다.&lt;/p&gt;</code></pre>
+
+    <p>위 코드는 HTML 구조의 예시다. 실제 프로젝트에서는 파일 경로를 본인의 폴더 구조에 맞게 수정해야 한다.</p>
+
+    <!-- < 10. 확인 문제 > -->
+    <h2>10. 확인 문제</h2>
+    <ol>
+        <li>video 태그에서 controls 속성은 어떤 역할을 하는가?</li>
+        <li>poster와 src의 차이를 설명하시오.</li>
+        <li>autoplay를 사용할 때 muted를 함께 지정하는 이유는 무엇인가?</li>
+        <li>preload="none"과 preload="metadata"의 차이를 설명하시오.</li>
+        <li>video 태그 내부에 source 태그를 여러 개 작성하는 이유는 무엇인가?</li>
+        <li>영상 파일 경로가 잘못되었을 때 개발자 도구에서 무엇을 확인할 수 있는가?</li>
+    </ol>
+</body>
+</html>

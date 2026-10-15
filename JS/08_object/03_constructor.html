@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    03_constructor_function.js
+
+    < 학습 목표 >
+    1. 객체 리터럴의 한계를 이해한다.
+    2. 생성자 함수가 필요한 이유를 이해한다.
+    3. 생성자 함수의 선언과 호출 방법을 익힌다.
+    4. new 연산자가 하는 일을 이해한다.
+    5. this가 생성된 객체를 가리키는 원리를 이해한다.
+    6. 생성자 함수로 여러 개의 객체를 생성할 수 있다.
+*/
+
+
+/*
+    < 1. 객체 리터럴의 한계 >
+
+    객체 : 관련된 데이터와 기능을 하나로 묶는 자료구조
+    객체 리터럴을 사용하면 객체를 쉽게 만들 수 있다.
+*/
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 20,
+        introduce: function() {
+            console.log("제 이름은 " + this.name + "입니다.");
+        }
+    };
+
+    let person2 = {
+        name: "김철수",
+        age: 25,
+        introduce: function() {
+            console.log("제 이름은 " + this.name + "입니다.");
+        }
+    };
+
+    console.log(person1.name);
+    console.log(person2.name);
+
+    person1.introduce();
+    person2.introduce();
+}
+
+/*
+    그런데 같은 구조의 객체를 많이 만들어야 한다면?
+
+    객체 리터럴을 사용하면 객체를 만들 때마다
+    프로퍼티와 메서드를 반복해서 작성해야 한다.
+
+    객체의 구조가 복잡해질수록 코드가 길어지고
+    같은 코드를 반복해서 작성하게 된다.
+
+    이러한 문제를 해결하는 방법 중 하나가 생성자 함수이다.
+*/
+
+
+/*
+    < 2. 생성자 함수란? >
+
+    생성자 함수(Constructor Function)
+    : 객체를 생성하기 위한 설계도 역할을 하는 함수
+
+    일반 함수와 문법적으로 특별히 다른 함수는 아니다.
+    new 연산자와 함께 호출하여 객체를 생성하는 용도로 사용한다.
+
+    생성자 함수의 이름은 관례적으로 첫 글자를 대문자로 작성한다.
+
+    예)
+    function Person() {}
+    function Student() {}
+    function Product() {}
+
+    일반 함수
+    function person() {}
+
+    생성자 함수로 사용할 함수
+    function Person() {}
+
+    첫 글자를 대문자로 작성하는 것은 관례일 뿐,
+    대문자로 작성했다고 자동으로 생성자 함수가 되는 것은 아니다.
+*/
+
+{
+    function Person() {
+        console.log("Person 함수가 실행되었습니다.");
+    }
+
+    // 일반 함수처럼 호출
+    Person();
+
+    // new와 함께 호출
+    let person1 = new Person();
+
+    console.log(person1);
+}
+
+/*
+    위 예제에서 Person()을 호출하면 함수가 실행된다.
+
+    new Person()을 호출하면 객체 생성 과정이 진행된다.
+
+    단, 현재 Person 함수 안에는 객체의 프로퍼티를
+    설정하는 코드가 없으므로 생성된 객체는 비어 있다.
+*/
+
+
+/*
+    < 3. 생성자 함수로 객체의 프로퍼티 설정하기 >
+
+    생성자 함수 안에서 this.name처럼 작성하면
+    생성되는 객체에 name 프로퍼티를 설정할 수 있다.
+
+    여기서 this는 new를 통해 생성 중인 객체를 가리킨다.
+*/
+
+{
+    function Person() {
+        this.name = "홍길동";
+        this.age = 20;
+    }
+
+    let person1 = new Person();
+
+    console.log(person1);
+    console.log(person1.name);
+    console.log(person1.age);
+}
+
+/*
+    실행 과정
+
+    let person1 = new Person();
+
+    1. 새로운 객체를 생성한다.
+    2. 생성자 함수 내부의 this가 새 객체를 가리키도록 설정한다.
+    3. Person 함수 내부의 코드를 실행한다.
+    4. this.name과 this.age를 통해 새 객체에 프로퍼티를 추가한다.
+    5. 생성된 객체를 반환하여 person1에 저장한다.
+
+    결과적으로 person1은 다음과 같은 구조의 객체가 된다.
+
+    {
+        name: "홍길동",
+        age: 20
+    }
+
+    중요!
+    this.name = "홍길동";
+    은 지역변수 name을 선언하는 코드가 아니다.
+
+    this가 가리키는 객체에 name이라는 프로퍼티를 추가하거나
+    기존 프로퍼티의 값을 설정하는 코드이다.
+*/
+
+
+/*
+    < 4. 생성자 함수의 매개변수 >
+
+    생성자 함수로 여러 객체를 만들 때
+    객체마다 다른 값을 설정할 수 있어야 한다.
+
+    이때 매개변수를 사용한다.
+*/
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    let person1 = new Person("홍길동", 20);
+    let person2 = new Person("김철수", 25);
+    let person3 = new Person("이영희", 30);
+
+    console.log(person1.name, person1.age);
+    console.log(person2.name, person2.age);
+    console.log(person3.name, person3.age);
+}
+
+/*
+    new Person("홍길동", 20);
+
+    name 매개변수에는 "홍길동"이 전달된다.
+    age 매개변수에는 20이 전달된다.
+
+    this.name = name;
+    this.age = age;
+
+    생성된 객체의 name과 age 프로퍼티에
+    전달받은 값을 저장한다.
+
+    생성자 함수는 객체의 공통 구조를 정의하고,
+    매개변수로 객체마다 다른 값을 설정할 수 있다.
+*/
+
+
+/*
+    < 5. 생성자 함수에서 this 이해하기 >
+
+    this : 함수가 어떻게 호출되었는지에 따라
+           가리키는 대상이 달라질 수 있는 키워드
+
+    지금 배우는 생성자 함수에서는
+    new와 함께 호출했을 때 생성되는 객체를 가리킨다.
+*/
+
+{
+    function Student(name, score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    let student1 = new Student("홍길동", 90);
+    let student2 = new Student("김철수", 80);
+
+    console.log(student1.name);  // 홍길동
+    console.log(student1.score); // 90
+
+    console.log(student2.name);  // 김철수
+    console.log(student2.score); // 80
+}
+
+/*
+    위 코드에서 Student 함수는 한 번만 작성했다.
+
+    그런데 new Student(...)를 호출할 때마다
+    서로 다른 객체가 생성된다.
+
+    첫 번째 호출:
+    this -> student1이 참조하는 객체
+
+    두 번째 호출:
+    this -> student2가 참조하는 객체
+
+    따라서 같은 this.name이라는 코드라도
+    각 호출에서 서로 다른 객체의 name을 설정한다.
+
+    주의!
+    this가 항상 student1 또는 student2라는 변수 자체를
+    가리키는 것은 아니다.
+
+    this는 생성되는 객체를 가리키고,
+    student1과 student2는 각각 그 객체를 참조하는 변수이다.
+*/
+
+
+/*
+    < 6. 생성자 함수에 메서드 추가하기 >
+
+    생성자 함수 안에서는 프로퍼티뿐만 아니라
+    메서드도 설정할 수 있다.
+
+    메서드 : 객체에 저장된 함수
+*/
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+
+        this.introduce = function() {
+            console.log(
+                "제 이름은 " + this.name +
+                "이고, 나이는 " + this.age + "살입니다."
+            );
+        };
+    }
+
+    let person1 = new Person("홍길동", 20);
+    let person2 = new Person("김철수", 25);
+
+    person1.introduce();
+    person2.introduce();
+}
+
+/*
+    생성된 객체마다 introduce 메서드가 설정된다.
+
+    person1.introduce();
+    person2.introduce();
+
+    메서드 안의 this는 메서드를 호출한 객체를 가리킨다.
+
+    person1.introduce();
+    -> this는 person1이 참조하는 객체
+
+    person2.introduce();
+    -> this는 person2가 참조하는 객체
+
+    여기서는 생성자 함수 안의 this와
+    메서드 안의 this가 각각 어떤 객체를 가리키는지
+    구분해서 이해하는 것이 중요하다.
+
+    생성자 함수의 this:
+    new로 생성 중인 객체
+
+    메서드의 this:
+    person1.introduce()처럼 호출할 때는 person1이
+    참조하는 객체
+*/
+
+
+/*
+    < 7. 실생활 예제 : 상품 객체 만들기 >
+
+    쇼핑몰에서 여러 상품을 관리한다고 가정하자.
+
+    모든 상품은 다음 정보를 가진다.
+    - 상품명
+    - 가격
+    - 재고
+
+    상품마다 이름, 가격, 재고는 다를 수 있다.
+*/
+
+{
+    function Product(name, price, stock) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+
+        this.showInfo = function() {
+            console.log("상품명 : " + this.name);
+            console.log("가격 : " + this.price + "원");
+            console.log("재고 : " + this.stock + "개");
+        };
+
+        this.sell = function(quantity) {
+            if (quantity > this.stock) {
+                console.log("재고가 부족합니다.");
+            } else {
+                this.stock = this.stock - quantity;
+                console.log(quantity + "개 판매되었습니다.");
+            }
+        };
+    }
+
+    let product1 = new Product("키보드", 30000, 10);
+    let product2 = new Product("마우스", 15000, 20);
+
+    product1.showInfo();
+    product1.sell(3);
+    product1.showInfo();
+
+    product2.showInfo();
+}
+
+/*
+    생성자 함수는 공통된 데이터 구조와 기능을 정의할 수 있다.
+
+    Product로 생성한 모든 객체는
+    name, price, stock 프로퍼티와
+    showInfo(), sell() 메서드를 가진다.
+
+    다만 각 객체의 프로퍼티 값은 서로 독립적이다.
+
+    product1.sell(3)을 실행해도
+    product2의 재고는 바뀌지 않는다.
+*/
+
+
+/*
+    < 8. 생성자 함수로 생성한 객체 확인하기 >
+
+    생성자 함수로 만든 객체도 일반 객체이다.
+
+    따라서 기존에 배운 객체의 접근 방법을 그대로 사용할 수 있다.
+*/
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    let person1 = new Person("홍길동", 20);
+
+    // 프로퍼티 조회
+    console.log(person1.name);
+    console.log(person1["age"]);
+
+    // 프로퍼티 수정
+    person1.age = 21;
+    console.log(person1.age);
+
+    // 프로퍼티 추가
+    person1.address = "부산";
+    console.log(person1.address);
+
+    // 프로퍼티 삭제
+    delete person1.address;
+    console.log(person1.address); // undefined
+}
+
+
+/*
+    < 9. new 연산자를 사용하는 이유 >
+
+    생성자 함수는 일반 함수처럼 호출할 수도 있지만,
+    객체를 생성하려는 목적이라면 new와 함께 호출해야 한다.
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    new 없이 호출하면 어떻게 될까?
+
+    Person("홍길동");
+
+    이 경우 일반 함수 호출이므로
+    생성자 함수에서 기대하는 객체 생성 과정이 일어나지 않는다.
+
+    일반 함수 호출에서는 this가 new로 생성되는 객체에
+    자동으로 연결되지 않는다.
+
+    엄격 모드에서는 일반 함수의 this가 undefined이므로
+    this.name에 값을 설정하려 하면 오류가 발생한다.
+
+    비엄격 모드에서는 this가 전역 객체를 가리킬 수 있어
+    의도하지 않은 결과가 발생할 수 있다.
+
+    따라서 생성자 함수는 new와 함께 호출하는 것이 원칙이다.
+
+    실제 수업에서는 아래 코드를 실행하지 말고 설명만 한다.
+*/
+
+// function Person(name) {
+//     this.name = name;
+// }
+//
+// Person("홍길동"); // new 없이 호출하면 의도하지 않은 결과가 발생할 수 있음
+
+
+/*
+    < 10. 생성자 함수의 이름과 new >
+
+    생성자 함수는 첫 글자를 대문자로 작성하는 것이 관례이다.
+
+    function Person(name) {
+        this.name = name;
+    }
+
+    let person1 = new Person("홍길동");
+
+    이렇게 작성하면 코드를 읽는 사람이
+    객체 생성용 함수라는 점을 쉽게 알아볼 수 있다.
+
+    하지만 대문자 자체가 객체를 생성하는 것은 아니다.
+
+    객체 생성 과정은 new 연산자가 담당한다.
+*/
+
+
+/*
+    < 11. 생성자 함수와 객체 리터럴 비교 >
+
+    객체 리터럴
+
+    let person1 = {
+        name: "홍길동",
+        age: 20
+    };
+
+    생성자 함수
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    let person1 = new Person("홍길동", 20);
+
+    객체 리터럴:
+    - 객체 하나를 간단히 만들 때 편리하다.
+    - 객체의 구조를 직접 작성한다.
+
+    생성자 함수:
+    - 같은 구조의 객체를 여러 개 만들 때 유용하다.
+    - 공통된 프로퍼티와 기능을 한 곳에 정의할 수 있다.
+    - 매개변수를 이용해 객체마다 다른 값을 설정할 수 있다.
+
+    객체 리터럴이 잘못된 방법이고
+    생성자 함수가 무조건 더 좋은 방법이라는 뜻은 아니다.
+
+    상황에 맞게 선택하면 된다.
+*/
+
+
+
+
+
+/*
+    < 14. 핵심 정리 >
+
+    1. 생성자 함수는 객체를 생성하기 위한 설계도 역할을 한다.
+    2. 생성자 함수는 일반 함수와 같은 function 문법으로 작성한다.
+    3. 생성자 함수의 이름은 첫 글자를 대문자로 작성하는 것이 관례이다.
+    4. new 생성자함수() 형태로 호출하면 객체가 생성된다.
+    5. 생성자 함수 내부의 this는 new로 생성되는 객체를 가리킨다.
+    6. this.name = name; 형태로 객체의 프로퍼티를 설정한다.
+    7. 매개변수를 사용하면 객체마다 서로 다른 값을 설정할 수 있다.
+    8. 생성자 함수 안에 메서드를 정의하면 생성된 객체에서 호출할 수 있다.
+    9. new 없이 호출하면 일반 함수 호출이 되므로 주의해야 한다.
+    10. 생성자 함수로 생성한 객체도 일반 객체이므로
+        프로퍼티 조회, 추가, 수정, 삭제가 가능하다.
+
+    다음 수업:
+    객체 안에 객체를 넣는 중첩 객체와 객체 배열을 학습한다.
+
+    참고:
+    생성자 함수 안에 메서드를 작성하면 객체를 만들 때마다
+    메서드 함수도 새로 만들어진다.
+    여러 객체가 메서드를 공유하는 방법은 프로토타입에서 학습한다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

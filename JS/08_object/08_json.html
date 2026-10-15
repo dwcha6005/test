@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    09_json.js
+
+    < 학습 목표 >
+    1. JSON의 의미와 사용 목적을 이해한다.
+    2. JavaScript 객체와 JSON 문자열의 차이를 구분한다.
+    3. JSON 문법의 규칙을 이해한다.
+    4. JSON.stringify()로 객체를 JSON 문자열로 변환한다.
+    5. JSON.parse()로 JSON 문자열을 JavaScript 값으로 변환한다.
+    6. 배열과 중첩 객체가 포함된 JSON 데이터를 처리한다.
+    7. JSON을 서버 통신과 데이터 저장에 활용하는 방법을 이해한다.
+*/
+
+
+/*
+    < 1. JSON이란? >
+
+    JSON : JavaScript Object Notation
+    자바스크립트 객체 표기법
+
+    JSON은 데이터를 표현하고 전달하기 위한 텍스트 형식이다.
+
+    예를 들어 회원 정보를 다음과 같이 표현할 수 있다.
+
+    {
+        "name": "홍길동",
+        "age": 25,
+        "job": "개발자"
+    }
+
+    위 형식은 객체와 비슷하게 생겼지만,
+    JSON은 JavaScript 객체 그 자체가 아니라 데이터 형식이다.
+
+    JSON은 JavaScript뿐만 아니라 Java, Python, C#, PHP 등
+    다양한 프로그래밍 언어에서 사용할 수 있다.
+
+    < JSON을 사용하는 이유 >
+
+    1. 서버와 클라이언트 사이에서 데이터를 전달하기 위해
+    2. 파일에 데이터를 저장하고 다시 읽기 위해
+    3. 서로 다른 프로그래밍 언어 사이에서 데이터를 교환하기 위해
+    4. API 응답 데이터를 표현하기 위해
+
+    예)
+    웹 브라우저의 JavaScript
+            ↓ JSON 데이터 요청
+    서버 프로그램
+            ↓ JSON 데이터 응답
+    웹 브라우저의 JavaScript
+
+    JSON은 데이터 전달 형식이고,
+    HTTP는 데이터를 주고받는 통신 규약이다.
+
+    JSON을 HTTP 요청이나 응답의 본문에 담아 전달하는 경우가 많다.
+*/
+
+
+/*
+    < 2. JavaScript 객체와 JSON의 차이 >
+
+    JavaScript 객체
+
+    let person = {
+        name: "홍길동",
+        age: 25,
+        introduce: function() {
+            console.log("안녕하세요");
+        }
+    };
+
+    JSON 데이터
+
+    {
+        "name": "홍길동",
+        "age": 25
+    }
+
+    두 형식은 비슷하지만 동일하지 않다.
+
+    JavaScript 객체는 프로그램에서 데이터를 다루기 위한 객체다.
+    JSON은 데이터를 텍스트로 표현하기 위한 형식이다.
+
+    JSON에는 함수나 undefined 같은 값을 그대로 표현할 수 없다.
+*/
+
+{
+    // JavaScript 객체
+    let person = {
+        name: "홍길동",
+        age: 25,
+        introduce: function() {
+            console.log("안녕하세요");
+        }
+    };
+
+    console.log(person);
+    console.log(person.name);
+    person.introduce();
+}
+
+
+/*
+    < 3. JSON 문법 규칙 >
+
+    < 3-1. 프로퍼티 이름은 큰따옴표로 작성한다 >
+
+    올바른 JSON
+    {
+        "name": "홍길동",
+        "age": 25
+    }
+
+    잘못된 JSON
+    {
+        name: "홍길동",
+        age: 25
+    }
+
+    JavaScript 객체 리터럴에서는 따옴표를 생략할 수 있지만,
+    JSON에서는 문자열인 프로퍼티 이름에 큰따옴표가 필요하다.
+
+
+    < 3-2. 문자열은 큰따옴표를 사용한다 >
+
+    올바른 JSON
+    {
+        "name": "홍길동"
+    }
+
+    잘못된 JSON
+    {
+        "name": '홍길동'
+    }
+
+    JSON 문자열은 큰따옴표를 사용한다.
+
+
+    < 3-3. 마지막 프로퍼티 뒤에 쉼표를 붙이지 않는다 >
+
+    올바른 JSON
+    {
+        "name": "홍길동",
+        "age": 25
+    }
+
+    잘못된 JSON
+    {
+        "name": "홍길동",
+        "age": 25,
+    }
+
+
+    < 3-4. 주석을 작성할 수 없다 >
+
+    JSON에는 JavaScript처럼  주석을 넣을 수 없다.
+
+
+    < 3-5. 사용할 수 있는 데이터 유형 >
+
+    문자열
+    숫자
+    true
+    false
+    null
+    배열
+    객체
+
+    함수, undefined, Symbol 등은 JSON의 데이터 값으로 직접 표현할 수 없다.
+*/
+
+{
+    // JavaScript 객체에서는 다양한 값을 사용할 수 있다.
+    let data = {
+        name: "홍길동",
+        age: 25,
+        active: true,
+        address: null,
+        scores: [90, 85, 95],
+        job: {
+            title: "개발자"
+        }
+    };
+
+    console.log(data);
+}
+
+
+/*
+    < 4. JSON.stringify() >
+
+    JSON.stringify(값)
+
+    : JavaScript 값을 JSON 문자열로 변환한다.
+
+    예)
+    JavaScript 객체 → JSON 문자열
+
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let json = JSON.stringify(person);
+
+    결과
+    "{\"name\":\"홍길동\",\"age\":25}"
+
+    출력되는 JSON 문자열 자체는 다음과 같은 형태다.
+
+    {"name":"홍길동","age":25}
+
+    주의)
+    JSON.stringify()의 반환값은 객체가 아니라 문자열이다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let json = JSON.stringify(person);
+
+    console.log(person);
+    console.log(json);
+
+    console.log(typeof person); // "object"
+    console.log(typeof json);   // "string"
+}
+
+
+/*
+    < 5. 객체와 JSON 문자열 비교하기 >
+
+    객체는 프로퍼티를 이용해 값을 조회할 수 있다.
+
+    person.name
+
+    JSON 문자열은 문자열이므로,
+    person.name처럼 프로퍼티에 직접 접근할 수 없다.
+
+    JSON 문자열을 사용하려면 먼저 JSON.parse()로 변환해야 한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let json = JSON.stringify(person);
+
+    console.log(person.name);  // "홍길동"
+
+    console.log(json.name);    // undefined
+    // json은 문자열이므로 name 프로퍼티가 없다.
+
+    let parsed = JSON.parse(json);
+
+    console.log(parsed.name);  // "홍길동"
+}
+
+
+/*
+    < 6. JSON.stringify()와 배열 >
+
+    JSON.stringify()는 배열도 JSON 문자열로 변환할 수 있다.
+*/
+
+{
+    let fruits = ["사과", "바나나", "포도"];
+
+    let json = JSON.stringify(fruits);
+
+    console.log(json);
+    // ["사과","바나나","포도"]
+
+    console.log(typeof json); // "string"
+}
+
+
+/*
+    < 7. JSON.stringify()와 중첩 객체 >
+
+    객체 안에 배열이나 다른 객체가 포함되어 있어도
+    JSON 문자열로 변환할 수 있다.
+*/
+
+{
+    let student = {
+        name: "김학생",
+        age: 24,
+        scores: [90, 85, 95],
+        address: {
+            city: "부산",
+            district: "해운대구"
+        }
+    };
+
+    let json = JSON.stringify(student);
+
+    console.log(json);
+}
+
+
+/*
+    < 8. JSON.stringify()의 들여쓰기 옵션 >
+
+    JSON.stringify(값, replacer, space)
+
+    첫 번째 인수 : 변환할 값
+    두 번째 인수 : 변환할 프로퍼티를 선택하거나 값을 변환하는 함수
+    세 번째 인수 : 들여쓰기 설정
+
+    세 번째 인수에 숫자 2를 전달하면
+    JSON 문자열을 두 칸 들여쓰기 형식으로 출력할 수 있다.
+
+    실습이나 파일 저장 시 사람이 읽기 편한 형태를 만들 때 유용하다.
+*/
+
+{
+    let student = {
+        name: "김학생",
+        age: 24,
+        scores: [90, 85, 95]
+    };
+
+    let compact = JSON.stringify(student);
+    let pretty = JSON.stringify(student, null, 2);
+
+    console.log(compact);
+    console.log(pretty);
+
+    // compact : 한 줄로 표현된 JSON 문자열
+    // pretty  : 들여쓰기가 적용된 JSON 문자열
+}
+
+
+/*
+    < 9. JSON.stringify()에서 변환할 프로퍼티 선택하기 >
+
+    두 번째 인수에 배열을 전달하면
+    지정한 프로퍼티만 JSON 문자열에 포함할 수 있다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25,
+        job: "개발자",
+        city: "부산"
+    };
+
+    let json = JSON.stringify(person, ["name", "job"], 2);
+
+    console.log(json);
+
+    /*
+        {
+          "name": "홍길동",
+          "job": "개발자"
+        }
+    */
+}
+
+
+/*
+    < 10. JSON.stringify()에서 주의할 값 >
+
+    JSON은 JavaScript의 모든 값을 그대로 표현하지 못한다.
+
+    객체의 프로퍼티 값이 undefined, 함수, Symbol이면
+    일반적으로 JSON 문자열 변환 과정에서 해당 프로퍼티가 제외된다.
+
+    배열 요소가 undefined, 함수, Symbol이면
+    JSON 문자열에서 null로 표현된다.
+
+    BigInt는 일반적으로 별도 처리 없이 JSON.stringify()에 전달하면
+    TypeError가 발생한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25,
+        address: undefined,
+        introduce: function() {
+            console.log("안녕하세요");
+        },
+        id: Symbol("id")
+    };
+
+    console.log(JSON.stringify(person));
+    // {"name":"홍길동","age":25}
+}
+
+{
+    let arr = [10, undefined, function() {}, Symbol("id")];
+
+    console.log(JSON.stringify(arr));
+    // [10,null,null,null]
+}
+
+{
+    // BigInt는 기본적으로 JSON 문자열로 변환할 수 없다.
+    // 아래 코드는 실행하면 TypeError가 발생하므로 주석 상태로 둔다.
+
+    // let value = 123n;
+    // console.log(JSON.stringify(value));
+}
+
+
+/*
+    < 11. JSON.parse() >
+
+    JSON.parse(JSON 문자열)
+
+    : JSON 문자열을 JavaScript 값으로 변환한다.
+
+    JSON 문자열 → JavaScript 객체
+    JSON 문자열 → JavaScript 배열
+    JSON 문자열 → 숫자, 문자열, 불리언, null 등
+
+    예)
+    '{"name":"홍길동","age":25}'
+
+    JSON.parse()로 변환하면 객체로 사용할 수 있다.
+*/
+
+{
+    let json = '{"name":"홍길동","age":25}';
+
+    let person = JSON.parse(json);
+
+    console.log(person);
+    console.log(person.name);
+    console.log(person.age);
+
+    console.log(typeof json);    // "string"
+    console.log(typeof person);  // "object"
+}
+
+
+/*
+    < 12. JSON.parse()와 배열 >
+
+    JSON 문자열이 배열 형태라면 JavaScript 배열로 변환된다.
+*/
+
+{
+    let json = '["사과","바나나","포도"]';
+
+    let fruits = JSON.parse(json);
+
+    console.log(fruits);
+    console.log(fruits[0]); // "사과"
+    console.log(fruits[1]); // "바나나"
+
+    console.log(Array.isArray(fruits)); // true
+}
+
+
+/*
+    < 13. JSON.parse()와 중첩 객체 >
+
+    JSON 문자열 안에 객체와 배열이 중첩되어 있어도
+    JavaScript 값으로 변환할 수 있다.
+*/
+
+{
+    let json = `{
+        "name": "김학생",
+        "age": 24,
+        "scores": [90, 85, 95],
+        "address": {
+            "city": "부산",
+            "district": "해운대구"
+        }
+    }`;
+
+    let student = JSON.parse(json);
+
+    console.log(student.name);
+    console.log(student.scores[0]);
+    console.log(student.address.city);
+}
+
+
+/*
+    < 14. JSON.parse()에서 주의할 점 >
+
+    JSON.parse()에는 올바른 JSON 문자열을 전달해야 한다.
+
+    잘못된 JSON 문자열을 전달하면 SyntaxError가 발생한다.
+
+    예)
+    '{"name":"홍길동",}'     : 마지막 쉼표가 잘못됨
+    "{'name':'홍길동'}"      : 작은따옴표 사용
+    "{name:'홍길동'}"        : 프로퍼티 이름의 따옴표 누락
+
+    JavaScript 객체 리터럴과 JSON 문법을 혼동하지 않아야 한다.
+*/
+
+{
+    let json = '{"name":"홍길동","age":25}';
+
+    let person = JSON.parse(json);
+
+    console.log(person);
+
+    // 아래 코드는 오류가 발생하므로 주석 상태로 둔다.
+    // JSON.parse("{name:'홍길동'}");
+}
+
+
+/*
+    < 15. JSON.parse() 오류 처리 >
+
+    외부에서 전달받은 JSON 문자열은 문법이 잘못되었을 수 있다.
+    try...catch를 이용하면 변환 오류를 처리할 수 있다.
+
+    try    : 오류가 발생할 수 있는 코드를 실행
+    catch  : try에서 오류가 발생했을 때 실행
+*/
+
+{
+    let json = '{"name":"홍길동",}';
+
+    try {
+        let person = JSON.parse(json);
+        console.log(person);
+    } catch (error) {
+        console.log("JSON 데이터 형식이 올바르지 않습니다.");
+        console.log(error.message);
+    }
+}
+
+
+/*
+    < 16. JSON.stringify()와 JSON.parse() 정리 >
+
+    JSON.stringify()
+    : JavaScript 값 → JSON 문자열
+
+    JSON.parse()
+    : JSON 문자열 → JavaScript 값
+
+    변환 방향
+
+    JavaScript 객체
+          |
+          | JSON.stringify()
+          ↓
+    JSON 문자열
+          |
+          | JSON.parse()
+          ↓
+    JavaScript 객체
+
+    이 두 메서드는 서로 반대 방향의 변환을 수행한다.
+*/
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let json = JSON.stringify(person);
+    let parsed = JSON.parse(json);
+
+    console.log(person);
+    console.log(json);
+    console.log(parsed);
+
+    console.log(person === parsed); // false
+
+    // parsed는 JSON 문자열에서 새로 만들어진 객체다.
+    // 원본 person과 parsed는 서로 다른 객체다.
+}
+
+
+/*
+    < 17. JSON과 데이터 저장 >
+
+    JSON 문자열은 파일이나 저장 공간에 텍스트로 저장할 수 있다.
+
+    예)
+    회원 정보를 JSON 문자열로 변환한 다음 저장한다.
+    나중에 저장된 문자열을 읽어 객체로 복원한다.
+
+    실제 파일을 읽고 쓰는 기능은 실행 환경에 따라 달라진다.
+    이 예제에서는 문자열 변환과 복원 과정만 확인한다.
+*/
+
+{
+    let member = {
+        id: 101,
+        name: "김학생",
+        email: "student@example.com"
+    };
+
+    // 저장할 수 있는 형태의 문자열로 변환
+    let savedData = JSON.stringify(member);
+
+    console.log("저장할 데이터:", savedData);
+
+    // 저장 공간에서 문자열을 읽었다고 가정
+    let loadedData = savedData;
+
+    // 읽은 JSON 문자열을 JavaScript 객체로 복원
+    let restoredMember = JSON.parse(loadedData);
+
+    console.log("복원된 회원:", restoredMember);
+    console.log("회원 이름:", restoredMember.name);
+}
+
+
+/*
+    < 18. JSON과 서버 통신 >
+
+    웹 개발에서는 클라이언트와 서버가 데이터를 주고받을 때
+    JSON을 사용하는 경우가 많다.
+
+    예를 들어 로그인 요청에 다음과 같은 데이터를 담을 수 있다.
+
+    {
+        "userId": "student01",
+        "password": "example"
+    }
+
+    서버가 회원 정보를 반환할 수도 있다.
+
+    {
+        "id": 101,
+        "name": "김학생",
+        "role": "student"
+    }
+
+    실제 서버 통신은 HTTP 요청과 응답을 통해 이루어진다.
+
+    JSON은 그 요청이나 응답의 본문에 담을 수 있는 데이터 형식이다.
+
+    주의)
+    JSON으로 비밀번호를 전달한다고 해서 자동으로 안전해지는 것은 아니다.
+    실제 인증 요청은 HTTPS 등 적절한 보안 조치가 필요하다.
+*/
+
+
+/*
+    < 19. JSON과 API 응답 데이터 >
+
+    API(Application Programming Interface)는
+    프로그램끼리 기능이나 데이터를 주고받을 수 있도록 정한 인터페이스다.
+
+    웹 API는 JSON 형식으로 데이터를 반환하는 경우가 많다.
+
+    예를 들어 서버에서 다음과 같은 JSON 응답을 반환했다고 가정한다.
+
+    {
+        "productId": 1001,
+        "productName": "무선 마우스",
+        "price": 25000,
+        "stock": 12
+    }
+
+    이 데이터가 JavaScript 객체로 변환되면
+    일반 객체처럼 프로퍼티에 접근할 수 있다.
+*/
+
+{
+    let responseJson = `{
+        "productId": 1001,
+        "productName": "무선 마우스",
+        "price": 25000,
+        "stock": 12
+    }`;
+
+    let product = JSON.parse(responseJson);
+
+    console.log("상품 번호:", product.productId);
+    console.log("상품명:", product.productName);
+    console.log("가격:", product.price);
+    console.log("재고:", product.stock);
+}
+
+
+/*
+    < 20. JSON과 배열 형태의 API 데이터 >
+
+    API는 여러 개의 데이터를 배열로 반환할 수도 있다.
+*/
+
+{
+    let responseJson = `[
+        {
+            "id": 1,
+            "name": "키보드",
+            "price": 39000
+        },
+        {
+            "id": 2,
+            "name": "마우스",
+            "price": 25000
+        },
+        {
+            "id": 3,
+            "name": "모니터",
+            "price": 220000
+        }
+    ]`;
+
+    let products = JSON.parse(responseJson);
+
+    console.log(products);
+    console.log(products[0].name); // 키보드
+    console.log(products[1].price); // 25000
+
+    for (let product of products) {
+        console.log(product.name, product.price);
+    }
+}
+
+
+/*
+    < 21. JSON과 fetch()의 관계 >
+
+    다음 내용은 이후 비동기 처리와 fetch()를 배울 때 연결한다.
+
+    일반적인 fetch() 응답에서 response.json()을 호출하면
+    응답 본문의 JSON 데이터를 읽어 JavaScript 값으로 변환한다.
+
+    따라서 다음 코드에서는 JSON.parse()를 직접 호출하지 않는다.
+
+    fetch("/api/products")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+
+    여기서 response.json()은 응답 본문을 읽고 JSON을 파싱하는
+    비동기 메서드이며, JavaScript 객체나 배열 등의 값을 돌려준다.
+
+    응답 본문이 올바른 JSON이 아니면 파싱 단계에서 오류가 발생할 수 있다.
+
+    중요)
+    response.json()은 JSON 문자열을 직접 받는 JSON.parse()와 다르다.
+    response.json()은 HTTP 응답 본문을 읽는 과정까지 포함한다.
+*/
+
+
+/*
+    < 22. JSON과 localStorage >
+
+    브라우저의 localStorage는 문자열 형태로 데이터를 저장한다.
+
+    따라서 객체를 저장하려면 JSON.stringify()로 문자열로 변환하고,
+    다시 읽을 때 JSON.parse()로 객체를 복원하는 방식을 자주 사용한다.
+
+    localStorage는 브라우저에서 실행할 때 사용할 수 있다.
+    Node.js 같은 다른 실행 환경에서는 동일하게 제공되지 않을 수 있다.
+*/
+
+{
+    // 브라우저 환경에서 실행할 때 사용할 수 있는 예제
+
+    let member = {
+        name: "김학생",
+        age: 24
+    };
+
+    // 객체 → JSON 문자열 → 저장
+    // localStorage.setItem("member", JSON.stringify(member));
+
+    // 저장된 문자열 조회
+    // let savedData = localStorage.getItem("member");
+
+    // JSON 문자열 → 객체
+    // let restoredMember = JSON.parse(savedData);
+
+    // console.log(restoredMember.name);
+
+    // 위 코드는 브라우저 환경에서 직접 실행할 때 주석을 해제한다.
+}
+
+
+/*
+    < 23. JSON 변환의 한계 >
+
+    JSON.stringify()와 JSON.parse()를 이용하면
+    일부 단순한 데이터 구조를 복사하는 데 활용할 수도 있다.
+
+    하지만 모든 JavaScript 값을 완벽하게 복사하는 범용 방법은 아니다.
+
+    예를 들어 다음 값들은 주의해야 한다.
+
+    1. 함수는 JSON 문자열에 보존되지 않는다.
+    2. undefined는 객체 프로퍼티에서 제외될 수 있다.
+    3. Date 객체는 보통 ISO 형식의 문자열로 변환된다.
+    4. Map, Set 등은 일반적인 방식으로 변환하면 원래 자료구조가 보존되지 않는다.
+    5. 순환 참조가 있는 객체는 일반적인 JSON.stringify()로 변환할 수 없다.
+    6. BigInt는 별도 처리 없이 변환할 수 없다.
+
+    따라서 JSON은 데이터 교환에 적합한 형식이지,
+    JavaScript 객체의 모든 특징을 보존하는 형식은 아니다.
+*/
+
+
+/*
+    < 24. Date 객체가 JSON으로 변환되는 경우 >
+
+    Date 객체는 JSON.stringify()에서 일반적으로
+    ISO 형식의 날짜 문자열로 변환된다.
+
+    JSON.parse()로 다시 읽더라도 자동으로 Date 객체가 되지 않고
+    문자열로 남는다.
+*/
+
+{
+    let data = {
+        createdAt: new Date("2026-10-15T00:00:00Z")
+    };
+
+    let json = JSON.stringify(data);
+
+    console.log(json);
+    // {"createdAt":"2026-10-15T00:00:00.000Z"}
+
+    let parsed = JSON.parse(json);
+
+    console.log(parsed.createdAt);
+    console.log(typeof parsed.createdAt); // "string"
+
+    // Date 객체로 다시 사용하려면 직접 생성해야 한다.
+    let restoredDate = new Date(parsed.createdAt);
+
+    console.log(restoredDate);
+    console.log(restoredDate instanceof Date); // true
+}
+
+
+/*
+    < 25. 순환 참조 >
+
+    객체가 자기 자신을 직접 또는 간접적으로 참조하는 경우를
+    순환 참조(Circular Reference)라고 한다.
+
+    일반적인 JSON 문자열 변환은 순환 참조를 처리하지 못한다.
+*/
+
+{
+    let person = {
+        name: "홍길동"
+    };
+
+    person.self = person;
+
+    // 아래 코드는 TypeError가 발생하므로 주석 상태로 둔다.
+    // console.log(JSON.stringify(person));
+
+    // person.self가 person 자신을 가리키므로
+    // JSON 문자열로 표현하는 과정에서 순환 참조 오류가 발생한다.
+}
+
+
+
+
+
+/*
+    < 28. 핵심 정리 >
+
+    JSON: 데이터를 텍스트로 표현하고 교환하기 위한 형식
+    JSON.stringify(value): JavaScript 값 → JSON 문자열
+    JSON.parse(text): JSON 문자열 → JavaScript 값
+
+    JSON 문법
+    : 프로퍼티 이름과 문자열에 큰따옴표 사용
+    : 마지막 항목 뒤에 쉼표 사용 불가
+    : 주석 사용 불가
+    : 함수와 undefined 등은 JSON 데이터 값으로 직접 표현할 수 없음
+
+    서버 통신
+    : JSON은 데이터를 표현하는 형식
+    : HTTP는 데이터를 주고받는 통신 규약
+    : 웹 API는 JSON 형식의 요청이나 응답을 사용하는 경우가 많음
+
+    다음 단계
+    : 프로토타입과 상속을 학습하며 JavaScript 객체의 내부 동작을 이해한다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

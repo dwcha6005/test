@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Video 속성 심화 실습</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            color: #222;
+        }
+        h1 {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+        h2 {
+            margin-top: 45px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        h3 {
+            margin-top: 25px;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 15px;
+            background: #f4f4f4;
+            border-radius: 6px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        .example {
+            margin: 15px 0 25px;
+            padding: 20px;
+            background: #f7f9fc;
+            border: 1px solid #d9e0ea;
+            border-radius: 8px;
+        }
+        .note {
+            margin: 15px 0;
+            padding: 12px 16px;
+            background: #fff8e6;
+            border-left: 4px solid #e5ad32;
+        }
+        .task {
+            margin: 20px 0;
+            padding: 18px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+        }
+        .task h3 {
+            margin-top: 0;
+        }
+        .small {
+            color: #666;
+            font-size: 14px;
+        }
+        video {
+            max-width: 100%;
+            background: #ddd;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Video 속성 심화 실습</h1>
+    <p>이번 수업에서는 video 태그의 여러 속성을 조합하여 영상 재생 방식을 제어하고, 실제 웹페이지에서 사용할 수 있는 영상 영역을 만들어 본다.</p>
+
+    <!-- < 1. 불리언 속성 이해하기 > -->
+    <h2>1. 불리언 속성 이해하기</h2>
+    <p>HTML 속성 중에는 값 자체보다 속성의 존재 여부가 중요한 불리언 속성이 있다.</p>
+
+    <pre><code>&lt;video controls&gt;&lt;/video&gt;
+&lt;video controls="controls"&gt;&lt;/video&gt;</code></pre>
+
+    <p>두 코드는 모두 controls가 활성화된 상태다.</p>
+    <p>다음처럼 작성해도 controls는 비활성화되지 않는다.</p>
+
+    <pre><code>&lt;video controls="false"&gt;&lt;/video&gt;</code></pre>
+
+    <p>HTML에서는 controls 속성이 존재하기 때문에 활성화된다. 비활성화하려면 속성 자체를 제거해야 한다.</p>
+
+    <div class="example">
+        <h3>controls가 있는 영상</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="480"></video>
+        <h3>controls가 없는 영상</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" width="480"></video>
+    </div>
+
+    <p><strong>실습 1.</strong> controls="false"로 작성한 영상과 controls 속성을 완전히 제거한 영상의 차이를 확인하시오.</p>
+
+    <!-- < 2. autoplay와 muted > -->
+    <h2>2. autoplay와 muted</h2>
+    <p>autoplay는 페이지가 열렸을 때 영상의 자동 재생을 시도하는 속성이다. 그러나 브라우저 정책에 따라 자동 재생이 차단될 수 있다.</p>
+
+    <pre><code>&lt;video
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    autoplay
+    muted
+    playsinline
+&gt;&lt;/video&gt;</code></pre>
+
+    <ul>
+        <li>autoplay : 자동 재생을 시도한다.</li>
+        <li>muted : 소리를 끈 상태로 시작한다.</li>
+        <li>playsinline : 지원하는 모바일 환경에서 페이지 안에서 재생하도록 요청한다.</li>
+    </ul>
+
+    <div class="example">
+        <h3>자동 재생 + 음소거</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" autoplay muted playsinline width="480"></video>
+        <p class="small">브라우저가 자동 재생을 허용하는 경우에 재생된다. 자동 재생 여부는 환경에 따라 달라질 수 있다.</p>
+    </div>
+
+    <p>자동 재생은 광고 영상, 배경 영상, 짧은 시각 효과 등에 활용될 수 있다. 다만 소리와 함께 자동 재생하는 방식은 사용자 경험을 해칠 수 있어 브라우저에서 제한하는 경우가 많다.</p>
+
+    <p><strong>실습 2.</strong> autoplay를 제거해 보고, 다시 muted를 제거했을 때 자동 재생이 어떻게 달라지는지 확인하시오.</p>
+
+    <!-- < 3. loop 속성 > -->
+    <h2>3. loop 속성</h2>
+    <p>loop는 영상이 끝났을 때 처음부터 반복 재생하도록 설정한다.</p>
+
+    <pre><code>&lt;video src="videos/sample.mp4" controls loop&gt;&lt;/video&gt;</code></pre>
+
+    <div class="example">
+        <h3>반복 재생 영상</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls loop width="480"></video>
+        <p class="small">영상을 끝까지 재생하여 처음부터 다시 재생되는지 확인하자.</p>
+    </div>
+
+    <p>loop는 반복 재생이 필요한 짧은 영상이나 배경 효과에 유용하다. 단, 자동으로 반복 재생하는 것과 자동으로 처음 재생하는 것은 서로 다른 동작이다.</p>
+
+    <p><strong>실습 3.</strong> loop 속성을 제거하고 반복 재생 여부를 비교하시오.</p>
+
+    <!-- < 4. poster 속성 > -->
+    <h2>4. poster 속성</h2>
+    <p>poster는 영상이 재생되기 전에 표시할 대표 이미지를 지정한다.</p>
+
+    <pre><code>&lt;video
+    src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+    controls
+    width="480"
+    poster="images/cover.jpg"
+&gt;&lt;/video&gt;</code></pre>
+
+    <p>poster에는 영상 파일이 아닌 이미지 파일의 경로를 지정한다. 대표 이미지는 영상 파일 자체의 첫 프레임과는 별개다.</p>
+
+    <div class="example">
+        <h3>poster 적용</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="480" poster="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.jpg"></video>
+        <p class="small">이미지 주소가 유효한 경우 영상 재생 전 대표 이미지가 표시된다.</p>
+    </div>
+
+    <p>poster는 온라인 강의 썸네일, 홍보 영상의 첫 화면, 영상 로딩 전 미리보기 등에 활용할 수 있다.</p>
+
+    <p><strong>실습 4.</strong> poster를 제거하고 영상이 재생되기 전 표시되는 화면을 비교하시오.</p>
+
+    <!-- < 5. preload 속성 > -->
+    <h2>5. preload 속성</h2>
+    <p>preload는 브라우저가 영상 데이터를 어느 정도 미리 불러올지 알려주는 힌트다.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>값</th>
+                <th>의미</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>none</td>
+                <td>미리 로딩하지 않도록 요청</td>
+            </tr>
+            <tr>
+                <td>metadata</td>
+                <td>영상 길이 등 메타데이터를 우선 불러오도록 요청</td>
+            </tr>
+            <tr>
+                <td>auto</td>
+                <td>재생에 필요한 데이터를 미리 불러올 수 있도록 요청</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pre><code>&lt;video src="videos/sample.mp4" controls preload="none"&gt;&lt;/video&gt;
+&lt;video src="videos/sample.mp4" controls preload="metadata"&gt;&lt;/video&gt;
+&lt;video src="videos/sample.mp4" controls preload="auto"&gt;&lt;/video&gt;</code></pre>
+
+    <p class="note">preload는 강제 명령이 아니다. autoplay가 있거나 브라우저의 로딩 정책이 다른 경우 실제 동작은 달라질 수 있다.</p>
+
+    <p><strong>실습 5.</strong> preload 값을 바꾸고 개발자 도구의 Network 탭에서 영상 요청과 전송량을 비교하시오. 캐시를 포함한 환경에 따라 결과가 달라질 수 있다.</p>
+
+    <!-- < 6. width와 height > -->
+    <h2>6. width와 height</h2>
+    <p>width와 height는 영상 요소의 표시 크기를 지정한다. 두 속성을 함께 지정할 때는 원본 영상의 비율을 고려해야 한다.</p>
+
+    <div class="example">
+        <h3>원본 비율에 맞춘 너비</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="480"></video>
+        <h3>너비와 높이를 모두 지정</h3>
+        <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="480" height="150"></video>
+    </div>
+
+    <p>두 번째 영상처럼 원본 비율과 지정한 영역의 비율이 다르면 영상이 찌그러져 보일 수 있다.</p>
+    <p>CSS의 object-fit 속성을 사용하면 영상이 영역 안에 표시되는 방식을 제어할 수 있다.</p>
+
+    <pre><code>video {
+    width: 480px;
+    height: 270px;
+    object-fit: cover;
+}</code></pre>
+
+    <p>cover는 영역을 채우면서 비율을 유지하므로 영상의 일부가 잘릴 수 있다. contain은 전체 영상이 보이도록 맞추며 빈 공간이 생길 수 있다.</p>
+
+    <p><strong>실습 6.</strong> object-fit을 cover와 contain으로 변경하여 영상의 표시 결과를 비교하시오.</p>
+
+    <!-- < 7. source와 type > -->
+    <h2>7. source와 type</h2>
+    <p>source 태그는 video 요소 안에서 재생할 파일과 미디어 유형을 지정한다.</p>
+
+    <pre><code>&lt;video controls width="480"&gt;
+    &lt;source src="videos/sample.webm" type="video/webm"&gt;
+    &lt;source src="videos/sample.mp4" type="video/mp4"&gt;
+    브라우저에서 영상을 재생할 수 없습니다.
+&lt;/video&gt;</code></pre>
+
+    <p>브라우저는 소스를 순서대로 검토하여 재생 가능한 형식을 선택하려고 한다. 하지만 컨테이너 형식만으로 재생 가능 여부가 결정되는 것은 아니며 내부 코덱과 서버 설정도 영향을 준다.</p>
+
+    <p><strong>실습 7.</strong> source 태그를 두 개 작성한 예제에서 첫 번째 소스 경로를 잘못 지정해 보고, 두 번째 소스가 재생 가능한 경우 어떤 동작을 하는지 확인하시오. 실제 결과는 브라우저와 파일 형식에 따라 달라질 수 있다.</p>
+
+    <!-- < 8. 대체 콘텐츠 > -->
+    <h2>8. 대체 콘텐츠</h2>
+    <p>video 태그 안에 작성한 일반 텍스트는 브라우저가 video 요소를 지원하지 않는 경우 등에 대체 콘텐츠로 사용될 수 있다.</p>
+
+    <pre><code>&lt;video controls&gt;
+    &lt;source src="videos/sample.mp4" type="video/mp4"&gt;
+    브라우저에서 영상을 재생할 수 없습니다.
+&lt;/video&gt;</code></pre>
+
+    <p>단순히 파일 경로가 잘못되었거나 영상 다운로드에 실패했다고 해서 대체 텍스트가 반드시 표시되는 것은 아니다. 일반적인 로딩 오류는 브라우저의 영상 UI를 통해 표시될 수 있다.</p>
+
+    <!-- < 9. 오류 확인 실습 > -->
+    <h2>9. 오류 확인 실습</h2>
+    <p>다음 코드는 일부러 존재하지 않는 파일 경로를 지정한 예제다.</p>
+
+    <pre><code>&lt;video src="videos/not-found.mp4" controls&gt;&lt;/video&gt;</code></pre>
+
+    <p>파일이 존재하지 않으면 영상이 재생되지 않는다. 개발자 도구를 열고 Network 탭에서 해당 파일 요청의 상태를 확인해 보자.</p>
+
+    <ul>
+        <li>404 : 요청한 파일을 찾을 수 없음</li>
+        <li>403 : 접근 권한이 거부됨</li>
+        <li>200 : 서버가 요청에 정상 응답했음을 의미하지만, 미디어 재생까지 보장하지는 않음</li>
+    </ul>
+
+    <p>파일 요청이 성공했더라도 지원하지 않는 코덱이나 잘못된 파일 형식 때문에 재생에 실패할 수 있다.</p>
+
+    <p><strong>실습 8.</strong> 올바른 파일 경로와 잘못된 파일 경로를 각각 작성하고 개발자 도구에서 차이를 확인하시오.</p>
+
+    <!-- < 10. 종합 실습 > -->
+    <h2>10. 종합 실습 : 영상 소개 카드 만들기</h2>
+    <div class="task">
+        <h3>실습 조건</h3>
+        <ol>
+            <li>영상 제목을 h2 태그로 작성한다.</li>
+            <li>video 태그로 영상을 삽입한다.</li>
+            <li>재생 조작 UI를 표시한다.</li>
+            <li>영상 너비를 100%로 지정하고 최대 너비를 640px로 제한한다.</li>
+            <li>영상 비율이 유지되도록 CSS를 작성한다.</li>
+            <li>영상 대표 이미지를 지정한다.</li>
+            <li>영상 아래에 설명 문단을 작성한다.</li>
+            <li>카드의 여백, 테두리, 배경색을 CSS로 디자인한다.</li>
+        </ol>
+    </div>
+
+    <h3>완성 예시</h3>
+    <pre><code>&lt;div class="video-card"&gt;
+    &lt;h2&gt;오늘의 영상&lt;/h2&gt;
+    &lt;video controls poster="images/cover.jpg"&gt;
+        &lt;source src="videos/sample.mp4" type="video/mp4"&gt;
+        브라우저에서 영상을 재생할 수 없습니다.
+    &lt;/video&gt;
+    &lt;p&gt;영상에 대한 간단한 설명을 작성합니다.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <pre><code>.video-card {
+    max-width: 680px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: #f9f9f9;
+}
+.video-card video {
+    display: block;
+    width: 100%;
+    height: auto;
+}</code></pre>
+
+    <!-- < 11. 확인 문제 > -->
+    <h2>11. 확인 문제</h2>
+    <ol>
+        <li>controls="false"라고 작성해도 controls가 활성화되는 이유를 설명하시오.</li>
+        <li>autoplay와 loop의 차이를 설명하시오.</li>
+        <li>poster 속성에는 어떤 종류의 파일을 지정해야 하는가?</li>
+        <li>preload="none"을 사용하면 영상 데이터가 절대로 다운로드되지 않는가?</li>
+        <li>object-fit: cover와 object-fit: contain의 차이를 설명하시오.</li>
+        <li>영상 파일 요청이 200 상태로 완료되었는데도 재생되지 않을 수 있는 이유를 설명하시오.</li>
+    </ol>
+</body>
+</html>

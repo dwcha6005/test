@@ -1,0 +1,341 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Source</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 30px; background: #f1f5f9; color: #1e293b; font-family: Arial, sans-serif; line-height: 1.7; }
+        main { max-width: 1000px; margin: 0 auto; }
+        h1 { margin-bottom: 8px; }
+        h2 { margin-top: 35px; padding-bottom: 8px; border-bottom: 2px solid #cbd5e1; }
+        h3 { margin-top: 24px; }
+        p { margin: 8px 0; }
+        code { padding: 2px 5px; background: #e2e8f0; border-radius: 4px; }
+        pre { overflow-x: auto; padding: 18px; background: #0f172a; color: #e2e8f0; border-radius: 8px; line-height: 1.6; }
+        .card { margin: 18px 0; padding: 20px; background: white; border-radius: 10px; }
+        .video-box { padding: 15px; background: #0f172a; border-radius: 8px; }
+        video { display: block; width: 100%; max-height: 420px; background: #000; }
+        .note { padding: 12px 16px; background: #dbeafe; border-left: 4px solid #2563eb; }
+        .warning { padding: 12px 16px; background: #fef3c7; border-left: 4px solid #d97706; }
+        .success { padding: 12px 16px; background: #dcfce7; border-left: 4px solid #16a34a; }
+        button { margin: 5px 4px 5px 0; padding: 9px 14px; border: 0; border-radius: 6px; background: #2563eb; color: white; cursor: pointer; }
+        button:hover { background: #1d4ed8; }
+        #status { margin-top: 12px; padding: 12px; background: #f1f5f9; border-radius: 6px; overflow-wrap: anywhere; }
+        .small { color: #64748b; font-size: 14px; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Video Source</h1>
+    <p>여러 영상 파일 중 브라우저가 재생할 수 있는 파일을 선택하도록 구성하기</p>
+
+    <!-- < 1. 이번 수업의 목표 > -->
+    <section class="card">
+        <h2>1. 이번 수업의 목표</h2>
+        <ul>
+            <li><code>video</code>의 <code>src</code> 속성과 <code>source</code> 요소의 차이를 설명할 수 있다.</li>
+            <li>하나의 영상에 여러 파일을 제공하는 이유를 이해할 수 있다.</li>
+            <li><code>type</code> 속성에 MIME 타입을 지정하는 이유를 이해할 수 있다.</li>
+            <li>파일 경로 오류와 브라우저의 미디어 형식 지원 문제를 구분할 수 있다.</li>
+            <li>영상 재생 실패 시 개발자 도구를 이용해 원인을 확인할 수 있다.</li>
+        </ul>
+    </section>
+
+    <!-- < 2. video의 src 속성 > -->
+    <section class="card">
+        <h2>2. video의 src 속성</h2>
+        <p>가장 간단한 방법은 <code>video</code> 요소에 <code>src</code>를 지정하는 것이다.</p>
+<pre><code>&lt;video src="assets/videos/flower.mp4" controls&gt;
+    브라우저가 video 요소를 지원하지 않습니다.
+&lt;/video&gt;</code></pre>
+        <p>이 방식은 영상 파일 하나를 재생할 때 간단하다.</p>
+        <p>하지만 같은 영상을 MP4, WebM 등 여러 형식으로 준비했다면 어떻게 해야 할까?</p>
+        <div class="note">
+            <strong>핵심:</strong> <code>video src</code>는 특정 파일 하나를 지정한다. 여러 후보 파일을 제공하려면 <code>source</code> 요소를 사용할 수 있다.
+        </div>
+    </section>
+
+    <!-- < 3. source 요소 사용하기 > -->
+    <section class="card">
+        <h2>3. source 요소 사용하기</h2>
+        <p><code>source</code> 요소는 미디어의 후보 파일을 지정한다. 하나의 <code>video</code> 안에 여러 개를 배치할 수 있다.</p>
+<pre><code>&lt;video controls&gt;
+    &lt;source src="assets/videos/flower.webm" type="video/webm"&gt;
+    &lt;source src="assets/videos/flower.mp4" type="video/mp4"&gt;
+    브라우저에서 영상을 재생할 수 없습니다.
+&lt;/video&gt;</code></pre>
+        <p>브라우저는 위에서부터 후보를 확인하고, 재생 가능한 소스를 선택한다.</p>
+        <ul>
+            <li>첫 번째 파일을 재생할 수 있으면 해당 파일을 사용한다.</li>
+            <li>첫 번째 파일을 지원하지 않으면 다음 후보를 확인할 수 있다.</li>
+            <li>재생할 수 있는 후보가 없다면 영상이 재생되지 않을 수 있다.</li>
+        </ul>
+        <div class="warning">
+            <strong>주의:</strong> 파일을 여러 개 적었다고 모든 오류가 자동으로 해결되는 것은 아니다. 경로가 잘못되었거나, 파일이 손상되었거나, 영상 코덱을 지원하지 않으면 재생에 실패할 수 있다.
+        </div>
+    </section>
+
+    <!-- < 4. src와 source 비교 > -->
+    <section class="card">
+        <h2>4. src와 source 비교</h2>
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#e2e8f0;">
+                    <th style="padding:10px; border:1px solid #cbd5e1;">구분</th>
+                    <th style="padding:10px; border:1px solid #cbd5e1;">video의 src</th>
+                    <th style="padding:10px; border:1px solid #cbd5e1;">source 요소</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">파일 지정</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">주로 하나의 파일</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">여러 후보 파일</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">사용 형태</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;"><code>&lt;video src="..."&gt;</code></td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;"><code>&lt;video&gt;&lt;source ...&gt;&lt;/video&gt;</code></td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">주요 목적</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">간단한 단일 파일 재생</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">형식별 대체 파일 제공</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="small">두 방식 모두 유효하다. 무조건 source가 더 좋은 것이 아니라, 여러 형식의 대체 파일이 필요한지에 따라 선택한다.</p>
+    </section>
+
+    <!-- < 5. type 속성 > -->
+    <section class="card">
+        <h2>5. type 속성</h2>
+        <p><code>type</code>은 해당 파일의 미디어 타입을 브라우저에 알려준다.</p>
+<pre><code>&lt;source src="flower.mp4" type="video/mp4"&gt;
+&lt;source src="flower.webm" type="video/webm"&gt;</code></pre>
+        <p>대표적인 영상 MIME 타입은 다음과 같다.</p>
+        <ul>
+            <li><code>video/mp4</code> : MP4 컨테이너의 영상 파일</li>
+            <li><code>video/webm</code> : WebM 컨테이너의 영상 파일</li>
+            <li><code>video/ogg</code> : Ogg 컨테이너의 영상 파일</li>
+        </ul>
+        <p><code>type</code>을 지정하면 브라우저가 파일을 직접 내려받기 전에 형식 지원 여부를 판단하는 데 도움이 된다.</p>
+        <div class="note">
+            <strong>중요:</strong> MIME 타입만 보고 실제 코덱까지 완벽하게 판단할 수 있는 것은 아니다. 같은 MP4 파일이라도 내부 영상·음성 코덱에 따라 재생 가능 여부가 달라질 수 있다.
+        </div>
+    </section>
+
+    <!-- < 6. 확장자와 코덱은 다르다 > -->
+    <section class="card">
+        <h2>6. 확장자와 코덱은 다르다</h2>
+        <p>영상 재생 문제를 해결하려면 파일 확장자와 코덱의 차이를 알아야 한다.</p>
+        <ul>
+            <li><strong>확장자:</strong> 파일 이름 뒤에 붙는 <code>.mp4</code>, <code>.webm</code> 등의 표시</li>
+            <li><strong>컨테이너:</strong> 영상과 음성, 자막 등의 데이터를 담는 형식</li>
+            <li><strong>코덱:</strong> 영상이나 음성을 압축하고 해제하는 방식</li>
+        </ul>
+        <p>예를 들어 MP4는 컨테이너 형식이다. MP4 파일이라고 해서 내부 영상이 반드시 같은 코덱으로 인코딩되어 있는 것은 아니다.</p>
+        <p>따라서 다음 상황이 가능하다.</p>
+        <ul>
+            <li>확장자는 MP4인데 특정 브라우저에서 재생되지 않는다.</li>
+            <li>영상은 나오지만 음성이 나오지 않는다.</li>
+            <li>한 브라우저에서는 재생되지만 다른 브라우저에서는 재생되지 않는다.</li>
+        </ul>
+        <div class="warning">
+            파일 확장자만 바꾼다고 영상 형식이 변환되는 것은 아니다. 코덱이나 컨테이너를 바꾸려면 적절한 변환 프로그램으로 인코딩해야 할 수 있다.
+        </div>
+    </section>
+
+    <!-- < 7. 실제 파일 구성 > -->
+    <section class="card">
+        <h2>7. 프로젝트 파일 구성하기</h2>
+        <p>HTML 파일과 영상 파일을 다음처럼 배치한다고 가정한다.</p>
+<pre><code>video-study/
+├── 04_video_source.html
+└── assets/
+    └── videos/
+        ├── flower.mp4
+        └── flower.webm</code></pre>
+        <p>HTML 파일에서 영상 파일까지의 상대 경로는 다음과 같다.</p>
+<pre><code>assets/videos/flower.mp4
+assets/videos/flower.webm</code></pre>
+        <p>경로는 HTML 파일의 위치를 기준으로 해석된다. 파일을 다른 폴더로 옮기면 상대 경로도 다시 확인해야 한다.</p>
+        <div class="note">
+            <strong>실습 전 확인:</strong> 예시 파일 이름만 적어 두어서는 영상이 재생되지 않는다. 실제 영상 파일을 해당 폴더에 준비해야 한다. 두 파일은 동일한 영상의 서로 다른 형식이어야 한다.
+        </div>
+    </section>
+
+    <!-- < 8. 여러 source 직접 테스트하기 > -->
+    <section class="card">
+        <h2>8. 여러 source 직접 테스트하기</h2>
+        <p>아래 예시는 같은 영상을 두 가지 형식으로 준비했을 때의 구조다. 로컬 파일을 준비한 뒤 테스트한다.</p>
+        <div class="video-box">
+            <video id="demoVideo" controls preload="metadata">
+                <source src="assets/videos/flower.webm" type="video/webm">
+                <source src="assets/videos/flower.mp4" type="video/mp4">
+                브라우저에서 영상을 재생할 수 없습니다.
+            </video>
+        </div>
+        <p id="status" aria-live="polite">재생 상태: 아직 확인하지 않았습니다.</p>
+        <button type="button" id="checkButton">현재 재생 상태 확인</button>
+        <button type="button" id="resetButton">처음부터 재생</button>
+        <p class="small">두 파일이 없으면 이 예시의 영상은 재생되지 않는다. 아래 상태 메시지와 개발자 도구를 함께 확인한다.</p>
+    </section>
+
+    <!-- < 9. JavaScript로 오류 확인하기 > -->
+    <section class="card">
+        <h2>9. JavaScript로 오류 확인하기</h2>
+        <p>영상이 재생되지 않을 때는 <code>video</code> 요소의 상태와 오류 정보를 확인할 수 있다.</p>
+<pre><code>const video = document.querySelector("video");
+
+console.log(video.currentSrc);
+console.log(video.readyState);
+console.log(video.networkState);
+console.log(video.error);</code></pre>
+        <ul>
+            <li><code>currentSrc</code> : 브라우저가 선택한 미디어 URL</li>
+            <li><code>readyState</code> : 미디어 데이터를 어느 정도 확보했는지 나타내는 값</li>
+            <li><code>networkState</code> : 미디어 리소스 로딩 상태</li>
+            <li><code>error</code> : 미디어 오류 정보. 오류가 없으면 <code>null</code>일 수 있다.</li>
+        </ul>
+        <p>오류 이벤트를 등록하면 재생 실패가 발생했을 때 확인할 수 있다.</p>
+<pre><code>video.addEventListener("error", function () {
+    console.log("영상 로딩 또는 재생 중 오류가 발생했습니다.");
+    console.log(video.error);
+});</code></pre>
+        <p class="small">오류 객체가 제공하는 정보만으로 모든 원인을 확정할 수는 없다. 브라우저 개발자 도구의 Network 탭과 Console도 함께 확인한다.</p>
+    </section>
+
+    <!-- < 10. 재생 실패 원인 구분하기 > -->
+    <section class="card">
+        <h2>10. 재생 실패 원인 구분하기</h2>
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="background:#e2e8f0;">
+                    <th style="padding:10px; border:1px solid #cbd5e1;">증상</th>
+                    <th style="padding:10px; border:1px solid #cbd5e1;">확인할 내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">파일을 찾을 수 없음</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">경로, 파일명, 대소문자, Network 응답 상태</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">파일은 있지만 재생 불가</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">파일 손상, 컨테이너 및 코덱 지원 여부</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">영상은 나오지만 소리가 없음</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">음성 트랙, 음성 코덱, 음소거 상태</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">로컬에서는 되지만 서버에서는 실패</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">서버 응답, MIME 타입, 접근 권한, 네트워크 설정</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">특정 브라우저에서만 실패</td>
+                    <td style="padding:10px; border:1px solid #cbd5e1;">브라우저별 컨테이너·코덱 지원 차이</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>실무에서는 무작정 속성을 바꾸기보다 파일 경로 → 네트워크 응답 → 형식과 코덱 순서로 확인하면 원인을 좁히기 쉽다.</p>
+    </section>
+
+    <!-- < 11. 실습 문제 > -->
+    <section class="card">
+        <h2>11. 실습 문제</h2>
+        <h3>문제 1. 대체 파일 구성</h3>
+        <p>동일한 영상의 WebM 파일과 MP4 파일을 준비하고, 브라우저가 두 파일을 순서대로 확인할 수 있도록 작성하시오.</p>
+        <ul>
+            <li>영상은 <code>controls</code>로 재생할 수 있어야 한다.</li>
+            <li>각 <code>source</code>에는 적절한 <code>type</code>을 지정한다.</li>
+            <li>모든 후보를 재생할 수 없을 때 표시할 안내 문구를 작성한다.</li>
+        </ul>
+        <h3>문제 2. 경로 오류 찾기</h3>
+        <p>다음 파일 구조에서 잘못된 경로를 찾아 수정하시오.</p>
+<pre><code>video-study/
+├── index.html
+└── assets/
+    └── videos/
+        └── intro.mp4</code></pre>
+<pre><code>&lt;video controls&gt;
+    &lt;source src="videos/intro.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+        <h3>문제 3. 재생 오류 진단</h3>
+        <p>영상이 재생되지 않는다. 다음 항목을 확인하는 순서를 작성하시오.</p>
+        <ul>
+            <li>파일이 실제 경로에 존재하는가?</li>
+            <li>Network 탭에서 파일 요청이 성공했는가?</li>
+            <li>브라우저가 해당 미디어 형식과 코덱을 지원하는가?</li>
+            <li>Console과 <code>video.error</code>에서 오류 정보를 확인했는가?</li>
+        </ul>
+        <h3>문제 4. 단일 파일과 대체 파일 비교</h3>
+        <p><code>video src</code> 방식과 여러 <code>source</code> 요소를 사용하는 방식의 차이를 두 가지 이상 서술하시오.</p>
+    </section>
+
+    <!-- < 12. 정리 > -->
+    <section class="card">
+        <h2>12. 오늘의 핵심 정리</h2>
+        <ul>
+            <li><code>video src</code>는 하나의 파일을 지정하는 간단한 방식이다.</li>
+            <li><code>source</code> 요소를 여러 개 사용하면 여러 후보 파일을 제공할 수 있다.</li>
+            <li><code>type</code>은 미디어의 MIME 타입을 알려 주어 후보 선택에 도움을 준다.</li>
+            <li>파일 확장자, 컨테이너, 코덱은 서로 다른 개념이다.</li>
+            <li>영상 재생 실패 시 경로, 네트워크 응답, 코덱 지원 여부를 구분해서 확인한다.</li>
+        </ul>
+    </section>
+</main>
+<script>
+    const video = document.querySelector("#demoVideo");
+    const status = document.querySelector("#status");
+
+    video.addEventListener("loadstart", function () {
+        status.textContent = "재생 상태: 브라우저가 미디어를 불러오기 시작했습니다.";
+    });
+
+    video.addEventListener("loadedmetadata", function () {
+        status.textContent = `재생 상태: 메타데이터 로드 완료 (${video.videoWidth} × ${video.videoHeight})`;
+    });
+
+    video.addEventListener("canplay", function () {
+        status.textContent = "재생 상태: 재생할 수 있는 데이터가 준비되었습니다.";
+    });
+
+    video.addEventListener("playing", function () {
+        status.textContent = "재생 상태: 영상이 재생 중입니다.";
+    });
+
+    video.addEventListener("error", function () {
+        const error = video.error;
+        status.textContent = error
+            ? `재생 오류: 코드 ${error.code} - ${error.message || "상세 메시지 없음"}. 파일 경로와 형식을 확인하세요.`
+            : "재생 오류가 발생했습니다. 개발자 도구를 확인하세요.";
+        console.log("현재 소스:", video.currentSrc);
+        console.log("미디어 오류:", error);
+    });
+
+    document.querySelector("#checkButton").addEventListener("click", function () {
+        status.textContent =
+            `선택된 파일: ${video.currentSrc || "아직 선택되지 않음"} | ` +
+            `readyState: ${video.readyState} | networkState: ${video.networkState}`;
+        console.log("currentSrc:", video.currentSrc);
+        console.log("readyState:", video.readyState);
+        console.log("networkState:", video.networkState);
+        console.log("error:", video.error);
+    });
+
+    document.querySelector("#resetButton").addEventListener("click", function () {
+        video.currentTime = 0;
+        video.play().catch(function (error) {
+            status.textContent = "재생을 시작하지 못했습니다. 영상 파일이 준비되어 있는지 확인하세요.";
+            console.log(error);
+        });
+    });
+</script>
+</body>
+</html>
+```

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // < 16. 실습 문제 >
+
+// 문제 1.
+// 다음 조건에 맞는 product 객체를 생성하세요.
+// - 상품명 : "모니터"
+// - 가격 : 300000
+// - 재고 : 10
+// - 판매 여부 : true
+//
+// 객체를 생성한 후 상품명과 가격을 출력하세요.
+
+
+// 문제 2.
+// 다음 member 객체에서 나이를 31로 수정하세요.
+// email 프로퍼티를 추가하고 "lee@example.com"을 저장하세요.
+// phone 프로퍼티를 추가하고 "010-1111-2222"를 저장하세요.
+// address 프로퍼티를 삭제하세요.
+
+let member2 = {
+    name: "이영희",
+    age: 30,
+    address: "부산"
+};
+
+
+// 문제 3.
+// 다음 객체에서 사용자가 입력한 프로퍼티의 값을 출력하세요.
+// 입력값이 name이면 "김철수", age이면 25가 출력되어야 합니다.
+
+let person3 = {
+    name: "김철수",
+    age: 25
+};
+
+// let inputKey = prompt("조회할 항목을 입력하세요.");
+// console.log(person3[inputKey]);
+
+
+// 문제 4.
+// 다음 객체에 score 프로퍼티가 존재하는지 확인하세요.
+// 존재하면 "점수 있음", 존재하지 않으면 "점수 없음"을 출력하세요.
+
+let result = {
+    name: "박민수",
+    score: undefined
+};
+
+// console.log("score" in result);
+// console.log(Object.hasOwn(result, "score"));
+
+
+// 문제 5.
+// 변수 key에 "english"를 저장하세요.
+// key 변수의 값을 프로퍼티 키로 사용하여
+// 점수가 85인 객체를 생성하세요.
+
+let key = "english";
+
+// 작성 위치
+
+
+// < 17. 실습 정답 >
+
+// 문제 1 정답
+let productAnswer = {
+    name: "모니터",
+    price: 300000,
+    stock: 10,
+    isAvailable: true
+};
+
+console.log(productAnswer.name);
+console.log(productAnswer.price);
+
+// 문제 2 정답
+let memberAnswer = {
+    name: "이영희",
+    age: 30,
+    address: "부산"
+};
+
+memberAnswer.age = 31;
+memberAnswer.email = "lee@example.com";
+memberAnswer.phone = "010-1111-2222";
+
+delete memberAnswer.address;
+
+console.log(memberAnswer);
+
+// 문제 3 정답
+let personAnswer = {
+    name: "김철수",
+    age: 25
+};
+
+let inputKey = "name";
+
+console.log(personAnswer[inputKey]);
+
+// 문제 4 정답
+let resultAnswer = {
+    name: "박민수",
+    score: undefined
+};
+
+if ("score" in resultAnswer) {
+    console.log("점수 있음");
+} else {
+    console.log("점수 없음");
+}
+
+// 문제 5 정답
+let keyAnswer = "english";
+
+let scoreAnswer = {
+    [keyAnswer]: 85
+};
+
+console.log(scoreAnswer);
+console.log(scoreAnswer.english);
+</script>
+
+<body>
+    
+</body>
+</html>

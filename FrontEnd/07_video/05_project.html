@@ -1,0 +1,447 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIDEO STUDIO | 영상 콘텐츠</title>
+    <style>
+        * { box-sizing: border-box; }
+        :root {
+            --bg: #0b1020;
+            --panel: #141b2e;
+            --panel-light: #1b2540;
+            --text: #f8fafc;
+            --muted: #a5b4cc;
+            --accent: #7c9cff;
+            --border: rgba(255,255,255,.1);
+        }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, "Malgun Gothic", sans-serif; line-height: 1.6; }
+        button, input { font: inherit; }
+        button { cursor: pointer; }
+        a { color: inherit; text-decoration: none; }
+        .container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+        .header { position: sticky; top: 0; z-index: 10; background: rgba(11,16,32,.94); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+        .nav { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 22px; color: var(--muted); font-size: 14px; }
+        .nav-links a:hover { color: white; }
+        .hero { padding: 64px 0 44px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 38px; align-items: center; }
+        .eyebrow { color: var(--accent); font-weight: bold; font-size: 13px; letter-spacing: 2px; }
+        .hero h1 { margin: 12px 0; font-size: clamp(34px, 5vw, 58px); line-height: 1.15; }
+        .hero p { max-width: 540px; color: var(--muted); }
+        .primary-btn { padding: 12px 18px; border: 0; border-radius: 8px; background: var(--accent); color: #071020; font-weight: bold; }
+        .primary-btn:hover { filter: brightness(1.1); }
+        .hero-visual { position: relative; overflow: hidden; min-height: 300px; border: 1px solid var(--border); border-radius: 18px; background: radial-gradient(circle at 70% 25%, #657cf4, transparent 35%), linear-gradient(135deg, #263b70, #101629 70%); display: flex; align-items: center; justify-content: center; }
+        .hero-visual::before, .hero-visual::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; }
+        .hero-visual::before { width: 250px; height: 250px; }
+        .hero-visual::after { width: 180px; height: 180px; }
+        .hero-play { z-index: 1; width: 76px; height: 76px; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; background: rgba(255,255,255,.15); color: white; font-size: 26px; }
+        .hero-label { position: absolute; bottom: 18px; left: 20px; color: #dbeafe; font-size: 13px; }
+        .section { padding: 28px 0 48px; }
+        .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 20px; }
+        .section-heading h2 { margin: 0; font-size: 28px; }
+        .section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+        .search-row { display: flex; gap: 10px; margin-bottom: 20px; }
+        .search-row input { width: 100%; min-width: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; outline: none; background: var(--panel); color: white; }
+        .search-row input:focus { border-color: var(--accent); }
+        .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+        .filter-btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: 100px; background: var(--panel); color: var(--muted); }
+        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #071020; border-color: var(--accent); }
+        .video-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+        .video-card { overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); transition: transform .2s, border-color .2s; }
+        .video-card:hover { transform: translateY(-4px); border-color: rgba(124,156,255,.7); }
+        .thumbnail { position: relative; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(135deg, #344d82, #18233b); }
+        .thumbnail::before { content: ""; position: absolute; width: 120px; height: 120px; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; }
+        .thumbnail .shape { position: absolute; width: 90px; height: 90px; border-radius: 22px; transform: rotate(35deg); background: rgba(255,255,255,.1); }
+        .thumbnail .play { position: relative; z-index: 1; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.8); border-radius: 50%; background: rgba(5,10,25,.4); color: white; font-size: 17px; }
+        .thumbnail .duration { position: absolute; right: 10px; bottom: 10px; padding: 2px 7px; border-radius: 4px; background: rgba(0,0,0,.75); font-size: 12px; }
+        .thumbnail.blue { background: linear-gradient(135deg, #4568a7, #18213c); }
+        .thumbnail.purple { background: linear-gradient(135deg, #7858a8, #272043); }
+        .thumbnail.orange { background: linear-gradient(135deg, #b86d42, #422b36); }
+        .thumbnail.green { background: linear-gradient(135deg, #398a78, #183d44); }
+        .thumbnail.pink { background: linear-gradient(135deg, #b65f91, #482746); }
+        .thumbnail.gold { background: linear-gradient(135deg, #aa8c43, #423724); }
+        .card-body { padding: 16px; }
+        .category { display: inline-block; margin-bottom: 8px; color: var(--accent); font-size: 12px; font-weight: bold; }
+        .card-body h3 { margin: 0 0 8px; font-size: 18px; }
+        .card-body p { margin: 0; color: var(--muted); font-size: 14px; }
+        .card-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+        .empty { grid-column: 1 / -1; padding: 45px 15px; text-align: center; color: var(--muted); background: var(--panel); border-radius: 12px; }
+        .project-guide { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .guide-card { padding: 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+        .guide-card .number { color: var(--accent); font-weight: 900; font-size: 13px; }
+        .guide-card h3 { margin: 8px 0; }
+        .guide-card p { margin: 0; color: var(--muted); font-size: 14px; }
+        .footer { margin-top: 30px; padding: 28px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+        .modal { position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.82); }
+        .modal.open { display: flex; }
+        .modal-panel { width: min(900px, 100%); overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+        .modal-top { display: flex; justify-content: space-between; align-items: center; gap: 15px; padding: 14px 18px; }
+        .modal-top h2 { margin: 0; font-size: 18px; }
+        .close-btn { width: 36px; height: 36px; border: 0; border-radius: 8px; background: var(--panel-light); color: white; font-size: 20px; }
+        .modal video { display: block; width: 100%; max-height: 65vh; background: black; }
+        .modal-info { padding: 14px 18px 20px; color: var(--muted); font-size: 14px; }
+        .modal-info p { margin: 5px 0; }
+        @media (max-width: 850px) {
+            .hero { grid-template-columns: 1fr; padding-top: 40px; }
+            .hero-visual { min-height: 240px; }
+            .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .project-guide { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 560px) {
+            body { font-size: 15px; }
+            .container { width: calc(100% - 28px); }
+            .nav { min-height: 62px; }
+            .nav-links { gap: 12px; font-size: 12px; }
+            .logo { font-size: 18px; }
+            .hero h1 { font-size: 36px; }
+            .video-grid { grid-template-columns: 1fr; }
+            .section-heading { align-items: start; flex-direction: column; }
+            .search-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container nav">
+        <a href="#" class="logo">VIDEO<span>STUDIO</span></a>
+        <nav class="nav-links">
+            <a href="#home">홈</a>
+            <a href="#videos">영상 목록</a>
+            <a href="#about">소개</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- < 1. 메인 소개 영역 > -->
+    <section class="container hero" id="home">
+        <div>
+            <span class="eyebrow">DISCOVER YOUR NEXT STORY</span>
+            <h1>영상으로 만나는<br>새로운 아이디어</h1>
+            <p>여행, 디자인, 개발, 라이프스타일까지. 다양한 영상 콘텐츠를 탐색하고 관심 있는 영상을 재생해 보세요.</p>
+            <button class="primary-btn" id="browseButton" type="button">영상 둘러보기 ↓</button>
+        </div>
+        <div class="hero-visual">
+            <button class="hero-play" id="heroPlay" type="button" aria-label="대표 영상 재생">▶</button>
+            <span class="hero-label">FEATURED CONTENT · 01</span>
+        </div>
+    </section>
+
+    <!-- < 2. 영상 목록 영역 > -->
+    <section class="container section" id="videos">
+        <div class="section-heading">
+            <div>
+                <h2>추천 영상</h2>
+                <p>관심 있는 주제를 선택해 콘텐츠를 찾아보세요.</p>
+            </div>
+            <span id="resultCount">전체 6개</span>
+        </div>
+
+        <div class="search-row">
+            <input id="searchInput" type="search" placeholder="영상 제목이나 설명 검색" aria-label="영상 검색">
+            <button class="primary-btn" id="searchButton" type="button">검색</button>
+        </div>
+
+        <div class="filters" aria-label="영상 카테고리">
+            <button class="filter-btn active" data-category="전체" type="button">전체</button>
+            <button class="filter-btn" data-category="여행" type="button">여행</button>
+            <button class="filter-btn" data-category="디자인" type="button">디자인</button>
+            <button class="filter-btn" data-category="개발" type="button">개발</button>
+            <button class="filter-btn" data-category="라이프" type="button">라이프</button>
+        </div>
+
+        <div class="video-grid" id="videoGrid">
+            <!-- JavaScript에서 영상 카드 생성 -->
+        </div>
+    </section>
+
+    <!-- < 3. 프로젝트 설명 영역 > -->
+    <section class="container section" id="about">
+        <div class="section-heading">
+            <div>
+                <h2>이 페이지의 기능</h2>
+                <p>HTML, CSS, JavaScript를 조합한 영상 콘텐츠 페이지입니다.</p>
+            </div>
+        </div>
+        <div class="project-guide">
+            <article class="guide-card">
+                <span class="number">01 / HTML</span>
+                <h3>콘텐츠 구조</h3>
+                <p>헤더, 메인 소개, 영상 목록, 영상 재생 모달, 푸터 영역을 구성합니다.</p>
+            </article>
+            <article class="guide-card">
+                <span class="number">02 / CSS</span>
+                <h3>반응형 디자인</h3>
+                <p>Grid와 미디어 쿼리를 이용해 화면 크기에 따라 카드 배치를 변경합니다.</p>
+            </article>
+            <article class="guide-card">
+                <span class="number">03 / JavaScript</span>
+                <h3>동적 기능</h3>
+                <p>영상 목록 생성, 카테고리 필터, 검색, 모달 열기와 닫기를 구현합니다.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        VIDEO STUDIO · HTML Video Project
+        <p>수업 실습용 프로젝트입니다. 실제 영상 파일을 연결하면 재생 기능을 사용할 수 있습니다.</p>
+    </div>
+</footer>
+
+<!-- < 4. 영상 재생 모달 > -->
+<div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+        <div class="modal-top">
+            <h2 id="modalTitle">영상 제목</h2>
+            <button class="close-btn" id="closeModal" type="button" aria-label="모달 닫기">×</button>
+        </div>
+        <video id="modalVideo" controls playsinline preload="metadata">
+            브라우저에서 영상을 재생할 수 없습니다.
+        </video>
+        <div class="modal-info">
+            <p id="modalDescription"></p>
+            <p id="modalNotice">영상 파일을 준비하면 재생할 수 있습니다.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // < 5. 영상 데이터 >
+    // video 경로는 프로젝트에 실제로 존재하는 파일 경로로 변경해야 합니다.
+    const videos = [
+        {
+            id: 1,
+            title: "바다를 따라 떠나는 여행",
+            category: "여행",
+            description: "아름다운 해안 풍경과 여행의 순간을 담은 영상입니다.",
+            duration: "04:32",
+            views: "1.2만",
+            theme: "blue",
+            src: "assets/videos/travel.mp4"
+        },
+        {
+            id: 2,
+            title: "색상으로 완성하는 디자인",
+            category: "디자인",
+            description: "색상과 레이아웃을 활용해 디자인의 완성도를 높이는 방법입니다.",
+            duration: "06:18",
+            views: "8,420",
+            theme: "purple",
+            src: "assets/videos/design.mp4"
+        },
+        {
+            id: 3,
+            title: "웹 개발 첫걸음",
+            category: "개발",
+            description: "HTML과 CSS를 이용해 웹페이지의 기본 구조를 만들어 봅니다.",
+            duration: "12:05",
+            views: "2.4만",
+            theme: "green",
+            src: "assets/videos/development.mp4"
+        },
+        {
+            id: 4,
+            title: "도시의 하루 기록하기",
+            category: "여행",
+            description: "도시의 거리와 일상의 풍경을 짧은 영상으로 기록합니다.",
+            duration: "03:47",
+            views: "6,150",
+            theme: "orange",
+            src: "assets/videos/city.mp4"
+        },
+        {
+            id: 5,
+            title: "집중력을 높이는 작업 환경",
+            category: "라이프",
+            description: "편안하고 효율적인 작업 공간을 구성하는 아이디어입니다.",
+            duration: "05:26",
+            views: "9,870",
+            theme: "pink",
+            src: "assets/videos/workspace.mp4"
+        },
+        {
+            id: 6,
+            title: "웹 화면을 구성하는 레이아웃",
+            category: "개발",
+            description: "Flexbox와 Grid를 이용한 화면 구성 방법을 살펴봅니다.",
+            duration: "09:14",
+            views: "1.6만",
+            theme: "gold",
+            src: "assets/videos/layout.mp4"
+        }
+    ];
+
+    // < 6. 영상 카드 생성 >
+    const videoGrid = document.querySelector("#videoGrid");
+    const resultCount = document.querySelector("#resultCount");
+    const searchInput = document.querySelector("#searchInput");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    let selectedCategory = "전체";
+
+    function renderVideos() {
+        const keyword = searchInput.value.trim().toLowerCase();
+
+        const filteredVideos = videos.filter(function (video) {
+            const matchesCategory =
+                selectedCategory === "전체" ||
+                video.category === selectedCategory;
+
+            const matchesKeyword =
+                video.title.toLowerCase().includes(keyword) ||
+                video.description.toLowerCase().includes(keyword) ||
+                video.category.toLowerCase().includes(keyword);
+
+            return matchesCategory && matchesKeyword;
+        });
+
+        resultCount.textContent = `검색 결과 ${filteredVideos.length}개`;
+
+        if (filteredVideos.length === 0) {
+            videoGrid.innerHTML = '<p class="empty">검색 결과가 없습니다.</p>';
+            return;
+        }
+
+        videoGrid.innerHTML = filteredVideos.map(function (video) {
+            return `
+                <article class="video-card">
+                    <div class="thumbnail ${video.theme}">
+                        <span class="shape"></span>
+                        <button class="play" type="button" data-play="${video.id}" aria-label="${video.title} 재생">▶</button>
+                        <span class="duration">${video.duration}</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="category">${video.category}</span>
+                        <h3>${video.title}</h3>
+                        <p>${video.description}</p>
+                        <div class="card-meta">
+                            <span>VIDEO STUDIO</span>
+                            <span>조회 ${video.views}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }).join("");
+    }
+
+    // < 7. 카테고리 필터 >
+    filterButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            selectedCategory = button.dataset.category;
+
+            filterButtons.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+            renderVideos();
+        });
+    });
+
+    // < 8. 검색 기능 >
+    document.querySelector("#searchButton").addEventListener("click", renderVideos);
+
+    searchInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            renderVideos();
+        }
+    });
+
+    // < 9. 영상 재생 모달 >
+    const modal = document.querySelector("#videoModal");
+    const modalVideo = document.querySelector("#modalVideo");
+    const modalTitle = document.querySelector("#modalTitle");
+    const modalDescription = document.querySelector("#modalDescription");
+    const modalNotice = document.querySelector("#modalNotice");
+    let lastFocusedElement = null;
+
+    function openVideo(videoId) {
+        const video = videos.find(function (item) {
+            return item.id === Number(videoId);
+        });
+
+        if (!video) return;
+
+        lastFocusedElement = document.activeElement;
+        modalTitle.textContent = video.title;
+        modalDescription.textContent = video.description;
+        modalNotice.textContent = `파일 경로: ${video.src}`;
+
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.replaceChildren();
+
+        const source = document.createElement("source");
+        source.src = video.src;
+        source.type = "video/mp4";
+        modalVideo.appendChild(source);
+
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+        document.querySelector("#closeModal").focus();
+
+        modalVideo.load();
+        modalVideo.play().catch(function () {
+            modalNotice.textContent =
+                "영상 파일을 재생할 수 없습니다. 파일 경로와 형식을 확인하세요.";
+        });
+    }
+
+    function closeVideo() {
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.replaceChildren();
+        modalVideo.load();
+
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+
+        if (lastFocusedElement) {
+            lastFocusedElement.focus();
+        }
+    }
+
+    // 카드가 동적으로 생성되므로 상위 요소에서 클릭을 처리합니다.
+    videoGrid.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-play]");
+        if (button) {
+            openVideo(button.dataset.play);
+        }
+    });
+
+    document.querySelector("#heroPlay").addEventListener("click", function () {
+        openVideo(1);
+    });
+
+    document.querySelector("#closeModal").addEventListener("click", closeVideo);
+
+    modal.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            closeVideo();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && modal.classList.contains("open")) {
+            closeVideo();
+        }
+    });
+
+    // < 10. 영상 목록으로 이동 >
+    document.querySelector("#browseButton").addEventListener("click", function () {
+        document.querySelector("#videos").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+
+    // < 11. 초기 화면 출력 >
+    renderVideos();
+</script>
+</body>
+</html>
+```

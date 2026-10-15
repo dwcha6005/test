@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    04_class.js
+
+    < 학습 목표 >
+    1. class 문법이 필요한 이유를 이해한다.
+    2. class와 constructor()의 역할을 이해한다.
+    3. new 연산자로 인스턴스를 생성할 수 있다.
+    4. this를 사용하여 인스턴스의 프로퍼티를 설정할 수 있다.
+    5. 클래스 내부에 메서드를 선언하고 호출할 수 있다.
+    6. 생성자 함수와 class의 차이를 설명할 수 있다.
+*/
+
+
+/*
+    < 1. class가 필요한 이유 >
+
+    같은 구조의 객체를 여러 개 생성하려면
+    객체 리터럴만으로는 코드가 반복될 수 있다.
+
+    객체 리터럴
+*/
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 20,
+        introduce: function() {
+            console.log("이름 : " + this.name);
+            console.log("나이 : " + this.age);
+        }
+    };
+
+    let person2 = {
+        name: "김철수",
+        age: 25,
+        introduce: function() {
+            console.log("이름 : " + this.name);
+            console.log("나이 : " + this.age);
+        }
+    };
+
+    person1.introduce();
+    person2.introduce();
+}
+
+/*
+    두 객체는 프로퍼티와 메서드의 구조가 같다.
+    하지만 객체를 만들 때마다 같은 구조를 반복해서 작성해야 한다.
+
+    앞에서 배운 생성자 함수를 사용하면 이 문제를 줄일 수 있다.
+*/
+
+
+/*
+    < 2. 생성자 함수 복습 >
+
+    생성자 함수는 객체를 생성하기 위한 설계도 역할을 한다.
+
+    new와 함께 호출하면 새로운 객체가 생성되고,
+    생성자 함수 내부의 this가 생성되는 객체를 가리킨다.
+*/
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+
+        this.introduce = function() {
+            console.log("이름 : " + this.name);
+            console.log("나이 : " + this.age);
+        };
+    }
+
+    let person1 = new Person("홍길동", 20);
+    let person2 = new Person("김철수", 25);
+
+    person1.introduce();
+    person2.introduce();
+}
+
+/*
+    생성자 함수로 같은 구조의 객체를 쉽게 만들 수 있다.
+    하지만 생성자 함수 안에서 다음과 같이 메서드를 작성하면
+    this.introduce = function() { ... };
+    객체를 생성할 때마다 introduce 함수도 새로 만들어진다.
+
+    여러 객체가 같은 기능을 사용한다면
+    메서드를 공유하는 방식이 더 효율적일 수 있다.
+
+    이러한 점을 포함해 객체 생성과 메서드 선언을
+    더 명확하게 표현할 수 있는 문법이 class이다.
+*/
+
+
+/*
+    < 3. class 선언하기 >
+
+    기본 문법
+
+    class 클래스이름 {
+        // 클래스의 내용
+    }
+
+    클래스 이름은 첫 글자를 대문자로 작성하는 것이 관례이다.
+
+    예)
+    Person
+    Student
+    Product
+*/
+
+{
+    class Person {
+
+    }
+
+    console.log(Person);
+}
+
+/*
+    class Person {}은 Person이라는 클래스를 선언한다.
+
+    클래스를 선언했다고 해서 Person 객체가 바로 생성되는 것은 아니다.
+
+    클래스를 이용해 객체를 생성하려면 new를 사용한다.
+*/
+
+
+/*
+    < 4. new로 인스턴스 생성하기 >
+
+    인스턴스(Instance)
+    : 클래스를 바탕으로 생성된 객체
+
+    기본 문법
+
+    let 변수명 = new 클래스이름();
+*/
+
+{
+    class Person {
+
+    }
+
+    let person1 = new Person();
+    let person2 = new Person();
+
+    console.log(person1);
+    console.log(person2);
+
+    console.log(person1 === person2); // false
+}
+
+/*
+    new Person()을 실행할 때마다 새로운 객체가 생성된다.
+
+    person1과 person2는 서로 다른 객체를 참조한다.
+
+    아직 클래스 안에 프로퍼티를 작성하지 않았기 때문에
+    두 객체는 빈 객체처럼 보인다.
+
+    정리
+    클래스 : 객체를 생성하기 위한 설계도
+    인스턴스 : 클래스를 바탕으로 실제 생성된 객체
+*/
+
+
+/*
+    < 5. constructor() >
+
+    constructor()
+    : 클래스의 인스턴스가 생성될 때 실행되는 특별한 메서드
+
+    주로 인스턴스의 초기 프로퍼티 값을 설정할 때 사용한다.
+
+    기본 문법
+
+    class 클래스이름 {
+        constructor(매개변수) {
+            // 초기화 코드
+        }
+    }
+*/
+
+{
+    class Person {
+        constructor() {
+            console.log("Person 인스턴스가 생성되었습니다.");
+        }
+    }
+
+    let person1 = new Person();
+    let person2 = new Person();
+}
+
+/*
+    new Person()을 실행할 때마다 constructor()가 실행된다.
+
+    constructor()는 클래스에서 인스턴스를 초기화할 때
+    사용하는 메서드이다.
+
+    일반적으로 클래스 하나에 constructor()를 직접 선언한다면
+    하나만 작성할 수 있다.
+
+    constructor()를 직접 작성하지 않아도
+    기본 생성자가 제공되므로 인스턴스를 생성할 수 있다.
+*/
+
+
+/*
+    < 6. constructor()에서 프로퍼티 설정하기 >
+
+    constructor() 내부에서 this를 사용하면
+    생성되는 인스턴스에 프로퍼티를 설정할 수 있다.
+*/
+
+{
+    class Person {
+        constructor() {
+            this.name = "홍길동";
+            this.age = 20;
+        }
+    }
+
+    let person1 = new Person();
+
+    console.log(person1.name); // 홍길동
+    console.log(person1.age);  // 20
+}
+
+/*
+    new Person()을 실행하면
+
+    1. 새로운 인스턴스가 생성된다.
+    2. constructor()가 실행된다.
+    3. constructor() 안의 this가 해당 인스턴스를 가리킨다.
+    4. this.name과 this.age에 값을 저장한다.
+    5. 생성된 인스턴스가 반환된다.
+
+    여기서 this는 person1이라는 변수 이름을 직접 가리키는 것이 아니다.
+    person1이 참조하는 객체를 가리킨다.
+*/
+
+
+/*
+    < 7. constructor()의 매개변수 >
+
+    인스턴스마다 다른 값을 저장하려면 매개변수를 사용한다.
+*/
+
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    let person1 = new Person("홍길동", 20);
+    let person2 = new Person("김철수", 25);
+    let person3 = new Person("이영희", 30);
+
+    console.log(person1.name, person1.age);
+    console.log(person2.name, person2.age);
+    console.log(person3.name, person3.age);
+}
+
+/*
+    new Person("홍길동", 20);
+
+    name 매개변수에는 "홍길동"이 전달된다.
+    age 매개변수에는 20이 전달된다.
+
+    this.name = name;
+    this.age = age;
+
+    전달받은 값을 인스턴스의 프로퍼티에 저장한다.
+
+    constructor()는 인스턴스 생성 시 필요한 초기값을
+    설정하는 역할을 한다.
+*/
+
+
+/*
+    < 8. 클래스에 메서드 선언하기 >
+
+    클래스 내부에는 메서드를 선언할 수 있다.
+
+    기본 문법
+
+    class 클래스이름 {
+        constructor() {
+            // 초기화
+        }
+
+        메서드이름() {
+            // 실행할 코드
+        }
+    }
+
+    클래스의 메서드는 function 키워드를 붙이지 않는다.
+*/
+
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        introduce() {
+            console.log("이름 : " + this.name);
+            console.log("나이 : " + this.age);
+        }
+    }
+
+    let person1 = new Person("홍길동", 20);
+    let person2 = new Person("김철수", 25);
+
+    person1.introduce();
+    person2.introduce();
+}
+
+/*
+    introduce()는 Person 클래스에 선언한 메서드이다.
+
+    person1.introduce();
+    person2.introduce();
+
+    각각의 인스턴스에서 같은 메서드를 호출할 수 있다.
+
+    메서드 내부의 this는 일반적인 객체 메서드 호출처럼
+    호출한 인스턴스를 가리킨다.
+
+    person1.introduce();
+    -> this는 person1이 참조하는 객체
+
+    person2.introduce();
+    -> this는 person2가 참조하는 객체
+*/
+
+
+/*
+    < 9. 클래스 메서드에서 프로퍼티 수정하기 >
+
+    메서드는 인스턴스의 프로퍼티 값을 조회하거나 수정할 수 있다.
+*/
+
+{
+    class Student {
+        constructor(name, score) {
+            this.name = name;
+            this.score = score;
+        }
+
+        addScore(point) {
+            this.score += point;
+        }
+
+        showInfo() {
+            console.log("학생 : " + this.name);
+            console.log("점수 : " + this.score);
+        }
+    }
+
+    let student1 = new Student("홍길동", 80);
+
+    student1.showInfo();
+
+    student1.addScore(10);
+
+    student1.showInfo();
+}
+
+/*
+    addScore(10)을 호출하면
+    this.score에 10을 더한다.
+
+    해당 메서드를 호출한 인스턴스의 점수만 변경된다.
+*/
+
+
+/*
+    < 10. 메서드의 매개변수와 반환값 >
+
+    클래스의 메서드도 일반 함수처럼
+    매개변수를 전달받고 값을 반환할 수 있다.
+*/
+
+{
+    class Calculator {
+        add(num1, num2) {
+            return num1 + num2;
+        }
+
+        subtract(num1, num2) {
+            return num1 - num2;
+        }
+
+        multiply(num1, num2) {
+            return num1 * num2;
+        }
+
+        divide(num1, num2) {
+            return num1 / num2;
+        }
+    }
+
+    let calculator = new Calculator();
+
+    console.log(calculator.add(10, 5));      // 15
+    console.log(calculator.subtract(10, 5)); // 5
+    console.log(calculator.multiply(10, 5)); // 50
+    console.log(calculator.divide(10, 5));   // 2
+}
+
+/*
+    Calculator 클래스는 계산 기능을 정의한다.
+
+    계산에 필요한 값은 메서드의 매개변수로 전달하고,
+    계산 결과는 return으로 반환한다.
+
+    이 예제에서는 인스턴스의 프로퍼티를 사용하지 않지만
+    메서드를 클래스에 선언하고 호출하는 방법을 익힐 수 있다.
+*/
+
+
+/*
+    < 11. 클래스의 메서드와 객체 리터럴의 메서드 비교 >
+
+    객체 리터럴의 메서드
+*/
+
+{
+    let person = {
+        name: "홍길동",
+
+        introduce() {
+            console.log(this.name);
+        }
+    };
+
+    person.introduce();
+}
+
+/*
+    class의 메서드
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(this.name);
+        }
+    }
+
+    let person = new Person("홍길동");
+
+    person.introduce();
+}
+
+/*
+    두 방식 모두 메서드를 선언할 때
+    introduce() { ... } 형태를 사용할 수 있다.
+
+    객체 리터럴:
+    이미 만들어지는 객체에 프로퍼티와 메서드를 작성한다.
+
+    class:
+    같은 구조의 인스턴스를 여러 개 생성할 수 있도록
+    클래스에 초기화 코드와 메서드를 정의한다.
+*/
+
+
+/*
+    < 12. 생성자 함수와 class 비교 >
+
+    생성자 함수
+*/
+
+{
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    let person1 = new Person("홍길동", 20);
+
+    console.log(person1.name);
+}
+
+/*
+    class
+*/
+
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    let person1 = new Person("홍길동", 20);
+
+    console.log(person1.name);
+}
+
+/*
+    두 코드는 비슷한 목적으로 사용할 수 있다.
+
+    생성자 함수:
+    function Person(name, age) { ... }
+
+    class:
+    class Person {
+        constructor(name, age) { ... }
+    }
+
+    생성자 함수는 기존 JavaScript에서 객체를 생성하는 데
+    널리 사용했던 방식이다.
+
+    class는 객체 생성과 메서드 정의 등을
+    명확한 문법으로 표현할 수 있도록 제공되는 문법이다.
+
+    단, class는 생성자 함수를 단순히 보기 좋게 바꾼 것만은 아니다.
+    호출 규칙과 메서드 처리 방식 등에 차이가 있다.
+*/
+
+
+/*
+    < 13. 생성자 함수와 class의 메서드 차이 >
+
+    생성자 함수 내부에 메서드를 작성하는 방식
+*/
+
+{
+    function Person(name) {
+        this.name = name;
+
+        this.introduce = function() {
+            console.log(this.name);
+        };
+    }
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    person1.introduce();
+    person2.introduce();
+
+    console.log(person1.introduce === person2.introduce); // false
+}
+
+/*
+    위 예제에서는 생성자 함수가 실행될 때마다
+    introduce 함수가 새로 만들어진다.
+
+    따라서 두 인스턴스의 introduce 함수는 서로 다르다.
+*/
+
+
+/*
+    class에서 메서드를 선언하는 방식
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(this.name);
+        }
+    }
+
+    let person1 = new Person("홍길동");
+    let person2 = new Person("김철수");
+
+    person1.introduce();
+    person2.introduce();
+
+    console.log(person1.introduce === person2.introduce); // true
+}
+
+/*
+    class의 introduce() 메서드는 일반적으로
+    Person.prototype에 등록되어 인스턴스들이 공유한다.
+
+    그래서 두 인스턴스에서 접근하는 introduce 메서드는 같다.
+
+    여기서 prototype의 자세한 구조는 아직 다루지 않는다.
+    다음 프로토타입 수업에서 자세히 학습한다.
+
+    기억할 내용
+
+    생성자 함수 내부에서
+    this.introduce = function() { ... };
+
+    class 내부에서
+    introduce() { ... }
+
+    이 두 방식은 메서드를 저장하는 방식에 차이가 있다.
+*/
+
+
+/*
+    < 14. class는 new 없이 호출할 수 없다 >
+
+    class는 new 연산자를 사용하여 인스턴스를 생성해야 한다.
+
+    아래 코드는 오류가 발생한다.
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    Person("홍길동"); // TypeError
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    let person1 = new Person("홍길동");
+
+    console.log(person1.name);
+}
+
+/*
+    클래스는 일반 함수처럼 호출할 수 없다.
+
+    반드시 new를 사용해야 한다.
+
+    이 점은 생성자 함수와 중요한 차이 중 하나이다.
+*/
+
+
+/*
+    < 15. constructor()는 생략할 수 있다 >
+
+    클래스에 constructor()를 작성하지 않아도
+    기본 생성자가 제공된다.
+*/
+
+{
+    class Product {
+        showMessage() {
+            console.log("상품입니다.");
+        }
+    }
+
+    let product1 = new Product();
+
+    product1.showMessage();
+}
+
+/*
+    위 클래스는 다음과 같은 형태로 생각할 수 있다.
+
+    class Product {
+        constructor() {
+        }
+
+        showMessage() {
+            console.log("상품입니다.");
+        }
+    }
+
+    별도의 초기화 작업이 필요 없다면
+    constructor()를 생략할 수 있다.
+*/
+
+
+/*
+    < 16. 실생활 예제 : 상품 관리 >
+
+    상품마다 상품명, 가격, 재고가 있다고 가정하자.
+
+    필요한 기능
+    1. 상품 정보 출력
+    2. 상품 판매
+    3. 재고가 부족하면 판매하지 않기
+*/
+
+{
+    class Product {
+        constructor(name, price, stock) {
+            this.name = name;
+            this.price = price;
+            this.stock = stock;
+        }
+
+        showInfo() {
+            console.log("상품명 : " + this.name);
+            console.log("가격 : " + this.price + "원");
+            console.log("재고 : " + this.stock + "개");
+        }
+
+        sell(quantity) {
+            if (quantity <= 0) {
+                console.log("판매 수량은 1개 이상이어야 합니다.");
+            } else if (quantity > this.stock) {
+                console.log("재고가 부족합니다.");
+            } else {
+                this.stock -= quantity;
+                console.log(quantity + "개 판매되었습니다.");
+            }
+        }
+    }
+
+    let product1 = new Product("키보드", 30000, 10);
+    let product2 = new Product("마우스", 15000, 5);
+
+    product1.showInfo();
+    product1.sell(3);
+    product1.showInfo();
+
+    product2.showInfo();
+    product2.sell(10);
+    product2.showInfo();
+}
+
+/*
+    < 19. 핵심 정리 >
+
+    1. class는 같은 구조의 인스턴스를 생성하기 위한 문법이다.
+    2. new 클래스이름()으로 인스턴스를 생성한다.
+    3. constructor()는 인스턴스 생성 시 초기화 작업을 수행한다.
+    4. this는 constructor() 안에서 생성되는 인스턴스를 가리킨다.
+    5. 클래스 내부의 메서드는 function 키워드 없이 선언한다.
+    6. 메서드 안의 this는 호출 방식에 따라 결정된다.
+       인스턴스의 메서드로 호출하면 해당 인스턴스를 가리킨다.
+    7. class는 new 없이 호출할 수 없다.
+    8. constructor()는 초기화 작업이 없다면 생략할 수 있다.
+    9. class 메서드는 일반적으로 프로토타입에서 공유된다.
+    10. 생성자 함수와 class는 비슷한 목적에 사용할 수 있지만
+        호출 방식과 메서드 처리 방식 등에 차이가 있다.
+
+    다음 수업:
+    중첩 객체와 객체 배열
+    이후 프로토타입에서 class 메서드가 공유되는 원리를 학습한다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

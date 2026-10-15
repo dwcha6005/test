@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    JavaScript 객체(Object)
+    = JSON (JavaScript Object Notaion)
+
+    01. 객체의 기본 개념과 프로퍼티 관리
+
+    학습 목표
+    1. 객체가 필요한 이유를 이해한다.
+    2. 객체 리터럴로 객체를 생성할 수 있다.
+    3. 프로퍼티의 키와 값을 구분할 수 있다.
+    4. 점 표기법과 대괄호 표기법을 사용할 수 있다.
+    5. 프로퍼티를 추가, 수정, 삭제할 수 있다.
+    6. 객체의 프로퍼티 존재 여부를 확인할 수 있다.
+    7. 계산된 프로퍼티 이름과 단축 프로퍼티를 사용할 수 있다.
+*/
+
+
+// < 1. 객체가 필요한 이유 >
+
+// 변수만 사용하여 회원 정보를 관리하는 경우
+let name = "김철수";
+let age = 25;
+let address = "부산";
+let job = "개발자";
+
+console.log(name);
+console.log(age);
+console.log(address);
+console.log(job);
+
+// 서로 관련된 데이터를 하나로 묶어서 관리할 수 있다.
+// 객체를 사용하면 하나의 회원 정보를 하나의 구조로 표현할 수 있다.
+
+
+// < 2. 객체 리터럴 >
+
+// 객체 리터럴 : 중괄호 {}를 사용하여 객체를 생성하는 방법
+let person = {
+    name: "김철수",
+    age: 25,
+    address: "부산",
+    job: "개발자"
+};
+
+console.log(person);
+
+// 프로퍼티(Property) : 객체에 저장되는 이름과 값의 쌍
+// 프로퍼티 키(Key) : 프로퍼티의 이름
+// 프로퍼티 값(Value) : 키에 대응하는 값
+
+// name : "김철수"
+// 키는 name, 값은 "김철수"
+
+// 하나의 객체에는 여러 프로퍼티를 저장할 수 있다.
+let product = {
+    name: "노트북",
+    price: 1500000,
+    isAvailable: true,
+    discount: null
+};
+
+console.log(product);
+
+
+// < 3. 객체의 프로퍼티 값 >
+
+// 프로퍼티 값에는 다양한 자료형을 저장할 수 있다.
+let member = {
+    name: "이영희",
+    age: 28,
+    isActive: true,
+    email: null,
+    hobbies: ["독서", "운동", "여행"],
+    address: {
+        city: "부산",
+        district: "해운대구"
+    }
+};
+
+console.log(member.name);
+console.log(member.hobbies);
+console.log(member.address);
+
+// 객체 안에 배열이나 다른 객체를 저장할 수도 있다.
+// 함수도 프로퍼티 값으로 저장할 수 있으며, 이 내용은 다음 수업에서 다룬다.
+
+
+// < 4. 점 표기법(Dot Notation) >
+
+// 객체.프로퍼티키 형태로 프로퍼티에 접근한다.
+console.log(person.name);
+console.log(person.age);
+console.log(person.address);
+
+// 프로퍼티 값을 변수에 저장할 수도 있다.
+let personName = person.name;
+let personAge = person.age;
+
+console.log(personName);
+console.log(personAge);
+
+// 점 표기법을 사용하여 프로퍼티 값을 변경할 수 있다.
+person.age = 26;
+person.address = "서울";
+
+console.log(person.age);
+console.log(person.address);
+
+
+// < 5. 대괄호 표기법(Bracket Notation) >
+
+// 대괄호 안에 프로퍼티 키를 문자열로 작성한다.
+console.log(person["name"]);
+console.log(person["age"]);
+console.log(person["address"]);
+
+// 점 표기법과 대괄호 표기법은 동일한 프로퍼티에 접근할 수 있다.
+console.log(person.name === person["name"]);
+
+// 프로퍼티 키에 공백이나 하이픈이 포함된 경우
+// 대괄호 표기법을 사용해야 한다.
+let item = {
+    name: "무선 키보드",
+    "sale price": 45000,
+    "product-code": "KB001"
+};
+
+console.log(item["sale price"]);
+console.log(item["product-code"]);
+
+// item.sale price
+// item.product-code
+// 위와 같은 형태는 점 표기법으로 올바르게 접근할 수 없다.
+
+
+// < 6. 점 표기법과 대괄호 표기법의 차이 >
+
+let student = {
+    name: "박민수",
+    age: 22
+};
+
+let key = "name";
+
+// 점 표기법에서 key는 변수명이 아니라 프로퍼티 키 자체이다.
+console.log(student.key);       // undefined
+
+// 대괄호 표기법에서는 key 변수의 값을 사용한다.
+console.log(student[key]);      // 박민수
+
+// student[key]는 student["name"]과 같다.
+
+// 변수에 저장된 키를 이용하면 원하는 프로퍼티에 동적으로 접근할 수 있다.
+let selectedProperty = "age";
+
+console.log(student[selectedProperty]);
+
+
+// < 7. 프로퍼티 추가 >
+
+// 객체를 생성할 때 존재하지 않았던 프로퍼티도 추가할 수 있다.
+student.score = 90;
+student.email = "park@example.com";
+
+console.log(student);
+
+// 대괄호 표기법으로도 프로퍼티를 추가할 수 있다.
+student["phone"] = "010-1234-5678";
+
+console.log(student);
+
+// 변수에 저장된 키를 이용하여 프로퍼티를 추가할 수도 있다.
+let newProperty = "grade";
+
+student[newProperty] = "A";
+
+console.log(student.grade);
+
+
+// < 8. 프로퍼티 수정 >
+
+// 이미 존재하는 프로퍼티에 새로운 값을 대입하면 값이 변경된다.
+student.score = 95;
+student["grade"] = "A+";
+
+console.log(student.score);
+console.log(student.grade);
+
+// 기존 프로퍼티를 수정하는 것과 새로운 프로퍼티를 추가하는 것은
+// 같은 대입 문법으로 처리할 수 있다.
+
+
+// < 9. 프로퍼티 삭제 >
+
+// delete 연산자로 객체의 특정 프로퍼티를 삭제할 수 있다.
+delete student.email;
+
+console.log(student);
+
+// 삭제한 프로퍼티에 접근하면 undefined가 반환된다.
+console.log(student.email);
+
+// delete는 프로퍼티를 삭제하는 것이지
+// student 변수 자체를 삭제하는 것이 아니다.
+console.log(student.name);
+
+
+// < 10. 존재하지 않는 프로퍼티에 접근하기 >
+
+let user = {
+    name: "최유진",
+    age: 30
+};
+
+console.log(user.name);
+console.log(user.address);
+
+// 존재하지 않는 프로퍼티에 접근하면 undefined가 반환된다.
+// undefined는 값이 정의되지 않았음을 나타낸다.
+
+// undefined를 직접 저장한 경우와 프로퍼티가 없는 경우를 비교한다.
+let obj1 = {};
+
+let obj2 = {
+    score: undefined
+};
+
+console.log(obj1.score);        // undefined
+console.log(obj2.score);        // undefined
+
+// 프로퍼티 값만 확인해서는 존재 여부를 구분할 수 없다.
+// 프로퍼티의 존재 여부를 확인하는 방법은 다음과 같다.
+
+
+// < 11. in 연산자 >
+
+// "프로퍼티키" in 객체 형태로 작성한다.
+let car = {
+    brand: "현대",
+    model: "아반떼",
+    year: 2025
+};
+
+console.log("brand" in car);    // true
+console.log("model" in car);    // true
+console.log("price" in car);    // false
+
+// 값이 undefined인 프로퍼티도 존재한다면 true를 반환한다.
+console.log("score" in obj1);   // false
+console.log("score" in obj2);   // true
+
+// in 연산자는 객체 자체의 프로퍼티뿐 아니라
+// 프로토타입을 통해 상속받은 프로퍼티도 확인한다.
+
+
+// < 12. Object.hasOwn() >
+
+// 객체 자체에 특정 프로퍼티가 존재하는지 확인한다.
+console.log(Object.hasOwn(car, "brand"));   // true
+console.log(Object.hasOwn(car, "price"));   // false
+
+// undefined가 저장되어 있어도 프로퍼티 자체가 존재하면 true이다.
+console.log(Object.hasOwn(obj2, "score"));  // true
+
+// in과 달리 프로토타입을 통해 상속받은 프로퍼티는 확인하지 않는다.
+// 기본 객체에서 자체 프로퍼티를 확인할 때 유용하다.
+
+
+// < 13. 계산된 프로퍼티 이름(Computed Property Names) >
+
+// 객체를 생성할 때 변수의 값을 프로퍼티 키로 사용할 수 있다.
+let propertyName = "name";
+
+let person1 = {
+    propertyName: "김철수"
+};
+
+let person2 = {
+    [propertyName]: "김철수"
+};
+
+console.log(person1);
+console.log(person2);
+
+// person1에는 propertyName이라는 키가 생성된다.
+// person2에는 변수의 값인 name이라는 키가 생성된다.
+
+console.log(person1.propertyName);  // 김철수
+console.log(person2.name);         // 김철수
+
+// 대괄호 안의 표현식을 계산한 결과가 프로퍼티 키가 된다.
+let subject = "javascript";
+let score = 90;
+
+let scoreData = {
+    [subject]: score
+};
+
+console.log(scoreData);
+console.log(scoreData.javascript);
+
+
+// < 14. 단축 프로퍼티(Shorthand Property Names) >
+
+// 변수명과 프로퍼티 키가 같다면 축약하여 작성할 수 있다.
+let userName = "김철수";
+let userAge = 25;
+let userAddress = "부산";
+
+// 일반적인 작성 방식
+let user1 = {
+    userName: userName,
+    userAge: userAge,
+    userAddress: userAddress
+};
+
+// 단축 프로퍼티를 사용한 작성 방식
+let user2 = {
+    userName,
+    userAge,
+    userAddress
+};
+
+console.log(user1);
+console.log(user2);
+
+// 두 객체의 프로퍼티 구성과 값은 동일하다.
+// 단축 프로퍼티는 객체 리터럴을 간결하게 작성할 때 유용하다.
+
+
+// < 15. 객체와 배열의 차이 >
+
+// 배열 : 일반적으로 순서에 따라 여러 값을 관리한다.
+let fruits = ["사과", "바나나", "포도"];
+
+console.log(fruits[0]);
+console.log(fruits[1]);
+
+// 객체 : 의미 있는 키를 이용하여 값을 관리한다.
+let fruit = {
+    name: "사과",
+    price: 2000,
+    origin: "대한민국"
+};
+
+console.log(fruit.name);
+console.log(fruit.price);
+
+// 실제 프로그램에서는 배열과 객체를 함께 사용하는 경우가 많다.
+let students = [
+    { name: "김철수", score: 85 },
+    { name: "이영희", score: 92 },
+    { name: "박민수", score: 78 }
+];
+
+console.log(students[0].name);
+console.log(students[1].score);
+
+// students[0] : 첫 번째 학생 객체
+// students[0].name : 첫 번째 학생의 이름
+// students[1].score : 두 번째 학생의 점수
+</script>
+
+<body>
+    
+</body>
+</html>

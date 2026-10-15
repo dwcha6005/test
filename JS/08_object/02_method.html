@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    JavaScript 객체(Object)
+    02. 객체의 메서드(Method)와 this
+
+    학습 목표
+    1. 객체의 프로퍼티에 함수를 저장할 수 있다.
+    2. 메서드의 정의와 호출 방법을 이해한다.
+    3. 메서드에서 this를 사용하는 이유를 이해한다.
+    4. 메서드의 매개변수와 반환값을 활용할 수 있다.
+    5. 일반 함수와 화살표 함수의 this 차이를 이해한다.
+    6. 메서드를 다른 변수에 대입했을 때의 차이를 이해한다.
+*/
+
+
+// < 1. 객체에 함수 저장하기 >
+
+// 객체에는 문자열, 숫자뿐 아니라 함수도 프로퍼티 값으로 저장할 수 있다.
+let person = {
+    name: "김철수",
+
+    introduce: function() {
+        console.log("안녕하세요.");
+    }
+};
+
+console.log(person.name);
+console.log(person.introduce);
+
+// 함수 자체를 확인하면 함수 코드가 출력될 수 있다.
+// 함수를 실행하려면 소괄호 ()를 붙여 호출한다.
+person.introduce();
+
+
+// < 2. 메서드(Method)란? >
+
+// 객체의 프로퍼티에 저장되어 객체와 관련된 동작을 수행하는 함수를
+// 일반적으로 메서드(method)라고 부른다.
+
+let calculator = {
+    add: function(a, b) {
+        return a + b;
+    },
+
+    subtract: function(a, b) {
+        return a - b;
+    }
+};
+
+console.log(calculator.add(10, 5));
+console.log(calculator.subtract(10, 5));
+
+// calculator.add : 함수 자체를 참조
+// calculator.add(10, 5) : 함수를 호출하고 반환값을 사용
+
+
+// < 3. 메서드 축약 문법 >
+
+// 객체 리터럴에서는 function 키워드를 생략하여 메서드를 정의할 수 있다.
+
+let calculator2 = {
+    add(a, b) {
+        return a + b;
+    },
+
+    subtract(a, b) {
+        return a - b;
+    },
+
+    multiply(a, b) {
+        return a * b;
+    },
+
+    divide(a, b) {
+        return a / b;
+    }
+};
+
+console.log(calculator2.add(10, 5));
+console.log(calculator2.subtract(10, 5));
+console.log(calculator2.multiply(10, 5));
+console.log(calculator2.divide(10, 5));
+
+// 다음 두 방식은 객체 리터럴에서 모두 사용할 수 있다.
+// add: function(a, b) { ... }
+// add(a, b) { ... }
+//
+// 메서드 축약 문법은 작성이 간결하며 this를 다룰 때도 유용하다.
+
+
+// < 4. 메서드의 매개변수와 반환값 >
+
+let calculator3 = {
+    add(a, b) {
+        let result = a + b;
+        return result;
+    }
+};
+
+let result = calculator3.add(20, 30);
+
+console.log(result);
+
+// 메서드도 일반 함수와 마찬가지로
+// 매개변수를 전달받고 return으로 결과를 반환할 수 있다.
+
+
+// < 5. 객체의 데이터를 메서드에서 사용하기 >
+
+// 객체의 프로퍼티와 메서드를 함께 사용하면
+// 데이터와 해당 데이터에 대한 동작을 하나의 객체로 관리할 수 있다.
+
+let member = {
+    name: "이영희",
+    age: 28,
+
+    showInfo() {
+        console.log("이름: " + this.name);
+        console.log("나이: " + this.age);
+    }
+};
+
+member.showInfo();
+
+// this.name은 현재 메서드 호출에서 this가 가리키는 객체의 name 프로퍼티를 의미한다.
+// 여기서는 member.showInfo()로 호출했으므로 this는 member를 가리킨다.
+
+
+// < 6. this를 사용하지 않고 객체 이름을 직접 사용하는 경우 >
+
+let user1 = {
+    name: "김철수",
+
+    showName() {
+        console.log(user1.name);
+    }
+};
+
+user1.showName();
+
+// 위 코드도 실행되지만, 객체의 이름을 직접 참조하고 있다.
+// 다른 객체에 메서드를 재사용하거나 객체 이름이 바뀌는 상황에서는 불편하다.
+
+// this를 사용하면 메서드를 호출한 객체의 데이터를 활용할 수 있다.
+
+let user2 = {
+    name: "이영희",
+
+    showName() {
+        console.log(this.name);
+    }
+};
+
+user2.showName();
+
+
+// < 7. this를 이용해 프로퍼티 값 변경하기 >
+
+let student = {
+    name: "박민수",
+    score: 80,
+
+    changeScore(newScore) {
+        this.score = newScore;
+    },
+
+    showScore() {
+        console.log("점수: " + this.score);
+    }
+};
+
+student.showScore();
+
+student.changeScore(95);
+
+student.showScore();
+
+// this.score = newScore는
+// 현재 메서드 호출에서 this가 가리키는 객체의 score 값을 변경한다.
+
+
+// < 8. 메서드에서 다른 메서드 호출하기 >
+
+let calculator4 = {
+    add(a, b) {
+        return a + b;
+    },
+
+    addAndShow(a, b) {
+        let result = this.add(a, b);
+        console.log("계산 결과: " + result);
+        return result;
+    }
+};
+
+calculator4.addAndShow(10, 20);
+
+// this.add(a, b)는 현재 this가 가리키는 객체의 add 메서드를 호출한다.
+// 같은 객체의 메서드를 연결해서 사용할 수 있다.
+
+
+// < 9. 실전 예제: 은행 계좌 >
+
+// 계좌의 상태와 계좌에 대한 동작을 하나의 객체로 관리한다.
+
+let account = {
+    owner: "김철수",
+    balance: 100000,
+
+    deposit(amount) {
+        if (amount <= 0) {
+            console.log("입금액은 0보다 커야 합니다.");
+            return;
+        }
+
+        this.balance += amount;
+        console.log(amount + "원 입금했습니다.");
+    },
+
+    withdraw(amount) {
+        if (amount <= 0) {
+            console.log("출금액은 0보다 커야 합니다.");
+            return;
+        }
+
+        if (amount > this.balance) {
+            console.log("잔액이 부족합니다.");
+            return;
+        }
+
+        this.balance -= amount;
+        console.log(amount + "원 출금했습니다.");
+    },
+
+    showBalance() {
+        console.log(this.owner + "님의 잔액은 " + this.balance + "원입니다.");
+    }
+};
+
+account.showBalance();
+
+account.deposit(50000);
+account.showBalance();
+
+account.withdraw(30000);
+account.showBalance();
+
+account.withdraw(500000);
+account.showBalance();
+
+
+// < 10. 메서드를 다른 객체에서 호출하기 >
+
+// this는 함수가 정의된 위치만으로 결정되지 않는다.
+// 일반 함수 형태의 메서드는 호출 방식에 따라 this가 결정된다.
+
+let person1 = {
+    name: "김철수",
+
+    introduce() {
+        console.log("제 이름은 " + this.name + "입니다.");
+    }
+};
+
+let person2 = {
+    name: "이영희"
+};
+
+person1.introduce();
+
+// call()을 사용하면 함수 호출 시 this로 사용할 객체를 지정할 수 있다.
+person1.introduce.call(person2);
+
+// introduce 함수는 person1 안에 정의되어 있지만,
+// call(person2)을 통해 호출했으므로 this는 person2를 가리킨다.
+
+// call()은 함수 호출 방식에 관한 내용이므로
+// 기본적인 메서드 사용을 이해한 다음 심화로 설명해도 된다.
+
+
+// < 11. 메서드를 변수에 대입하면? >
+
+let person3 = {
+    name: "박민수",
+
+    introduce() {
+        console.log(this.name);
+    }
+};
+
+person3.introduce();
+
+// 메서드를 변수에 대입하면 함수 자체에 대한 참조가 저장된다.
+let fn = person3.introduce;
+
+// fn()은 person3.introduce() 형태의 호출이 아니다.
+// 따라서 원래 객체의 this가 자동으로 유지되지 않는다.
+//
+// 아래 호출은 엄격 모드에서 this가 undefined가 되어 오류가 발생한다.
+// 일반 스크립트에서는 실행 환경에 따라 전역 객체가 this가 될 수 있다.
+
+// fn();
+
+
+// < 12. bind()로 this 고정하기 >
+
+// bind()는 this를 지정한 새로운 함수를 반환한다.
+// 반환된 함수를 나중에 호출해도 지정한 this가 유지된다.
+
+let person4 = {
+    name: "최유진",
+
+    introduce() {
+        console.log("이름: " + this.name);
+    }
+};
+
+let boundFunction = person4.introduce.bind(person4);
+
+boundFunction();
+
+// bind()는 함수를 즉시 실행하는 것이 아니다.
+// this가 지정된 새로운 함수를 반환한다.
+
+
+// < 13. call(), apply(), bind() 비교 >
+
+let printer = {
+    show(message, count) {
+        console.log(this.name);
+        console.log(message);
+        console.log(count);
+    }
+};
+
+let target = {
+    name: "대상 객체"
+};
+
+// call(): 인수를 하나씩 전달하며 즉시 호출
+printer.show.call(target, "안녕하세요", 3);
+
+// apply(): 인수를 배열로 전달하며 즉시 호출
+printer.show.apply(target, ["반갑습니다", 5]);
+
+// bind(): this가 지정된 새로운 함수를 반환
+let boundPrinter = printer.show.bind(target, "어서 오세요", 2);
+boundPrinter();
+
+// call()과 apply()는 즉시 호출한다.
+// bind()는 새로운 함수를 반환하므로 나중에 호출할 수 있다.
+
+
+// < 14. 화살표 함수의 this >
+
+// 화살표 함수는 자신만의 this를 생성하지 않는다.
+// 화살표 함수가 정의된 바깥쪽의 this를 사용한다.
+
+let arrowExample = {
+    name: "객체",
+
+    showName() {
+        console.log(this.name);
+    },
+
+    showNameArrow: () => {
+        console.log(this.name);
+    }
+};
+
+arrowExample.showName();
+
+// 화살표 함수의 this는 arrowExample을 가리키지 않는다.
+// 따라서 아래 결과는 일반적인 메서드 호출과 다를 수 있다.
+arrowExample.showNameArrow();
+
+// 객체의 메서드에서 객체 자신의 프로퍼티를 this로 접근하려면
+// 일반 메서드 문법을 사용하는 것이 기본적으로 안전하다.
+
+
+// < 15. 화살표 함수가 유용한 경우 >
+
+// 화살표 함수는 바깥쪽 this를 그대로 사용해야 하는 상황에서 유용하다.
+// 아래 예제의 콜백 함수는 showLater 메서드의 this를 사용한다.
+
+let timerExample = {
+    name: "김철수",
+
+    showLater() {
+        setTimeout(() => {
+            console.log(this.name);
+        }, 100);
+    }
+};
+
+// 브라우저 또는 Node.js에서 실행하면 잠시 뒤 김철수가 출력된다.
+// setTimeout은 콜백 함수가 나중에 실행되도록 한다.
+// timerExample.showLater();
+
+
+// < 16. 메서드와 일반 함수의 차이 >
+
+// 일반 함수도 호출 방식에 따라 this가 결정될 수 있다.
+// 메서드는 객체의 프로퍼티로 저장된 함수를 객체를 통해 호출하는 형태로
+// 이해하면 된다.
+
+function showThis() {
+    console.log(this);
+}
+
+let sample = {
+    name: "샘플",
+
+    showThis() {
+        console.log(this);
+    }
+};
+
+sample.showThis();
+
+// 엄격 모드에서 일반 함수 showThis()를 호출하면 this는 undefined이다.
+// 비엄격 모드에서는 전역 객체가 this가 될 수 있다.
+// 브라우저 개발자 도구와 실행 환경에 따라 출력 형태가 다를 수 있다.
+</script>
+
+<body>
+    
+</body>
+</html>

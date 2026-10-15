@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    /*
+    < 15. 연습문제 >
+
+    아래 문제는 정답 코드를 먼저 보지 말고
+    실행 결과를 예상한 다음 직접 작성해 보자.
+*/
+
+// < 문제 1. 객체 참조 >
+
+/*
+    다음 코드의 실행 결과를 예상하시오.
+
+    let a = { value: 10 };
+    let b = a;
+
+    b.value = 20;
+
+    console.log(a.value);
+    console.log(b.value);
+
+    질문
+    1. a와 b는 같은 객체를 가리키는가?
+    2. 왜 a.value도 변경되는가?
+*/
+
+// < 문제 2. 객체 비교 >
+
+/*
+    다음 코드의 실행 결과를 예상하시오.
+
+    let a = { name: "홍길동" };
+    let b = { name: "홍길동" };
+    let c = a;
+
+    console.log(a === b);
+    console.log(a === c);
+
+    질문
+    1. a와 b는 왜 같지 않은가?
+    2. a와 c는 왜 같은가?
+*/
+
+// < 문제 3. 얕은 복사 >
+
+/*
+    다음 코드의 실행 결과를 예상하시오.
+
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = { ...original };
+
+    copy.name = "김철수";
+    copy.address.city = "서울";
+
+    console.log(original.name);
+    console.log(original.address.city);
+
+    질문
+    1. name은 왜 원본에 영향을 주지 않는가?
+    2. address.city는 왜 원본에도 영향을 주는가?
+*/
+
+// < 문제 4. 깊은 복사 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. 다음 객체를 original 변수에 저장한다.
+
+       {
+           name: "홍길동",
+           address: {
+               city: "부산"
+           },
+           scores: [80, 90, 100]
+       }
+
+    2. structuredClone()을 사용하여 copy를 만든다.
+    3. copy.address.city를 "서울"로 변경한다.
+    4. copy.scores의 첫 번째 점수를 50으로 변경한다.
+    5. original과 copy의 결과를 각각 출력한다.
+
+    원본 객체의 주소와 점수 배열은 변경되지 않아야 한다.
+*/
+
+// < 문제 5. 객체 배열 복사 >
+
+/*
+    다음 조건을 만족하는 코드를 작성하시오.
+
+    1. 학생 두 명을 객체로 만들고 배열에 저장한다.
+
+       홍길동 : 80점
+       김철수 : 90점
+
+    2. map()과 전개 구문을 사용하여 배열과 학생 객체를 복사한다.
+    3. 복사본의 첫 번째 학생 점수를 100점으로 변경한다.
+    4. 원본 배열과 복사본 배열을 출력한다.
+
+    원본의 첫 번째 학생 점수는 80점이어야 한다.
+*/
+
+/*
+    < 16. 연습문제 정답 >
+
+    정답은 각 문제를 충분히 생각한 다음 확인한다.
+*/
+
+// < 문제 1 정답 >
+
+{
+    let a = { value: 10 };
+    let b = a;
+
+    b.value = 20;
+
+    console.log(a.value); // 20
+    console.log(b.value); // 20
+}
+
+// < 문제 2 정답 >
+
+{
+    let a = { name: "홍길동" };
+    let b = { name: "홍길동" };
+    let c = a;
+
+    console.log(a === b); // false
+    console.log(a === c); // true
+}
+
+// < 문제 3 정답 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = { ...original };
+
+    copy.name = "김철수";
+    copy.address.city = "서울";
+
+    console.log(original.name);         // 홍길동
+    console.log(original.address.city); // 서울
+}
+
+// < 문제 4 정답 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        },
+        scores: [80, 90, 100]
+    };
+
+    let copy = structuredClone(original);
+
+    copy.address.city = "서울";
+    copy.scores[0] = 50;
+
+    console.log(original);
+    /*
+        {
+            name: "홍길동",
+            address: { city: "부산" },
+            scores: [80, 90, 100]
+        }
+    */
+
+    console.log(copy);
+    /*
+        {
+            name: "홍길동",
+            address: { city: "서울" },
+            scores: [50, 90, 100]
+        }
+    */
+}
+
+// < 문제 5 정답 >
+
+{
+    let students = [
+        { name: "홍길동", score: 80 },
+        { name: "김철수", score: 90 }
+    ];
+
+    let copy = students.map(function (student) {
+        return { ...student };
+    });
+
+    copy[0].score = 100;
+
+    console.log(students);
+    // [{ name: "홍길동", score: 80 }, { name: "김철수", score: 90 }]
+
+    console.log(copy);
+    // [{ name: "홍길동", score: 100 }, { name: "김철수", score: 90 }]
+}
+</script>
+
+<body>
+    
+</body>
+</html>

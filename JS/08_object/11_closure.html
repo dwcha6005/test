@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+
+/*
+    파일명 : 12_closure.js
+    주제 : 클로저(Closure)
+
+    학습 목표
+    1. 함수가 선언된 위치와 스코프의 관계를 이해한다.
+    2. 함수가 외부 함수의 지역 변수에 접근하는 원리를 이해한다.
+    3. 외부 함수의 실행이 끝난 뒤에도 변수가 유지되는 이유를 이해한다.
+    4. 클로저를 이용해 상태를 유지하는 함수를 작성한다.
+    5. Java의 private 멤버와 JavaScript의 클로저를 비교한다.
+*/
+
+
+/*
+    < 1. 함수 내부에서 외부 변수 접근하기 >
+
+    함수 내부에서는 자신이 선언된 위치의 외부 스코프에
+    있는 변수에 접근할 수 있다.
+
+    이러한 변수 탐색은 스코프 체인을 통해 이루어진다.
+*/
+
+{
+    const message = "외부 변수";
+
+    function showMessage() {
+        console.log(message);
+    }
+
+    showMessage(); // 외부 변수
+}
+
+
+/*
+    < 2. 중첩 함수에서 외부 함수의 지역 변수 접근하기 >
+
+    함수 내부에 또 다른 함수를 선언할 수 있다.
+
+    내부 함수는 자신이 선언된 위치의 외부 함수 스코프에
+    있는 변수에 접근할 수 있다.
+*/
+
+{
+    function outer() {
+        const message = "outer 함수의 지역 변수";
+
+        function inner() {
+            console.log(message);
+        }
+
+        inner(); // outer 함수의 지역 변수
+    }
+
+    outer();
+
+    // console.log(message);
+    // ReferenceError: message is not defined
+
+    // message는 outer 함수 내부의 지역 변수이므로
+    // outer 함수 외부에서는 직접 접근할 수 없다.
+}
+
+
+/*
+    < 3. 함수가 선언된 위치와 호출된 위치 >
+
+    JavaScript는 함수가 호출된 위치가 아니라
+    함수가 선언된 위치를 기준으로 변수의 유효 범위를 결정한다.
+
+    이를 렉시컬 스코프(Lexical Scope)라고 한다.
+*/
+
+{
+    const value = "전역 변수";
+
+    function outer() {
+        const value = "outer 함수의 변수";
+
+        function inner() {
+            console.log(value);
+        }
+
+        inner();
+    }
+
+    outer(); // outer 함수의 변수
+}
+
+
+/*
+    < 4. 내부 함수를 반환하기 >
+
+    지금까지는 outer 함수 내부에서 inner 함수를 호출했다.
+
+    이번에는 inner 함수를 호출하지 않고 반환한다.
+
+    함수 이름을 반환하면 함수 자체가 반환된다.
+    함수 이름 뒤에 ()를 붙이면 함수를 호출한 결과가 반환된다.
+*/
+
+{
+    function outer() {
+        const message = "반환된 함수";
+
+        function inner() {
+            console.log(message);
+        }
+
+        return inner;
+    }
+
+    const fn = outer();
+
+    console.log(fn); // 함수 객체를 확인할 수 있음
+
+    fn(); // 반환된 함수
+
+    // outer()의 실행은 끝났지만
+    // 반환받은 fn 함수는 message에 접근할 수 있다.
+}
+
+
+/*
+    < 5. 클로저란? >
+
+    클로저(Closure)는 함수와 그 함수가 선언될 당시의
+    렉시컬 환경 사이의 연결을 의미한다.
+
+    내부 함수가 외부 함수의 변수를 참조하고 있고,
+    외부 함수의 실행이 끝난 뒤에도 그 내부 함수를 사용할 수 있다면
+    클로저의 동작을 확인할 수 있다.
+
+    핵심
+    - 함수가 선언된 위치의 스코프를 기준으로 변수에 접근한다.
+    - 외부 함수의 실행이 끝나도 필요한 렉시컬 환경은 유지될 수 있다.
+    - 반환된 함수는 해당 환경의 변수에 계속 접근할 수 있다.
+*/
+
+{
+    function outer() {
+        const message = "클로저";
+
+        return function() {
+            console.log(message);
+        };
+    }
+
+    const fn = outer();
+
+    fn(); // 클로저
+}
+
+
+/*
+    < 6. 클로저에서 변수의 값 변경하기 >
+
+    클로저는 외부 변수의 값을 읽는 것뿐 아니라
+    해당 변수의 값을 변경할 수도 있다.
+*/
+
+{
+    function outer() {
+        let count = 0;
+
+        return function() {
+            count++;
+            console.log(count);
+        };
+    }
+
+    const fn = outer();
+
+    fn(); // 1
+    fn(); // 2
+    fn(); // 3
+
+    // count는 outer 함수의 지역 변수다.
+    // outer 함수의 실행이 끝났지만
+    // 반환된 함수가 count를 사용하므로 상태가 유지된다.
+}
+
+
+/*
+    < 7. 클로저를 여러 개 생성하기 >
+
+    외부 함수를 호출할 때마다 새로운 실행 환경이 만들어진다.
+
+    따라서 각각의 클로저는 서로 다른 지역 변수의 상태를 유지할 수 있다.
+*/
+
+{
+    function createCounter() {
+        let count = 0;
+
+        return function() {
+            count++;
+            console.log(count);
+        };
+    }
+
+    const counter1 = createCounter();
+    const counter2 = createCounter();
+
+    counter1(); // 1
+    counter1(); // 2
+    counter1(); // 3
+
+    counter2(); // 1
+    counter2(); // 2
+
+    counter1(); // 4
+
+    console.log(counter1 === counter2); // false
+
+    // counter1과 counter2는 서로 다른 count 변수를 사용한다.
+}
+
+
+/*
+    < 8. 클로저로 여러 메서드에서 같은 변수 공유하기 >
+
+    하나의 외부 함수에서 여러 함수를 반환할 수 있다.
+
+    반환된 함수들은 같은 외부 변수에 접근할 수 있다.
+*/
+
+{
+    function createCounter() {
+        let count = 0;
+
+        return {
+            increment: function() {
+                count++;
+            },
+            decrement: function() {
+                count--;
+            },
+            getCount: function() {
+                return count;
+            }
+        };
+    }
+
+    const counter = createCounter();
+
+    counter.increment();
+    counter.increment();
+    counter.increment();
+
+    console.log(counter.getCount()); // 3
+
+    counter.decrement();
+
+    console.log(counter.getCount()); // 2
+}
+
+
+/*
+    < 9. 클로저와 private 효과 >
+
+    Java에서는 private 접근 제한자를 이용해
+    클래스 외부에서 필드에 직접 접근하지 못하도록 제한할 수 있다.
+
+    JavaScript에서는 클로저의 지역 변수를 이용해
+    외부에서 직접 접근할 수 없는 상태를 만들 수 있다.
+*/
+
+{
+    function createAccount() {
+        let balance = 10000;
+
+        return {
+            deposit: function(amount) {
+                if (amount > 0) {
+                    balance += amount;
+                }
+            },
+            withdraw: function(amount) {
+                if (amount > 0 && amount <= balance) {
+                    balance -= amount;
+                }
+            },
+            getBalance: function() {
+                return balance;
+            }
+        };
+    }
+
+    const account = createAccount();
+
+    account.deposit(5000);
+    console.log(account.getBalance()); // 15000
+
+    account.withdraw(3000);
+    console.log(account.getBalance()); // 12000
+
+    console.log(account.balance); // undefined
+
+    // balance는 반환된 객체의 프로퍼티가 아니다.
+    // 외부에서는 balance에 직접 접근할 수 없다.
+    // 반환된 메서드들이 클로저를 통해 balance를 사용한다.
+
+    // 주의:
+    // account.balance = 999999;
+    // 위 코드는 내부 balance를 변경하지 않는다.
+    // account 객체에 별도의 balance 프로퍼티를 추가할 뿐이다.
+}
+
+
+/*
+    < 10. Java의 private 필드와 비교하기 >
+
+    Java에서는 다음과 같이 private 필드를 선언할 수 있다.
+
+    class Counter {
+        int field;
+        private int count = 0;
+
+        public void increment() {
+            count++;
+        }
+
+        public int getCount() {
+            return count;
+        }
+    }
+
+    Counter c = new Counter();
+    c.count // 접근불가
+    c.field // 접근가능
+
+    JavaScript에서도 클래스의 private 필드를 사용할 수 있다.
+*/
+
+{
+    class Counter {
+        #count = 0;
+
+        increment() {
+            this.#count++;
+        }
+
+        getCount() {
+            return this.#count;
+        }
+    }
+
+    const counter = new Counter();
+
+    counter.increment();
+    counter.increment();
+
+    console.log(counter.getCount()); // 2
+
+    // console.log(counter.#count);
+    // SyntaxError: 클래스 외부에서 private 필드에 접근할 수 없다.
+}
+
+
+/*
+    < 11. 클로저와 클래스의 차이 >
+
+    클로저
+    - 함수의 렉시컬 환경에 있는 변수를 통해 상태를 유지한다.
+    - 외부 함수의 지역 변수에 직접 접근할 수 없다.
+    - 반환된 함수가 해당 변수에 접근할 수 있다.
+    - 클래스 없이도 상태를 관리하는 함수를 만들 수 있다.
+
+    클래스의 private 필드
+    - #필드명 문법으로 접근을 제한한다.
+    - 클래스의 메서드에서 해당 필드에 접근할 수 있다.
+    - 객체의 상태와 동작을 클래스에 묶어서 관리할 수 있다.
+
+    두 방법 모두 내부 상태를 보호하는 데 활용할 수 있다.
+
+    다만 클로저의 핵심은 private 효과만이 아니라
+    함수가 선언된 환경과 변수가 유지되는 원리를 이해하는 것이다.
+*/
+
+
+/*
+    < 12. 클로저가 항상 필요한 것은 아니다 >
+
+    단순히 값을 보관하고 변경하는 경우에는
+    일반 객체나 클래스의 프로퍼티로도 충분하다.
+
+    클로저는 다음과 같은 경우 유용하다.
+
+    1. 함수가 실행된 뒤에도 상태를 유지해야 하는 경우
+    2. 내부 변수를 외부에서 직접 변경하지 못하게 하고 싶은 경우
+    3. 여러 함수가 같은 내부 상태를 공유해야 하는 경우
+    4. 함수 팩토리로 서로 독립적인 상태를 가진 함수를 만들 경우
+
+    클로저를 사용한다고 해서 무조건 더 좋은 코드는 아니다.
+    요구사항에 맞는 방법을 선택해야 한다.
+*/
+
+
+/*
+    < 13. 실습 문제 >
+
+    문제 1.
+    createMultiplier(n) 함수를 작성한다.
+    호출할 때 전달한 n을 기억하고,
+    전달받은 값에 n을 곱한 결과를 반환하는 함수를 만든다.
+
+    예시:
+    const double = createMultiplier(2);
+    console.log(double(5));  // 10
+    console.log(double(10)); // 20
+
+
+    문제 2.
+    createPasswordChecker(password) 함수를 작성한다.
+    전달받은 비밀번호를 내부 변수에 보관하고,
+    반환된 함수에 입력한 값이 일치하면 true,
+    일치하지 않으면 false를 반환한다.
+
+
+    문제 3.
+    createBankAccount(initialBalance) 함수를 작성한다.
+    잔액은 외부에서 직접 접근할 수 없게 한다.
+    입금, 출금, 잔액 조회 기능을 제공한다.
+    잔액보다 큰 금액은 출금할 수 없어야 한다.
+
+
+    문제 4.
+    createCounter() 함수를 작성한다.
+    증가, 감소, 현재 값 조회 기능을 제공한다.
+    생성한 카운터마다 독립적인 상태를 유지해야 한다.
+*/
+
+
+/*
+    < 14. 실습 문제 정답 >
+
+    문제 1.
+*/
+
+{
+    function createMultiplier(n) {
+        return function(value) {
+            return value * n;
+        };
+    }
+
+    const double = createMultiplier(2);
+    const triple = createMultiplier(3);
+
+    console.log(double(5));  // 10
+    console.log(double(10)); // 20
+    console.log(triple(5));  // 15
+}
+
+
+/*
+    문제 2.
+*/
+
+{
+    function createPasswordChecker(password) {
+        return function(input) {
+            return input === password;
+        };
+    }
+
+    const checkPassword = createPasswordChecker("abc123");
+
+    console.log(checkPassword("abc123")); // true
+    console.log(checkPassword("123abc")); // false
+}
+
+
+/*
+    문제 3.
+*/
+
+{
+    function createBankAccount(initialBalance) {
+        let balance = initialBalance;
+
+        return {
+            deposit(amount) {
+                if (amount > 0) {
+                    balance += amount;
+                }
+            },
+            withdraw(amount) {
+                if (amount > 0 && amount <= balance) {
+                    balance -= amount;
+                    return true;
+                }
+
+                return false;
+            },
+            getBalance() {
+                return balance;
+            }
+        };
+    }
+
+    const account = createBankAccount(50000);
+
+    account.deposit(10000);
+    console.log(account.getBalance()); // 60000
+
+    console.log(account.withdraw(20000)); // true
+    console.log(account.getBalance());    // 40000
+
+    console.log(account.withdraw(50000)); // false
+    console.log(account.getBalance());    // 40000
+}
+
+
+/*
+    문제 4.
+*/
+
+{
+    function createCounter() {
+        let count = 0;
+
+        return {
+            increment() {
+                count++;
+            },
+            decrement() {
+                count--;
+            },
+            getCount() {
+                return count;
+            }
+        };
+    }
+
+    const counter1 = createCounter();
+    const counter2 = createCounter();
+
+    counter1.increment();
+    counter1.increment();
+    counter2.increment();
+
+    console.log(counter1.getCount()); // 2
+    console.log(counter2.getCount()); // 1
+}
+
+</script>
+
+<body>
+    
+</body>
+</html>

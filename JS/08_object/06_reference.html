@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    파일명 : 06_object_reference.js
+    주제 : 객체의 참조, 비교, 얕은 복사, 깊은 복사
+
+    학습 목표
+    1. 기본형과 참조형의 차이를 설명할 수 있다.
+    2. 객체를 다른 변수에 대입했을 때 어떤 일이 발생하는지 이해한다.
+    3. 객체와 배열의 비교 결과를 예측할 수 있다.
+    4. 얕은 복사와 깊은 복사의 차이를 이해한다.
+    5. Object.assign(), 전개 구문(...), structuredClone()을 활용할 수 있다.
+*/
+
+/*
+    < 1. 기본형과 참조형 >
+
+    JavaScript에서 변수에 값을 저장하거나 전달할 때는
+    데이터의 종류에 따라 동작 방식이 달라진다.
+
+    기본형(Primitive Type)
+    - Number
+    - String
+    - Boolean
+    - Undefined
+    - Null
+    - BigInt
+    - Symbol
+
+    참조형(Reference Type)
+    - Object
+    - Array
+    - Function
+    - Date 등 객체를 기반으로 하는 값
+
+    기본형은 값 자체를 복사하는 방식으로 동작한다.
+    객체와 같은 참조형은 객체 자체를 새로 복사하는 것이 아니라
+    해당 객체를 가리키는 참조가 복사된다.
+
+    ※ 참조를 설명할 때 메모리 주소라는 표현을 사용하기도 하지만,
+       JavaScript에서 변수에 실제 메모리 주소가 그대로 저장된다고
+       단정해서 설명하지 않는 것이 좋다.
+       여기서는 '같은 객체를 가리킨다'는 개념으로 이해한다.
+*/
+
+// < 1-1. 기본형 변수의 대입 >
+
+{
+    let a = 10;
+    let b = a;
+
+    console.log(a); // 10
+    console.log(b); // 10
+
+    b = 20;
+
+    console.log(a); // 10
+    console.log(b); // 20
+
+    /*
+        실행 과정
+
+        1. a에 숫자 10을 저장한다.
+        2. b = a를 실행하면 a의 값인 10이 b에 대입된다.
+        3. b에 20을 대입해도 a에는 영향을 주지 않는다.
+
+        a와 b는 각각 독립적인 기본형 값을 가진다.
+    */
+}
+
+// < 1-2. 문자열도 같은 방식으로 동작한다 >
+
+{
+    let firstName = "홍길동";
+    let secondName = firstName;
+
+    secondName = "김철수";
+
+    console.log(firstName);  // 홍길동
+    console.log(secondName); // 김철수
+}
+
+/*
+    < 2. 객체를 다른 변수에 대입하기 >
+
+    객체를 다른 변수에 대입하면 객체가 새로 복사되는 것이 아니다.
+    같은 객체를 가리키는 참조가 복사된다.
+
+    따라서 두 변수가 같은 객체를 가리키는 상황이 발생한다.
+*/
+
+// < 2-1. 객체 대입 >
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let person2 = person1;
+
+    console.log(person1);
+    // { name: "홍길동", age: 25 }
+
+    console.log(person2);
+    // { name: "홍길동", age: 25 }
+
+    /*
+        person1과 person2는 같은 객체를 가리킨다.
+
+        person1 ─┐
+                 ├──> { name: "홍길동", age: 25 }
+        person2 ─┘
+
+        person2 = person1은 객체를 복사하는 코드가 아니다.
+        같은 객체를 가리키도록 만드는 코드다.
+    */
+}
+
+// < 2-2. 한쪽에서 객체의 속성 변경하기 >
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let person2 = person1;
+
+    person2.age = 30;
+
+    console.log(person1.age); // 30
+    console.log(person2.age); // 30
+
+    /*
+        person2.age를 변경했지만 person1.age도 변경된 것처럼 보인다.
+
+        실제로는 person1과 person2가 같은 객체를 가리키고 있으므로
+        동일한 객체의 age 속성이 변경된 것이다.
+    */
+}
+
+// < 2-3. 속성 추가와 삭제도 공유된다 >
+
+{
+    let product1 = {
+        name: "키보드",
+        price: 50000
+    };
+
+    let product2 = product1;
+
+    product2.stock = 10;
+
+    console.log(product1.stock); // 10
+
+    delete product2.price;
+
+    console.log(product1.price); // undefined
+
+    /*
+        속성을 추가하거나 삭제하는 작업도
+        두 변수가 같은 객체를 가리키고 있다면 함께 반영된다.
+    */
+}
+
+/*
+    < 3. 변수 자체에 새로운 객체를 대입하기 >
+
+    객체의 속성을 변경하는 것과 변수 자체에 다른 객체를 대입하는 것은
+    서로 다른 작업이다.
+*/
+
+// < 3-1. 변수에 새로운 객체 대입하기 >
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let person2 = person1;
+
+    person2 = {
+        name: "김철수",
+        age: 30
+    };
+
+    console.log(person1);
+    // { name: "홍길동", age: 25 }
+
+    console.log(person2);
+    // { name: "김철수", age: 30 }
+
+    /*
+        처음에는 두 변수가 같은 객체를 가리켰다.
+
+        person1 ─┐
+                 ├──> { name: "홍길동", age: 25 }
+        person2 ─┘
+
+        person2에 새로운 객체를 대입한 후에는 다음과 같이 달라진다.
+
+        person1 ───> { name: "홍길동", age: 25 }
+
+        person2 ───> { name: "김철수", age: 30 }
+
+        person2가 다른 객체를 가리키도록 변경되었기 때문에
+        person1이 가리키는 객체에는 영향을 주지 않는다.
+    */
+}
+
+// < 3-2. 객체의 속성 변경과 변수 재대입 비교 >
+
+{
+    let obj1 = { value: 10 };
+    let obj2 = obj1;
+
+    // 같은 객체의 속성을 변경한다.
+    obj2.value = 20;
+
+    console.log(obj1.value); // 20
+
+    // obj2가 다른 객체를 가리키도록 변경한다.
+    obj2 = { value: 30 };
+
+    console.log(obj1.value); // 20
+    console.log(obj2.value); // 30
+}
+
+/*
+    < 4. 객체 비교하기 >
+
+    숫자나 문자열 같은 기본형은 값이 같으면 같은 값으로 비교된다.
+
+    객체는 내부 속성이 같더라도 서로 다른 객체라면
+    참조가 다르기 때문에 같지 않다고 판단한다.
+*/
+
+// < 4-1. 기본형 비교 >
+
+{
+    let a = 10;
+    let b = 10;
+
+    console.log(a == b);  // true
+    console.log(a === b); // true
+
+    let name1 = "홍길동";
+    let name2 = "홍길동";
+
+    console.log(name1 === name2); // true
+}
+
+// < 4-2. 내용이 같은 객체 비교 >
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let person2 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    console.log(person1 == person2);  // false
+    console.log(person1 === person2); // false
+
+    /*
+        두 객체의 속성은 동일하다.
+
+        하지만 객체를 각각 생성했기 때문에 서로 다른 객체다.
+
+        person1 ───> 객체 A
+        person2 ───> 객체 B
+
+        객체 내부의 속성이 같은지를 자동으로 비교하는 것이 아니라
+        두 변수가 같은 객체를 가리키는지를 비교한다.
+    */
+}
+
+// < 4-3. 같은 객체를 가리키는 변수 비교 >
+
+{
+    let person1 = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let person2 = person1;
+
+    console.log(person1 == person2);  // true
+    console.log(person1 === person2); // true
+
+    /*
+        person2 = person1을 실행했기 때문에
+        두 변수는 같은 객체를 가리킨다.
+
+        따라서 두 변수의 참조가 같다고 판단한다.
+    */
+}
+
+// < 4-4. 배열도 같은 원리로 비교한다 >
+
+{
+    let arr1 = [10, 20, 30];
+    let arr2 = [10, 20, 30];
+    let arr3 = arr1;
+
+    console.log(arr1 === arr2); // false
+    console.log(arr1 === arr3); // true
+
+    /*
+        arr1과 arr2는 내용이 같아도 각각 생성된 별개의 배열이다.
+        arr3는 arr1이 가리키는 배열을 함께 가리킨다.
+    */
+}
+
+// < 4-5. 함수도 참조형이다 >
+
+{
+    function hello() {
+        console.log("안녕하세요.");
+    }
+
+    let func1 = hello;
+    let func2 = hello;
+
+    console.log(func1 === func2); // true
+
+    let func3 = function () {
+        console.log("안녕하세요.");
+    };
+
+    console.log(func1 === func3); // false
+
+    /*
+        func1과 func2는 같은 함수를 가리킨다.
+        func3는 코드 내용이 비슷해도 별도로 생성된 함수다.
+    */
+}
+
+/*
+    < 5. 배열의 참조 관계 >
+
+    배열도 객체의 한 종류이므로 동일한 참조 규칙이 적용된다.
+*/
+
+// < 5-1. 배열 대입 >
+
+{
+    let numbers1 = [10, 20, 30];
+    let numbers2 = numbers1;
+
+    numbers2[0] = 100;
+
+    console.log(numbers1); // [100, 20, 30]
+    console.log(numbers2); // [100, 20, 30]
+}
+
+// < 5-2. 배열 메서드도 같은 배열을 변경할 수 있다 >
+
+{
+    let fruits1 = ["사과", "바나나"];
+    let fruits2 = fruits1;
+
+    fruits2.push("포도");
+
+    console.log(fruits1);
+    // ["사과", "바나나", "포도"]
+
+    console.log(fruits2);
+    // ["사과", "바나나", "포도"]
+
+    /*
+        push()는 기존 배열에 요소를 추가하는 메서드다.
+        같은 배열을 가리키는 다른 변수에서도 변경된 내용을 확인할 수 있다.
+    */
+}
+
+// < 5-3. 배열 변수에 새로운 배열 대입하기 >
+
+{
+    let numbers1 = [10, 20, 30];
+    let numbers2 = numbers1;
+
+    numbers2 = [100, 200, 300];
+
+    console.log(numbers1); // [10, 20, 30]
+    console.log(numbers2); // [100, 200, 300]
+}
+
+/*
+    < 6. 객체 복사하기 >
+
+    다음과 같이 작성하면 객체를 복사한 것처럼 보이지만
+    실제로는 같은 객체를 가리키는 참조만 복사된다.
+
+    let copy = original;
+
+    원본과 별개의 객체가 필요하다면 복사 방법을 사용해야 한다.
+*/
+
+// < 6-1. 복사가 아닌 참조 대입 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy = original;
+
+    copy.age = 30;
+
+    console.log(original.age); // 30
+    console.log(copy.age);     // 30
+}
+
+/*
+    < 7. 얕은 복사(Shallow Copy) >
+
+    얕은 복사는 새로운 객체를 생성하되
+    최상위 속성의 값을 복사하는 방식이다.
+
+    객체의 최상위 속성이 기본형이라면 값이 복사된다.
+    하지만 속성에 중첩 객체나 배열이 있다면 그 내부 객체를
+    새로 복사하지 않고 같은 객체를 가리키게 된다.
+
+    대표적인 얕은 복사 방법
+    1. 전개 구문(...)
+    2. Object.assign()
+*/
+
+// < 7-1. 전개 구문으로 객체 복사하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy = { ...original };
+
+    console.log(original === copy); // false
+
+    copy.age = 30;
+
+    console.log(original.age); // 25
+    console.log(copy.age);     // 30
+
+    /*
+        { ...original }은 새로운 객체를 생성한다.
+
+        original ───> 객체 A
+        copy     ───> 객체 B
+
+        따라서 최상위 속성을 변경해도 서로 영향을 주지 않는다.
+    */
+}
+
+// < 7-2. 복사한 객체에 속성 추가하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy = { ...original };
+
+    copy.address = "부산";
+    copy.age = 30;
+
+    console.log(original);
+    // { name: "홍길동", age: 25 }
+
+    console.log(copy);
+    // { name: "홍길동", age: 30, address: "부산" }
+}
+
+// < 7-3. 전개 구문을 이용해 객체 복사와 속성 변경을 동시에 처리하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25,
+        address: "서울"
+    };
+
+    let copy = {
+        ...original,
+        age: 30
+    };
+
+    console.log(original);
+    // { name: "홍길동", age: 25, address: "서울" }
+
+    console.log(copy);
+    // { name: "홍길동", age: 30, address: "서울" }
+
+    /*
+        ...original로 기존 속성을 복사한 다음
+        age: 30을 지정하여 age 값을 덮어쓴다.
+
+        같은 이름의 속성을 뒤에서 지정하면 뒤의 값이 적용된다.
+    */
+}
+
+// < 7-4. Object.assign()으로 객체 복사하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy = Object.assign({}, original);
+
+    console.log(original === copy); // false
+
+    copy.age = 30;
+
+    console.log(original.age); // 25
+    console.log(copy.age);     // 30
+
+    /*
+        Object.assign(대상 객체, 원본 객체)
+
+        첫 번째 인수인 {}에 원본 객체의 최상위 속성을 복사한다.
+        따라서 새로운 객체가 만들어진다.
+
+        Object.assign()도 얕은 복사만 수행한다.
+    */
+}
+
+// < 7-5. Object.assign()으로 여러 객체의 속성 합치기 >
+
+{
+    let basicInfo = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let extraInfo = {
+        address: "부산",
+        job: "개발자"
+    };
+
+    let person = Object.assign({}, basicInfo, extraInfo);
+
+    console.log(person);
+    // {
+    //     name: "홍길동",
+    //     age: 25,
+    //     address: "부산",
+    //     job: "개발자"
+    // }
+
+    /*
+        여러 객체의 최상위 속성을 하나의 객체로 합칠 수 있다.
+
+        같은 이름의 속성이 있다면 뒤쪽 객체의 값으로 덮어쓴다.
+    */
+}
+
+// < 7-6. 전개 구문과 Object.assign()의 차이 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25
+    };
+
+    let copy1 = { ...original };
+    let copy2 = Object.assign({}, original);
+
+    console.log(copy1); // { name: "홍길동", age: 25 }
+    console.log(copy2); // { name: "홍길동", age: 25 }
+
+    /*
+        일반적인 얕은 복사에서는 두 방법 모두 사용할 수 있다.
+
+        전개 구문은 간결하고 현재 코드에서 자주 사용된다.
+        Object.assign()은 여러 객체의 속성을 합치는 용도로도 사용할 수 있다.
+    */
+}
+
+/*
+    < 8. 얕은 복사에서 주의할 점 >
+
+    얕은 복사는 최상위 객체만 새로 만든다.
+    내부에 중첩 객체나 배열이 있으면 그 객체는 공유된다.
+
+    이 부분이 참조와 복사를 배울 때 가장 중요한 내용이다.
+*/
+
+// < 8-1. 중첩 객체가 있는 경우 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25,
+        address: {
+            city: "부산",
+            district: "해운대구"
+        }
+    };
+
+    let copy = { ...original };
+
+    console.log(original === copy); // false
+    console.log(original.address === copy.address); // true
+
+    /*
+        최상위 객체는 서로 다르다.
+
+        original ───> 객체 A
+                        |
+                        └── address ───> 주소 객체 C
+
+        copy ──────> 객체 B
+                        |
+                        └── address ───> 주소 객체 C
+
+        두 객체의 address 속성은 같은 주소 객체를 가리킨다.
+    */
+}
+
+// < 8-2. 최상위 속성 변경 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = { ...original };
+
+    copy.name = "김철수";
+
+    console.log(original.name); // 홍길동
+    console.log(copy.name);     // 김철수
+
+    /*
+        name은 최상위 속성이므로 값이 복사되었다.
+        copy.name을 변경해도 original.name에는 영향이 없다.
+    */
+}
+
+// < 8-3. 중첩 객체의 속성 변경 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = { ...original };
+
+    copy.address.city = "서울";
+
+    console.log(original.address.city); // 서울
+    console.log(copy.address.city);     // 서울
+
+    /*
+        address 객체는 복사되지 않고 공유된다.
+
+        따라서 copy.address.city를 변경하면
+        original.address.city에서도 변경된 값이 확인된다.
+    */
+}
+
+// < 8-4. 중첩 객체 자체를 새로운 객체로 교체하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = { ...original };
+
+    copy.address = {
+        city: "서울"
+    };
+
+    console.log(original.address.city); // 부산
+    console.log(copy.address.city);     // 서울
+
+    /*
+        copy.address에 새로운 객체를 대입했다.
+
+        original.address가 가리키는 객체는 그대로 유지된다.
+        copy.address만 새 객체를 가리키도록 변경된다.
+
+        중첩 객체의 속성을 변경하는 것과
+        중첩 객체 자체를 교체하는 것은 다르다.
+    */
+}
+
+// < 8-5. 배열이 포함된 객체도 마찬가지다 >
+
+{
+    let original = {
+        name: "홍길동",
+        scores: [80, 90, 100]
+    };
+
+    let copy = { ...original };
+
+    console.log(original === copy); // false
+    console.log(original.scores === copy.scores); // true
+
+    copy.scores[0] = 50;
+
+    console.log(original.scores);
+    // [50, 90, 100]
+
+    console.log(copy.scores);
+    // [50, 90, 100]
+}
+
+// < 8-6. 배열의 전개 구문도 얕은 복사다 >
+
+{
+    let original = [
+        { name: "홍길동", score: 80 },
+        { name: "김철수", score: 90 }
+    ];
+
+    let copy = [...original];
+
+    console.log(original === copy);       // false
+    console.log(original[0] === copy[0]); // true
+
+    copy[0].score = 100;
+
+    console.log(original[0].score); // 100
+    console.log(copy[0].score);     // 100
+
+    /*
+        배열 자체는 새로 만들어졌지만
+        배열 안에 들어 있는 객체들은 복사되지 않았다.
+    */
+}
+
+// < 8-7. 배열 안의 객체를 수정하지 않고 새 객체로 교체하기 >
+
+{
+    let original = [
+        { name: "홍길동", score: 80 },
+        { name: "김철수", score: 90 }
+    ];
+
+    let copy = original.map(function (student) {
+        return { ...student };
+    });
+
+    console.log(original === copy);       // false
+    console.log(original[0] === copy[0]); // false
+
+    copy[0].score = 100;
+
+    console.log(original[0].score); // 80
+    console.log(copy[0].score);     // 100
+
+    /*
+        map()으로 각 학생 객체를 순회하면서
+        전개 구문으로 새로운 객체를 만들었다.
+
+        따라서 배열뿐 아니라 배열 안의 학생 객체도 각각 새로 만들어졌다.
+
+        단, 각 학생 객체 안에 또 다른 중첩 객체가 있다면
+        그 중첩 객체까지 자동으로 복사되는 것은 아니다.
+    */
+}
+
+/*
+    < 9. 깊은 복사(Deep Copy) >
+
+    깊은 복사는 객체뿐 아니라 내부에 포함된 중첩 객체와 배열까지
+    별도로 복사하는 방식이다.
+
+    깊은 복사를 수행하면 원본과 복사본의 중첩 데이터도 분리할 수 있다.
+
+    JavaScript에서는 structuredClone()을 사용할 수 있다.
+*/
+
+// < 9-1. structuredClone()으로 깊은 복사하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: 25,
+        address: {
+            city: "부산",
+            district: "해운대구"
+        },
+        scores: [80, 90, 100]
+    };
+
+    let copy = structuredClone(original);
+
+    console.log(original === copy); // false
+    console.log(original.address === copy.address); // false
+    console.log(original.scores === copy.scores);   // false
+
+    /*
+        structuredClone()은 지원되는 데이터 구조를 복제한다.
+
+        원본과 복사본은 별개의 객체이며,
+        중첩 객체와 배열도 별개의 객체로 복제된다.
+    */
+}
+
+// < 9-2. 깊은 복사 후 중첩 객체 변경하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        }
+    };
+
+    let copy = structuredClone(original);
+
+    copy.address.city = "서울";
+
+    console.log(original.address.city); // 부산
+    console.log(copy.address.city);     // 서울
+}
+
+// < 9-3. 깊은 복사 후 중첩 배열 변경하기 >
+
+{
+    let original = {
+        name: "홍길동",
+        scores: [80, 90, 100]
+    };
+
+    let copy = structuredClone(original);
+
+    copy.scores.push(95);
+
+    console.log(original.scores);
+    // [80, 90, 100]
+
+    console.log(copy.scores);
+    // [80, 90, 100, 95]
+}
+
+// < 9-4. structuredClone() 사용 시 주의사항 >
+
+{
+    let original = {
+        name: "홍길동",
+        createdAt: new Date(),
+        scores: [80, 90, 100]
+    };
+
+    let copy = structuredClone(original);
+
+    console.log(copy.name);
+    console.log(copy.createdAt instanceof Date); // true
+    console.log(copy.scores);
+
+    /*
+        structuredClone()은 Date, 배열, 여러 중첩 객체 등
+        지원하는 데이터 구조를 복제할 수 있다.
+
+        다만 모든 JavaScript 값을 복제할 수 있는 것은 아니다.
+        예를 들어 함수가 포함된 객체는 일반적으로 복제할 수 없으며,
+        복제할 수 없는 값이 포함되면 DataCloneError가 발생할 수 있다.
+    */
+}
+
+/*
+    < 10. JSON을 이용한 복사 방법 >
+
+    JSON.stringify()와 JSON.parse()를 조합하는 방법도 있다.
+
+    JSON.stringify()
+    - JavaScript 값을 JSON 문자열로 변환한다.
+
+    JSON.parse()
+    - JSON 문자열을 JavaScript 값으로 변환한다.
+
+    두 과정을 거치면서 새로운 객체를 생성할 수 있다.
+
+    다만 JSON으로 표현할 수 있는 데이터만 대상으로 해야 한다.
+*/
+
+// < 10-1. JSON을 이용한 깊은 복사 >
+
+{
+    let original = {
+        name: "홍길동",
+        address: {
+            city: "부산"
+        },
+        scores: [80, 90, 100]
+    };
+
+    let copy = JSON.parse(JSON.stringify(original));
+
+    console.log(original === copy); // false
+    console.log(original.address === copy.address); // false
+    console.log(original.scores === copy.scores);   // false
+
+    copy.address.city = "서울";
+    copy.scores[0] = 50;
+
+    console.log(original.address.city); // 부산
+    console.log(original.scores);       // [80, 90, 100]
+}
+
+// < 10-2. JSON 복사의 한계 >
+
+{
+    let original = {
+        name: "홍길동",
+        age: undefined,
+        createdAt: new Date("2025-01-01"),
+        greet: function () {
+            console.log("안녕하세요.");
+        }
+    };
+
+    let copy = JSON.parse(JSON.stringify(original));
+
+    console.log(copy);
+    /*
+        일반적인 JSON 직렬화 과정에서는
+
+        - 객체 속성의 undefined 값은 생략된다.
+        - 함수는 JSON으로 표현되지 않아 생략된다.
+        - Date는 보통 ISO 형식의 문자열로 변환된다.
+
+        따라서 원본 객체의 모든 정보를 그대로 복제하는 방법은 아니다.
+    */
+
+    console.log(copy.age);       // undefined
+    console.log(copy.createdAt); // 날짜 문자열
+    console.log(copy.greet);     // undefined
+}
+
+/*
+    < 11. const와 객체의 참조 >
+
+    const로 선언한 변수는 다른 값으로 재대입할 수 없다.
+
+    하지만 const 변수에 객체를 저장한 경우
+    객체 내부의 속성을 변경하는 것까지 금지되는 것은 아니다.
+*/
+
+// < 11-1. const 객체의 속성 변경 >
+
+{
+    const person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    person.age = 30;
+    person.address = "부산";
+
+    console.log(person);
+    // { name: "홍길동", age: 30, address: "부산" }
+
+    /*
+        const는 변수에 다른 값을 재대입하지 못하게 한다.
+        객체 자체를 완전히 불변 상태로 만드는 기능은 아니다.
+    */
+}
+
+// < 11-2. const 변수에 다른 객체 재대입하기 >
+
+{
+    const person = {
+        name: "홍길동"
+    };
+
+    // person = { name: "김철수" };
+    // TypeError: Assignment to constant variable.
+
+    /*
+        const로 선언한 변수에 새로운 객체를 재대입하면 오류가 발생한다.
+        위 코드는 주석을 해제하면 실행이 중단될 수 있으므로 주의한다.
+    */
+}
+
+// < 11-3. const 배열도 같은 원리다 >
+
+{
+    const numbers = [10, 20, 30];
+
+    numbers.push(40);
+    numbers[0] = 100;
+
+    console.log(numbers); // [100, 20, 30, 40]
+
+    /*
+        배열 내부의 요소는 변경할 수 있다.
+        하지만 numbers = [1, 2, 3]처럼 새로운 배열을 재대입할 수는 없다.
+    */
+}
+
+/*
+    < 12. 함수에 객체를 전달할 때 >
+
+    함수에 객체를 인수로 전달하면
+    함수의 매개변수를 통해 같은 객체에 접근할 수 있다.
+
+    따라서 함수 내부에서 객체의 속성을 변경하면
+    함수 바깥에서도 변경된 결과를 확인할 수 있다.
+*/
+
+// < 12-1. 함수에서 객체 속성 변경하기 >
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    function changeAge(target) {
+        target.age = 30;
+    }
+
+    changeAge(person);
+
+    console.log(person.age); // 30
+
+    /*
+        target은 person이 가리키는 객체를 참조한다.
+        target.age를 변경하면 동일한 객체의 age가 변경된다.
+    */
+}
+
+// < 12-2. 함수 내부에서 매개변수에 새 객체 대입하기 >
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    function replacePerson(target) {
+        target = {
+            name: "김철수",
+            age: 30
+        };
+    }
+
+    replacePerson(person);
+
+    console.log(person);
+    // { name: "홍길동", age: 25 }
+
+    /*
+        target에 새로운 객체를 대입해도 person 변수는 바뀌지 않는다.
+
+        함수의 매개변수 target은 전달받은 참조의 복사본을 가진다.
+        target에 새 객체를 대입하면 target이 가리키는 대상만 바뀐다.
+
+        JavaScript는 객체를 전달할 때도 값 전달 방식으로 동작한다.
+        이때 전달되는 값이 객체를 가리키는 참조라는 점이 중요하다.
+    */
+}
+
+// < 12-3. 함수 내부에서 객체를 변경하는 것과 교체하는 것 >
+
+{
+    let person = {
+        name: "홍길동",
+        age: 25
+    };
+
+    function changePerson(target) {
+        target.age = 30;
+        target = { name: "김철수", age: 40 };
+    }
+
+    changePerson(person);
+
+    console.log(person);
+    // { name: "홍길동", age: 30 }
+
+    /*
+        첫 번째 작업
+        target.age = 30
+        → person이 가리키는 객체의 속성을 변경한다.
+
+        두 번째 작업
+        target = { ... }
+        → 매개변수 target이 새로운 객체를 가리키게 한다.
+        → person 변수에는 영향을 주지 않는다.
+    */
+}
+
+/*
+    < 13. 실무에서 자주 발생하는 참조 관련 실수 >
+
+    객체를 복사했다고 생각했지만 실제로는 같은 객체를 공유하거나,
+    얕은 복사만 수행해 내부 데이터가 함께 변경되는 문제가 발생할 수 있다.
+*/
+
+// < 13-1. 원본 데이터를 보관하려다가 실패하는 경우 >
+
+{
+    let user = {
+        name: "홍길동",
+        settings: {
+            theme: "light",
+            fontSize: 16
+        }
+    };
+
+    let backup = { ...user };
+
+    user.settings.theme = "dark";
+
+    console.log(user.settings.theme);   // dark
+    console.log(backup.settings.theme); // dark
+
+    /*
+        backup은 별도 객체지만 settings 객체는 공유한다.
+
+        원본 상태를 보관하려는 목적이라면
+        얕은 복사만으로 충분한지 반드시 확인해야 한다.
+    */
+}
+
+// < 13-2. 깊은 복사로 원본 상태 분리하기 >
+
+{
+    let user = {
+        name: "홍길동",
+        settings: {
+            theme: "light",
+            fontSize: 16
+        }
+    };
+
+    let backup = structuredClone(user);
+
+    user.settings.theme = "dark";
+
+    console.log(user.settings.theme);   // dark
+    console.log(backup.settings.theme); // light
+}
+
+// < 13-3. 객체 배열을 복사할 때 주의하기 >
+
+{
+    let cart = [
+        { name: "키보드", price: 50000, quantity: 1 },
+        { name: "마우스", price: 30000, quantity: 2 }
+    ];
+
+    let backupCart = [...cart];
+
+    backupCart[0].quantity = 5;
+
+    console.log(cart[0].quantity);       // 5
+    console.log(backupCart[0].quantity); // 5
+
+    /*
+        배열만 복사했을 뿐 배열 안의 상품 객체는 공유하고 있다.
+    */
+}
+
+// < 13-4. 상품 객체까지 별도로 복사하기 >
+
+{
+    let cart = [
+        { name: "키보드", price: 50000, quantity: 1 },
+        { name: "마우스", price: 30000, quantity: 2 }
+    ];
+
+    let backupCart = cart.map(function (item) {
+        return { ...item };
+    });
+
+    backupCart[0].quantity = 5;
+
+    console.log(cart[0].quantity);       // 1
+    console.log(backupCart[0].quantity); // 5
+
+    /*
+        각 상품 객체의 최상위 속성까지 복사했다.
+
+        현재 예제에서는 상품 객체 안에 추가적인 중첩 객체가 없으므로
+        이 방식으로 상품 객체를 분리할 수 있다.
+
+        중첩 객체가 더 있다면 그 구조까지 확인해야 한다.
+    */
+}
+
+/*
+    < 14. 복사 방법 정리 >
+
+    1. 참조 대입
+       let copy = original;
+
+       - 새로운 객체를 만들지 않는다.
+       - 원본과 복사 변수가 같은 객체를 가리킨다.
+
+    2. 얕은 복사
+       let copy = { ...original };
+       let copy = Object.assign({}, original);
+
+       - 새로운 최상위 객체를 만든다.
+       - 중첩 객체와 배열은 공유될 수 있다.
+
+    3. 배열의 얕은 복사
+       let copy = [...original];
+       let copy = original.slice();
+
+       - 새로운 배열을 만든다.
+       - 배열 내부에 객체가 있으면 해당 객체는 공유될 수 있다.
+
+    4. 깊은 복사
+       let copy = structuredClone(original);
+
+       - 지원되는 중첩 데이터까지 복제한다.
+       - 복제할 수 없는 값이나 특수한 객체는 주의해야 한다.
+
+    5. JSON을 이용한 복사
+       let copy = JSON.parse(JSON.stringify(original));
+
+       - JSON으로 표현 가능한 데이터에 적합하다.
+       - undefined, 함수, Date 등은 원본과 다르게 처리될 수 있다.
+*/
+
+
+
+/*
+    < 17. 최종 정리 >
+
+    1. 기본형 값의 대입은 값 자체를 복사한다.
+    2. 객체를 다른 변수에 대입하면 같은 객체를 가리키는 참조가 복사된다.
+    3. 객체의 속성을 변경하면 같은 객체를 가리키는 다른 변수에서도
+       변경된 결과가 확인된다.
+    4. 객체 내부의 속성이 같아도 서로 다른 객체라면
+       === 비교 결과는 false다.
+    5. { ...original }, Object.assign({}, original)은 얕은 복사를 수행한다.
+    6. 얕은 복사는 최상위 객체를 새로 만들지만
+       중첩 객체와 배열은 공유될 수 있다.
+    7. structuredClone()은 지원되는 중첩 데이터까지 복제할 수 있다.
+    8. const로 선언한 객체도 내부 속성은 변경할 수 있다.
+       단, 변수 자체에 다른 객체를 재대입할 수는 없다.
+    9. 함수에 객체를 전달해 내부 속성을 변경하면
+       함수 바깥에서도 변경된 결과를 확인할 수 있다.
+    10. 복사 방법을 선택할 때는 데이터의 중첩 구조와
+        실제로 독립적인 복사본이 필요한지를 먼저 판단해야 한다.
+*/
+
+</script>
+
+<body>
+    
+</body>
+</html>

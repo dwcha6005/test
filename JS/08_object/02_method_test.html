@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    // < 17. 실습 문제 >
+
+// 문제 1.
+// 다음 상품 객체에 메서드를 추가하세요.
+// - getPrice(): 가격을 반환한다.
+// - changePrice(newPrice): 가격을 변경한다.
+// - showInfo(): 상품명과 가격을 출력한다.
+
+let product = {
+    name: "무선 마우스",
+    price: 30000
+
+    // 메서드 작성
+};
+
+
+// 문제 2.
+// 다음 학생 객체에 increaseScore(amount) 메서드를 추가하세요.
+// 점수는 전달받은 amount만큼 증가해야 합니다.
+
+let student2 = {
+    name: "김철수",
+    score: 70
+
+    // 메서드 작성
+};
+
+
+// 문제 3.
+// 다음 계좌 객체에 입금과 출금 메서드를 작성하세요.
+// - 입금액이 0 이하이면 처리하지 않는다.
+// - 출금액이 잔액보다 크면 출금하지 않는다.
+// - 잔액을 출력하는 메서드도 작성한다.
+
+let account2 = {
+    owner: "이영희",
+    balance: 50000
+
+    // 메서드 작성
+};
+
+
+// 문제 4.
+// 아래 코드에서 this.name이 어떤 값을 출력하는지 예상하세요.
+
+let first = {
+    name: "첫 번째 객체",
+
+    showName() {
+        console.log(this.name);
+    }
+};
+
+let second = {
+    name: "두 번째 객체"
+};
+
+// first.showName();
+// first.showName.call(second);
+
+
+// 문제 5.
+// 다음 코드에서 fn()을 실행하면 왜 원래 객체의 name이
+// 자동으로 출력되지 않는지 설명하세요.
+
+let person5 = {
+    name: "홍길동",
+
+    showName() {
+        console.log(this.name);
+    }
+};
+
+let fn2 = person5.showName;
+
+// fn2();
+
+
+// < 18. 실습 정답 >
+
+// 문제 1 정답
+let productAnswer = {
+    name: "무선 마우스",
+    price: 30000,
+
+    getPrice() {
+        return this.price;
+    },
+
+    changePrice(newPrice) {
+        this.price = newPrice;
+    },
+
+    showInfo() {
+        console.log("상품명: " + this.name);
+        console.log("가격: " + this.price);
+    }
+};
+
+productAnswer.showInfo();
+productAnswer.changePrice(35000);
+console.log(productAnswer.getPrice());
+
+
+// 문제 2 정답
+let studentAnswer = {
+    name: "김철수",
+    score: 70,
+
+    increaseScore(amount) {
+        this.score += amount;
+    }
+};
+
+studentAnswer.increaseScore(10);
+console.log(studentAnswer.score);
+
+
+// 문제 3 정답
+let accountAnswer = {
+    owner: "이영희",
+    balance: 50000,
+
+    deposit(amount) {
+        if (amount > 0) {
+            this.balance += amount;
+        }
+    },
+
+    withdraw(amount) {
+        if (amount > 0 && amount <= this.balance) {
+            this.balance -= amount;
+        } else {
+            console.log("출금할 수 없습니다.");
+        }
+    },
+
+    showBalance() {
+        console.log(this.owner + ": " + this.balance + "원");
+    }
+};
+
+accountAnswer.deposit(20000);
+accountAnswer.withdraw(10000);
+accountAnswer.showBalance();
+
+
+// 문제 4 정답
+// first.showName()은 this가 first를 가리키므로 "첫 번째 객체"가 출력된다.
+// first.showName.call(second)는 this를 second로 지정하므로
+// "두 번째 객체"가 출력된다.
+
+
+// 문제 5 정답
+// fn2에는 메서드 함수에 대한 참조가 저장된다.
+// fn2()로 호출하면 person5 객체를 통해 호출한 것이 아니므로
+// this가 person5를 가리키지 않는다.
+// 엄격 모드에서는 this가 undefined가 될 수 있다.
+
+</script>
+
+<body>
+    
+</body>
+</html>

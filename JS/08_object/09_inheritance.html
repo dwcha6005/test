@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script>
+    
+/*
+    10_inheritance.js
+
+    < 학습 목표 >
+    1. 상속이 필요한 이유를 이해한다.
+    2. 부모 클래스와 자식 클래스의 관계를 이해한다.
+    3. extends를 사용하여 클래스를 상속한다.
+    4. super()를 사용하여 부모 클래스의 생성자를 호출한다.
+    5. 부모 클래스의 메서드를 자식 클래스에서 사용한다.
+    6. 메서드 오버라이딩의 개념을 이해한다.
+    7. super.method()로 부모 클래스의 메서드를 호출한다.
+    8. instanceof를 이용하여 객체와 클래스의 관계를 확인한다.
+*/
+
+
+/*
+    < 1. 상속이란? >
+
+    상속(Inheritance)
+    : 기존 클래스의 속성과 기능을 물려받아 새로운 클래스를 만드는 것
+
+    부모 클래스(Parent Class)
+    : 다른 클래스에 기능을 제공하는 클래스
+    : 상위 클래스(Superclass)라고도 한다.
+
+    자식 클래스(Child Class)
+    : 부모 클래스를 상속받는 클래스
+    : 하위 클래스(Subclass)라고도 한다.
+
+    예)
+
+    Person
+    ├── Student
+    └── Teacher
+
+    Person : 사람의 공통적인 정보와 기능
+    Student : 학생에게 필요한 정보와 기능
+    Teacher : 선생님에게 필요한 정보와 기능
+
+    학생과 선생님 모두 사람이다.
+    따라서 이름, 나이, 인사하기와 같은 공통 기능을
+    Person 클래스에 작성할 수 있다.
+
+    Student와 Teacher는 Person을 상속받아
+    공통 기능을 재사용하고 각자 필요한 기능을 추가할 수 있다.
+*/
+
+
+/*
+    < 2. 상속을 사용하지 않는 경우 >
+
+    학생과 선생님을 각각 클래스로 만든다고 가정한다.
+
+    두 클래스에 이름, 나이, 인사하기 기능이 반복된다.
+
+    클래스마다 동일한 기능을 작성하면
+    코드가 중복되고 수정할 때 여러 곳을 변경해야 할 수 있다.
+*/
+
+{
+    class Student {
+        constructor(name, age, school) {
+            this.name = name;
+            this.age = age;
+            this.school = school;
+        }
+
+        introduce() {
+            console.log(`저는 ${this.name}이고, ${this.age}살입니다.`);
+        }
+    }
+
+    class Teacher {
+        constructor(name, age, subject) {
+            this.name = name;
+            this.age = age;
+            this.subject = subject;
+        }
+
+        introduce() {
+            console.log(`저는 ${this.name}이고, ${this.age}살입니다.`);
+        }
+    }
+
+    let student = new Student("김학생", 20, "한국대학교");
+    let teacher = new Teacher("이선생", 35, "JavaScript");
+
+    student.introduce();
+    teacher.introduce();
+
+    // 문제점
+    // name, age, introduce()가 두 클래스에 중복되어 있다.
+    // 공통 기능을 부모 클래스로 분리하면 중복을 줄일 수 있다.
+}
+
+
+/*
+    < 3. 상속을 사용하는 경우 >
+
+    공통 기능을 Person 클래스에 작성한다.
+
+    Student와 Teacher는 Person을 상속받는다.
+
+    Person
+    : name, age
+    : introduce()
+
+    Student
+    : school
+    : study()
+
+    Teacher
+    : subject
+    : teach()
+
+    상속을 사용하면 공통 기능은 부모 클래스에서 관리하고,
+    자식 클래스에서는 자신에게 필요한 기능만 추가할 수 있다.
+*/
+
+
+/*
+    < 4. extends >
+
+    extends
+    : 다른 클래스를 상속받을 때 사용하는 키워드
+
+    class 자식클래스 extends 부모클래스 {
+        ...
+    }
+
+    예)
+
+    class Student extends Person {
+        ...
+    }
+
+    의미)
+    Student 클래스는 Person 클래스를 상속받는다.
+
+    Student 객체는 Person에서 제공하는 기능을 사용할 수 있고,
+    Student 클래스에 정의한 기능도 사용할 수 있다.
+*/
+
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        introduce() {
+            console.log(`이름: ${this.name}, 나이: ${this.age}`);
+        }
+    }
+
+    class Student extends Person {
+        study() {
+            console.log(`${this.name} 학생이 공부합니다.`);
+        }
+    }
+
+    let student = new Student("김학생", 20);
+
+    student.introduce();  // Person에서 정의한 메서드
+    student.study();      // Student에서 정의한 메서드
+
+    console.log(student.name); // "김학생"
+    console.log(student.age);  // 20
+}
+
+
+/*
+    < 5. 자식 클래스에 생성자가 없는 경우 >
+
+    자식 클래스에 constructor()를 작성하지 않아도
+    부모 클래스의 생성자를 이용해 객체를 초기화할 수 있다.
+
+    예)
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+    }
+
+    let student = new Student("김학생");
+
+    위 코드에서는 부모 클래스의 생성자가 사용된다.
+
+    따라서 Student에 constructor()가 없어도
+    name을 초기화할 수 있다.
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(`안녕하세요. 저는 ${this.name}입니다.`);
+        }
+    }
+
+    class Student extends Person {
+        // constructor()를 작성하지 않았다.
+    }
+
+    let student = new Student("김학생");
+
+    student.introduce();
+}
+
+
+/*
+    < 6. super() >
+
+    super()
+    : 자식 클래스의 생성자에서 부모 클래스의 생성자를 호출한다.
+
+    자식 클래스에서 constructor()를 직접 작성하고
+    부모 클래스의 초기화 기능을 사용하려면 super()를 호출해야 한다.
+
+    예)
+
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, age, school) {
+            super(name, age);
+            this.school = school;
+        }
+    }
+
+    super(name, age)
+    : Person의 생성자에 name과 age를 전달한다.
+
+    this.school = school
+    : Student에만 필요한 school을 초기화한다.
+
+    주의)
+    파생 클래스(extends를 사용하는 클래스)의 constructor()에서는
+    super()를 호출하기 전에 this를 사용할 수 없다.
+*/
+
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        introduce() {
+            console.log(`이름: ${this.name}, 나이: ${this.age}`);
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, age, school) {
+            super(name, age);
+
+            this.school = school;
+        }
+
+        showSchool() {
+            console.log(`학교: ${this.school}`);
+        }
+    }
+
+    let student = new Student("김학생", 20, "한국대학교");
+
+    student.introduce();
+    student.showSchool();
+
+    console.log(student.name);
+    console.log(student.age);
+    console.log(student.school);
+}
+
+
+/*
+    < 7. super()를 호출하지 않으면? >
+
+    자식 클래스에서 constructor()를 직접 작성했는데
+    super()를 호출하지 않으면 오류가 발생한다.
+
+    다음 코드는 실행하면 ReferenceError가 발생한다.
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            this.school = school;
+        }
+    }
+
+    new Student("김학생", "한국대학교");
+
+    이유)
+    Student는 Person을 상속받는 클래스다.
+    자식 클래스의 생성자에서 this를 사용하기 전에
+    super()를 호출해야 한다.
+
+    올바른 코드)
+
+    class Student extends Person {
+        constructor(name, school) {
+            super(name);
+            this.school = school;
+        }
+    }
+
+    부모 생성자가 name을 초기화한 다음,
+    자식 생성자가 school을 초기화한다.
+*/
+
+
+/*
+    < 8. 부모 클래스와 자식 클래스의 초기화 순서 >
+
+    다음 코드를 통해 생성자 실행 순서를 확인한다.
+
+    부모 생성자
+        ↓
+    자식 생성자의 super() 이후 코드
+*/
+
+{
+    class Person {
+        constructor(name) {
+            console.log("1. Person 생성자 실행");
+
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            console.log("2. Student 생성자 시작");
+
+            super(name);
+
+            console.log("3. super() 실행 이후");
+
+            this.school = school;
+        }
+    }
+
+    let student = new Student("김학생", "한국대학교");
+
+    console.log(student);
+}
+
+
+/*
+    < 9. 부모 클래스의 메서드 사용하기 >
+
+    자식 클래스는 부모 클래스에 정의된 메서드를 사용할 수 있다.
+
+    예)
+
+    class Person {
+        introduce() {
+            console.log("안녕하세요.");
+        }
+    }
+
+    class Student extends Person {
+        study() {
+            console.log("공부합니다.");
+        }
+    }
+
+    let student = new Student();
+
+    student.introduce();
+    student.study();
+
+    introduce() : Person에 정의된 메서드
+    study()     : Student에 정의된 메서드
+
+    자식 클래스에 introduce()를 다시 작성하지 않아도
+    부모 클래스의 기능을 사용할 수 있다.
+*/
+
+{
+    class Person {
+        introduce() {
+            console.log("안녕하세요. 저는 사람입니다.");
+        }
+
+        sleep() {
+            console.log("잠을 잡니다.");
+        }
+    }
+
+    class Student extends Person {
+        study() {
+            console.log("학생이 공부합니다.");
+        }
+    }
+
+    let student = new Student();
+
+    student.introduce();
+    student.sleep();
+    student.study();
+}
+
+
+/*
+    < 10. 메서드 오버라이딩(Overriding) >
+
+    오버라이딩
+    : 자식 클래스에서 부모 클래스의 메서드와 같은 이름으로
+      메서드를 다시 정의하는 것
+
+    부모 클래스의 기능을 자식 클래스에 맞게 변경할 때 사용한다.
+
+    예)
+
+    Person의 introduce()
+    : 일반적인 인사말
+
+    Student의 introduce()
+    : 학생이라는 정보를 포함한 인사말
+
+    자식 클래스에 같은 이름의 메서드가 있으면
+    해당 객체에서 그 메서드를 호출했을 때 자식 클래스의 메서드가 실행된다.
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(`저는 ${this.name}입니다.`);
+        }
+    }
+
+    class Student extends Person {
+        introduce() {
+            console.log(`저는 학생 ${this.name}입니다.`);
+        }
+    }
+
+    let person = new Person("홍길동");
+    let student = new Student("김학생");
+
+    person.introduce();
+    student.introduce();
+}
+
+
+/*
+    < 11. 오버라이딩과 메서드 이름 >
+
+    부모 클래스의 메서드 이름과 자식 클래스의 메서드 이름이
+    같지 않으면 오버라이딩이 아니다.
+
+    부모 클래스의 메서드
+    introduce()
+
+    자식 클래스의 메서드
+    study()
+
+    이 경우 자식 클래스는 부모의 introduce()를 사용할 수 있고,
+    자신만의 study()도 사용할 수 있다.
+
+    반면 부모와 자식에 모두 introduce()가 있다면
+    자식 클래스의 introduce()가 부모의 메서드를 대체해 사용된다.
+*/
+
+{
+    class Person {
+        introduce() {
+            console.log("저는 사람입니다.");
+        }
+    }
+
+    class Student extends Person {
+        study() {
+            console.log("공부합니다.");
+        }
+    }
+
+    let student = new Student();
+
+    student.introduce();
+    student.study();
+}
+
+
+/*
+    < 12. super.method() >
+
+    super()
+    : 부모 클래스의 생성자를 호출
+
+    super.method()
+    : 부모 클래스에 정의된 메서드를 호출
+
+    자식 클래스에서 메서드를 오버라이딩하더라도
+    부모 클래스의 원래 기능을 함께 사용하고 싶을 수 있다.
+
+    이때 super.method()를 사용할 수 있다.
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(`이름: ${this.name}`);
+        }
+    }
+
+    class Student extends Person {
+        introduce() {
+            super.introduce();
+
+            console.log("저는 학생입니다.");
+        }
+    }
+
+    let student = new Student("김학생");
+
+    student.introduce();
+
+    /*
+        실행 결과
+
+        이름: 김학생
+        저는 학생입니다.
+    */
+}
+
+
+/*
+    < 13. super.method() 활용 >
+
+    부모 클래스의 기능을 그대로 활용하면서
+    자식 클래스에 필요한 동작을 추가할 수 있다.
+*/
+
+{
+    class Employee {
+        constructor(name, salary) {
+            this.name = name;
+            this.salary = salary;
+        }
+
+        getInfo() {
+            return `이름: ${this.name}, 급여: ${this.salary}`;
+        }
+    }
+
+    class Manager extends Employee {
+        constructor(name, salary, department) {
+            super(name, salary);
+
+            this.department = department;
+        }
+
+        getInfo() {
+            let info = super.getInfo();
+
+            return `${info}, 부서: ${this.department}`;
+        }
+    }
+
+    let manager = new Manager("이부장", 5000000, "개발팀");
+
+    console.log(manager.getInfo());
+
+    // 이름: 이부장, 급여: 5000000, 부서: 개발팀
+}
+
+
+/*
+    < 14. 상속받은 메서드에서 this 사용하기 >
+
+    부모 클래스에 정의된 메서드에서 this는
+    일반적으로 그 메서드를 호출한 객체를 가리킨다.
+
+    따라서 자식 객체가 부모의 메서드를 사용하더라도
+    this.name은 해당 자식 객체의 name을 가리킨다.
+*/
+
+{
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+
+        introduce() {
+            console.log(`저는 ${this.name}입니다.`);
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            super(name);
+
+            this.school = school;
+        }
+    }
+
+    let student1 = new Student("김학생", "한국대학교");
+    let student2 = new Student("이학생", "부산대학교");
+
+    student1.introduce();
+    student2.introduce();
+
+    // 부모 클래스의 introduce()를 사용하지만
+    // 각각의 객체에 저장된 name이 출력된다.
+}
+
+
+/*
+    < 15. 상속받은 메서드를 자식 클래스에서 확장하기 >
+
+    자식 클래스는 부모의 메서드를 그대로 사용하거나,
+    오버라이딩하거나, super.method()로 부모의 메서드를 호출한 뒤
+    추가 기능을 수행할 수 있다.
+*/
+
+{
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        eat() {
+            console.log(`${this.name}이 먹이를 먹습니다.`);
+        }
+    }
+
+    class Dog extends Animal {
+        bark() {
+            console.log(`${this.name}이 멍멍 짖습니다.`);
+        }
+    }
+
+    let dog = new Dog("초코");
+
+    dog.eat();   // 부모 클래스의 메서드
+    dog.bark();  // 자식 클래스의 메서드
+}
+
+
+/*
+    < 16. 상속 관계에서 instanceof >
+
+    instanceof
+    : 객체가 특정 클래스의 인스턴스인지 확인한다.
+
+    예)
+
+    student instanceof Student
+    : student가 Student 클래스의 인스턴스인지 확인
+
+    student instanceof Person
+    : student가 Person 클래스의 인스턴스인지도 확인
+
+    Student가 Person을 상속받기 때문에
+    Student로 생성한 객체는 두 클래스 모두와 관련된 인스턴스다.
+*/
+
+{
+    class Person {
+    }
+
+    class Student extends Person {
+    }
+
+    let person = new Person();
+    let student = new Student();
+
+    console.log(person instanceof Person);   // true
+    console.log(person instanceof Student);  // false
+
+    console.log(student instanceof Student); // true
+    console.log(student instanceof Person);  // true
+}
+
+
+/*
+    < 17. 상속 관계 확인하기 >
+
+    instanceof는 객체와 클래스의 관계를 확인하는 데 사용할 수 있다.
+*/
+
+{
+    class Animal {
+    }
+
+    class Dog extends Animal {
+    }
+
+    class Cat extends Animal {
+    }
+
+    let dog = new Dog();
+    let cat = new Cat();
+
+    console.log(dog instanceof Dog);     // true
+    console.log(dog instanceof Animal);  // true
+    console.log(dog instanceof Cat);     // false
+
+    console.log(cat instanceof Cat);     // true
+    console.log(cat instanceof Animal);  // true
+}
+
+
+/*
+    < 18. 상속과 생성자 함수의 관계 >
+
+    생성자 함수로 객체를 만들던 방식과 비교해 보자.
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            super(name);
+            this.school = school;
+        }
+    }
+
+    클래스 상속에서는 extends와 super()를 사용한다.
+
+    JavaScript에서는 클래스 상속이 내부적으로 프로토타입과
+    연결되어 동작한다.
+
+    다만 지금은 상속 문법과 사용 목적을 먼저 이해한다.
+    프로토타입을 이용한 상속의 내부 원리는 별도 단원에서 학습한다.
+*/
+
+
+/*
+    < 19. 상속을 사용할 때 주의할 점 >
+
+    1. 공통 기능이 있다는 이유만으로 무조건 상속하지 않는다.
+       실제로 부모와 자식 사이에 적절한 관계가 있어야 한다.
+
+    2. 자식 클래스는 부모 클래스의 기능을 사용할 수 있지만,
+       부모 클래스는 자식 클래스에만 정의된 기능을 자동으로 사용할 수 없다.
+
+    3. 자식 클래스에서 constructor()를 작성했다면
+       부모 생성자를 초기화하기 위해 super()를 호출해야 한다.
+
+    4. super()를 호출하기 전에 자식 생성자에서 this를 사용하면 안 된다.
+
+    5. 자식 클래스에서 부모 메서드와 같은 이름의 메서드를 작성하면
+       메서드 오버라이딩이 발생한다.
+
+    6. super.method()는 부모 클래스의 메서드를 호출할 때 사용한다.
+
+    7. 상속 단계가 지나치게 깊어지면 코드 구조를 이해하고 수정하기
+       어려워질 수 있으므로 필요한 만큼만 상속한다.
+*/
+
+
+/*
+    < 20. 종합 예제 : 직원 관리 프로그램 >
+
+    요구사항
+
+    1. Employee 클래스를 만든다.
+       - name, salary를 생성자에서 초기화한다.
+       - getInfo() 메서드에서 이름과 급여를 반환한다.
+
+    2. Developer 클래스를 만든다.
+       - Employee를 상속받는다.
+       - name, salary, language를 초기화한다.
+       - getInfo()를 오버라이딩한다.
+       - super.getInfo()를 사용해 부모의 정보를 가져온다.
+       - language 정보도 추가해 반환한다.
+*/
+
+{
+    class Employee {
+        constructor(name, salary) {
+            this.name = name;
+            this.salary = salary;
+        }
+
+        getInfo() {
+            return `이름: ${this.name}, 급여: ${this.salary}`;
+        }
+    }
+
+    class Developer extends Employee {
+        constructor(name, salary, language) {
+            super(name, salary);
+
+            this.language = language;
+        }
+
+        getInfo() {
+            let info = super.getInfo();
+
+            return `${info}, 주력 언어: ${this.language}`;
+        }
+    }
+
+    let developer = new Developer("김개발", 4000000, "JavaScript");
+
+    console.log(developer.getInfo());
+}
+
+
+/*
+    < 21. 실습 문제 >
+
+    문제 1.
+    Animal 클래스를 작성하시오.
+
+    - name을 생성자에서 초기화한다.
+    - eat() 메서드에서 "{name}이 먹이를 먹습니다."를 출력한다.
+
+    Dog 클래스를 작성하고 Animal을 상속받으시오.
+
+    - bark() 메서드에서 "{name}이 멍멍 짖습니다."를 출력한다.
+    - Dog 객체를 생성하고 eat(), bark()를 호출하시오.
+
+
+    문제 2.
+    Person 클래스를 작성하시오.
+
+    - name, age를 생성자에서 초기화한다.
+    - introduce()에서 이름과 나이를 출력한다.
+
+    Student 클래스를 작성하고 Person을 상속받으시오.
+
+    - name, age, school을 생성자에서 초기화한다.
+    - super()를 사용하여 부모 생성자를 호출한다.
+    - introduce()를 오버라이딩하여 학교 정보까지 출력한다.
+
+
+    문제 3.
+    Product 클래스를 작성하시오.
+
+    - name, price를 생성자에서 초기화한다.
+    - getInfo()에서 상품명과 가격을 반환한다.
+
+    DiscountProduct 클래스를 작성하고 Product를 상속받으시오.
+
+    - name, price, discountRate를 초기화한다.
+    - getInfo()를 오버라이딩한다.
+    - super.getInfo()를 이용해 기본 상품 정보를 가져온다.
+    - 할인율을 추가해 반환한다.
+
+
+    문제 4.
+    Vehicle 클래스를 작성하시오.
+
+    - brand를 생성자에서 초기화한다.
+    - drive()에서 "{brand} 차량이 이동합니다."를 출력한다.
+
+    Car 클래스를 작성하고 Vehicle을 상속받으시오.
+
+    - model을 추가로 초기화한다.
+    - showModel()에서 모델명을 출력한다.
+
+    Car 객체에서 drive(), showModel()을 호출하시오.
+
+
+    문제 5.
+    다음 코드의 오류를 찾아 수정하시오.
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            this.school = school;
+            super(name);
+        }
+    }
+
+    let student = new Student("김학생", "한국대학교");
+
+
+    문제 6.
+    다음 코드의 출력 결과를 예상하시오.
+
+    class A {
+        hello() {
+            console.log("A");
+        }
+    }
+
+    class B extends A {
+        hello() {
+            console.log("B");
+        }
+    }
+
+    let obj = new B();
+
+    obj.hello();
+
+    출력 결과가 그렇게 나오는 이유도 설명하시오.
+*/
+
+
+/*
+    < 22. 실습 문제 정답 >
+*/
+
+// 문제 1
+{
+    class Animal {
+        constructor(name) {
+            this.name = name;
+        }
+
+        eat() {
+            console.log(`${this.name}이 먹이를 먹습니다.`);
+        }
+    }
+
+    class Dog extends Animal {
+        bark() {
+            console.log(`${this.name}이 멍멍 짖습니다.`);
+        }
+    }
+
+    let dog = new Dog("초코");
+
+    dog.eat();
+    dog.bark();
+}
+
+
+// 문제 2
+{
+    class Person {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        introduce() {
+            console.log(`이름: ${this.name}, 나이: ${this.age}`);
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, age, school) {
+            super(name, age);
+
+            this.school = school;
+        }
+
+        introduce() {
+            console.log(
+                `이름: ${this.name}, 나이: ${this.age}, 학교: ${this.school}`
+            );
+        }
+    }
+
+    let student = new Student("김학생", 20, "한국대학교");
+
+    student.introduce();
+}
+
+
+// 문제 3
+{
+    class Product {
+        constructor(name, price) {
+            this.name = name;
+            this.price = price;
+        }
+
+        getInfo() {
+            return `상품명: ${this.name}, 가격: ${this.price}원`;
+        }
+    }
+
+    class DiscountProduct extends Product {
+        constructor(name, price, discountRate) {
+            super(name, price);
+
+            this.discountRate = discountRate;
+        }
+
+        getInfo() {
+            let info = super.getInfo();
+
+            return `${info}, 할인율: ${this.discountRate}%`;
+        }
+    }
+
+    let product = new DiscountProduct("키보드", 50000, 10);
+
+    console.log(product.getInfo());
+}
+
+
+// 문제 4
+{
+    class Vehicle {
+        constructor(brand) {
+            this.brand = brand;
+        }
+
+        drive() {
+            console.log(`${this.brand} 차량이 이동합니다.`);
+        }
+    }
+
+    class Car extends Vehicle {
+        constructor(brand, model) {
+            super(brand);
+
+            this.model = model;
+        }
+
+        showModel() {
+            console.log(`모델명: ${this.model}`);
+        }
+    }
+
+    let car = new Car("현대", "아반떼");
+
+    car.drive();
+    car.showModel();
+}
+
+
+// 문제 5
+{
+    // 오류 원인)
+    // 파생 클래스의 생성자에서는 super()를 호출하기 전에
+    // this를 사용할 수 없다.
+
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    class Student extends Person {
+        constructor(name, school) {
+            super(name);
+
+            this.school = school;
+        }
+    }
+
+    let student = new Student("김학생", "한국대학교");
+
+    console.log(student);
+}
+
+
+// 문제 6
+{
+    class A {
+        hello() {
+            console.log("A");
+        }
+    }
+
+    class B extends A {
+        hello() {
+            console.log("B");
+        }
+    }
+
+    let obj = new B();
+
+    obj.hello();
+
+    // 출력 결과: B
+    // B 클래스에서 hello()를 오버라이딩했기 때문이다.
+}
+
+</script>
+
+<body>
+    
+</body>
+</html>
