@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="05_create_remove.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>DOM 요소 생성과 삭제</h1>
+
+    <section>
+        <h2>1. 요소 생성</h2>
+        <div id="result"></div>
+        <button id="createBtn">요소 생성</button>
+    </section>
+
+    <section>
+        <h2>2. 목록 추가</h2>
+        <input type="text" id="itemInput" placeholder="할 일 입력">
+        <button id="addBtn">목록 추가</button>
+        <ul id="todoList"></ul>
+        <button id="clearBtn">전체 삭제</button>
+    </section>
+
+    <section>
+        <h2>3. 카드 추가</h2>
+        <div id="cardList"></div>
+        <button id="cardBtn">카드 추가</button>
+    </section>
+
+    <section>
+        <h2>4. 요소 교체와 복제</h2>
+        <div id="replaceArea">
+            <p id="oldText">교체할 요소입니다.</p>
+        </div>
+        <button id="replaceBtn">요소 교체</button>
+
+        <div id="cloneArea">
+            <p id="original">복제할 원본 요소입니다.</p>
+        </div>
+        <button id="cloneBtn">요소 복제</button>
+    </section>
+</body>
+</html>

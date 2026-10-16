@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최종 실습 | LOCAL TABLE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background:#f4f5f3; color:#242923; }
+        .sheet { max-width:1000px; margin:2rem auto; background:#fff; padding:clamp(1.25rem,4vw,3rem); border-radius:1rem; box-shadow:0 8px 28px rgba(0,0,0,.06); }
+        .eyebrow { color:#315c4b; letter-spacing:.15em; font-weight:800; font-size:.8rem; }
+        .task { border:1px solid #dee3df; border-radius:.8rem; padding:1.25rem; margin-bottom:1rem; }
+        .task h3 { font-size:1.1rem; font-weight:800; }
+        code { color:#a12852; }
+        @media print { body{background:#fff}.sheet{box-shadow:none;margin:0;max-width:none} }
+    </style>
+</head>
+<body>
+    <main class="sheet">
+        <p class="eyebrow mb-2">HTML · CSS · BOOTSTRAP FINAL PROJECT</p>
+        <h1 class="display-5 fw-bold mb-3">LOCAL TABLE 웹사이트 구현</h1>
+        <p class="lead">제공된 완성 화면(target.html)을 참고하여 동네 원데이 클래스 소개 및 신청 웹사이트를 구현하세요.</p>
+        <div class="alert alert-warning">
+            <strong>시험 조건</strong><br>
+            작업 시간: 180분 / 총점: 100점<br>
+            HTML, CSS, Bootstrap에서 배운 내용만 사용합니다. 외부 템플릿을 복사하지 말고 직접 작성하세요.
+        </div>
+        <h2 class="h4 fw-bold mt-4 mb-3">1. 기본 조건</h2>
+        <ul>
+            <li>파일명은 <code>practice.html</code>로 저장하고, CSS는 내부 <code>style</code> 또는 별도 CSS 파일로 작성합니다.</li>
+            <li>Bootstrap 5.3 이상 CDN을 사용하고, Bootstrap JavaScript가 필요한 기능은 bundle을 연결합니다.</li>
+            <li>페이지는 PC, 태블릿, 모바일에서 가로 스크롤 없이 보여야 합니다.</li>
+            <li>의미에 맞는 HTML5 시맨틱 태그를 사용하고 이미지에는 적절한 <code>alt</code>를 작성합니다.</li>
+            <li>링크는 실제 섹션으로 연결합니다. 의미 없는 <code>href="#"</code> 사용은 금지합니다.</li>
+            <li>콘텐츠와 색상은 주제에 맞게 작성하되, 레이아웃·기능·반응형 동작은 기준 화면과 최대한 비슷하게 구현합니다.</li>
+        </ul>
+
+        <h2 class="h4 fw-bold mt-4 mb-3">2. 필수 구현 항목</h2>
+        <section class="task">
+            <h3>① 헤더와 내비게이션 (10점)</h3>
+            <ul class="mb-0">
+                <li>브랜드 로고, 4개 이상의 메뉴, 신청 버튼을 배치합니다.</li>
+                <li>Bootstrap Navbar의 모바일 토글을 구현하고, 메뉴는 해당 섹션으로 이동해야 합니다.</li>
+                <li>스크롤 시 상단에 유지되는 내비게이션을 구현합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>② 메인 Carousel (12점)</h3>
+            <ul class="mb-0">
+                <li>서로 다른 이미지와 제목·설명을 가진 슬라이드를 3개 이상 만듭니다.</li>
+                <li>이전/다음 버튼, 인디케이터, 자동 전환 중 2가지 이상을 구현합니다.</li>
+                <li>이미지는 영역을 가득 채우고 제목은 이미지 위에 읽기 쉽게 배치합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>③ 추천 클래스 카드 (14점)</h3>
+            <ul class="mb-0">
+                <li>클래스 카드 3개 이상을 Bootstrap Grid로 배치합니다.</li>
+                <li>카드마다 이미지, 카테고리 배지, 제목, 설명, 시간 또는 가격, 상세 보기 버튼을 넣습니다.</li>
+                <li>PC에서는 3열, 태블릿에서는 2열, 모바일에서는 1열로 배치합니다.</li>
+                <li>CSS hover 효과를 적용하되 콘텐츠가 움직여도 겹치거나 잘리지 않아야 합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>④ Modal 상세 보기 (12점)</h3>
+            <ul class="mb-0">
+                <li>각 카드의 상세 보기 버튼을 누르면 Bootstrap Modal이 열려야 합니다.</li>
+                <li>Modal에는 클래스명, 설명, 가격 또는 참여 안내, 닫기 버튼이 있어야 합니다.</li>
+                <li>가능하면 클릭한 카드의 데이터가 Modal에 반영되도록 구현합니다.</li>
+                <li>닫기 버튼, 바깥 영역 클릭 또는 ESC로 닫히는 기본 동작을 유지합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>⑤ 소개 영역과 반응형 레이아웃 (10점)</h3>
+            <ul class="mb-0">
+                <li>이미지와 소개 글을 2단 레이아웃으로 배치합니다.</li>
+                <li>수치 또는 특징을 2개 이상 시각적으로 강조합니다.</li>
+                <li>모바일에서는 이미지와 텍스트가 자연스럽게 세로로 쌓이도록 합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>⑥ 일정 테이블 (10점)</h3>
+            <ul class="mb-0">
+                <li>날짜, 클래스, 시간, 장소, 잔여석, 신청 항목이 있는 테이블을 만듭니다.</li>
+                <li>테이블 헤더와 행을 구분하고, Bootstrap hover 및 정렬 클래스를 적절히 사용합니다.</li>
+                <li>좁은 화면에서도 레이아웃이 깨지지 않도록 반응형 테이블을 적용합니다.</li>
+                <li>잔여석 또는 마감 상태는 Badge 등으로 구분합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>⑦ Accordion FAQ (8점)</h3>
+            <ul class="mb-0">
+                <li>질문과 답변을 3개 이상 작성합니다.</li>
+                <li>Bootstrap Accordion으로 열고 닫히게 하고, 한 번에 하나씩 열리는 동작을 적용합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>⑧ 신청 폼과 유효성 표시 (14점)</h3>
+            <ul class="mb-0">
+                <li>이름, 연락처, 이메일, 클래스 선택, 인원 선택, 요청 사항, 개인정보 동의 항목을 만듭니다.</li>
+                <li>각 입력 요소와 <code>label</code>을 연결하고 필수 입력에는 <code>required</code>를 적용합니다.</li>
+                <li>Bootstrap Form 클래스를 사용하고, 입력 오류가 있을 때 피드백을 표시합니다.</li>
+                <li>제출과 초기화 버튼을 제공하고, 실제 서버 전송이 되지 않는 경우 화면용임을 표시합니다.</li>
+            </ul>
+        </section>
+        <section class="task">
+            <h3>⑨ CSS 커스터마이징과 마무리 (10점)</h3>
+            <ul class="mb-0">
+                <li>Bootstrap 기본 스타일을 그대로 두지 말고 브랜드 색상, 글꼴, 간격, 테두리, 버튼 등을 일관성 있게 수정합니다.</li>
+                <li>CSS 변수 또는 재사용 가능한 클래스를 2개 이상 사용합니다.</li>
+                <li>hover/focus 상태를 고려하고, 제목 크기·여백·이미지 비율이 일관적이어야 합니다.</li>
+                <li>Footer와 상단 이동 버튼을 포함합니다.</li>
+            </ul>
+        </section>
+
+        <h2 class="h4 fw-bold mt-4 mb-3">3. 제출 전 확인</h2>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c1"><label class="form-check-label" for="c1">메뉴가 각 섹션으로 이동한다.</label></div>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c2"><label class="form-check-label" for="c2">Carousel이 전환되고 Modal이 정상적으로 열린다.</label></div>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c3"><label class="form-check-label" for="c3">Accordion의 질문을 열고 닫을 수 있다.</label></div>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c4"><label class="form-check-label" for="c4">필수 항목을 비우면 폼 피드백이 표시된다.</label></div>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c5"><label class="form-check-label" for="c5">모바일 화면에서 가로 스크롤이나 겹침이 없다.</label></div>
+        <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="c6"><label class="form-check-label" for="c6">개발자 도구 콘솔에 오류가 없다.</label></div>
+        <hr class="my-4">
+        <p class="small text-secondary mb-0">참고: 이미지와 Bootstrap CDN은 인터넷 연결이 필요합니다. 완성 화면은 target.html을 확인하세요.</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,338 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 이벤트 기초 실습</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-4">
+    <h1 class="mb-2">JavaScript 이벤트 기초 실습</h1>
+    <p class="text-secondary mb-4">
+        각 기능의 요구사항을 읽고 버튼을 클릭했을 때 실행될 함수를 구현하세요.
+    </p>
+
+    <!-- < 1. 회원 서비스 : 비밀번호 표시 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 1. 비밀번호 표시 / 숨기기</div>
+        <div class="card-body">
+            <p>로그인 화면에서 사용자가 입력한 비밀번호를 확인할 수 있도록 구현하세요.</p>
+
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" id="password" class="form-control mb-3"
+                   value="myPassword123">
+
+            <button class="btn btn-primary" onclick="togglePassword()">
+                비밀번호 표시
+            </button>
+
+            <ul class="mt-3 mb-0">
+                <li>버튼을 클릭하면 비밀번호가 보이도록 변경하세요.</li>
+                <li>다시 클릭하면 비밀번호가 숨겨지도록 변경하세요.</li>
+                <li>버튼 문구도 현재 상태에 맞게 변경하세요.</li>
+            </ul>
+
+            <!-- 정답 -->
+            <script>
+            function togglePassword() {
+                const password = document.getElementById("password");
+                const button = event.currentTarget;
+
+                if (password.type === "password") {
+                    password.type = "text";
+                    button.textContent = "비밀번호 숨기기";
+                } else {
+                    password.type = "password";
+                    button.textContent = "비밀번호 표시";
+                }
+            }
+            </script>
+
+        </div>
+    </section>
+
+    <!-- < 2. 쇼핑몰 : 재고 제한 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 2. 상품 수량과 재고 제한</div>
+        <div class="card-body">
+            <p>상품 재고는 5개입니다. 구매 수량을 변경하는 기능을 구현하세요.</p>
+
+            <p>상품명: 무선 마우스</p>
+            <p>남은 재고: <strong>5개</strong></p>
+            <p>구매 수량: <strong id="orderQuantity">1</strong>개</p>
+            <p id="orderMessage" class="text-secondary">구매 수량을 선택하세요.</p>
+
+            <button class="btn btn-outline-secondary" onclick="changeOrderQuantity(-1)">-</button>
+            <button class="btn btn-outline-secondary" onclick="changeOrderQuantity(1)">+</button>
+
+            <ul class="mt-3 mb-0">
+                <li>수량은 최소 1개, 최대 5개입니다.</li>
+                <li>범위를 벗어나면 수량을 변경하지 마세요.</li>
+                <li>재고가 부족하거나 최소 수량에 도달하면 안내 문구를 출력하세요.</li>
+            </ul>
+
+            <script>
+            let orderQuantity = 1;
+
+            function changeOrderQuantity(amount) {
+                if (orderQuantity + amount < 1) {
+                    document.getElementById("orderMessage").textContent =
+                        "최소 1개 이상 선택해야 합니다.";
+                    return;
+                }
+
+                if (orderQuantity + amount > 5) {
+                    document.getElementById("orderMessage").textContent =
+                        "재고가 부족합니다. 최대 5개까지 구매할 수 있습니다.";
+                    return;
+                }
+
+                orderQuantity += amount;
+
+                document.getElementById("orderQuantity").textContent = orderQuantity;
+                document.getElementById("orderMessage").textContent =
+                    "구매 수량이 " + orderQuantity + "개로 변경되었습니다.";
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 3. 쇼핑몰 : 쿠폰 적용 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 3. 할인 쿠폰 적용</div>
+        <div class="card-body">
+            <p>상품 금액에 쿠폰 할인을 적용하는 기능을 구현하세요.</p>
+
+            <p>상품 금액: <strong>50,000원</strong></p>
+            <p>쿠폰: <strong>10% 할인</strong></p>
+            <p id="couponResult">할인 적용 전: 50,000원</p>
+
+            <button class="btn btn-success" onclick="applyCoupon()">쿠폰 적용</button>
+
+            <ul class="mt-3 mb-0">
+                <li>버튼을 클릭하면 10% 할인 금액을 계산하세요.</li>
+                <li>할인된 최종 금액을 화면에 출력하세요.</li>
+                <li>정답에서는 버튼을 한 번 누르면 할인 결과가 표시되도록 구현합니다.</li>
+            </ul>
+
+            <script>
+            function applyCoupon() {
+                const price = 50000;
+                const discountRate = 0.1;
+                const discountPrice = price * discountRate;
+                const finalPrice = price - discountPrice;
+
+                document.getElementById("couponResult").textContent =
+                    "할인 금액: " + discountPrice.toLocaleString() +
+                    "원 / 최종 금액: " + finalPrice.toLocaleString() + "원";
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 4. 배달 서비스 : 배달비 계산 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 4. 주문 금액에 따른 배달비</div>
+        <div class="card-body">
+            <p>주문 금액에 따라 배달비를 계산하세요.</p>
+
+            <p>음식 주문 금액: 18,000원</p>
+            <p>배달비 기준: 20,000원 이상이면 무료</p>
+            <p id="deliveryResult">배달비를 확인하세요.</p>
+
+            <button class="btn btn-primary" onclick="calculateDelivery()">배달비 계산</button>
+
+            <ul class="mt-3 mb-0">
+                <li>주문 금액이 20,000원 이상이면 배달비는 0원입니다.</li>
+                <li>20,000원 미만이면 배달비는 3,000원입니다.</li>
+                <li>최종 결제 금액도 함께 출력하세요.</li>
+            </ul>
+
+            <script>
+            function calculateDelivery() {
+                const orderPrice = 18000;
+                let deliveryFee = 3000;
+
+                if (orderPrice >= 20000) {
+                    deliveryFee = 0;
+                }
+
+                const totalPrice = orderPrice + deliveryFee;
+
+                document.getElementById("deliveryResult").textContent =
+                    "배달비: " + deliveryFee.toLocaleString() +
+                    "원 / 최종 결제 금액: " + totalPrice.toLocaleString() + "원";
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 5. 고객센터 : 문의 유형 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 5. 고객센터 문의 안내</div>
+        <div class="card-body">
+            <p>문의 유형에 따라 고객에게 다른 안내 문구를 표시하세요.</p>
+
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-primary" onclick="showInquiry('배송')">배송 문의</button>
+                <button class="btn btn-outline-primary" onclick="showInquiry('환불')">환불 문의</button>
+                <button class="btn btn-outline-primary" onclick="showInquiry('결제')">결제 문의</button>
+            </div>
+
+            <p id="inquiryResult" class="mt-3 mb-0">문의 유형을 선택하세요.</p>
+
+            <ul class="mt-3 mb-0">
+                <li>배송: 배송 조회 페이지에서 현재 위치를 확인할 수 있습니다.</li>
+                <li>환불: 주문 내역에서 환불 신청을 진행할 수 있습니다.</li>
+                <li>결제: 결제 내역에서 승인 여부를 확인할 수 있습니다.</li>
+            </ul>
+
+            <script>
+            function showInquiry(type) {
+                let message = "";
+
+                if (type === "배송") {
+                    message = "배송 조회 페이지에서 현재 위치를 확인할 수 있습니다.";
+                } else if (type === "환불") {
+                    message = "주문 내역에서 환불 신청을 진행할 수 있습니다.";
+                } else if (type === "결제") {
+                    message = "결제 내역에서 승인 여부를 확인할 수 있습니다.";
+                }
+
+                document.getElementById("inquiryResult").textContent = message;
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 6. 사내 시스템 : 출퇴근 상태 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 6. 출근 상태 변경</div>
+        <div class="card-body">
+            <p>직원의 출근 상태를 변경하는 기능을 구현하세요.</p>
+
+            <p>현재 상태: <strong id="workStatus">출근 전</strong></p>
+            <p id="workMessage" class="text-secondary">출근 버튼을 클릭하세요.</p>
+
+            <button class="btn btn-success" onclick="checkIn()">출근 처리</button>
+            <button class="btn btn-outline-danger" onclick="checkOut()">퇴근 처리</button>
+
+            <ul class="mt-3 mb-0">
+                <li>출근 처리 버튼을 클릭하면 상태를 출근으로 변경하세요.</li>
+                <li>퇴근 처리 버튼을 클릭하면 상태를 퇴근으로 변경하세요.</li>
+                <li>각 버튼에 맞는 처리 완료 메시지를 출력하세요.</li>
+            </ul>
+
+            <script>
+            let workState = "출근 전";
+
+            function checkIn() {
+                workState = "출근";
+                document.getElementById("workStatus").textContent = workState;
+                document.getElementById("workMessage").textContent =
+                    "출근 처리가 완료되었습니다.";
+            }
+
+            function checkOut() {
+                workState = "퇴근";
+                document.getElementById("workStatus").textContent = workState;
+                document.getElementById("workMessage").textContent =
+                    "퇴근 처리가 완료되었습니다.";
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 7. 예약 서비스 : 예약 인원 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 7. 예약 인원 관리</div>
+        <div class="card-body">
+            <p>식당 예약 인원을 조절하는 기능을 구현하세요.</p>
+
+            <p>예약 인원: <strong id="guestCount">2</strong>명</p>
+            <p id="guestMessage" class="text-secondary">최대 예약 인원은 8명입니다.</p>
+
+            <button class="btn btn-outline-secondary" onclick="changeGuests(-1)">-</button>
+            <button class="btn btn-outline-secondary" onclick="changeGuests(1)">+</button>
+
+            <ul class="mt-3 mb-0">
+                <li>예약 인원은 최소 1명, 최대 8명입니다.</li>
+                <li>인원 변경 시 화면의 숫자를 갱신하세요.</li>
+                <li>최소 또는 최대 인원을 넘으려고 하면 안내 메시지를 출력하세요.</li>
+            </ul>
+
+            <script>
+            let guests = 2;
+
+            function changeGuests(amount) {
+                if (guests + amount < 1) {
+                    document.getElementById("guestMessage").textContent =
+                        "예약은 최소 1명부터 가능합니다.";
+                    return;
+                }
+
+                if (guests + amount > 8) {
+                    document.getElementById("guestMessage").textContent =
+                        "최대 8명까지 예약할 수 있습니다.";
+                    return;
+                }
+
+                guests += amount;
+
+                document.getElementById("guestCount").textContent = guests;
+                document.getElementById("guestMessage").textContent =
+                    "현재 " + guests + "명 예약을 선택했습니다.";
+            }
+            </script>
+        </div>
+    </section>
+
+    <!-- < 8. 관리자 페이지 : 게시글 공개 상태 > -->
+    <section class="card mb-4">
+        <div class="card-header fw-bold">문제 8. 게시글 공개 / 비공개</div>
+        <div class="card-body">
+            <p>관리자 페이지에서 게시글 공개 상태를 변경하는 기능을 구현하세요.</p>
+
+            <p>게시글: 10월 신규 서비스 안내</p>
+            <p>공개 상태: <strong id="postStatus">공개</strong></p>
+
+            <button class="btn btn-warning" onclick="togglePostStatus()">
+                공개 상태 변경
+            </button>
+
+            <ul class="mt-3 mb-0">
+                <li>현재 공개 상태가 공개라면 비공개로 변경하세요.</li>
+                <li>현재 비공개라면 공개로 변경하세요.</li>
+                <li>상태와 함께 변경 완료 메시지를 출력하세요.</li>
+            </ul>
+
+            <script>
+            let isPublished = true;
+
+            function togglePostStatus() {
+                isPublished = !isPublished;
+                const status = isPublished ? "공개" : "비공개";
+                document.getElementById("postStatus").textContent = status;
+            }
+            </script>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    // 강사용 정답을 공개할 때는 각 문제의 정답 코드를 이곳에 옮겨
+    // 하나의 script 영역에서 실행해도 됩니다.
+    //
+    // 주의:
+    // 각 문제의 정답 코드에 포함된 <script> 태그는
+    // 다른 script 태그 내부에 중첩해서 넣지 마세요.
+    // 위의 정답은 설명을 위해 주석으로 보관한 것입니다.
+</script>
+
+</body>
+</html>
+```

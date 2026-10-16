@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Event Basic</title>
+</head>
+<body>
+
+    <h1>JavaScript Event Basic</h1>
+
+    <h2>1. 이벤트란?</h2>
+    <p>이벤트는 브라우저에서 발생하는 사건이나 사용자의 행동을 의미한다.</p>
+    <ul>
+        <li>버튼 클릭</li>
+        <li>마우스 이동</li>
+        <li>키보드 입력</li>
+        <li>웹 페이지 로딩</li>
+    </ul>
+
+    <h2>2. 클릭 이벤트</h2>
+
+    <!--
+        onclick : 요소를 클릭했을 때 실행할 JavaScript 코드를 지정한다.
+
+        onclick="alert('버튼을 클릭했습니다.')"
+
+        사용자가 버튼을 클릭하면 alert() 함수가 실행된다.
+        onclick은 이벤트를 등록하는 여러 방법 중 하나이다.
+    -->
+    <button onclick="alert('버튼을 클릭했습니다.')">클릭하기</button>
+
+    <h2>3. 이벤트 핸들러</h2>
+
+    <p id="message">아직 버튼을 클릭하지 않았습니다.</p>
+
+    <!--
+        버튼을 클릭하면 changeMessage() 함수를 호출한다.
+        HTML은 어떤 행동에 반응할지 지정하고,
+        JavaScript 함수는 실제로 수행할 작업을 담당한다.
+    -->
+    <button onclick="changeMessage()">
+        메시지 변경
+    </button>
+
+    <script>
+        // 버튼 클릭 시 실행할 함수
+        function changeMessage() {
+            // DOM 요소 선택
+            const message = document.getElementById("message");
+
+            // 선택한 요소의 텍스트 변경
+            message.textContent = "버튼을 클릭했습니다!";
+        }
+    </script>
+
+    <h2>4. 이벤트 대상</h2>
+
+    <p id="targetMessage">어떤 버튼을 클릭했는지 확인해 보세요.</p>
+
+    <!--
+        각각의 버튼은 서로 다른 문자열을 함수에 전달한다.
+        클릭한 버튼에 따라 결과가 달라진다.
+    -->
+    <button onclick="showTarget('첫 번째 버튼')">첫 번째 버튼</button>
+    <button onclick="showTarget('두 번째 버튼')">두 번째 버튼</button>
+    <button onclick="showTarget('세 번째 버튼')">세 번째 버튼</button>
+
+    <script>
+        // 전달받은 버튼 이름을 화면에 출력한다.
+        function showTarget(buttonName) {
+            const targetMessage = document.getElementById("targetMessage");
+
+            targetMessage.textContent =
+                buttonName + "을(를) 클릭했습니다.";
+        }
+    </script>
+
+    <h2>5. 이벤트 발생 전과 후</h2>
+
+    <p id="countMessage">클릭 횟수: 0</p>
+
+    <button onclick="increaseCount()">
+        횟수 증가
+    </button>
+
+    <button onclick="resetCount()">
+        초기화
+    </button>
+
+    <script>
+        // 클릭 횟수를 저장하는 변수
+        let count = 0;
+
+        // 버튼을 클릭할 때마다 횟수 증가
+        function increaseCount() {
+            count++;
+
+            document.getElementById("countMessage").textContent =
+                "클릭 횟수: " + count;
+        }
+
+        // 클릭 횟수를 0으로 초기화
+        function resetCount() {
+            count = 0;
+
+            document.getElementById("countMessage").textContent =
+                "클릭 횟수: " + count;
+        }
+    </script>
+
+</body>
+</html>

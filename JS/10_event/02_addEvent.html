@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript addEventListener</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="02_addEvent.js" defer></script>
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h1 class="mb-2">addEventListener()</h1>
+        <p class="text-secondary mb-4">
+            이벤트를 등록하고 관리하는 방법을 학습합니다.
+        </p>
+
+        <!-- < 1. onclick 방식과 비교 > -->
+        <section class="card mb-4">
+            <div class="card-header fw-bold">1. 기존 onclick 방식</div>
+            <div class="card-body">
+                <p>HTML에 이벤트 처리 코드를 직접 연결하는 방식입니다.</p>
+                <button class="btn btn-outline-secondary" onclick="showLegacyMessage()">
+                    알림 확인
+                </button>
+                <p id="legacyResult" class="mt-3 mb-0 text-secondary">
+                    버튼을 클릭하세요.
+                </p>
+            </div>
+        </section>
+
+        <!-- < 2. addEventListener 기본 사용법 > -->
+        <section class="card mb-4">
+            <div class="card-header fw-bold">2. 주문 처리</div>
+            <div class="card-body">
+                <p>주문 처리 버튼을 클릭하면 주문 접수 결과를 표시합니다.</p>
+                <button id="orderButton" class="btn btn-primary">
+                    주문 접수
+                </button>
+                <p id="orderResult" class="mt-3 mb-0 text-secondary">
+                    아직 주문을 접수하지 않았습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- < 3. 하나의 요소에 여러 이벤트 등록 > -->
+        <section class="card mb-4">
+            <div class="card-header fw-bold">3. 하나의 버튼에 여러 기능 연결</div>
+            <div class="card-body">
+                <p>
+                    버튼 하나를 클릭했을 때 서로 다른 두 기능이 실행되도록 합니다.
+                </p>
+                <button id="notificationButton" class="btn btn-success">
+                    알림 설정 저장
+                </button>
+                <p id="notificationResult" class="mt-3 mb-1 text-secondary">
+                    아직 설정을 저장하지 않았습니다.
+                </p>
+                <p id="notificationLog" class="mb-0 text-secondary">
+                    실행 기록이 없습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- < 4. 이벤트 리스너 등록과 제거 > -->
+        <section class="card mb-4">
+            <div class="card-header fw-bold">4. 이벤트 리스너 관리</div>
+            <div class="card-body">
+                <p>
+                    특정 기능의 이벤트 리스너를 등록하거나 제거합니다.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <button id="registerButton" class="btn btn-outline-primary">
+                        점검 알림 등록
+                    </button>
+                    <button id="unregisterButton" class="btn btn-outline-danger">
+                        점검 알림 제거
+                    </button>
+                    <button id="testButton" class="btn btn-warning">
+                        시스템 점검 확인
+                    </button>
+                </div>
+
+                <p id="listenerStatus" class="mb-1 text-secondary">
+                    점검 알림이 등록되어 있습니다.
+                </p>
+                <p id="maintenanceResult" class="mb-0 text-secondary">
+                    시스템 점검 버튼을 클릭해 보세요.
+                </p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
