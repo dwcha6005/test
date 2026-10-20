@@ -12,6 +12,8 @@
     // 1) AND 연산자(&&) : 두 피연산자 모두 true 일 때 true, 하나라도 false 일 때 false
     // 2) OR 연산자(||) : 두 피연산자 모두 false 일 때 false, 하나라도 true 일 때 true
     // 3) NOT 연산자(!) : 단항연산자. 피연산자의 현재 boolean 값 반전. true -> false, false -> true
+    // 4) XOR 연산자 = 배타적 논리합 (^ Caret)
+    //                     : 두 피연산자의 값이 다르면 true 같으면 false
     console.log("false && false = " + (false && false)); // false
     console.log("false && true = " + (false && true)); // false
     console.log("true && false = " + (true && false)); // false
@@ -34,6 +36,11 @@
     console.log("result 변수값이 true 입니까? " + (result !== false));
 
     console.log("result 변수값의 상태 반전 결과 : " + !result);
+
+    console.log(true ^ true);   // 같으니까 false: 0
+    console.log(true ^ false);  // 다르니까 true: 1
+    console.log(false ^ true);  // 다르니까 true: 1
+    console.log(false ^ false); // 같으니까 false: 0
 </script>
 
 <body>
