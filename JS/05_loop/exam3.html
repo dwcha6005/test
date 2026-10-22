@@ -32,7 +32,7 @@ let passwd;
 do { // 조건 없이 무조건 블럭 내의 문장을 한 번 실행한다!
 	// 널스트링일 경우 새로운 패스워드를 다시 입력받아 변수 passwd 에 저장
 	passwd = prompt("패스워드를 입력하세요");
-} while(passwd == ""); // 마지막 while 문 조건 뒤에 세미콜론 필수!
+} while(passwd == "") // 마지막 while 문 조건 뒤에 세미콜론 필수!
 // => 블럭 내의 문장을 최소 한 번 실행한 후 마지막에 while 문을 통해 조건식을 판별하여 반복 결정
 
 if(passwd == null) {
