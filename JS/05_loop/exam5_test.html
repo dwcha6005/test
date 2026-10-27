@@ -9,6 +9,73 @@
 <script>
     // < 문제 >
     // 2단부터 9단까지 출력하기
+{
+	for (let dan = 2; dan <= 9; dan++) {
+		document.write("< " + dan + "단 ><br>")
+		for (let i = 1; i <= 9; i++) {
+			document.write(dan + " * " + i + " = " + dan*i + "<br>")
+		}
+		document.write("<br>")
+	}
+}
+
+
+
+	/*
+	어떤 수 n을 입력받으면 다음과 같은 삼각형을 출력한다.
+	여기서 입력되는 n은 반드시 홀수이다.
+	3부터 99 까지의 홀수 중 하나가 입력된다.
+	(document.write() 사용)
+
+	입력: 5 --> 출력:	*
+					  ***
+					 *****
+	참고) &nbsp; --> 공백 한칸					 
+	*/
+{
+	let num = 5;	
+	let line = parseInt(num / 2 + 1);
+	let star = 1;
+	let space = parseInt(num / 2);
+
+	for (let i = 0; i < line; i++) {
+		
+		for (let j = 0; j < space; j++) {
+			document.write("&nbsp;")
+		}
+
+		for (let j = 0; j < star; j++) {
+			document.write("*")
+		}
+
+		star += 2;
+		space--;
+
+		document.write("<br>")
+	}
+}
+	/*
+	주사위는 각 면에 1~6까지 적혀 있는 정육면체이다.
+	이런 주사위 2개를 굴려 합이 k가 나오는 경우를 조사하려고 한다.
+	예를 들어, 주사위 두개를 굴려 5가 나오는 경우는 1 4, 2 3, 3 2, 4 1 이다.
+	그리고 주사위를 하나만 굴리는 경우는 없다.
+	두 주사위를 굴려 나오는 합 k 가 입력된다. 
+
+	입력: 5 --> 출력: 1 4
+					 2 3
+					 3 2
+					 4 1
+	*/
+{
+	let target = 5;	
+	for (let i = 1; i <= 6; i++) {
+		for (let j = 1; j <= 6; j++) {
+			if (i + j === target) {
+				document.write(i + " " + j + "<br>")
+			}
+		}
+	}
+}
 
     /*
 [ 연습문제 ]
@@ -17,60 +84,60 @@
 
 */
 // prompt() 함수를 활용하여 두 번의 입력을 통해 memNum 과 colNum 값을 생성
-let memNum = prompt("전체 입장객 수 입력");
-document.write("전체 입장객 수 : " + memNum + "<br>");
+// let memNum = prompt("전체 입장객 수 입력");
+// document.write("전체 입장객 수 : " + memNum + "<br>");
 
-let colNum = prompt("한 줄에 앉을 수 있는 인원 입력");
-document.write("한 줄 당 좌석 수 : " + colNum + "<br>");
+// let colNum = prompt("한 줄에 앉을 수 있는 인원 입력");
+// document.write("한 줄 당 좌석 수 : " + colNum + "<br>");
 
 // 한 줄 당 좌석수를 활용하여 전체 입장객이 앉을 때 필요한 줄 수 계산
 // 1) 전체 입장객 수를 한 줄 당 좌석수로 나눈 값(몫) 계산
 //    => 단, 정수로 된 몫 계산을 위해 계산 결과를 정수화(parseInt() 활용)
 //let rowNum = memNum / colNum;
-let rowNum = parseInt(memNum / colNum); // memNum / colNum 결과값에서 정수 부분만 추출(= 소수점 버림)
+// let rowNum = parseInt(memNum / colNum); // memNum / colNum 결과값에서 정수 부분만 추출(= 소수점 버림)
 
 // 2) 만약, 전체 입장객 수를 한 줄 당 좌석수로 나눈 나머지가 0보다 클 경우
 //    필요한 줄 수 + 1 처리
-if(memNum % colNum > 0) {
-	rowNum++;
-}
+// if(memNum % colNum > 0) {
+// 	rowNum++;
+// }
 
-document.write("필요한 좌석 줄 수 : " + rowNum + "<br>");
+// document.write("필요한 좌석 줄 수 : " + rowNum + "<br>");
 // -------------------------------------------------------
 // 좌석별 좌석 번호 배치 형태 출력
 // ex) 좌석1 좌석2 좌석3 좌석4 좌석5
 //     .... 생략 ....
 //     좌석51 좌석52
 // 0) 좌석번호를 기록할 변수 seatNo 선언 및 1로 초기화
-let seatNo = 1;
-// 1) 바깥쪽 for문을 통해 좌석 줄 수 만큼 반복(row = 1부터 rowNum 까지 1씩 증가)
-LOOP_SEAT:
-for(let row = 1; row <= rowNum; row++) {
-	// 2) 바깥쪽 for문을 통해 1줄 반복마다 5개의 열을 반복하도록 안쪽 for문 작성
-	// => col = 1 부터 5 까지 1씩 증가
-	for(let col = 1; col <= 5; col++) {
-//		document.write(col + " ");
+// let seatNo = 1;
+// // 1) 바깥쪽 for문을 통해 좌석 줄 수 만큼 반복(row = 1부터 rowNum 까지 1씩 증가)
+// LOOP_SEAT:
+// for(let row = 1; row <= rowNum; row++) {
+// 	// 2) 바깥쪽 for문을 통해 1줄 반복마다 5개의 열을 반복하도록 안쪽 for문 작성
+// 	// => col = 1 부터 5 까지 1씩 증가
+// 	for(let col = 1; col <= 5; col++) {
+// //		document.write(col + " ");
 
-		// 좌석번호값을 출력 후 1만큼 증가시키기
-		document.write("좌석" + seatNo + " ");
+// 		// 좌석번호값을 출력 후 1만큼 증가시키기
+// 		document.write("좌석" + seatNo + " ");
 		
-		// 현재 좌석번호가 전체 인원 수와 같을 경우 전체 인원에 대한 좌석이 끝이므로
-		// 더 이상 좌석 출력이 되지 않도록 현재 반복문을 종료해야한다! => break 문 필요
-		if(seatNo == memNum) {
-			console.log("안쪽 for문을 종료합니다.");
-//			break; // 현재 소속된 반복문(= 안쪽 for문)을 빠져나감
-			break LOOP_SEAT; // LOOP_SEAT 라는 레이블이 붙어있는 for문(= 바깥쪽 for문)을 빠져나감
-		}
+// 		// 현재 좌석번호가 전체 인원 수와 같을 경우 전체 인원에 대한 좌석이 끝이므로
+// 		// 더 이상 좌석 출력이 되지 않도록 현재 반복문을 종료해야한다! => break 문 필요
+// 		if(seatNo == memNum) {
+// 			console.log("안쪽 for문을 종료합니다.");
+// //			break; // 현재 소속된 반복문(= 안쪽 for문)을 빠져나감
+// 			break LOOP_SEAT; // LOOP_SEAT 라는 레이블이 붙어있는 for문(= 바깥쪽 for문)을 빠져나감
+// 		}
 		
-		seatNo++;
-	} // 안쪽 for문 끝
-	// break; 코드를 만나면 빠져나오는 위치
+// 		seatNo++;
+// 	} // 안쪽 for문 끝
+// 	// break; 코드를 만나면 빠져나오는 위치
 	
-	// 한 줄을 출력 완료 시 줄바꿈을 위해 <br> 태그 실행 
-	document.write("<br>");
+// 	// 한 줄을 출력 완료 시 줄바꿈을 위해 <br> 태그 실행 
+// 	document.write("<br>");
 	
-	console.log("현재 row = " + row);
-} // 바깥쪽 for문 끝
+// 	console.log("현재 row = " + row);
+// } // 바깥쪽 for문 끝
 // break LOOP_SEAT; 코드를 만나면 빠져나오는 위치
 </script>
 
