@@ -344,6 +344,17 @@ arrD[0] = 100;
 console.log(arrC); // [10, 20, 30]
 console.log(arrD); // [100, 20, 30]
 
+// let newArr = []
+let newArr = new Array(arrC.length);    // 기존 배열과 같은 크기의 빈 배열을 생성
+for (let i = 0; i < arrC.length; i++) {
+    newArr[i] = arrC[i];    // 기존 배열의 값을 새로운 배열에 복사
+}
+console.log("==========")
+console.log(arrC)
+console.log(newArr)
+console.log(arrC === newArr)
+
+
 // 전개 구문으로도 배열을 복사할 수 있다.
 let arrE = [...arrC];
 

@@ -17,3 +17,9 @@
 17	Fetch 및 REST API	7h
 18	모듈, npm, Vite	4h
 19	종합 프로젝트	7h	
+
+
+나의할일 
+1. addEventListener(), onclick = function(){} 차이점 정리
+2. JS 회원가입 유효성 검사 시험문제 만들기
+3. 나머지 수업자료 만들기
