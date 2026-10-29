@@ -285,18 +285,27 @@
     4 9 2
     */
 {
-    let arr = [ 
-        [0,0,0], 
-        [0,0,0], 
-        [0,0,0] 
-    ]
+    let n = 5;
+    let arr = new Array(n);
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = new Array(n);
+    }
+
+    // let arr = [ 
+    //     [0,0,0], 
+    //     [0,0,0], 
+    //     [0,0,0] 
+    // ]
+
     let row = 0;
-    let col = 1;
+    // let col = 1;
+    let col = n / 2;
+    
     let num = 1;
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < n*n; i++) {
         arr[row][col] = num;
         
-        if (num % 3 == 0) {
+        if (num % n == 0) { // num % 3 == 0
             row++;
         } else {
             row--;
@@ -304,10 +313,11 @@
         }
 
         if (row < 0) {
-            row = 2;
+            // row = 2;
+            row = arr.length - 1;
         }
 
-        if (col > 2) {
+        if (col > arr.length - 1) { // col > 2
             col = 0;
         }
 

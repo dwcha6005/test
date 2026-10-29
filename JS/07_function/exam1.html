@@ -138,7 +138,9 @@ console.log(result2);
 // return의 실행 종료 기능
 function checkAge(age) {
     if (age < 0) {
-        return "잘못된 나이입니다.";
+        // return "잘못된 나이입니다.";
+        return; 
+        // => return이 단독으로 사용되면 함수를 종료하는 용도 (break와 비슷)
     }
 
     return "나이 : " + age;
@@ -211,7 +213,7 @@ test();
 console.log(message);
 // - 전역변수는 접근 가능한 여러 위치에서 사용할 수 있다.
 // - 지역변수와 전역변수의 이름이 같으면 지역 범위에서는 일반적으로 지역변수가 우선한다.
-
+// - 모호한 코팅 X
 let num = 100;
 function test() {
     let num = 200;

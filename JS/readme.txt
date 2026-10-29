@@ -23,3 +23,8 @@
 1. addEventListener(), onclick = function(){} 차이점 정리
 2. JS 회원가입 유효성 검사 시험문제 만들기
 3. 나머지 수업자료 만들기
+
+var a = document.getElementById("segments-container")
+a = Array.from(a.childNodes)
+var text = a.map(html => html.innerText).join(" / ")
+copy(text)
