@@ -8,22 +8,95 @@
 
 <script>
     /*
-    < 14. 실습 문제 >
-
-    문제 1. 전달받은 모든 숫자의 합계를 반환하는 sum() 함수를 작성하시오.
+    문제 1. 
+    전달받은 모든 숫자의 합계를 반환하는 sum() 함수를 작성하시오.
     예시 : sum(10, 20, 30) -> 60
+    */
+function sum(...nums){
+    let sum = 0;
+    for (let n of nums) {
+        sum += n;
+    }
+    return sum
+}
+console.log(sum(10, 20, 30))
 
-    문제 2. 전달받은 숫자의 평균을 반환하는 average() 함수를 작성하시오.
+    /*
+    문제 2. 
+    전달받은 숫자의 평균을 반환하는 average() 함수를 작성하시오.
     인자가 없으면 0을 반환하시오.
+    */
+function average(...nums) {
+    if (nums.length == 0) {
+        return 0;
+    }
 
+    let sum = 0;
+    for (let n of nums) {
+        sum += n;
+    }
+    return sum / nums.length;
+}
+console.log(average(10, 20, 30))
+    /*
+    문제 5. 
+    전달받은 모든 숫자 중 최댓값을 반환하는 getMax() 함수를 작성하시오.
+    */
+function getMax(...nums) {
+    let max = 0;
+    for (let n of nums) {
+        if (max < n) {
+            max = n;
+        }
+    }
+    return max;
+}
+console.log(getMax(10, 20, 30, 40, 50, 60))
+
+
+    /*
     문제 3. 첫 번째 인자는 이름으로, 나머지 인자는 점수 배열로 저장하는
     printScores() 함수를 작성하시오.
 
     문제 4. 배열 [10, 20, 30]을 전개 구문으로 전달하여
     세 숫자의 합계를 구하시오.
 
-    문제 5. 전달받은 숫자 중 최댓값을 반환하는 getMax() 함수를 작성하시오.
+    
     단, Math.max()는 사용하지 마시오.
+    */
+// =============================================================================
+//     문제 4. 게시글 태그 출력
+// 게시글 제목과 여러 개의 태그를 전달받아 게시글 정보를 출력하는 함수를 작성하시오.
+// - 함수명: printPost
+// - 첫 번째 매개변수는 게시글 제목이다.
+// - 나머지 매개변수는 태그 목록이다.
+// - 태그가 없으면 "등록된 태그가 없습니다."를 출력한다.
+
+    function printPost(subject, ...tags) {
+        console.log("게시글 제목: " + subject)
+        if (tags.length == 0) {
+            console.log("등록된 태그가 없습니다.")
+            return;
+        } 
+
+        // debugger;
+
+        msg = tags.map(t => "#" + t).join(" ")
+        console.log("태그: " + msg)
+    }
+
+   printPost("JavaScript 공부하기", "JavaScript", "프로그래밍", "웹개발");
+
+    /*
+    게시글 제목 : JavaScript 공부하기
+    태그 : #JavaScript #프로그래밍 #웹개발
+    */
+
+    printPost("React 시작하기");
+
+    /*
+    게시글 제목 : React 시작하기
+    등록된 태그가 없습니다.
     */
 </script>
 

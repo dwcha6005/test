@@ -57,7 +57,9 @@
         console.log(discountPrice(10000, 10)); // 9000
         console.log(discountPrice(50000, 20)); // 40000
     */
-
+    let discountPrice = (price, rate) => price * (1 - rate / 100);
+    console.log(discountPrice(10000, 10)); // 9000
+    console.log(discountPrice(50000, 20)); // 40000
 
     /*
         < 4. 함수를 매개변수로 전달하기 >
