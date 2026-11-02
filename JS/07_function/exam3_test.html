@@ -14,7 +14,7 @@
         함수 multiply()를 작성하세요.
 
         조건
-        - 함수 선언식을 사용하세요.
+        - 변수에 화살표 함수를 저장하는 방식으로 선언하세요.
         - 함수 내부에서 console.log()를 사용하지 말고 return으로 결과를 반환하세요.
         - 반환된 결과를 console.log()로 출력하세요.
 
@@ -22,6 +22,9 @@
         console.log(multiply(5, 3));   // 15
         console.log(multiply(10, 7));  // 70
     */
+    let multiply = (a, b) => a * b;
+    console.log(multiply(5, 3))
+    console.log(multiply(10, 7))
 
 
     /*
@@ -127,7 +130,13 @@
         - operate() 내부에서 무조건 더하기를 수행하면 안 됩니다.
         - 전달받은 callback 함수에 a와 b를 전달하세요.
     */
+    function operate(a, b, callback) {
+        callback(a, b)
+    }
 
+    operate(10, 20, (a, b) => console.log(a + b))
+    operate(10, 20, (a, b) => console.log(a - b))
+    operate(10, 20, (a, b) => console.log(a * b))
 
     /*
         < 7. 콜백 함수로 메시지 만들기 >
@@ -148,6 +157,13 @@
         greet("영희", ...);
         // 영희님, 오늘도 좋은 하루 보내세요!
     */
+    function greet(name, callback) {
+        callback(name)
+    }
+
+    greet("민수", name => console.log(name + "님, 환영합니다."))
+    greet("영희", name => console.log(name + "님, 오늘도 좋은 하루 보내세요!"))
+
 
 
     /*
@@ -158,15 +174,13 @@
     */
 
     function start(callback) {
-        console.log("1. 시작");
-
+        console.log("a");   // 1.
         callback();
-
-        console.log("3. 종료");
+        console.log("b");   // 3.
     }
 
     start(() => {
-        console.log("2. 작업 중");
+        console.log("c");   // 2.
     });
 
     // 예상 출력 결과
@@ -204,6 +218,20 @@
         - if문을 사용하세요.
         - 콜백 함수는 화살표 함수로 전달하세요.
     */
+    function checkNumber(num, callback1, callback2) {
+        if (num > 0) {
+            callback1();
+        } else {
+            callback2();
+        }
+    }
+
+    checkNumber(10 , () => console.log("앙수입니다."), () => console.log("양수가 아닙니다."))
+    checkNumber(-3 , () => console.log("앙수입니다."), () => console.log("양수가 아닙니다."))
+    checkNumber(0 , () => console.log("앙수입니다."), () => console.log("양수가 아닙니다."))
+
+
+
 
 
     /*
