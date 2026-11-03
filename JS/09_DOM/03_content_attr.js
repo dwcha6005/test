@@ -1,4 +1,3 @@
-```javascript
 /*
     03_DOM_Content_Attribute.js
 
@@ -605,4 +604,3 @@
 // 신뢰할 수 없는 문자열이 HTML로 해석되면서
 // 의도하지 않은 HTML이나 스크립트 실행을 유발할 수 있기 때문이다.
 // 일반 텍스트를 표시할 때는 textContent를 사용하는 것이 안전하다.
-```

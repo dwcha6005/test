@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOCAL TABLE | 동네의 취향을 만나다</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <style>
+        :root {
+            --brand: #315c4b;
+            --brand-dark: #203e33;
+            --brand-light: #e4eee7;
+
+            --cream: #f7f5ef;
+            --ink: #242923;
+            --white: #ffffff;
+            --footer-bg: #17251e;
+            --footer-text: #d5ddd7;
+
+            --border-color: #dee2e6;
+            --focus-border: #719785;
+            --focus-shadow: rgba(49, 92, 75, 0.17);
+
+            --overlay-dark: rgba(12, 25, 19, 0.78);
+            --overlay-light: rgba(12, 25, 19, 0.12);
+
+            --shadow-sm: rgba(22, 38, 29, 0.07);
+            --shadow-hover: rgba(22, 38, 29, 0.13);
+            --shadow-modal: rgba(0, 0, 0, 0.06);
+
+            --font-family: "Pretendard", "Noto Sans KR", sans-serif;
+        }
+
+        body { font-family: var(--font-family); color: var(--ink); }
+        html { scroll-behavior: smooth; }
+
+        section { padding: 75px 0; scroll-margin-top: 70px; }
+        .container { max-width: 1100px; }
+
+        .bg-cream { background-color: var(--cream); }
+        .bg-brand { background-color: var(--brand); }
+        .text-brand { color: var(--brand); }
+
+        .btn-brand { background-color: var(--brand); color: white; border: 1px solid var(--brand); }
+        .btn-brand:hover { background-color: var(--brand-dark); color: white; }
+
+        .btn-outline-brand { border: 1px solid var(--brand); color: var(--brand); }
+        .btn-outline-brand:hover { background-color: var(--brand); color: white; }
+
+        /* 뉴스레터 구독 버튼 (사진: 진한 초록 배경) */
+        .btn-newsletter { background-color: var(--brand-dark); color: white; border: 1px solid var(--brand-dark); }
+        .btn-newsletter:hover { background-color: #17251e; color: white; }
+
+        .section-label { font-size: 11px; font-weight: bold; letter-spacing: 2px; color: var(--brand); }
+        .section-title { font-size: 30px; font-weight: bold; }
+        .section-desc { color: #777; font-size: 14px; }
+
+        .navbar-brand { font-size: 15px; letter-spacing: 2px; }
+        .navbar .nav-link { font-size: 13px; }
+
+        .carousel-item img { height: 450px; object-fit: cover; filter: brightness(48%); }
+        .carousel-caption { bottom: 22%; text-align: left; }
+        .carousel-caption h1 { font-size: 46px; font-weight: bold; line-height: 1.25; }
+        .carousel-caption p { font-weight: 500; }
+
+        /* 히어로 상단 작은 라벨 (MEET YOUR NEIGHBORS) */
+        .hero-badge {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            padding: 4px 10px;
+            margin-bottom: 14px;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 4px;
+        }
+
+        .class-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px var(--shadow-sm);
+            transition: 0.2s;
+        }
+        .class-card:hover { box-shadow: 0 8px 20px var(--shadow-hover); }
+        .class-card img { height: 195px; object-fit: cover; }
+        .class-card .card-text { min-height: 65px; color: #777; font-size: 14px; }
+
+        .class-badge { background-color: var(--brand-light); color: var(--brand-dark); font-size: 11px; }
+
+        /* 사진 기준: 스토리 이미지 높이는 낮고, 그림자가 있음 */
+        .story-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px var(--shadow-hover);
+        }
+
+        .story-number { font-size: 36px; font-weight: bold; color: var(--brand-dark); }
+
+        .schedule-table thead th { background-color: var(--brand); color: white; font-size: 13px; }
+        .schedule-table td { font-size: 13px; }
+
+        .accordion-button { font-size: 14px; }
+        .accordion-button:not(.collapsed) {
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            box-shadow: none;
+        }
+
+        .form-label { font-size: 13px; font-weight: 500; }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 0.25rem var(--focus-shadow);
+        }
+        .invalid-feedback { font-size: 12px; }
+
+        .modal-content { border: none; border-radius: 15px; overflow: hidden; }
+        .modal-header { background-color: var(--brand); color: white; padding: 20px 24px; }
+        .modal-body { padding: 26px 24px 12px; }
+        .modal-footer { padding: 12px 24px 24px; }
+
+        footer { background-color: var(--footer-bg); color: var(--footer-text); }
+        footer a { color: var(--footer-text); text-decoration: none; }
+        footer a:hover { color: white; }
+
+        .top-btn {
+            width: 42px;
+            height: 42px;
+            background-color: var(--brand);
+            color: white;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 50px 0; }
+            .carousel-item img { height: 370px; }
+            .carousel-caption { bottom: 18%; }
+            .carousel-caption h1 { font-size: 30px; }
+            .section-title { font-size: 26px; }
+            .story-img { height: 220px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!--
+        < 구조 >
+        nav
+        header (carousel)
+        main
+            section: classes / story / schedule / faq / apply
+        footer
+    -->
+
+    <nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold text-dark" href="#top">LOCAL TABLE</a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="메뉴 열기">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#classes">클래스</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#story">배움의 가치</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#schedule">일정표</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">자주 묻는 질문</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-brand btn-sm rounded-pill px-4" href="#apply">신청하기</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header>
+        <div id="mainCarousel" class="carousel slide"
+             data-bs-ride="carousel" data-bs-interval="4000">
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" aria-label="슬라이드 1" class="active"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="슬라이드 2"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="슬라이드 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85"
+                         class="d-block w-100" alt="로컬 테이블 공간">
+
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <span class="hero-badge">MEET YOUR NEIGHBORS</span>
+                            <h1>취향으로 연결되는<br>우리 동네.</h1>
+                            <p class="my-3">
+                                혼자 와도 어색하지 않은 공간에서 새로운 사람과 경험을 만나보세요.
+                            </p>
+                            <a href="#apply" class="btn btn-brand rounded-pill px-4">참여 신청하기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=85"
+                         class="d-block w-100" alt="사람들과 함께하는 시간">
+
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <span class="hero-badge">MEET YOUR NEIGHBORS</span>
+                            <h1>함께 배우는<br>즐거운 시간.</h1>
+                            <p class="my-3">새로운 사람들과 함께 나만의 취향을 찾아보세요.</p>
+                            <a href="#story" class="btn btn-brand rounded-pill px-4">자세히 보기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1600&q=85"
+                         class="d-block w-100" alt="요리 클래스">
+
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <span class="hero-badge">MEET YOUR NEIGHBORS</span>
+                            <h1>일상 속 작은 배움,<br>특별한 경험.</h1>
+                            <p class="my-3">로컬 클래스에서 새로운 즐거움을 발견해 보세요.</p>
+                            <a href="#apply" class="btn btn-brand rounded-pill px-4">참여 신청하기</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="carousel-control-prev" type="button"
+                    data-bs-target="#mainCarousel" data-bs-slide="prev" aria-label="이전 슬라이드">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button"
+                    data-bs-target="#mainCarousel" data-bs-slide="next" aria-label="다음 슬라이드">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <section id="classes">
+            <div class="container">
+
+                <div class="d-flex flex-wrap gap-3 justify-content-between align-items-end mb-4">
+                    <div>
+                        <p class="section-label mb-2">FIND YOUR CLASS</p>
+                        <h2 class="section-title">이번 달 추천 클래스</h2>
+                        <p class="section-desc mb-0">관심 있는 분야를 골라 새로운 취향을 발견해 보세요.</p>
+                    </div>
+                    <a href="#schedule" class="text-brand small text-decoration-none">전체 일정 보기 +</a>
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- 카드 1 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card class-card h-100">
+                            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=85"
+                                 class="card-img-top" alt="제철 요리 클래스">
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge class-badge rounded-pill">COOKING</span>
+                                    <small class="text-secondary">2시간 30분</small>
+                                </div>
+
+                                <h5 class="card-title fw-bold">계절의 식탁, 제철 요리</h5>
+
+                                <p class="card-text">
+                                    시장 재료를 고르는 법부터 집에서 활용하는
+                                    제철 레시피까지 함께 배워요.
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <strong>35,000원</strong>
+                                        <small class="text-secondary">/ 1인</small>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-outline-brand btn-sm rounded-pill"
+                                            data-bs-toggle="modal" data-bs-target="#classModal"
+                                            data-name="계절의 식탁, 제철 요리"
+                                            data-price="35,000원"
+                                            data-info="제철 재료를 활용한 요리 실습입니다. 앞치마와 레시피 카드를 제공합니다.">
+                                        자세히 보기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 카드 2 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card class-card h-100">
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=85"
+                                 class="card-img-top" alt="종이 오브제 클래스">
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge class-badge rounded-pill">CRAFT</span>
+                                    <small class="text-secondary">2시간</small>
+                                </div>
+
+                                <h5 class="card-title fw-bold">내 손으로 만드는 종이 오브제</h5>
+
+                                <p class="card-text">
+                                    종이의 질감과 색을 조합해 책상 위에 둘
+                                    작은 오브제를 만들어 봅니다.
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <strong>28,000원</strong>
+                                        <small class="text-secondary">/ 1인</small>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-outline-brand btn-sm rounded-pill"
+                                            data-bs-toggle="modal" data-bs-target="#classModal"
+                                            data-name="내 손으로 만드는 종이 오브제"
+                                            data-price="28,000원"
+                                            data-info="종이의 질감과 색을 조합하여 나만의 종이 오브제를 만드는 클래스입니다. 필요한 재료와 도구를 제공합니다.">
+                                        자세히 보기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card class-card h-100">
+                            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85"
+                                 class="card-img-top" alt="북클럽 클래스">
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge class-badge rounded-pill">BOOK CLUB</span>
+                                    <small class="text-secondary">90분</small>
+                                </div>
+
+                                <h5 class="card-title fw-bold">한 권의 책, 세 가지 시선</h5>
+
+                                <p class="card-text">
+                                    같은 책을 읽고 서로 다른 시선으로
+                                    이야기를 나누는 독서 모임입니다.
+                                </p>
+
+                                <div class="d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <strong>18,000원</strong>
+                                        <small class="text-secondary">/ 1인</small>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-outline-brand btn-sm rounded-pill"
+                                            data-bs-toggle="modal" data-bs-target="#classModal"
+                                            data-name="한 권의 책, 세 가지 시선"
+                                            data-price="18,000원"
+                                            data-info="같은 책을 읽고 각자의 시선으로 이야기를 나누는 독서 모임입니다. 도서는 사전에 안내해 드립니다.">
+                                        자세히 보기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="story" class="bg-cream">
+            <div class="container">
+                <div class="row align-items-center g-5">
+
+                    <div class="col-12 col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1100&q=85"
+                             class="story-img" alt="함께하는 사람들">
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <p class="section-label mb-2">WHY LOCAL TABLE</p>
+
+                        <h2 class="section-title">배움이 자연스럽게<br>일상이 되는 곳</h2>
+
+                        <p class="section-desc lh-lg mt-3">
+                            LOCAL TABLE은 동네의 다양한 취향을 연결하는
+                            로컬 클래스 플랫폼입니다. 새로운 것을 배우고
+                            사람들과 경험을 나누며 일상 속 작은 즐거움을
+                            만들어 갑니다.
+                        </p>
+
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                <div class="story-number">12</div>
+                                <small class="text-secondary">운영 중인 클래스</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="story-number">640+</div>
+                                <small class="text-secondary">누적 참여자 수</small>
+                            </div>
+                        </div>
+
+                        <a href="#classes" class="btn btn-brand rounded-pill mt-4 px-4">
+                            나에게 맞는 클래스 찾기
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="schedule">
+            <div class="container">
+
+                <div class="text-center mb-4">
+                    <p class="section-label mb-2">UPCOMING SCHEDULE</p>
+                    <h2 class="section-title">10월 클래스 일정</h2>
+                    <p class="section-desc">완성 화면 기준의 10월 실습용 일정입니다.</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle text-center text-nowrap schedule-table">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">날짜</th>
+                                <th scope="col">클래스</th>
+                                <th scope="col">시간</th>
+                                <th scope="col">장소</th>
+                                <th scope="col">잔여석</th>
+                                <th scope="col">신청</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>10/16</td>
+                                <td>계절의 식탁, 제철 요리</td>
+                                <td>19:00 ~ 21:30</td>
+                                <td>연희동 키친</td>
+                                <td><span class="badge bg-success">6석</span></td>
+                                <td><a href="#apply" class="btn btn-outline-brand btn-sm">신청</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>10/21</td>
+                                <td>내 손으로 만드는 종이 오브제</td>
+                                <td>14:00 ~ 16:00</td>
+                                <td>망원동 작업실</td>
+                                <td><span class="badge bg-warning text-dark">2석</span></td>
+                                <td><a href="#apply" class="btn btn-outline-brand btn-sm">신청</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>10/24</td>
+                                <td>한 권의 책, 세 가지 시선</td>
+                                <td>19:00 ~ 20:30</td>
+                                <td>합정 북카페</td>
+                                <td><span class="badge bg-success">4석</span></td>
+                                <td><a href="#apply" class="btn btn-outline-brand btn-sm">신청</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>10/29</td>
+                                <td>계절의 식탁, 제철 요리</td>
+                                <td>11:00 ~ 13:30</td>
+                                <td>연희동 키친</td>
+                                <td><span class="badge bg-success">8석</span></td>
+                                <td><a href="#apply" class="btn btn-outline-brand btn-sm">신청</a></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <small class="text-secondary">
+                    * 클래스 일정은 상황에 따라 일부 변경될 수 있습니다.
+                </small>
+
+            </div>
+        </section>
+
+
+        <section id="faq" class="bg-cream">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+
+                    <div class="col-12 col-lg-4">
+                        <p class="section-label mb-2">GOOD TO KNOW</p>
+                        <h2 class="section-title">참여 전<br>확인해 주세요</h2>
+                        <p class="section-desc">자주 묻는 질문을 통해 궁금한 점을 확인해 보세요.</p>
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+                        <div class="accordion" id="faqAccordion">
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq1" aria-controls="faq1" aria-expanded="false">
+                                        처음 참여해도 괜찮나요?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        네, 대부분의 클래스는 처음 참여하는 분들도
+                                        쉽게 따라올 수 있도록 구성되어 있습니다.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq2" aria-controls="faq2" aria-expanded="false">
+                                        신청을 취소할 수 있나요?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        클래스 시작 3일 전까지 취소할 수 있습니다.
+                                        자세한 내용은 신청 안내를 확인해 주세요.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq3" aria-controls="faq3" aria-expanded="false">
+                                        친구와 함께 신청할 수 있나요?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        네, 가능합니다. 신청서에서 참여 인원을 선택해 주세요.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="apply">
+            <div class="container">
+                <div class="row g-5 align-items-start">
+
+                    <div class="col-12 col-lg-5">
+
+                        <p class="section-label mb-2">JOIN US</p>
+
+                        <h2 class="section-title">다음 취향의 주인공은<br>당신입니다.</h2>
+
+                        <p class="section-desc lh-lg">
+                            원하는 클래스를 선택하고 신청서를 작성해 주세요.
+                            새로운 취향을 발견하는 시간을 함께하겠습니다.
+                        </p>
+
+                        <div class="card bg-brand text-white border-0 rounded-4 mt-4">
+                            <div class="card-body p-4">
+
+                                <small class="fw-bold">A LITTLE NOTE</small>
+
+                                <h5 class="fw-bold mt-2">동네의 새로운 소식을 받아보세요.</h5>
+
+                                <p class="small">새로운 클래스와 이벤트 소식을 만나보세요. 실습용 구독 폼으로 실제 이메일은 발송되지 않습니다.</p>
+
+                                <label for="newsletterEmail" class="form-label">소식을 받을 이메일</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control"
+                                           id="newsletterEmail" placeholder="이메일 입력" required>
+                                    <button type="button" class="btn btn-newsletter" id="newsletterBtn">
+                                        구독하기
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-lg-7">
+                        <div class="card rounded-4 shadow-sm">
+                            <div class="card-body p-4">
+
+                                <h4 class="fw-bold mb-4">클래스 신청서</h4>
+
+                                <form id="applyForm" novalidate>
+                                    <div class="row g-3">
+
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="userName">이름 *</label>
+                                            <input type="text" class="form-control"
+                                                   id="userName" name="name" autocomplete="name" placeholder="이름을 입력하세요" required>
+                                            <div class="invalid-feedback">이름을 입력해 주세요.</div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="phone">연락처 *</label>
+                                            <input type="tel" class="form-control"
+                                                   id="phone" name="phone" autocomplete="tel" pattern="[0-9]{2,3}-?[0-9]{3,4}-?[0-9]{4}" placeholder="010-0000-0000" required>
+                                            <div class="invalid-feedback">연락처를 숫자 9~11자리로 입력해 주세요. 하이픈도 사용할 수 있습니다.</div>
+                                        </div>
+
+                                        <!-- 이메일은 선택 항목 -->
+                                        <div class="col-12">
+                                            <label class="form-label" for="email">이메일</label>
+                                            <input type="email" class="form-control"
+                                                   id="email" name="email" autocomplete="email" placeholder="example@email.com">
+                                            <div class="invalid-feedback">올바른 이메일 형식으로 입력해 주세요.</div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="classSelect">관심 클래스 *</label>
+                                            <select class="form-select" id="classSelect" name="class" required>
+                                                <option value="">클래스를 선택하세요</option>
+                                                <option value="계절의 식탁, 제철 요리">계절의 식탁, 제철 요리</option>
+                                                <option value="내 손으로 만드는 종이 오브제">내 손으로 만드는 종이 오브제</option>
+                                                <option value="한 권의 책, 세 가지 시선">한 권의 책, 세 가지 시선</option>
+                                            </select>
+                                            <div class="invalid-feedback">클래스를 선택해 주세요.</div>
+                                        </div>
+
+                                        <!-- 인원: 기본값 1명 선택 -->
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="people">인원</label>
+                                            <select class="form-select" id="people" name="people" required>
+                                                <option selected>1명</option>
+                                                <option>2명</option>
+                                                <option>3명</option>
+                                                <option>4명</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label class="form-label" for="request">문의 사항</label>
+                                            <textarea class="form-control" id="request" name="request" rows="3"
+                                                      placeholder="궁금한 점이나 요청 사항을 작성해 주세요."></textarea>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
+                                                <label class="form-check-label small" for="agree">
+                                                    개인정보 수집 및 이용에 동의합니다. *
+                                                </label>
+                                                <div class="invalid-feedback">개인정보 수집 및 이용에 동의해 주세요.</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-brand rounded-pill px-4">신청서 제출</button>
+                                            <button type="reset" class="btn btn-outline-secondary rounded-pill">다시 작성</button>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <small class="text-secondary">
+                                                * 표시는 필수 입력 항목입니다. 이 신청서는 실습용이며 실제 접수되거나 서버로 전송되지 않습니다.
+                                            </small>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-3">
+
+                <div class="col-md-4">
+                    <strong class="text-white">LOCAL TABLE</strong>
+                    <p class="small mb-0">동네의 취향을 연결하는 로컬 클래스</p>
+                </div>
+
+                <div class="col-md-4 text-md-center small">
+                    <a href="#classes">클래스</a>　
+                    <a href="#faq">FAQ</a>　
+                    <a href="#apply">신청</a>
+                </div>
+
+                <div class="col-md-4 text-md-end small">
+                    © 2026 LOCAL TABLE. All rights reserved.
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalTitle">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="classModalTitle">클래스 상세 안내</h5>
+                    <button type="button" class="btn-close btn-close-white"
+                            data-bs-dismiss="modal" aria-label="닫기"></button>
+                </div>
+
+                <div class="modal-body">
+                    <span class="badge class-badge rounded-pill px-3 py-2">LOCAL CLASS</span>
+
+                    <h4 class="fw-bold mt-3" id="modalName">계절의 식탁, 제철 요리</h4>
+
+                    <p class="text-secondary lh-lg mt-3" id="modalInfo">
+                        제철 재료를 활용한 요리 실습입니다.
+                        앞치마와 레시피 카드를 제공합니다.
+                    </p>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-secondary">참가비</span>
+                        <strong id="modalPrice">35,000원</strong>
+                    </div>
+
+                    <p class="text-secondary small mt-3 mb-0">참여 전 일정과 잔여석을 확인해 주세요.</p>
+                </div>
+
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill"
+                            data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-brand rounded-pill px-4"
+                            id="modalApply">신청서 작성하기</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <a href="#top" aria-label="페이지 상단으로 이동"
+       class="top-btn position-fixed bottom-0 end-0 m-4 rounded-circle d-flex justify-content-center align-items-center shadow">
+        ↑
+    </a>
+
+
+    <script>
+        let classModal = document.querySelector("#classModal");
+        let modalName = document.querySelector("#modalName");
+        let modalPrice = document.querySelector("#modalPrice");
+        let modalInfo = document.querySelector("#modalInfo");
+        let classSelect = document.querySelector("#classSelect");
+
+        classModal.addEventListener("show.bs.modal", function(event) {
+            let button = event.relatedTarget;
+
+            modalName.textContent = button.getAttribute("data-name");
+            modalPrice.textContent = button.getAttribute("data-price");
+            modalInfo.textContent = button.getAttribute("data-info");
+        });
+
+
+        let modalApply = document.querySelector("#modalApply");
+        let moveToApply = false;
+
+        modalApply.addEventListener("click", function() {
+            classSelect.value = modalName.textContent;
+            moveToApply = true;
+
+            let modal = bootstrap.Modal.getInstance(classModal);
+            modal.hide();
+        });
+
+        classModal.addEventListener("hidden.bs.modal", function() {
+            if (moveToApply == true) {
+                document.querySelector("#apply").scrollIntoView({ behavior: "smooth" });
+                moveToApply = false;
+            }
+        });
+
+
+        let applyForm = document.querySelector("#applyForm");
+
+        applyForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!applyForm.checkValidity()) {
+                applyForm.classList.add("was-validated");
+                return;
+            }
+
+            alert("신청서 검증이 완료되었습니다.");
+            applyForm.reset();
+            applyForm.classList.remove("was-validated");
+        });
+
+        applyForm.addEventListener("reset", function() {
+            applyForm.classList.remove("was-validated");
+        });
+
+
+        let newsletterBtn = document.querySelector("#newsletterBtn");
+
+        newsletterBtn.addEventListener("click", function() {
+            let email = document.querySelector("#newsletterEmail").value;
+
+            if (!document.querySelector("#newsletterEmail").checkValidity()) {
+                document.querySelector("#newsletterEmail").reportValidity();
+            } else {
+                alert("이메일 확인이 완료되었습니다.");
+                document.querySelector("#newsletterEmail").value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>

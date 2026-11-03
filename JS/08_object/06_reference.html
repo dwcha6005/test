@@ -336,12 +336,11 @@
     let func1 = hello;
     let func2 = hello;
 
-    console.log(func1 === func2); // true
-
     let func3 = function () {
         console.log("안녕하세요.");
     };
 
+    console.log(func1 === func2); // true
     console.log(func1 === func3); // false
 
     /*
@@ -426,7 +425,7 @@
     console.log(original.age); // 30
     console.log(copy.age);     // 30
 }
-
+// ======================================??
 /*
     < 7. 얕은 복사(Shallow Copy) >
 

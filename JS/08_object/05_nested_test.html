@@ -7,6 +7,131 @@
 </head>
 
 <script>
+
+  /*
+    for ~ of와 forEach 구문을 활용하여 다음과 같이 출력하시오.
+    출력예시)
+    키보드 / 30000원 / 10개 / 주변기기
+  */
+
+{
+    let products = [
+        {
+            name: "키보드",
+            price: 30000,
+            stock: 10,
+            category: "주변기기"
+        },
+        {
+            name: "마우스",
+            price: 15000,
+            stock: 20,
+            category: "주변기기"
+        },
+        {
+            name: "모니터",
+            price: 200000,
+            stock: 5,
+            category: "디스플레이"
+        }
+    ];
+
+    // 모든 상품 정보 출력
+    for (let product of products) {
+        console.log(
+            product.name + " / " +
+            product.price + "원 / " +
+            product.stock + "개 / " +
+            product.category
+        );
+    }
+}
+
+
+/*
+    prompt()로 상품명을 입력받아 products 객체에서 해당 상품을 찾고
+    다음과 같이 출력하시오.
+    
+    출력예시)
+    검색한상품: xxx
+    가격: 15000원
+    재고 20개
+*/
+
+{
+    let products = [
+        { name: "키보드", price: 30000, stock: 10 },
+        { name: "마우스", price: 15000, stock: 20 },
+        { name: "모니터", price: 200000, stock: 5 }
+    ];
+
+    let searchName = "마우스";
+
+    for (let product of products) {
+        if (product.name === searchName) {
+            console.log("검색한 상품 : " + product.name);
+            console.log("가격 : " + product.price + "원");
+            console.log("재고 : " + product.stock + "개");
+        }
+    }
+}
+
+/*
+    배열 안의 객체를 반복해서 확인하고,
+    객체의 프로퍼티 값을 조건문으로 비교한다.
+
+    이러한 구조는 실제 상품 목록 검색과 같은 기능의
+    기본 원리가 된다.
+*/
+
+
+/*
+    order 객체를 다음과 같이 출력하시오.
+
+    출력예시)
+    주문번호: xxx
+    주문자: xxx
+    연락처: xxx
+    키보드 / 30000원 / 1개
+    마우스 / 15000원 / 2개
+*/
+
+{
+    let order = {
+        orderNo: "ORD-001",
+        customer: {
+            name: "홍길동",
+            phone: "010-1234-5678"
+        },
+        items: [
+            { name: "키보드", price: 30000, quantity: 1 },
+            { name: "마우스", price: 15000, quantity: 2 }
+        ]
+    };
+
+    console.log("주문번호 : " + order.orderNo);
+    console.log("주문자 : " + order.customer.name);
+    console.log("연락처 : " + order.customer.phone);
+
+    for (let item of order.items) {
+        console.log(
+            item.name + " / " +
+            item.price + "원 / " +
+            item.quantity + "개"
+        );
+    }
+    
+    // let a = order.items.map(item => {
+    //         if (item.price) item.price += "원";
+    //         if (item.quantity)  item.quantity += "개";
+    //         return item;
+    //     }).map(item => {
+    //         return Object.values(item).join(" / ")
+    //     })
+}
+
+
+
     /*
     < 25. 실습 문제 >
 
@@ -39,7 +164,8 @@
     3. 세 번째 학생의 점수를 100점으로 수정하시오.
     4. for문을 사용하여 모든 학생의 이름과 점수를 출력하시오.
 
-
+*/
+/*
     문제 3. 상품 목록
 
     다음 상품 정보를 배열에 저장하시오.
@@ -51,7 +177,27 @@
     1. 모든 상품의 이름을 출력하시오.
     2. 가격이 30000원 이상인 상품만 출력하시오.
     3. 모든 상품의 가격 합계를 구하시오.
+*/
+{
+    let products = [
+        { name: "키보드", price: 30000, stock: 10 },
+        { name: "마우스", price: 15000, stock: 20 },
+        { name: "모니터", price: 200000, stock: 5 },
+    ]
 
+    products.forEach(p => console.log("상품명: " + p.name))
+
+    products.filter(p => p.price >= 30000)
+            .forEach(p => console.log("상품명: " + p.name))
+
+    // reduce(callbackfn(누적합변수, 객체), 초기값)
+    let sum = products.reduce((sum, p) => (sum + p.price), 0)
+    console.log("-----------")
+    console.log(sum)
+
+}
+
+/*
 
     문제 4. 주문 정보
 
