@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 종합 실습 - 가계부</title>
+    <script src="04_memo_app_test.js" defer></script>
+    <style>
+        body { max-width: 720px; }
+        #ledgerForm p { margin: 6px 0; }
+        #formMsg { color: red; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 4px 8px; text-align: center; }
+        .income { color: royalblue; }
+        .expense { color: crimson; }
+        #summary span { margin-right: 16px; font-weight: bold; }
+        #jsonView { background-color: #f5f5f5; padding: 8px; max-height: 200px; overflow: auto; }
+    </style>
+</head>
+<body>
+    <h1>가계부 만들기</h1>
+    <p>입력한 내역은 localStorage에 저장되어 새로고침해도 유지됩니다.</p>
+
+    <form id="ledgerForm" novalidate>
+        <p>
+            날짜 <input type="date" name="date" id="date">
+            <label><input type="radio" name="type" value="income"> 수입</label>
+            <label><input type="radio" name="type" value="expense" checked> 지출</label>
+        </p>
+        <p>
+            항목 <input type="text" name="item" id="item" placeholder="예) 점심 식사">
+            금액 <input type="text" name="amount" id="amount" placeholder="숫자만" size="10">원
+        </p>
+        <button type="submit" id="submitBtn">추가</button>
+        <button type="button" id="cancelBtn" hidden>수정 취소</button>
+        <span id="formMsg"></span>
+    </form>
+
+    <hr>
+    <p>
+        월 선택 <input type="month" id="monthFilter">
+        <button type="button" id="showAll">전체 보기</button>
+    </p>
+    <p id="summary">
+        <span class="income" id="incomeTotal">수입 0원</span>
+        <span class="expense" id="expenseTotal">지출 0원</span>
+        <span id="balance">잔액 0원</span>
+    </p>
+
+    <table>
+        <thead>
+            <tr><th>날짜</th><th>구분</th><th>항목</th><th>금액</th><th>관리</th></tr>
+        </thead>
+        <tbody id="ledgerBody"></tbody>
+    </table>
+
+    <p>
+        <button type="button" id="jsonBtn">저장된 JSON 보기</button>
+        <button type="button" id="clearAll">전체 삭제</button>
+    </p>
+    <pre id="jsonView" hidden></pre>
+</body>
+</html>

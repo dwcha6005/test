@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 요소 생성과 삭제 실습</title>
+    <script src="05_create_remove_test.js" defer></script>
+    <style>
+        section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        h2 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        .card {
+            display: inline-block;
+            width: 140px;
+            padding: 10px;
+            margin: 4px;
+            border: 1px solid #999;
+            border-radius: 8px;
+        }
+        .banner {
+            background-color: #fee2e2;
+            padding: 8px;
+        }
+        #cartList li,
+        #guestList li {
+            margin-bottom: 6px;
+        }
+        .result {
+            color: royalblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>카페 주문 페이지</h1>
+    <p>결과는 개발자 도구(F12)의 Console 탭과 화면에서 확인합니다.</p>
+
+    <!-- 문제 1 -->
+    <section>
+        <h2>문제 1</h2>
+        <div id="welcomeArea"></div>
+    </section>
+
+    <!-- 문제 2 -->
+    <section>
+        <h2>문제 2</h2>
+        <ul id="menuList">
+            <li>아메리카노</li>
+            <li>카페라테</li>
+        </ul>
+    </section>
+
+    <!-- 문제 3 -->
+    <section>
+        <h2>문제 3</h2>
+        <ul id="dessertList">
+            <li>치즈케이크</li>
+            <li id="targetItem">티라미수 (기준 항목)</li>
+            <li>마카롱</li>
+        </ul>
+    </section>
+
+    <!-- 문제 4 -->
+    <section>
+        <h2>문제 4</h2>
+        <p id="oldBanner" class="banner">지난 이벤트 배너입니다.</p>
+        <p>배너 아래 내용입니다.</p>
+    </section>
+
+    <!-- 문제 5 -->
+    <section>
+        <h2>문제 5</h2>
+        <ul id="drinkList"></ul>
+    </section>
+
+    <!-- 문제 6 -->
+    <section>
+        <h2>문제 6</h2>
+        <div id="templateCard" class="card">
+            <h3>카드 제목</h3>
+            <p>오늘의 추천 메뉴</p>
+        </div>
+        <div id="cardArea"></div>
+    </section>
+
+    <!-- 문제 7 -->
+    <section>
+        <h2>문제 7</h2>
+        <p id="statusText">주문 접수 중...</p>
+    </section>
+
+    <!-- 문제 8 -->
+    <section>
+        <h2>문제 8 - 방명록</h2>
+        <input type="text" id="guestName" placeholder="이름">
+        <input type="text" id="guestMsg" placeholder="한 줄 메시지">
+        <button type="button" id="guestBtn">등록</button>
+        <p id="guestError" class="result"></p>
+        <ul id="guestList"></ul>
+    </section>
+
+    <!-- 문제 9, 10 -->
+    <section>
+        <h2>문제 9, 10 - 장바구니</h2>
+        <button type="button" class="add-cart" data-name="아메리카노" data-price="4500">아메리카노 담기</button>
+        <button type="button" class="add-cart" data-name="카페라테" data-price="5000">카페라테 담기</button>
+        <button type="button" class="add-cart" data-name="치즈케이크" data-price="6500">치즈케이크 담기</button>
+
+        <ul id="cartList"></ul>
+        <p id="cartEmpty">장바구니가 비어 있습니다.</p>
+        <p id="cartTotal" class="result">총 금액: 0원</p>
+        <button type="button" id="clearCart">장바구니 비우기</button>
+    </section>
+</body>
+</html>

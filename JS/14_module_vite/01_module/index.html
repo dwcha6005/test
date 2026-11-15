@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. 모듈 (import / export)</title>
+    <!-- type="module" : 이 파일을 모듈로 실행한다. (defer가 자동 적용됨) -->
+    <script type="module" src="main.js"></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .result { color: royalblue; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>01. 모듈 (import / export)</h1>
+    <p>이 파일은 반드시 Live Server로 열어야 합니다. (더블클릭으로 열면 CORS 오류)</p>
+
+    <section>
+        <h2>3. named export - 가격 / 날짜 표시</h2>
+        <p id="formatResult" class="result"></p>
+    </section>
+
+    <section>
+        <h2>4. default export - 장바구니</h2>
+        <button type="button" data-name="텀블러" data-price="12000">텀블러 담기</button>
+        <button type="button" data-name="머그컵" data-price="8500">머그컵 담기</button>
+        <button type="button" id="clearCart">비우기</button>
+        <p id="cartResult" class="result">장바구니가 비어 있습니다.</p>
+    </section>
+
+    <section>
+        <h2>8. 모듈은 한 번만 실행된다</h2>
+        <p id="logResult" class="result"></p>
+    </section>
+</body>
+</html>

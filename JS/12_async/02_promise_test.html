@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. Promise 실습</title>
+    <script src="fake_api.js" defer></script>
+    <script src="02_promise_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .loading { color: gray; }
+        .error { color: crimson; font-weight: bold; }
+        .result { color: royalblue; font-weight: bold; }
+        .soldout { color: #999; text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <h1>DOM 쇼핑몰 - 주문 조회</h1>
+    <p>F12 → Console 탭에서 [서버] 로그를 함께 확인하세요.</p>
+    <p>테스트용 데이터 : 주문번호 A001, A002 / 상품 P1 ~ P4 / 도시 서울, 부산, 대구, 제주</p>
+
+    <section>
+        <h2>문제 1</h2>
+        <button type="button" id="productsBtn">상품 목록</button>
+        <ul id="productList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 2, 3</h2>
+        <input type="text" id="orderInput" placeholder="주문번호 (예: A001)" value="A001">
+        <button type="button" id="orderBtn">주문 조회</button>
+        <p id="orderResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <button type="button" id="payBtn">결제하기</button>
+        <p id="payResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <input type="text" id="detailInput" value="A001" size="8">
+        <button type="button" id="detailBtn">주문 상세 조회</button>
+        <p id="orderDetail"></p>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <select id="productSelect">
+            <option value="P1">P1</option>
+            <option value="P2">P2</option>
+            <option value="P3">P3</option>
+            <option value="P9">P9 (없는 상품)</option>
+        </select>
+        <button type="button" id="stockBtn">구매 가능 여부</button>
+        <p id="stockResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <p>장바구니 : P1, P3, P4</p>
+        <button type="button" id="cartBtn">장바구니 합계 계산</button>
+        <p id="cartResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <button type="button" id="retryBtn">서울 날씨 (실패 확률 50%, 최대 3번 시도)</button>
+        <ol id="retryLog"></ol>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <button type="button" id="raceBtn">부산 날씨 (1초 안에 응답 없으면 실패)</button>
+        <p id="raceResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <button type="button" id="settledBtn">전국 날씨 (서울, 부산, 인천, 제주)</button>
+        <ul id="settledList"></ul>
+    </section>
+</body>
+</html>

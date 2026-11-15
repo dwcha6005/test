@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 탐색 실습</title>
+    <script src="06_traversal_test.js" defer></script>
+    <style>
+        section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        .comment {
+            border-bottom: 1px solid #eee;
+            padding: 8px 0;
+        }
+        .best .author::after {
+            content: " (베스트)";
+            color: crimson;
+        }
+        .author {
+            font-weight: bold;
+        }
+        .actions button {
+            margin-right: 4px;
+        }
+        #commentCount {
+            color: royalblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>게시글 댓글 관리</h1>
+    <p>결과는 개발자 도구(F12)의 Console 탭과 화면에서 확인합니다.</p>
+
+    <section id="commentSection">
+        <h2>댓글</h2>
+        <p id="commentCount">댓글 4개</p>
+
+        <ul id="commentList">
+            <li class="comment" id="c1">
+                <span class="author">홍길동</span>
+                <p class="content">설명이 정말 자세하네요!</p>
+                <div class="actions">
+                    좋아요 <span class="like-count">3</span>
+                    <button type="button" class="like-btn">좋아요</button>
+                    <button type="button" class="up-btn">위로</button>
+                    <button type="button" class="down-btn">아래로</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                </div>
+            </li>
+            <li class="comment best" id="c2">
+                <span class="author">김철수</span>
+                <p class="content">closest() 덕분에 코드가 짧아졌어요.</p>
+                <div class="actions">
+                    좋아요 <span class="like-count">12</span>
+                    <button type="button" class="like-btn">좋아요</button>
+                    <button type="button" class="up-btn">위로</button>
+                    <button type="button" class="down-btn">아래로</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                </div>
+            </li>
+            <li class="comment" id="c3">
+                <span class="author">이영희</span>
+                <p class="content">형제 요소 탐색이 헷갈렸는데 이해됐습니다.</p>
+                <div class="actions">
+                    좋아요 <span class="like-count">5</span>
+                    <button type="button" class="like-btn">좋아요</button>
+                    <button type="button" class="up-btn">위로</button>
+                    <button type="button" class="down-btn">아래로</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                </div>
+            </li>
+            <li class="comment best" id="c4">
+                <span class="author">박민수</span>
+                <p class="content">실습 문제도 올려주세요.</p>
+                <div class="actions">
+                    좋아요 <span class="like-count">9</span>
+                    <button type="button" class="like-btn">좋아요</button>
+                    <button type="button" class="up-btn">위로</button>
+                    <button type="button" class="down-btn">아래로</button>
+                    <button type="button" class="delete-btn">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </section>
+</body>
+</html>

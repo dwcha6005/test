@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 종합 - 메모장</title>
+    <script src="04_memo_app.js" defer></script>
+    <style>
+        body { max-width: 640px; }
+        #memoForm p { margin: 6px 0; }
+        #memoForm input[type="text"], #memoForm textarea { width: 100%; box-sizing: border-box; }
+        .memo { border: 1px solid #ccc; padding: 8px 12px; margin-bottom: 8px; }
+        .memo.important { border-left: 5px solid crimson; }
+        .memo h3 { margin: 0 0 4px; font-size: 16px; }
+        .memo .date { color: gray; font-size: 12px; }
+        .memo .content { white-space: pre-wrap; }
+        #formMsg { color: red; }
+    </style>
+</head>
+<body>
+    <h1>04. 종합 실습 - 메모장</h1>
+    <p>메모를 추가하고 새로고침해도 남아 있는지 확인하세요.</p>
+
+    <form id="memoForm" novalidate>
+        <p><input type="text" id="title" name="title" placeholder="제목 (필수, 30자 이내)"></p>
+        <p><textarea id="content" name="content" rows="4" placeholder="내용"></textarea></p>
+        <p><label><input type="checkbox" id="important" name="important"> 중요 메모</label></p>
+        <button type="submit" id="submitBtn">메모 추가</button>
+        <button type="button" id="cancelBtn" hidden>수정 취소</button>
+        <span id="formMsg"></span>
+    </form>
+
+    <hr>
+    <p>
+        <input type="text" id="searchInput" placeholder="제목/내용 검색">
+        <label><input type="checkbox" id="onlyImportant"> 중요만 보기</label>
+        <span id="memoCount"></span>
+    </p>
+
+    <div id="memoList"></div>
+</body>
+</html>

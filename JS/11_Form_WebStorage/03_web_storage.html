@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. Web Storage</title>
+    <script src="03_web_storage.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        #storageTable td, #storageTable th { border: 1px solid #ccc; padding: 4px 10px; }
+        body.dark { background-color: #1f2937; color: #f3f4f6; }
+        body.dark section { border-color: #555; }
+        .keyword { display: inline-block; margin: 2px; padding: 2px 8px; background-color: #e0e7ff; color: #111; }
+        .keyword button { border: none; background: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>03. Web Storage (localStorage / sessionStorage)</h1>
+    <p>개발자 도구(F12) → Application 탭 → Local Storage 에서 저장된 값을 함께 확인하세요.</p>
+
+    <section>
+        <h2>2. 기본 메서드 - 저장 / 읽기 / 삭제</h2>
+        key <input type="text" id="keyInput" value="userName" size="10">
+        value <input type="text" id="valueInput" value="홍길동" size="10">
+        <button type="button" id="setBtn">setItem</button>
+        <button type="button" id="getBtn">getItem</button>
+        <button type="button" id="removeBtn">removeItem</button>
+        <button type="button" id="clearBtn">clear</button>
+        <p id="storageMsg"></p>
+        <table id="storageTable">
+            <thead><tr><th>key</th><th>value</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>6. localStorage vs sessionStorage - 방문 횟수</h2>
+        <p id="visitResult"></p>
+        <p>새로고침(F5) → 둘 다 증가 / 탭을 닫고 다시 열기 → session만 1부터 다시 시작</p>
+    </section>
+
+    <section>
+        <h2>7. 실제 예 - 아이디 저장</h2>
+        <form id="loginForm">
+            <input type="text" id="loginId" placeholder="아이디">
+            <input type="password" id="loginPw" placeholder="비밀번호">
+            <label><input type="checkbox" id="rememberId"> 아이디 저장</label>
+            <button type="submit">로그인</button>
+        </form>
+        <p id="loginMsg"></p>
+    </section>
+
+    <section>
+        <h2>8. 실제 예 - 다크 모드 유지</h2>
+        <button type="button" id="themeBtn">다크 모드</button>
+        <span>(설정 후 새로고침해 보세요)</span>
+    </section>
+
+    <section>
+        <h2>9. 실제 예 - 최근 검색어</h2>
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="검색어 입력">
+            <button type="submit">검색</button>
+            <button type="button" id="clearKeywords">전체 삭제</button>
+        </form>
+        <div id="keywordList"></div>
+    </section>
+</body>
+</html>

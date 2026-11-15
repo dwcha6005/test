@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. fetch GET 실습</title>
+    <script src="01_fetch_get_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .loading { color: gray; }
+        .error { color: crimson; font-weight: bold; }
+        .result { color: royalblue; }
+        table { border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 4px 8px; font-size: 14px; }
+        .done { color: #999; text-decoration: line-through; }
+        #pageButtons button.current { background-color: royalblue; color: white; }
+        .cards { display: flex; gap: 10px; }
+        .card { flex: 1; border: 1px solid #999; padding: 10px; }
+        .card h3 { margin: 0 0 6px; font-size: 15px; }
+    </style>
+</head>
+<body>
+    <h1>fetch GET 실습</h1>
+    <p>JSONPlaceholder : https://jsonplaceholder.typicode.com / DummyJSON : https://dummyjson.com</p>
+
+    <section>
+        <h2>문제 1</h2>
+        <button type="button" id="userBtn">1번 회원 정보</button>
+        <p id="userCard"></p>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <button type="button" id="usersBtn">회원 목록 표</button>
+        <table id="userTable"></table>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <button type="button" id="todoCountBtn">1번 회원 할 일 통계</button>
+        <p id="todoCount"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <input type="number" id="postId" value="1" min="1" style="width:70px">
+        <button type="button" id="postBtn">게시글 조회</button>
+        <p id="postResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <button type="button" id="detailBtn">1번 게시글 + 댓글</button>
+        <div id="detailBox"></div>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <select id="todoUser">
+            <option value="1">1번 회원</option>
+            <option value="2">2번 회원</option>
+            <option value="3">3번 회원</option>
+        </select>
+        <label><input type="radio" name="todoFilter" value="all" checked> 전체</label>
+        <label><input type="radio" name="todoFilter" value="done"> 완료</label>
+        <label><input type="radio" name="todoFilter" value="todo"> 미완료</label>
+        <p id="todoStatus"></p>
+        <ul id="todoList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <select id="categorySelect">
+            <option value="">카테고리 불러오는 중...</option>
+        </select>
+        <ul id="categoryProducts"></ul>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <ol id="pagePosts"></ol>
+        <div id="pageButtons"></div>
+        <p id="pageInfo"></p>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <input type="text" id="liveSearch" placeholder="상품 검색 (입력을 멈추면 검색)">
+        <span id="liveStatus"></span>
+        <ul id="liveList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <button type="button" id="dashboardBtn">대시보드 불러오기</button>
+        <div class="cards">
+            <div class="card"><h3>회원 수</h3><p id="cardUsers">-</p></div>
+            <div class="card"><h3>게시글 수</h3><p id="cardPosts">-</p></div>
+            <div class="card"><h3>상품 수</h3><p id="cardProducts">-</p></div>
+            <div class="card"><h3>공지 (잘못된 주소)</h3><p id="cardNotice">-</p></div>
+        </div>
+    </section>
+</body>
+</html>

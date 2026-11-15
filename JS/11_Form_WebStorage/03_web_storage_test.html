@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. Web Storage 실습</title>
+    <script src="03_web_storage_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        body.font-small { font-size: 13px; }
+        body.font-large { font-size: 19px; }
+        .notice { background-color: #fef3c7; padding: 8px; }
+        #dailyPopup { border: 2px solid crimson; padding: 10px; width: 300px; }
+        .product { display: inline-block; width: 130px; border: 1px solid #aaa; padding: 8px; margin: 4px; }
+        .wish-btn.on { color: crimson; }
+    </style>
+</head>
+<body>
+    <h1>DOM 쇼핑몰 - 개인화 설정</h1>
+    <p>개발자 도구(F12) → Application → Local Storage / Session Storage 에서 함께 확인하세요.</p>
+
+    <section>
+        <h2>문제 1, 4</h2>
+        <input type="text" id="nickInput" placeholder="닉네임">
+        <button type="button" id="nickSave">저장</button>
+        <button type="button" id="nickLoad">불러오기</button>
+        <button type="button" id="nickRemove">삭제</button>
+        <p id="nickResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <p id="visitResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <p class="notice" id="tabNotice">
+            [공지] 오늘 밤 12시 서버 점검이 있습니다.
+            <button type="button" id="tabNoticeClose">이 탭에서 닫기</button>
+        </p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        글자 크기 :
+        <label><input type="radio" name="fontSize" value="small"> 작게</label>
+        <label><input type="radio" name="fontSize" value="normal" checked> 보통</label>
+        <label><input type="radio" name="fontSize" value="large"> 크게</label>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <form id="addressForm">
+            <p>받는 사람 <input type="text" name="receiver"></p>
+            <p>연락처 <input type="text" name="phone"></p>
+            <p>주소 <input type="text" name="address" size="40"></p>
+            <label><input type="checkbox" name="isDefault"> 기본 배송지로 저장</label>
+            <button type="submit">배송지 등록</button>
+        </form>
+        <p id="addressMsg"></p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <div id="dailyPopup">
+            <p>🎁 첫 구매 10% 할인 쿠폰 지급 중!</p>
+            <label><input type="checkbox" id="hideToday"> 오늘 하루 보지 않기</label>
+            <button type="button" id="popupClose">닫기</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>문제 8, 9</h2>
+        <div id="productArea">
+            <div class="product" data-id="p1" data-name="무선 이어폰">무선 이어폰<br>
+                <button type="button" class="view-btn">상품 보기</button>
+                <button type="button" class="wish-btn">♡</button>
+            </div>
+            <div class="product" data-id="p2" data-name="기계식 키보드">기계식 키보드<br>
+                <button type="button" class="view-btn">상품 보기</button>
+                <button type="button" class="wish-btn">♡</button>
+            </div>
+            <div class="product" data-id="p3" data-name="게이밍 마우스">게이밍 마우스<br>
+                <button type="button" class="view-btn">상품 보기</button>
+                <button type="button" class="wish-btn">♡</button>
+            </div>
+            <div class="product" data-id="p4" data-name="모니터 받침대">모니터 받침대<br>
+                <button type="button" class="view-btn">상품 보기</button>
+                <button type="button" class="wish-btn">♡</button>
+            </div>
+            <div class="product" data-id="p5" data-name="USB 허브">USB 허브<br>
+                <button type="button" class="view-btn">상품 보기</button>
+                <button type="button" class="wish-btn">♡</button>
+            </div>
+        </div>
+        <p>최근 본 상품 : <span id="recentList"></span></p>
+        <p id="wishCount"></p>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <textarea id="reviewText" rows="4" cols="50" placeholder="상품 리뷰를 작성하세요 (자동 임시 저장)"></textarea><br>
+        <button type="button" id="reviewSubmit">리뷰 등록</button>
+        <span id="draftMsg"></span>
+    </section>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 내용과 속성 실습</title>
+    <script src="03_content_attr_test.js" defer></script>
+    <style>
+        section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        h2 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        label {
+            display: inline-block;
+            width: 70px;
+        }
+        .result {
+            color: royalblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>회원 프로필 관리</h1>
+    <p>결과는 개발자 도구(F12)의 Console 탭과 화면에서 확인합니다.</p>
+
+    <!-- 문제 1, 2, 8 -->
+    <section id="profile">
+        <h2>문제 1, 2, 8 - 프로필</h2>
+        <p id="profileName">이름: 홍길동</p>
+
+        <p>
+            <label for="nameInput">이름</label>
+            <input type="text" id="nameInput" value="홍길동">
+        </p>
+        <p>
+            <label for="gradeSelect">등급</label>
+            <select id="gradeSelect">
+                <option value="일반">일반</option>
+                <option value="실버">실버</option>
+                <option value="골드">골드</option>
+            </select>
+        </p>
+        <button type="button" id="applyBtn">프로필 반영</button>
+        <p id="applyMessage" class="result"></p>
+    </section>
+
+    <!-- 문제 3 -->
+    <section>
+        <h2>문제 3 - 프로필 사진</h2>
+        <img id="profileImg" src="https://picsum.photos/120/120" alt="회원 프로필 사진">
+    </section>
+
+    <!-- 문제 4, 7 -->
+    <section id="memberCard" data-member-id="2001" data-grade="silver" data-point="1500">
+        <h2>문제 4, 7 - 회원 카드</h2>
+        <p id="memberCardInfo">회원 카드 정보</p>
+    </section>
+
+    <!-- 문제 5 -->
+    <section>
+        <h2>문제 5 - 자기소개</h2>
+        <p id="introHtml">자기소개 1</p>
+        <p id="introText">자기소개 2</p>
+    </section>
+
+    <!-- 문제 6 -->
+    <section>
+        <h2>문제 6 - 링크</h2>
+        <a id="homepage" href="#">홈페이지</a>
+    </section>
+
+    <!-- 문제 9 -->
+    <section>
+        <h2>문제 9 - 약관 동의</h2>
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck" style="width:auto">약관에 동의합니다.</label>
+        <br><br>
+        <button type="button" id="saveBtn" disabled>회원 정보 저장</button>
+        <p id="agreeMessage" class="result">약관에 동의해야 저장할 수 있습니다.</p>
+    </section>
+
+    <!-- 문제 10 -->
+    <section>
+        <h2>문제 10 - 쿠폰 적용</h2>
+        <p id="originPrice" data-price="50000">상품 가격: 50,000원</p>
+        <button type="button" class="coupon-btn" data-coupon-code="WELCOME10" data-discount="10">신규 회원 10%</button>
+        <button type="button" class="coupon-btn" data-coupon-code="SILVER15" data-discount="15">실버 등급 15%</button>
+        <button type="button" class="coupon-btn" data-coupon-code="GOLD20" data-discount="20">골드 등급 20%</button>
+        <p id="couponResult" class="result">쿠폰을 선택하세요.</p>
+    </section>
+</body>
+</html>

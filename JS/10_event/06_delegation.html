@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06. 이벤트 위임</title>
+    <script src="06_delegation.js" defer></script>
+    <style>
+        .done span {
+            color: #999;
+            text-decoration: line-through;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+        .filter-btn.active {
+            background-color: royalblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>06. 이벤트 위임 (Event Delegation)</h1>
+
+    <h2>1. 문제 상황 - 새로 추가한 항목의 삭제 버튼이 안 눌린다</h2>
+    <input type="text" id="problemInput" placeholder="할 일 입력">
+    <button type="button" id="problemAdd">추가</button>
+    <ul id="problemList">
+        <li>장보기 <button type="button" class="delete-btn">삭제</button></li>
+        <li>운동하기 <button type="button" class="delete-btn">삭제</button></li>
+    </ul>
+
+    <h2>3. 해결 - 부모(ul)에게 맡기기</h2>
+    <input type="text" id="solveInput" placeholder="할 일 입력">
+    <button type="button" id="solveAdd">추가</button>
+    <ul id="solveList">
+        <li>장보기 <button type="button" class="delete-btn">삭제</button></li>
+        <li>운동하기 <button type="button" class="delete-btn">삭제</button></li>
+    </ul>
+
+    <h2>4. closest() - 버튼 안의 글자를 클릭해도 동작하게</h2>
+    <div id="iconArea">
+        <button type="button" class="icon-btn" data-menu="홈"><span>🏠</span> 홈</button>
+        <button type="button" class="icon-btn" data-menu="검색"><span>🔍</span> 검색</button>
+        <button type="button" class="icon-btn" data-menu="설정"><span>⚙️</span> 설정</button>
+    </div>
+    <p id="iconResult">메뉴의 아이콘이나 글자를 클릭하세요.</p>
+
+    <h2>5. 실제 예 - 할 일 목록 (추가 / 완료 / 삭제 / 필터)</h2>
+    <input type="text" id="todoInput" placeholder="할 일 입력 후 Enter">
+    <button type="button" id="todoAdd">추가</button>
+
+    <div id="filterArea">
+        <button type="button" class="filter-btn active" data-filter="all">전체</button>
+        <button type="button" class="filter-btn" data-filter="todo">진행 중</button>
+        <button type="button" class="filter-btn" data-filter="done">완료</button>
+    </div>
+
+    <ul id="todoList">
+        <li>
+            <span>DOM 복습하기</span>
+            <button type="button" data-action="done">완료</button>
+            <button type="button" data-action="delete">삭제</button>
+        </li>
+        <li class="done">
+            <span>이벤트 수업 듣기</span>
+            <button type="button" data-action="done">완료</button>
+            <button type="button" data-action="delete">삭제</button>
+        </li>
+    </ul>
+    <p id="todoCount"></p>
+</body>
+</html>

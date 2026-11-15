@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. 입력값 검증 실습</title>
+    <script src="02_validation_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        form p { margin: 8px 0; }
+        .title { display: inline-block; width: 110px; }
+        .msg { font-size: 13px; margin-left: 6px; }
+        .msg.error { color: red; }
+        .msg.ok { color: green; }
+        input.error { border: 2px solid red; }
+        input.ok { border: 2px solid green; }
+        #pwRules { list-style: none; padding-left: 110px; margin: 4px 0; font-size: 13px; }
+        #pwRules li.pass { color: green; }
+        #pwRules li.fail { color: #999; }
+        #readyMsg { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>온라인 강의 수강 신청</h1>
+
+    <section>
+        <h2>문제 4 - HTML 속성만으로 검증 (HTML을 수정하세요)</h2>
+        <form id="quickForm">
+            <p>수강생 이름 <input type="text" id="quickName"></p>
+            <p>수강 코드 (영문 대문자 3 + 숫자 3, 예: JSB101) <input type="text" id="quickCode"></p>
+            <p>신청 인원 (1~5) <input type="number" id="quickCount"></p>
+            <button type="submit">빠른 신청</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>문제 2 ~ 10 - 수강 신청서</h2>
+        <form id="signupForm" novalidate>
+            <p>
+                <span class="title">이름</span>
+                <input type="text" id="name" placeholder="한글 2~5자">
+                <span class="msg" id="nameMsg"></span>
+            </p>
+            <p>
+                <span class="title">나이</span>
+                <input type="text" id="age" placeholder="14~100" size="5">
+                <span class="msg" id="ageMsg"></span>
+            </p>
+            <p>
+                <span class="title">이메일</span>
+                <input type="text" id="email" placeholder="example@email.com">
+                <span class="msg" id="emailMsg"></span>
+            </p>
+            <p>
+                <span class="title">비밀번호</span>
+                <input type="password" id="password">
+                <span class="msg" id="passwordMsg"></span>
+            </p>
+            <ul id="pwRules">
+                <li data-rule="length" class="fail">✖ 8자 이상</li>
+                <li data-rule="letter" class="fail">✖ 영문 포함</li>
+                <li data-rule="number" class="fail">✖ 숫자 포함</li>
+                <li data-rule="special" class="fail">✖ 특수문자(!@#$%^&*) 포함</li>
+            </ul>
+            <p>
+                <span class="title">비밀번호 확인</span>
+                <input type="password" id="password2">
+                <span class="msg" id="password2Msg"></span>
+            </p>
+            <p>
+                <span class="title">휴대폰</span>
+                <input type="text" id="phone" placeholder="숫자만 입력" maxlength="13">
+                <span class="msg" id="phoneMsg"></span>
+            </p>
+            <button type="submit">수강 신청</button>
+            <span id="readyMsg"></span>
+        </form>
+        <p id="signupResult"></p>
+    </section>
+</body>
+</html>

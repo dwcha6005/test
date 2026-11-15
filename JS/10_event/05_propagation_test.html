@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05. 이벤트 전파 실습</title>
+    <script src="05_propagation_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .box { padding: 14px; border: 2px solid #666; }
+        .post-item, .noti-item { border: 1px solid #aaa; padding: 8px; margin-bottom: 6px; cursor: pointer; }
+        .read { color: #999; background-color: #f5f5f5; }
+        .card { border: 1px solid #aaa; padding: 10px; width: 240px; cursor: pointer; }
+
+        #imgModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+        #imgModal.open { display: block; }
+        #imgModalContent { width: 260px; margin: 120px auto; padding: 16px; background-color: white; }
+
+        #dropMenu { display: none; border: 1px solid #999; width: 140px; padding: 6px; }
+        #dropMenu.open { display: block; }
+
+        .comment { border-left: 3px solid #ccc; padding: 6px 10px; margin: 6px 0; }
+        .comment.highlight { border-left-color: crimson; background-color: #fee2e2; }
+
+        #sideMenu { display: none; position: fixed; top: 0; right: 0; width: 200px; height: 100%; padding: 16px; background-color: #f1f5f9; border-left: 1px solid #999; }
+        #sideMenu.open { display: block; }
+        #sideMenu a.selected { font-weight: bold; color: crimson; }
+    </style>
+</head>
+<body>
+    <h1>커뮤니티 사이트</h1>
+
+    <section>
+        <h2>문제 1, 9</h2>
+        <div id="outerBox" class="box">
+            outerBox
+            <div id="innerBox" class="box">
+                innerBox
+                <button type="button" id="innerBtn">innerBtn</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <div class="post-item" id="postItem">
+            [자유] 이벤트 버블링 질문입니다
+            <button type="button" id="likeBtn">👍 좋아요 <span id="likeCount">0</span></button>
+        </div>
+        <p id="postResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <nav id="menuBar">
+            <button type="button">홈</button>
+            <button type="button">인기글</button>
+            <button type="button">공지</button>
+        </nav>
+        <p id="menuResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <div class="card" id="noticeCard">
+            <p>공지 : 서버 점검 안내</p>
+            <a href="notice.html" id="noticeLink">자세히 보기</a>
+        </div>
+        <p id="noticeResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <div class="noti-item">홍길동님이 댓글을 남겼습니다. <button type="button" class="noti-delete">✕</button></div>
+        <div class="noti-item">김철수님이 좋아요를 눌렀습니다. <button type="button" class="noti-delete">✕</button></div>
+        <div class="noti-item">새 공지사항이 등록되었습니다. <button type="button" class="noti-delete">✕</button></div>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <button type="button" id="openImg">프로필 사진 크게 보기</button>
+        <div id="imgModal">
+            <div id="imgModalContent">
+                <p>[ 프로필 사진 ]</p>
+                <p>사진 영역을 클릭해도 닫히지 않습니다.</p>
+                <button type="button" id="closeImg">닫기</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <button type="button" id="dropBtn">내 정보 ▼</button>
+        <div id="dropMenu">
+            <p>마이페이지</p>
+            <p>설정</p>
+            <p>로그아웃</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <div class="comment">
+            댓글 1 (홍길동)
+            <div class="comment">
+                답글 1-1 (김철수)
+                <div class="comment">답글 1-1-1 (이영희)</div>
+            </div>
+        </div>
+        <div class="comment">댓글 2 (박민수)</div>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <button type="button" id="openSide">☰ 메뉴</button>
+        <p id="sideResult"></p>
+    </section>
+
+    <aside id="sideMenu">
+        <h3>전체 메뉴</h3>
+        <p><a href="board.html">자유게시판</a></p>
+        <p><a href="qna.html">질문게시판</a></p>
+        <p><a href="notice.html">공지사항</a></p>
+    </aside>
+</body>
+</html>

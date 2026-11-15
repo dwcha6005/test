@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. async / await 실습</title>
+    <script src="fake_api.js" defer></script>
+    <script src="03_async_await_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .loading { color: gray; }
+        .error { color: crimson; font-weight: bold; }
+        .result { color: royalblue; font-weight: bold; }
+        .cards { display: flex; gap: 10px; }
+        .card { flex: 1; border: 1px solid #999; padding: 10px; min-height: 60px; }
+        .card h3 { margin: 0 0 6px; font-size: 15px; }
+    </style>
+</head>
+<body>
+    <h1>커뮤니티 게시판</h1>
+    <p>F12 → Console 탭에서 [서버] 로그를 함께 확인하세요.</p>
+
+    <section>
+        <h2>문제 1</h2>
+        <button type="button" id="nameBtn">2번 회원 이름</button>
+        <p id="nameResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <button type="button" id="usersBtn">회원 목록</button>
+        <label><input type="checkbox" id="usersFail"> 실패시키기</label>
+        <ul id="userList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <input type="text" id="orderInput" value="A001" size="8">
+        <button type="button" id="orderBtn">주문 상세 조회</button>
+        <p id="orderDetail"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <button type="button" id="countBtn">1번 회원 게시글 수</button>
+        <p id="countResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <button type="button" id="productsBtn">상품 목록</button>
+        <label><input type="checkbox" id="productsFail"> 실패시키기</label>
+        <div id="productBox"></div>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <select id="profileSelect">
+            <option value="1">1번 회원</option>
+            <option value="2">2번 회원</option>
+            <option value="3">3번 회원</option>
+        </select>
+        <button type="button" id="profileBtn">프로필 보기</button>
+        <p id="profileResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <button type="button" id="seqBtn">순서대로 (for...of)</button>
+        <button type="button" id="parallelBtn">동시에 (map + Promise.all)</button>
+        <p id="progress"></p>
+        <ul id="statList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 8 - 대시보드 (페이지가 열리면 자동으로 불러옴)</h2>
+        <div class="cards">
+            <div class="card" id="cardUsers"><h3>회원</h3><p></p></div>
+            <div class="card" id="cardProducts"><h3>상품</h3><p></p></div>
+            <div class="card" id="cardWeather"><h3>날씨 (제주)</h3><p></p></div>
+        </div>
+        <button type="button" id="dashboardBtn">상품만 실패시키고 새로고침</button>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <select id="writerSelect">
+            <option value="1">홍길동</option>
+            <option value="2">김철수</option>
+            <option value="3">이영희</option>
+        </select>
+        <button type="button" id="postsBtn">게시글 + 댓글 수</button>
+        <ul id="postList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <input type="text" id="searchInput" placeholder="상품 검색 (예: 마우스)">
+        <span id="searchStatus"></span>
+        <ul id="searchList"></ul>
+    </section>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04. 기본 동작 막기</title>
+    <script src="04_prevent_default.js" defer></script>
+</head>
+<body>
+    <h1>04. 기본 동작 막기 (preventDefault)</h1>
+
+    <h2>2. 링크 이동 막기 - 로그인이 필요한 메뉴</h2>
+    <a href="https://www.google.com" id="myPageLink">마이페이지</a>
+
+    <h2>3. 폼 전송 막기 - 로그인 폼 검사</h2>
+    <form id="loginForm" action="login.jsp">
+        <input type="text" id="loginId" name="loginId" placeholder="아이디">
+        <input type="password" id="loginPw" name="loginPw" placeholder="비밀번호">
+        <button type="submit">로그인</button>
+    </form>
+    <p id="loginMsg"></p>
+
+    <h2>4. return false 방식 (onsubmit 프로퍼티)</h2>
+    <form name="searchForm" action="search.jsp">
+        <input type="text" name="keyword" placeholder="검색어">
+        <button type="submit">검색</button>
+    </form>
+
+    <h2>5. 숫자만 입력받기 - 전화번호</h2>
+    <input type="text" id="phone" placeholder="숫자만 입력" maxlength="11">
+
+    <h2>6. 우클릭 메뉴 막기</h2>
+    <p id="noRightClick" style="border:1px solid #999; padding:16px;">이 영역에서는 우클릭할 수 없습니다.</p>
+</body>
+</html>

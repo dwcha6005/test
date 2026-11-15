@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 스타일과 클래스 실습</title>
+    <script src="04_style_class_test.js" defer></script>
+    <style>
+        section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+        h2 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        #subTitle {
+            font-size: 20px;
+            color: gray;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            border-left: 5px solid orange;
+            padding: 8px;
+        }
+        .hidden {
+            display: none;
+        }
+        .badge-new {
+            background-color: royalblue;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .badge-hot {
+            background-color: crimson;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .done {
+            color: #999;
+            text-decoration: line-through;
+        }
+        .dark {
+            background-color: #222;
+            color: white;
+        }
+        .error {
+            border: 2px solid red;
+            color: red;
+        }
+        .success {
+            border: 2px solid green;
+            color: green;
+        }
+        .tab-btn.active {
+            background-color: royalblue;
+            color: white;
+        }
+        .tab-panel {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>게시판 관리자 화면</h1>
+    <p>결과는 개발자 도구(F12)의 Console 탭과 화면에서 확인합니다.</p>
+
+    <!-- 문제 1, 6 -->
+    <section>
+        <h2>문제 1, 6</h2>
+        <h3 id="pageTitle">게시판 관리</h3>
+        <p id="subTitle">관리자 전용 페이지입니다.</p>
+    </section>
+
+    <!-- 문제 2 -->
+    <section>
+        <h2>문제 2</h2>
+        <div id="banner">신규 게시판이 오픈되었습니다.</div>
+    </section>
+
+    <!-- 문제 3, 4 -->
+    <section>
+        <h2>문제 3, 4</h2>
+        <p id="noticeBox">서버 점검 안내: 오늘 밤 12시부터 1시간</p>
+        <p id="adBox">광고 영역입니다.</p>
+    </section>
+
+    <!-- 문제 5 -->
+    <section>
+        <h2>문제 5</h2>
+        <p>게시글 상태: <span id="statusBadge" class="badge-new">NEW</span></p>
+    </section>
+
+    <!-- 문제 7 -->
+    <section>
+        <h2>문제 7 - 처리할 게시글 (클릭하면 처리 완료)</h2>
+        <ul id="taskList">
+            <li>신고 게시글 확인</li>
+            <li class="done">공지사항 수정</li>
+            <li>댓글 스팸 삭제</li>
+            <li>회원 문의 답변</li>
+        </ul>
+        <p id="taskCount"></p>
+    </section>
+
+    <!-- 문제 8 -->
+    <section id="dashboard">
+        <h2>문제 8 - 대시보드</h2>
+        <p>오늘 등록된 게시글: 24개</p>
+        <button type="button" id="themeBtn">다크 모드</button>
+    </section>
+
+    <!-- 문제 9 -->
+    <section>
+        <h2>문제 9 - 관리자 비밀번호 변경</h2>
+        <input type="password" id="passwordInput" placeholder="새 비밀번호 (8자 이상)">
+        <p id="pwMessage">비밀번호를 입력하세요.</p>
+    </section>
+
+    <!-- 문제 10 -->
+    <section>
+        <h2>문제 10 - 탭 메뉴</h2>
+        <button type="button" class="tab-btn active">공지사항</button>
+        <button type="button" class="tab-btn">자유게시판</button>
+        <button type="button" class="tab-btn">질문게시판</button>
+
+        <div class="tab-panel">공지사항 목록입니다.</div>
+        <div class="tab-panel hidden">자유게시판 목록입니다.</div>
+        <div class="tab-panel hidden">질문게시판 목록입니다.</div>
+    </section>
+</body>
+</html>

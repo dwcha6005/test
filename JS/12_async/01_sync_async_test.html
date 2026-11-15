@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. 동기와 비동기 실습</title>
+    <script src="01_sync_async_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .result { color: royalblue; font-weight: bold; }
+        #bellView, #clock { font-size: 22px; font-weight: bold; }
+        #progressOuter { width: 300px; height: 18px; border: 1px solid #999; }
+        #progressBar { width: 0; height: 100%; background-color: royalblue; }
+    </style>
+</head>
+<body>
+    <h1>DOM 카페 주문 시스템</h1>
+    <p>F12 → Console 탭을 함께 확인하세요.</p>
+
+    <section>
+        <h2>문제 1 (콘솔)</h2>
+    </section>
+
+    <section>
+        <h2>문제 2, 4</h2>
+        <button type="button" id="orderBtn">아메리카노 주문</button>
+        <button type="button" id="cancelBtn">주문 취소</button>
+        <p id="orderStatus" class="result"></p>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <button type="button" id="latteBtn">카페라테 만들기</button>
+        <p id="coffeeResult" class="result"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <button type="button" id="stepBtn">주문 진행</button>
+        <ol id="stepList"></ol>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <button type="button" id="bellBtn">진동벨 받기</button>
+        <span id="bellView">-</span>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <button type="button" id="clockBtn">시계 시작</button>
+        <span id="clock">--:--:--</span>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <button type="button" id="pointBtn">포인트 정산 시작</button>
+        <div id="progressOuter"><div id="progressBar"></div></div>
+        <p id="progressText">0%</p>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <p>10초 동안 아무것도 클릭하거나 입력하지 않으면 자동 로그아웃됩니다.</p>
+        <p id="logoutView" class="result"></p>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <input type="text" id="searchInput" placeholder="메뉴 검색 (입력을 멈추면 검색)">
+        <p>검색 실행 횟수 : <span id="searchCount">0</span></p>
+        <ul id="searchLog"></ul>
+    </section>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05. 이벤트 전파</title>
+    <script src="05_propagation.js" defer></script>
+    <style>
+        .box {
+            padding: 20px;
+            border: 2px solid #666;
+        }
+        #house { background-color: #fde68a; }
+        #room  { background-color: #bbf7d0; }
+
+        .product-card {
+            display: inline-block;
+            width: 160px;
+            padding: 12px;
+            margin-right: 8px;
+            border: 1px solid #999;
+            cursor: pointer;
+        }
+
+        #modalBg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #modalBg.open {
+            display: block;
+        }
+        #modalContent {
+            width: 280px;
+            margin: 120px auto;
+            padding: 20px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>05. 이벤트 전파 (버블링)</h1>
+
+    <h2>2. 버블링 확인 - 집 > 방 > 버튼</h2>
+    <div id="house" class="box">
+        집
+        <div id="room" class="box">
+            방
+            <button type="button" id="lightBtn">전등 스위치</button>
+        </div>
+    </div>
+    <ol id="bubbleLog"></ol>
+
+    <h2>3. 문제 상황 - 장바구니 버튼을 눌렀는데 상세 페이지로 이동?</h2>
+    <div class="product-card" data-name="무선 이어폰">
+        <p>무선 이어폰</p>
+        <button type="button" class="cart-btn">장바구니 담기</button>
+    </div>
+    <div class="product-card" data-name="블루투스 스피커">
+        <p>블루투스 스피커</p>
+        <button type="button" class="cart-btn">장바구니 담기</button>
+    </div>
+    <p id="cardResult">카드 또는 장바구니 버튼을 클릭하세요.</p>
+
+    <h2>4. 실제 예 - 모달 창 (배경 클릭 시 닫기)</h2>
+    <button type="button" id="openModal">공지 열기</button>
+
+    <div id="modalBg">
+        <div id="modalContent">
+            <h3>공지사항</h3>
+            <p>내용을 클릭하면 닫히지 않습니다.<br>바깥 어두운 배경을 클릭하면 닫힙니다.</p>
+            <button type="button" id="closeModal">닫기</button>
+        </div>
+    </div>
+</body>
+</html>

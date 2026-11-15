@@ -1,72 +1,92 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 관리</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>03. 자주 쓰는 이벤트 실습</title>
     <script src="03_event_type_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .over { color: red; }
+        #thumb { width: 160px; height: 90px; background-color: #ddd; text-align: center; line-height: 90px; }
+        #thumbGuide { display: none; color: gray; }
+        .tag { display: inline-block; margin-right: 4px; padding: 2px 8px; background-color: #e0e7ff; }
+        #passwordRow { display: none; }
+        #progressBar { position: fixed; top: 0; left: 0; height: 5px; width: 0; background-color: royalblue; }
+        #topBtn { display: none; position: fixed; right: 20px; bottom: 20px; }
+        #spacer { height: 1200px; }
+    </style>
 </head>
 <body>
-    <div class="container py-4">
-        <h1 class="mb-4">상품 관리</h1>
+    <div id="progressBar"></div>
+    <h1>게시글 작성</h1>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <p class="text-secondary mb-0">상품명을 더블 클릭하면 바로 수정할 수 있습니다.</p>
-            <button type="button" id="addButton" class="btn btn-primary">상품 등록</button>
-        </div>
+    <section>
+        <h2>문제 1</h2>
+        <input type="text" id="titleInput" placeholder="제목 (최대 30자)" size="40">
+        <span id="titleCount">0 / 30</span>
+    </section>
 
-        <table class="table table-hover table-bordered align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>상품 코드</th>
-                    <th>상품명</th>
-                    <th>카테고리</th>
-                    <th class="text-end">가격</th>
-                    <th>판매 상태</th>
-                </tr>
-            </thead>
-            <tbody id="productTable">
-                <tr>
-                    <td>P-101</td>
-                    <td class="product-name">무선 키보드</td>
-                    <td>주변기기</td>
-                    <td class="text-end">39,000원</td>
-                    <td><span class="badge text-bg-success">판매 중</span></td>
-                </tr>
-                <tr>
-                    <td>P-102</td>
-                    <td class="product-name">무선 마우스</td>
-                    <td>주변기기</td>
-                    <td class="text-end">25,000원</td>
-                    <td><span class="badge text-bg-success">판매 중</span></td>
-                </tr>
-                <tr>
-                    <td>P-103</td>
-                    <td class="product-name">USB-C 허브</td>
-                    <td>컴퓨터 액세서리</td>
-                    <td class="text-end">42,000원</td>
-                    <td><span class="badge text-bg-warning">재고 부족</span></td>
-                </tr>
-                <tr>
-                    <td>P-104</td>
-                    <td class="product-name">노트북 거치대</td>
-                    <td>데스크 액세서리</td>
-                    <td class="text-end">31,000원</td>
-                    <td><span class="badge text-bg-success">판매 중</span></td>
-                </tr>
-                <tr>
-                    <td>P-105</td>
-                    <td class="product-name">웹캠</td>
-                    <td>화상 회의 장비</td>
-                    <td class="text-end">58,000원</td>
-                    <td><span class="badge text-bg-secondary">판매 중지</span></td>
-                </tr>
-            </tbody>
-        </table>
+    <section>
+        <h2>문제 2</h2>
+        <select id="categorySelect">
+            <option value="">카테고리 선택</option>
+            <option value="자유">자유</option>
+            <option value="질문">질문</option>
+            <option value="정보">정보</option>
+        </select>
+        <span id="categoryResult"></span>
+    </section>
 
-        <p id="message" class="text-secondary">상품 행을 클릭하거나 상품명을 더블 클릭해 보세요.</p>
-    </div>
+    <section>
+        <h2>문제 3</h2>
+        <div id="thumb">대표 이미지</div>
+        <p id="thumbGuide">클릭하면 이미지를 변경할 수 있습니다.</p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <input type="text" id="writer" placeholder="작성자">
+        <span id="writerGuide"></span>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <input type="text" id="tagInput" placeholder="태그 입력 후 Enter (최대 5개)">
+        <div id="tagList"></div>
+        <p id="tagMsg"></p>
+    </section>
+
+    <section>
+        <h2>문제 6, 10</h2>
+        <textarea id="content" rows="5" cols="50" placeholder="내용 (최대 200자, Ctrl+Enter 등록)"></textarea>
+        <p id="contentCount">0 / 200</p>
+        <button type="button" id="submitBtn">등록</button>
+        <p id="submitResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <input type="checkbox" id="publicCheck" checked>
+        <label for="publicCheck">전체 공개</label>
+        <p id="passwordRow">
+            비밀글 비밀번호: <input type="password" id="postPassword">
+        </p>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <input type="text" id="memoInput" placeholder="메모 입력 후 다른 곳 클릭" size="40">
+        <p>input 실행 횟수: <span id="inputCount">0</span> / change 실행 횟수: <span id="changeCount">0</span></p>
+        <p id="saveMsg"></p>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <p>아래로 스크롤하면 화면 맨 위 진행률 막대가 늘어납니다.</p>
+        <div id="spacer"></div>
+    </section>
+    <button type="button" id="topBtn">▲ TOP</button>
 </body>
 </html>

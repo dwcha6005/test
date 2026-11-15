@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. 동기와 비동기</title>
+    <script src="01_sync_async.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .result { color: royalblue; font-weight: bold; }
+        #timerView { font-size: 28px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>01. 동기와 비동기</h1>
+    <p>F12 → Console 탭을 함께 확인하세요.</p>
+
+    <section>
+        <h2>2. 동기 작업은 화면을 멈춘다</h2>
+        <button type="button" id="countBtn">클릭 수 +1</button>
+        <span id="countView">0</span>
+        <br><br>
+        <button type="button" id="syncBtn">동기 방식으로 3초 작업</button>
+        <button type="button" id="asyncBtn">비동기 방식으로 3초 작업</button>
+        <p id="workResult" class="result"></p>
+    </section>
+
+    <section>
+        <h2>3. setTimeout 실행 순서</h2>
+        <button type="button" id="orderBtn">순서 확인</button>
+        <ol id="orderList"></ol>
+    </section>
+
+    <section>
+        <h2>5. 비동기 결과는 return으로 받을 수 없다</h2>
+        <button type="button" id="returnBtn">return으로 받기 (실패)</button>
+        <button type="button" id="callbackBtn">콜백으로 받기 (성공)</button>
+        <p id="userResult" class="result"></p>
+    </section>
+
+    <section>
+        <h2>6. 콜백 지옥</h2>
+        <button type="button" id="hellBtn">회원 → 게시글 → 댓글 순서로 불러오기</button>
+        <ul id="hellList"></ul>
+    </section>
+
+    <section>
+        <h2>7. setInterval - 인증번호 타이머</h2>
+        <button type="button" id="sendCodeBtn">인증번호 받기</button>
+        <button type="button" id="stopBtn">인증 완료 (타이머 정지)</button>
+        <p>남은 시간 : <span id="timerView">--:--</span></p>
+    </section>
+</body>
+</html>

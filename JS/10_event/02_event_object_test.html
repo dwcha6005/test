@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. 이벤트 객체 실습</title>
+    <script src="02_event_object_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .selected { background-color: royalblue; color: white; }
+        #menuCard { border: 2px solid #999; padding: 12px; width: 260px; }
+        #menuCard .photo { background-color: #eee; height: 60px; text-align: center; line-height: 60px; }
+    </style>
+</head>
+<body>
+    <h1>DOM 카페 키오스크</h1>
+
+    <section>
+        <h2>문제 1</h2>
+        <button type="button" id="orderBtn">주문하기 (클릭 / 더블클릭)</button>
+    </section>
+
+    <section>
+        <h2>문제 2, 9</h2>
+        <button type="button" class="menu-btn">아메리카노</button>
+        <button type="button" class="menu-btn">카페라테</button>
+        <button type="button" class="menu-btn">바닐라라테</button>
+        <p id="menuResult">메뉴를 선택하세요. (키보드 1, 2, 3 / Esc 취소)</p>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <input type="text" id="nameInput" placeholder="주문자 이름">
+        <p id="nameEcho"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <input type="text" id="keyInput" placeholder="아무 키나 누르세요">
+        <p id="keyResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <button type="button" class="size-btn" data-size="Regular" data-price="0">Regular</button>
+        <button type="button" class="size-btn" data-size="Large" data-price="500">Large</button>
+        <button type="button" class="size-btn" data-size="Venti" data-price="1000">Venti</button>
+        <p id="sizeResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <div id="menuCard">
+            <div class="photo">메뉴 사진</div>
+            <p>오늘의 추천 : 콜드브루</p>
+            <button type="button">담기</button>
+        </div>
+        <p id="cardInfo"></p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <input type="text" id="couponInput" placeholder="쿠폰 코드 입력 후 Enter">
+        <p id="couponResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <button type="button" class="qty-btn" data-diff="-1">-</button>
+        <span id="qtyView">1</span>
+        <button type="button" class="qty-btn" data-diff="1">+</button>
+        <button type="button" class="qty-btn" data-diff="5">+5</button>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <input type="text" id="orderName" placeholder="이름">
+        <input type="text" id="orderPhone" placeholder="연락처">
+        <input type="text" id="orderRequest" placeholder="요청사항">
+        <p>
+            주문자: <span id="previewName">-</span> /
+            연락처: <span id="previewPhone">-</span> /
+            요청사항: <span id="previewRequest">-</span>
+        </p>
+    </section>
+</body>
+</html>

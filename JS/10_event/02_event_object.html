@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. 이벤트 객체</title>
+    <script src="02_event_object.js" defer></script>
+    <style>
+        .selected {
+            background-color: royalblue;
+            color: white;
+        }
+        #card {
+            border: 2px solid #999;
+            padding: 16px;
+            width: 260px;
+        }
+    </style>
+</head>
+<body>
+    <h1>02. 이벤트 객체 (event)</h1>
+
+    <h2>1~2. event 객체와 event.type</h2>
+    <button type="button" id="typeBtn">클릭 / 더블클릭</button>
+
+    <h2>3. event.target - 사이즈 선택</h2>
+    <button type="button" class="size-btn">S</button>
+    <button type="button" class="size-btn">M</button>
+    <button type="button" class="size-btn">L</button>
+    <p id="sizeResult">사이즈를 선택하세요.</p>
+
+    <h2>4. target과 currentTarget</h2>
+    <div id="card">
+        카드 영역 (여기 클릭)
+        <button type="button">카드 안 버튼</button>
+    </div>
+
+    <h2>5. event.target.value - 닉네임 미리보기</h2>
+    <input type="text" id="nickname" placeholder="닉네임 입력">
+    <p>미리보기: <strong id="preview"></strong></p>
+
+    <h2>6. event.key - Enter로 메시지 전송</h2>
+    <input type="text" id="chatInput" placeholder="메시지 입력 후 Enter">
+    <ul id="chatList"></ul>
+</body>
+</html>

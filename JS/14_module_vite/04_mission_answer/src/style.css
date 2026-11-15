@@ -1,0 +1,11 @@
+body { max-width: 640px; margin: 20px auto; font-family: sans-serif; }
+#memoForm p { margin: 6px 0; }
+#memoForm input[type="text"], #memoForm textarea { width: 100%; box-sizing: border-box; }
+#formMsg { color: crimson; }
+.memo { border: 1px solid #ccc; padding: 8px 12px; margin-bottom: 8px; }
+.memo.important { border-left: 5px solid crimson; }
+.memo h3 { margin: 0 0 4px; font-size: 16px; }
+.memo .date { color: gray; font-size: 12px; }
+.memo .content { white-space: pre-wrap; }
+.loading { color: gray; }
+.error { color: crimson; font-weight: bold; }

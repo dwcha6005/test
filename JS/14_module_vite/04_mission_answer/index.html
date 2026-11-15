@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모장 (Vite + json-server)</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+    <h1>메모장</h1>
+    <p>메모는 json-server(db.json)에 저장됩니다.</p>
+
+    <form id="memoForm" novalidate>
+        <p><input type="text" id="title" name="title" placeholder="제목 (필수, 30자 이내)"></p>
+        <p><textarea id="content" name="content" rows="4" placeholder="내용"></textarea></p>
+        <p><label><input type="checkbox" id="important" name="important"> 중요 메모</label></p>
+        <button type="submit" id="submitBtn">메모 추가</button>
+        <button type="button" id="cancelBtn" hidden>수정 취소</button>
+        <span id="formMsg"></span>
+    </form>
+
+    <hr>
+    <p>
+        <input type="text" id="searchInput" placeholder="제목/내용 검색">
+        <label><input type="checkbox" id="onlyImportant"> 중요만 보기</label>
+        <span id="memoCount"></span>
+    </p>
+
+    <div id="memoList"></div>
+</body>
+</html>

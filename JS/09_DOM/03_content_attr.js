@@ -32,6 +32,9 @@
     hasAttribute()
     : HTML 속성의 존재 여부를 확인
 
+    dataset
+    : data-* 형식의 사용자 정의 속성을 읽거나 변경
+
     참고
     : 아래 코드는 하나의 HTML 문서에 연결하여 실습한다.
     : HTML 구조는 먼저 작성하고, JavaScript 파일은 defer로 연결한다.
@@ -73,6 +76,19 @@
         <a id="productLink"
            href="https://example.com"
            target="_blank">상품 상세 보기</a>
+    </section>
+
+    <section id="memberCard" data-user-id="1001" data-grade="gold" data-point="3500">
+        <h2>회원 카드</h2>
+        <p id="memberInfo">회원 정보를 확인하세요.</p>
+    </section>
+
+    <section id="dataProducts">
+        <h2>상품 선택</h2>
+        <button type="button" class="product-btn" data-product-id="P01" data-price="12000">텀블러</button>
+        <button type="button" class="product-btn" data-product-id="P02" data-price="8500">머그컵</button>
+        <button type="button" class="product-btn" data-product-id="P03" data-price="23000">보온병</button>
+        <p id="productInfo">상품을 선택하세요.</p>
     </section>
 
     <script src="03_content_attr.js" defer></script>
@@ -436,7 +452,135 @@
 
 
 /*
-    < 15. 실습 예제 - 회원 정보 변경
+    < 15. dataset (data-* 속성) >
+
+    data-* 속성
+    : HTML 요소에 개발자가 원하는 정보를 저장하기 위한 사용자 정의 속성
+    : 화면에는 표시되지 않지만 JavaScript에서 읽고 사용할 수 있다.
+    : 이름은 반드시 data-로 시작한다.
+
+    예시
+    <section id="memberCard" data-user-id="1001" data-grade="gold" data-point="3500">
+
+    언제 사용하는가?
+    - 목록의 각 항목에 상품 번호, 회원 번호 등을 저장할 때
+    - 버튼마다 서로 다른 값(가격, 옵션 등)을 연결할 때
+    - 이벤트 처리에서 "어떤 항목을 클릭했는지" 구분할 때
+
+    1) dataset으로 읽기
+
+    요소.dataset.이름
+
+    HTML 속성 이름              JavaScript dataset 이름
+    ----------------------------------------------------
+    data-grade                  dataset.grade
+    data-point                  dataset.point
+    data-user-id                dataset.userId       (하이픈 → camelCase)
+    data-product-id             dataset.productId
+
+    규칙
+    - data- 접두사는 빼고 작성한다.
+    - 하이픈(-) 뒤의 글자는 대문자로 바꾸고 하이픈은 제거한다.
+
+    2) 값은 항상 문자열이다.
+
+    data-point="3500"
+    → dataset.point는 숫자 3500이 아니라 문자열 "3500"이다.
+    → 계산에 사용하려면 Number()로 변환한다.
+
+    3) dataset으로 변경, 추가, 삭제하기
+
+    요소.dataset.grade = "vip";      // 값 변경 → data-grade="vip"
+    요소.dataset.joinYear = "2026";  // 새로 추가 → data-join-year="2026"
+    delete 요소.dataset.point;       // 삭제 → data-point 속성 제거
+
+    4) getAttribute()와 비교
+
+    요소.dataset.userId
+    요소.getAttribute("data-user-id")
+
+    두 방법 모두 같은 값을 읽는다.
+    dataset이 더 간결하므로 data-* 속성은 dataset을 주로 사용한다.
+
+    5) 존재 여부 확인
+
+    "grade" in 요소.dataset       // true 또는 false
+    요소.dataset.없는이름          // undefined
+
+    주의
+    : data-* 속성은 HTML에 그대로 보이므로
+      비밀번호 등 민감한 정보를 저장하면 안 된다.
+*/
+
+// 1) 읽기
+// const memberCard = document.querySelector("#memberCard");
+
+// console.log(memberCard.dataset);          // DOMStringMap {userId: '1001', grade: 'gold', point: '3500'}
+// console.log(memberCard.dataset.userId);   // 1001
+// console.log(memberCard.dataset.grade);    // gold
+// console.log(memberCard.dataset.point);    // 3500
+
+// 2) 값은 문자열
+// console.log(typeof memberCard.dataset.point);         // string
+// console.log(memberCard.dataset.point + 500);          // 3500500 (문자열 연결)
+// console.log(Number(memberCard.dataset.point) + 500);  // 4000
+
+// 3) 변경, 추가, 삭제
+// memberCard.dataset.grade = "vip";
+// memberCard.dataset.joinYear = "2026";
+// delete memberCard.dataset.point;
+
+// console.log(memberCard.outerHTML);
+// <section id="memberCard" data-user-id="1001" data-grade="vip" data-join-year="2026">...
+
+// 4) getAttribute()와 비교
+// console.log(memberCard.getAttribute("data-user-id"));  // 1001
+// console.log(memberCard.dataset.userId);                // 1001
+
+// 5) 존재 여부 확인
+// console.log("grade" in memberCard.dataset);    // true
+// console.log(memberCard.dataset.address);       // undefined
+
+// 6) 화면에 출력하기
+// const memberInfo = document.querySelector("#memberInfo");
+
+// memberInfo.textContent =
+//     "회원번호: " + memberCard.dataset.userId +
+//     " / 등급: " + memberCard.dataset.grade;
+
+
+/*
+    < 15-1. dataset 활용 - 버튼마다 다른 정보 연결하기 >
+
+    같은 모양의 버튼이 여러 개 있을 때
+    각 버튼의 data-* 속성에 상품 번호와 가격을 저장해 두면
+    클릭한 버튼의 정보를 쉽게 구분할 수 있다.
+
+    <button class="product-btn" data-product-id="P01" data-price="12000">텀블러</button>
+
+    주의
+    : 이 예제는 버튼 클릭 이벤트를 사용한다.
+      이벤트의 자세한 개념은 다음 장에서 다룬다.
+*/
+
+// const productButtons = document.querySelectorAll(".product-btn");
+// const productInfo = document.querySelector("#productInfo");
+
+// productButtons.forEach(function(button) {
+//     button.addEventListener("click", function() {
+//         const productId = button.dataset.productId;
+//         const price = Number(button.dataset.price);
+
+//         productInfo.textContent =
+//             "상품번호: " + productId +
+//             " / 상품명: " + button.textContent +
+//             " / 가격: " + price.toLocaleString() + "원";
+//     });
+// });
+
+
+/*
+    < 16. 실습 예제 - 회원 정보 변경
 
     실습용 HTML에 다음 요소가 있다고 가정한다.
 
@@ -469,7 +613,7 @@
 
 
 /*
-    < 16. 실습 예제 - 이미지 속성 변경
+    < 17. 실습 예제 - 이미지 속성 변경
 
     실습용 HTML에 다음 요소가 있다고 가정한다.
 
@@ -499,7 +643,7 @@
 
 
 /*
-    < 17. 실습 문제
+    < 18. 실습 문제
 
     문제 1.
     id가 title인 요소의 텍스트를
@@ -552,7 +696,7 @@
 
 
 /*
-    < 18. 실습 문제 정답
+    < 19. 실습 문제 정답
 */
 
 // 문제 1

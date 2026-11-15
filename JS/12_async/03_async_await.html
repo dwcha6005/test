@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03. async / await</title>
+    <script src="fake_api.js" defer></script>
+    <script src="03_async_await.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .loading { color: gray; }
+        .error { color: crimson; font-weight: bold; }
+        .result { color: royalblue; font-weight: bold; }
+        #weatherBox { border: 1px dashed #999; padding: 12px; width: 300px; min-height: 40px; }
+        #postArea li { cursor: pointer; }
+        #postArea li.selected { background-color: #dbeafe; }
+        .columns { display: flex; gap: 20px; }
+        .columns > div { flex: 1; }
+    </style>
+</head>
+<body>
+    <h1>03. async / await</h1>
+    <p>F12 → Console 탭에서 [서버] 로그를 함께 확인하세요.</p>
+
+    <section>
+        <h2>1. async 함수는 Promise를 반환한다</h2>
+        <button type="button" id="asyncCheckBtn">확인</button>
+    </section>
+
+    <section>
+        <h2>2 ~ 3. await + try / catch - 회원 → 게시글 → 댓글</h2>
+        <button type="button" id="awaitBtn">불러오기</button>
+        <label><input type="checkbox" id="awaitFail"> 중간에 실패시키기</label>
+        <ul id="awaitList"></ul>
+    </section>
+
+    <section>
+        <h2>4. 로딩 / 성공 / 에러 - 날씨 조회</h2>
+        <select id="citySelect">
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="제주">제주</option>
+            <option value="인천">인천 (정보 없음)</option>
+        </select>
+        <button type="button" id="weatherBtn">날씨 조회</button>
+        <label><input type="checkbox" id="weatherFail"> 서버 오류 발생</label>
+        <div id="weatherBox">도시를 선택하고 조회하세요.</div>
+    </section>
+
+    <section>
+        <h2>5. 순차 vs 동시</h2>
+        <button type="button" id="seqAwaitBtn">await 하나씩</button>
+        <button type="button" id="allAwaitBtn">await Promise.all</button>
+        <p id="speedResult"></p>
+    </section>
+
+    <section>
+        <h2>6. 반복문과 await</h2>
+        <button type="button" id="forOfBtn">for...of (순서대로)</button>
+        <button type="button" id="forEachBtn">forEach (주의!)</button>
+        <button type="button" id="mapAllBtn">map + Promise.all (동시에)</button>
+        <ol id="loopList"></ol>
+    </section>
+
+    <section>
+        <h2>7. 실전 - 회원별 게시글과 댓글</h2>
+        <select id="userSelect">
+            <option value="">회원 목록 불러오는 중...</option>
+        </select>
+        <div class="columns" id="postArea">
+            <div>
+                <h3>게시글</h3>
+                <p id="postStatus"></p>
+                <ul id="postList"></ul>
+            </div>
+            <div>
+                <h3>댓글</h3>
+                <p id="commentStatus">게시글을 클릭하세요.</p>
+                <ul id="commentList"></ul>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "memo-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "api": "json-server db.json --port 3000"
+  },
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "vite": "^8.0.0"
+  }
+}

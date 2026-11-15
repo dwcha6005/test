@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06. 이벤트 위임 실습</title>
+    <script src="06_delegation_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .selected { background-color: #dbeafe; }
+        #colorBox { width: 120px; height: 50px; border: 1px solid #999; margin-top: 6px; }
+        #display { display: inline-block; min-width: 120px; padding: 4px 8px; border: 1px solid #999; }
+        #numPad button { width: 40px; }
+        #stars span { font-size: 26px; cursor: pointer; color: #ccc; }
+        #stars span.on { color: orange; }
+        .faq-a { display: none; color: gray; margin: 4px 0 10px 16px; }
+        .faq-a.open { display: block; }
+        #cartTable td { padding: 4px 10px; }
+    </style>
+</head>
+<body>
+    <h1>이벤트 위임 실습 - 쇼핑몰 & 커뮤니티</h1>
+
+    <section>
+        <h2>문제 1</h2>
+        <ul id="fruitList">
+            <li>사과</li>
+            <li>바나나</li>
+            <li>포도</li>
+        </ul>
+        <p id="fruitResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <div id="colorArea">
+            <button type="button" data-color="crimson">빨강</button>
+            <button type="button" data-color="seagreen">초록</button>
+            <button type="button" data-color="royalblue">파랑</button>
+        </div>
+        <div id="colorBox"></div>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <div id="display">&nbsp;</div>
+        <div id="numPad">
+            <button type="button">1</button><button type="button">2</button><button type="button">3</button><br>
+            <button type="button">4</button><button type="button">5</button><button type="button">6</button><br>
+            <button type="button">7</button><button type="button">8</button><button type="button">9</button><br>
+            <button type="button" data-key="clear">C</button><button type="button">0</button><button type="button" data-key="back">⌫</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <div id="iconMenu">
+            <button type="button" class="menu-btn" data-page="cart"><span>🛒</span> 장바구니</button>
+            <button type="button" class="menu-btn" data-page="mypage"><span>👤</span> 마이페이지</button>
+        </div>
+        <p id="iconResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <input type="text" id="commentInput" placeholder="댓글 입력" size="40">
+        <button type="button" id="commentAdd">등록</button>
+        <ul id="commentList">
+            <li><span>좋은 정보 감사합니다.</span> <button type="button" class="del-btn">삭제</button></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <table id="cartTable" border="1">
+            <thead>
+                <tr><th>상품</th><th>가격</th><th>수량</th><th>소계</th><th></th></tr>
+            </thead>
+            <tbody>
+                <tr data-price="12000">
+                    <td>텀블러</td><td>12,000</td>
+                    <td>
+                        <button type="button" data-action="minus">-</button>
+                        <span class="qty">1</span>
+                        <button type="button" data-action="plus">+</button>
+                    </td>
+                    <td class="subtotal">12,000</td>
+                    <td><button type="button" data-action="remove">삭제</button></td>
+                </tr>
+                <tr data-price="8500">
+                    <td>머그컵</td><td>8,500</td>
+                    <td>
+                        <button type="button" data-action="minus">-</button>
+                        <span class="qty">2</span>
+                        <button type="button" data-action="plus">+</button>
+                    </td>
+                    <td class="subtotal">17,000</td>
+                    <td><button type="button" data-action="remove">삭제</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <p id="cartTotal">총 금액: 29,000원</p>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <div id="stars">
+            <span data-score="1">★</span><span data-score="2">★</span><span data-score="3">★</span><span data-score="4">★</span><span data-score="5">★</span>
+        </div>
+        <p id="starResult">별점을 선택하세요.</p>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <div id="faqList">
+            <div class="faq-item">
+                <button type="button" class="faq-q">Q. 배송비는 얼마인가요?</button>
+                <p class="faq-a">A. 3만 원 이상 구매 시 무료입니다.</p>
+            </div>
+            <div class="faq-item">
+                <button type="button" class="faq-q">Q. 교환 기간은?</button>
+                <p class="faq-a">A. 수령 후 7일 이내입니다.</p>
+            </div>
+        </div>
+        <input type="text" id="faqQuestion" placeholder="새 질문">
+        <input type="text" id="faqAnswer" placeholder="답변">
+        <button type="button" id="faqAdd">FAQ 추가</button>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <label><input type="checkbox" id="checkAll"> 전체 선택</label>
+        <button type="button" id="deleteChecked">선택 삭제</button>
+        <span id="checkedCount">선택: 0개</span>
+        <ul id="mailList">
+            <li><input type="checkbox"> [광고] 블랙프라이데이 할인</li>
+            <li><input type="checkbox"> 주문하신 상품이 발송되었습니다</li>
+            <li><input type="checkbox"> [광고] 신규 회원 쿠폰</li>
+            <li><input type="checkbox"> 비밀번호 변경 안내</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <p>할 일을 더블클릭하면 수정할 수 있습니다. (Enter 저장 / Esc 취소)</p>
+        <ul id="editList">
+            <li><span>JavaScript 복습</span></li>
+            <li><span>이벤트 위임 실습</span></li>
+            <li><span>회원가입 폼 만들기</span></li>
+        </ul>
+    </section>
+</body>
+</html>

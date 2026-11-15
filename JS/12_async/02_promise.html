@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. Promise</title>
+    <script src="fake_api.js" defer></script>
+    <script src="02_promise.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .loading { color: gray; }
+        .error { color: crimson; font-weight: bold; }
+        .result { color: royalblue; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>02. Promise</h1>
+    <p>F12 → Console 탭에서 [서버] 로그를 함께 확인하세요.</p>
+
+    <section>
+        <h2>1. Promise 객체 확인</h2>
+        <button type="button" id="checkBtn">api.getUsers() 반환값 확인</button>
+    </section>
+
+    <section>
+        <h2>2. then - 회원 목록</h2>
+        <button type="button" id="usersBtn">회원 목록 불러오기</button>
+        <ul id="userList"></ul>
+    </section>
+
+    <section>
+        <h2>3. catch - 실패 처리</h2>
+        <button type="button" id="notFoundBtn">99번 회원 요청 (없는 회원)</button>
+        <button type="button" id="serverErrorBtn">서버 오류 발생시키기</button>
+        <p id="errorResult"></p>
+    </section>
+
+    <section>
+        <h2>4. finally - 로딩 표시</h2>
+        <button type="button" id="productsBtn">상품 목록 불러오기</button>
+        <label><input type="checkbox" id="failCheck"> 실패하게 만들기</label>
+        <p id="productStatus"></p>
+        <ul id="productList"></ul>
+    </section>
+
+    <section>
+        <h2>5. 체이닝 - 콜백 지옥 탈출</h2>
+        <button type="button" id="chainBtn">회원 → 게시글 → 댓글</button>
+        <label><input type="checkbox" id="chainFail"> 중간에 실패시키기</label>
+        <ul id="chainList"></ul>
+    </section>
+
+    <section>
+        <h2>6. 자주 하는 실수 - return 빼먹기</h2>
+        <button type="button" id="mistakeBtn">return 없이 체이닝</button>
+        <p id="mistakeResult"></p>
+    </section>
+
+    <section>
+        <h2>7. Promise 직접 만들기</h2>
+        <button type="button" id="delayBtn">2초 기다리기</button>
+        <button type="button" id="diceBtn">주사위 (1이 나오면 실패)</button>
+        <p id="makeResult" class="result"></p>
+    </section>
+
+    <section>
+        <h2>8. Promise.all - 동시에 요청하기</h2>
+        <button type="button" id="seqBtn">하나씩 차례대로 (순차)</button>
+        <button type="button" id="allBtn">Promise.all (동시)</button>
+        <p id="allResult"></p>
+    </section>
+</body>
+</html>

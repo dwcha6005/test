@@ -1,0 +1,6 @@
+{
+  "memos": [
+    { "id": "1", "title": "장보기", "content": "우유, 계란", "important": false, "date": "2026. 11. 12." },
+    { "id": "2", "title": "React 준비", "content": "구조 분해, 전개 연산자 복습", "important": true, "date": "2026. 11. 12." }
+  ]
+}
