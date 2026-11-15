@@ -1,0 +1,25 @@
+/* 모든 챕터가 함께 쓰는 기본 스타일 */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Malgun Gothic", sans-serif;
+  line-height: 1.5;
+}
+
+section {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+section > h2 {
+  margin-top: 0;
+  font-size: 17px;
+  color: #334;
+}
+
+button {
+  margin-right: 4px;
+  cursor: pointer;
+}

@@ -1,0 +1,75 @@
+.todo-app {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.todo-header h1 {
+  margin: 4px 0;
+  color: royalblue;
+  font-size: 22px;
+}
+
+.todo-header h3 {
+  margin: 0;
+}
+
+.todo-editor {
+  display: flex;
+  gap: 6px;
+  margin: 16px 0;
+}
+
+.todo-editor input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.todo-list > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo-list .filters {
+  margin: 8px 0;
+}
+
+.todo-list .filters button.active {
+  background-color: royalblue;
+  color: white;
+}
+
+.todo-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.todo-item .content {
+  flex: 1;
+}
+
+.todo-item .date {
+  color: gray;
+  font-size: 13px;
+}
+
+.todo-item.done .content {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.empty {
+  color: gray;
+}

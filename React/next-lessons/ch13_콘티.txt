@@ -1,0 +1,67 @@
+=====================================================================
+[수업 콘티] ch13. Next.js (App Router)                      2교시 (100분)
+=====================================================================
+준비
+- next-lessons 폴더는 react-lessons와 "다른 프로젝트"다. 터미널을 새로 열어서
+    cd next-lessons
+    npm install
+    npm run dev        → http://localhost:3000
+- react-lessons 개발 서버(5173)와 동시에 켜 둬도 된다. (포트가 다름)
+- Node.js 20.9 이상인지 확인 (node -v)
+- 실습 문제는 app/practice/page.js 주석에 있다.
+
+---------------------------------------------------------------------
+1교시 (50분) - Next.js 구조, 라우팅, 서버 컴포넌트
+---------------------------------------------------------------------
+[순서01] Next.js란? (10분)  → app/page.js 주석
+  - 판서 : 라이브러리(React) vs 프레임워크(Next.js)
+  - 시연 : Vite 앱과 Next 앱에서 각각 "페이지 소스 보기"(Ctrl+U)
+           Vite : <div id="root"></div> 만 있음 / Next : 게시글 제목까지 HTML에 들어 있음
+  - create-next-app 선택지 안내 (TypeScript No, App Router Yes)
+
+[순서02] 파일 기반 라우팅 (10분)
+  - 시연 : app/contact/page.js 를 즉석에서 만들기 → /contact 바로 생김
+  - ch08 React Router의 <Route path>와 비교 : "폴더 = 주소"
+
+[순서03] layout.js / [순서04] Link (5분)  → app/layout.js
+  - ch08 Layout + Outlet 과 같은 역할 / <html>, <body>를 직접 쓴다
+  - metadata → 브라우저 탭 제목 확인 (소개 페이지에서 바뀜)
+
+[순서05] 서버 컴포넌트에서 데이터 가져오기 (20분)  ★ 핵심  → app/posts/page.js
+  - ch06 [순서04]의 useEffect + loading + error 코드와 나란히 비교
+  - 시연 : console.log가 브라우저 콘솔이 아니라 "터미널"에 찍히는 것 확인
+  - 주의 : 서버 컴포넌트에서는 useState, onClick 불가
+
+정리 (5분)
+
+---------------------------------------------------------------------
+2교시 (50분) - 동적 라우트, 클라이언트 컴포넌트, API + 실습
+---------------------------------------------------------------------
+[순서06] 동적 라우트, notFound (10분)  → app/posts/[id]/page.js
+  - 대괄호 폴더 = :id
+  - ★ const { id } = await params;  (Next.js 15부터 Promise. 인터넷 예전 자료 주의)
+  - 시연 : /posts/9999 → not-found.js 화면
+
+[순서07] loading.js (3분)
+  - 시연 : Network → Slow 4G → 게시글 이동 시 로딩 문구
+
+[순서08] 클라이언트 컴포넌트 (10분)  → components/Counter.js
+  - 시연 : "use client" 지우기 → 에러 메시지 읽어 보기 → 원복
+  - 추천 구조 : 페이지는 서버, 움직이는 부분만 클라이언트
+
+[순서09] Route Handler (2분)
+  - 시연 : /api/hello?name=홍길동 → JSON 응답
+
+실습 (25분) : app/practice/page.js 문제 1 ~ 4
+  - 정답은 /practice/products 에서 바로 확인 가능
+  - 문제 4(localStorage)는 "서버에서도 한 번 실행된다"는 점이 핵심
+
+---------------------------------------------------------------------
+예상 질문 / 자주 막히는 곳
+---------------------------------------------------------------------
+- params.id 가 undefined → await params 누락
+- "useState only works in Client Components" → 파일 맨 위 "use client" (import보다 위)
+- localStorage is not defined → 서버에서 실행됨. useEffect 안으로
+- 서버 컴포넌트 파일을 고쳤는데 콘솔에 로그가 없다 → 터미널을 봐야 한다
+- "React Router를 Next.js에서도 쓰나요?" → 아니다. Next.js는 폴더 라우팅을 사용
+=====================================================================

@@ -1,3 +1,61 @@
+/*
+=====================================================================================
+[수업 콘티] 09_DOM / 04. 스타일과 클래스 제어              권장 60분 (설명 35 + 실습 25)
+=====================================================================================
+< 준비 >
+- 04_style_class.html을 열고 F12 → Console, Elements 탭을 띄워 둔다.
+- 이 파일은 < 3 > ~ < 21 > 코드가 모두 "실행되는 상태"다.
+  → 새로고침하면 결과가 한꺼번에 겹쳐 보이므로, 설명할 섹션 아래 코드를 잠시 주석 처리하며 진행하거나
+    콘솔에 한 줄씩 직접 입력해서 보여 준다. (콘솔 시연을 추천)
+- 주의! < 18 >, < 19 >의 #themeBox, #themeBtn이 HTML에 없다.
+  → 콘솔에 TypeError (Cannot read properties of null) 가 나고, 그 아래 코드(< 21 > 정답)는 실행되지 않는다.
+  → 수업 전에 HTML에 아래 두 줄을 추가하거나, < 18 > ~ < 19 > 코드를 주석 처리한다.
+      <div id="themeBox" class="card">테마 변경 실습</div>
+      <button id="themeBtn">테마 변경</button>
+    (18번과 19번은 같은 버튼에 이벤트가 두 번 등록되므로 둘 중 하나만 풀어 둔다)
+
+< 진행 순서 >
+1) 개요 (2분) - < 1 >
+   - 판서 : style = 한 가지 속성을 직접 / classList = CSS에 만들어 둔 묶음을 붙였다 떼기
+
+2) element.style (8분) - < 3 > ~ < 6 >
+   ▶ 시연 : 콘솔에서 title.style.color = "red" → Elements 탭에 style="color: red;" 생김 (인라인)
+   ▶ 시연 : title.style.background-color = ... → 에러 → backgroundColor (카멜 표기)
+   ▶ 시연 : title.style.fontSize = 40 → 적용 안 됨 → "40px" (단위 필수)
+
+3) style 값 읽기 vs getComputedStyle (5분) - < 7 >, < 8 >
+   ▶ 시연 : card.style.width → "" (CSS의 .card에 쓴 값은 못 읽음) / getComputedStyle(card).width → "300px"
+   ▶ 포인트 : style은 "인라인으로 지정한 값"만 읽는다. 실제 적용 값은 getComputedStyle
+
+4) classList (10분)  ★ 핵심 - < 9 > ~ < 12 >
+   ▶ 시연 : card.classList.add("active") → 테두리 / 배경 변경, remove, toggle 반복
+   ▶ 시연 : card.classList.toggle("active")의 반환값 true / false 확인
+   ▶ 시연 : card.className = "active" → 기존 card 클래스가 사라져 모양이 깨짐 → classList를 써야 하는 이유
+
+5) style vs classList 정리 (3분) - < 13 >
+   ▶ 포인트 : 디자인은 CSS에, JS는 "클래스 이름만 바꾼다" → 실무 기본
+
+6) 실제 예 (7분) - < 14 > ~ < 19 >
+   ▶ 시연 : [버튼] 클릭 → 카드 active 토글 + 글자 크기 변경 (한 버튼에 이벤트 2개)
+   ▶ 시연 : 이름 입력창 비우기 / 입력하기 → error(빨강) / success(초록) 테두리
+   ▶ 시연 : (HTML 보완 후) 테마 변경 버튼 → dark 클래스 토글, 버튼 문구 변경
+   ▶ 포인트 : 이벤트는 10_event에서 자세히. 오늘은 "클릭하면 클래스가 바뀐다"만.
+
+< 예상 질문 / 자주 막히는 곳 >
+- CSS 속성 이름을 그대로 쓰는 실수 (background-color) → backgroundColor
+- 숫자만 넣는 실수 (fontSize = 20) → "20px"
+- classList.add(".active") 처럼 점을 붙이는 실수
+- hidden(display: none)과 visibility: hidden의 차이 → < 17 > 주석
+- 이 파일 안의 < 20 > 문제 / < 21 > 정답은 복습용이다. 수업 시간 실습은 04_style_class_test를 사용한다.
+
+< 실습 연결 : 04_style_class_test.html / .js >
+- 3)까지 설명 후 : 문제 1 ~ 2 (기초)
+- 5)까지 설명 후 : 문제 3 ~ 4 (기초), 문제 5 ~ 7 (응용)
+- 수업 마지막    : 문제 8 ~ 10 (심화, 문제 10 탭 메뉴는 classList 종합)
+=====================================================================================
+*/
+
+
 
 /*
     < 1. DOM 스타일과 클래스 제어 >

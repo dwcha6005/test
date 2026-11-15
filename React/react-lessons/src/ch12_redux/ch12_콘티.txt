@@ -1,0 +1,57 @@
+=====================================================================
+[수업 콘티] ch12. 리덕스, 리덕스 툴킷                       2교시 (100분)
+=====================================================================
+준비
+- npm install @reduxjs/toolkit react-redux  (react-lessons 에는 이미 포함)
+- 크롬 확장 "Redux DevTools" 설치 (수업 전에 학생들도 설치)
+- main.jsx에서 ch12_redux/App.jsx 줄만 주석 해제
+- ch11 App.jsx(todoReducer)를 옆에 열어 둔다.
+
+---------------------------------------------------------------------
+1교시 (50분) - Redux 개념과 카운터
+---------------------------------------------------------------------
+[순서01] Redux란? (10분)
+  - 판서 : 컴포넌트 → dispatch(action) → store(reducer) → useSelector 컴포넌트 갱신
+  - "ch11의 useReducer + Context를 앱 전체용으로 키운 것"
+  - 예전 Redux(createStore, switch) vs RTK(createSlice) → RTK가 공식 권장
+
+[순서02] store / [순서03] slice (15분)  → store/index.js, counterSlice.js
+  - reducer 객체의 key = state 이름 (counter, todos, users)
+  - ★ state.value += 1 처럼 직접 수정해도 되는 이유 : Immer (ch11에서는 안 됐다!)
+  - counterSlice.actions의 increase() 를 console.log 해 보기 → { type: "counter/increase" }
+
+[순서04] Provider, useSelector, useDispatch (15분)
+  - 시연 : 버튼 클릭 → Counter와 CounterDisplay가 동시에 바뀜 (props 없음)
+  - 시연 : Redux DevTools → Action 목록, State 탭, 슬라이더로 이전 상태 되돌리기
+
+[순서05] payload (5분)
+  - addBy(10) → action.payload === 10
+
+정리 (5분)
+
+---------------------------------------------------------------------
+2교시 (50분) - 할 일, 비동기 + 실습
+---------------------------------------------------------------------
+[순서06] 할 일 slice (10분)  → todoSlice.js
+  - ch11 todoReducer와 비교 : map/filter → find 후 직접 수정, splice
+  - prepare : id 같은 값은 reducer 밖에서 만든다 (순수 함수 규칙 복습)
+
+[순서07] createAsyncThunk (10분)  → userSlice.js
+  - 시연 : [사용자 불러오기] → DevTools에서 pending → fulfilled 순서 확인
+  - 시연 : 주소를 /userss 로 바꿔 보기 → rejected, 에러 메시지 → 원복
+  - ch11 실습 문제 3(FETCH_START/SUCCESS/ERROR)과 비교
+
+[순서08] Context vs Redux (5분)
+  - 표로 정리. "무조건 Redux"가 아니다.
+
+실습 (25분) : Practice.jsx 문제 1 ~ 4
+  - 문제 1, 2는 ch10/ch11 장바구니를 Redux로 옮기는 것 → 세 방식 비교가 포인트
+
+---------------------------------------------------------------------
+예상 질문 / 자주 막히는 곳
+---------------------------------------------------------------------
+- dispatch(increase) (괄호 없음) → action 객체가 아니라 함수를 보냄. 반드시 increase()
+- useSelector(state => state.count) 처럼 store의 key 이름을 틀림 → undefined
+- "could not find react-redux context value" → Provider 밖에서 useSelector 사용
+- reducer에서 직접 수정 + return 을 함께 하면 에러 (둘 중 하나만)
+=====================================================================

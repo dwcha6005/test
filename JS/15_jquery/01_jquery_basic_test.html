@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. jQuery 기초 실습</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="01_jquery_basic_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .soldout { color: #999; text-decoration: line-through; }
+        .best { font-weight: bold; color: crimson; }
+        .selected { background-color: #dbeafe; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1 id="cafeTitle">jQuery 실습 - 카페 주문</h1>
+
+    <section>
+        <h2>문제 1 ~ 2</h2>
+        <p id="notice">오늘의 공지가 들어갈 자리입니다.</p>
+        <ul id="menuList">
+            <li class="menu" data-price="4500" data-stock="10">아메리카노</li>
+            <li class="menu" data-price="5000" data-stock="0">카페라떼</li>
+            <li class="menu" data-price="5500" data-stock="3">바닐라라떼</li>
+            <li class="menu" data-price="6000" data-stock="0">딸기스무디</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <input type="text" id="nickname" value="손님">
+        <p id="greeting"></p>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <img id="menuImage" src="https://picsum.photos/id/30/160/100" alt="메뉴 이미지">
+        <a id="menuLink" href="https://example.com/menu" target="_blank">메뉴 상세</a>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <ul id="orderList"></ul>
+    </section>
+
+    <section id="reviewArea">
+        <h2>문제 7</h2>
+        <div class="review" id="r1"><span class="writer">홍길동</span> <span class="text">커피가 맛있어요</span></div>
+        <div class="review" id="r2"><span class="writer">김철수</span> <span class="text">매장이 넓어요</span></div>
+        <div class="review" id="r3"><span class="writer">이영희</span> <span class="text">디저트 추천</span></div>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <label><input type="checkbox" id="agreeTerms"> 이용약관 동의</label>
+        <label><input type="checkbox" id="agreeMarketing" checked> 마케팅 수신 동의</label>
+        <button type="button" id="joinBtn">가입</button>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <table border="1" cellpadding="4">
+            <tbody id="cartBody">
+                <tr data-price="4500" data-qty="2"><td>아메리카노</td></tr>
+                <tr data-price="5500" data-qty="1"><td>바닐라라떼</td></tr>
+                <tr data-price="3800" data-qty="3"><td>크루아상</td></tr>
+            </tbody>
+        </table>
+        <p id="cartTotal"></p>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <div id="convertArea">
+            <p class="tip">팁 1 : 텀블러를 가져오면 300원 할인</p>
+            <p class="tip">팁 2 : 오후 2시 ~ 4시 디저트 10% 할인</p>
+            <p class="tip">팁 3 : 스탬프 10개 = 음료 1잔 무료</p>
+        </div>
+        <p id="tipCount"></p>
+    </section>
+</body>
+</html>

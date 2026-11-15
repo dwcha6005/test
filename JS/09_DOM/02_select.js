@@ -1,4 +1,64 @@
 /*
+=====================================================================================
+[수업 콘티] 09_DOM / 02. DOM 요소 선택                    권장 60분 (설명 35 + 실습 25)
+=====================================================================================
+< 준비 >
+- 주의! 02_select.html에 script 태그가 없다. 수업 전에 <head> 안에 아래 한 줄을 추가한다.
+      <script src="02_select.js" defer></script>
+- 02_select.html을 열고 F12 → Console 탭을 띄워 둔다.
+- 처음에는 < 2 > 코드만 실행된다. 나머지 섹션은 주석으로 되어 있다.
+  → 섹션 코드를 "주석 해제 → 저장 → 새로고침 → 콘솔 확인 → 다시 주석" 순서로 하나씩 진행한다.
+  ※ 섹션마다 const title, const items 등 같은 이름을 다시 선언하므로
+    두 섹션을 동시에 풀면 SyntaxError (Identifier has already been declared)가 난다.
+
+< 진행 순서 >
+1) 요소 선택이란? (3분) - < 1 >
+   - 판서 : "선택해야 바꿀 수 있다" → 선택 메서드 5개 이름만 먼저 나열
+
+2) getElementById (5분) - < 2 >
+   ▶ 시연 : 새로고침 → 콘솔에 h1 요소와 "DOM 요소 선택" 출력
+   ▶ 시연 : 65번 줄을 getElementById("#title")로 잠깐 바꿔 보기 → null (# 붙이면 안 됨) → 원복
+
+3) getElementsByClassName / TagName (7분) - < 3 >, < 4 >
+   ▶ 시연 : menuItems 출력 → HTMLCollection(3), [0] [1] [2] 접근
+   ▶ 포인트 : 여기도 점(.)을 붙이지 않는다.
+
+4) querySelector / querySelectorAll (10분)  ★ 핵심 - < 5 >, < 6 >
+   ▶ 시연 : "#title", ".menu-item", "#menu h2" 등 CSS 선택자 그대로 사용
+   ▶ 포인트 : querySelector는 "첫 번째 하나", 없으면 null / querySelectorAll은 NodeList
+   ▶ 정리 : "새 코드는 querySelector / querySelectorAll 두 개면 충분하다"
+
+5) HTMLCollection vs NodeList (5분) - < 7 >, < 16 > 비교표
+   - 표 판서 : forEach 가능 여부, live / static
+   ▶ 포인트 : 자세한 live 비교는 실습 문제 9에서 직접 확인
+
+6) 여러 요소 반복 처리 (5분) - < 8 > ~ < 11 >
+   ▶ 시연 : for → for...of → forEach 세 방법으로 메뉴 이름 출력
+   ▶ 포인트 : HTMLCollection에는 forEach가 없다. (for...of는 둘 다 가능)
+
+7) 선택자 조합, 특정 요소 기준 선택 (3분) - < 12 >, < 13 >
+   ▶ 시연 : menu.querySelectorAll(".menu-item") → #menu 영역 안에서만 찾기
+
+8) 요소가 없을 때, 실행 시점 (5분) - < 14 >, < 15 >
+   ▶ 시연 : 없는 요소에 .textContent 접근 → TypeError (Cannot read properties of null)
+   ▶ 시연 : script 태그의 defer를 지우고 새로고침 → null → 원복
+   ▶ 포인트 : 해결 방법 3가지(body 끝 / defer / DOMContentLoaded) 중 수업은 defer 사용
+
+< 예상 질문 / 자주 막히는 곳 >
+- getElementById("#title"), getElementsByClassName(".menu-item")처럼 기호를 붙이는 실수
+- querySelectorAll 결과에 .textContent를 바로 쓰는 실수 → 목록이므로 반복문 필요
+- 같은 이름의 const를 두 섹션에서 동시에 풀어 SyntaxError
+- 이 파일 안의 < 17 > 문제 / < 18 > 정답은 복습용이다. 수업 시간 실습은 02_select_test를 사용한다.
+
+< 실습 연결 : 02_select_test.html / .js >
+- 4)까지 설명 후 : 문제 1 ~ 4 (기초)
+- 7)까지 설명 후 : 문제 5 ~ 7 (응용)
+- 수업 마지막    : 문제 8 ~ 10 (심화, 문제 9 live/static은 결과를 예측한 뒤 실행)
+=====================================================================================
+*/
+
+
+/*
     02_DOM_Select.js
 
     < 1. DOM 요소 선택이란?

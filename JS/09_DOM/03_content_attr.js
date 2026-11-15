@@ -1,4 +1,63 @@
 /*
+=====================================================================================
+[수업 콘티] 09_DOM / 03. 내용과 속성 변경, dataset        권장 80분 (설명 50 + 실습 30)
+=====================================================================================
+< 준비 >
+- 03_content_attr.html을 열고 F12 → Console, Elements 탭을 띄워 둔다.
+- 이 파일의 코드는 전부 주석이다. 섹션마다 "주석 해제 → 저장 → 새로고침 → 확인 → 다시 주석"으로 진행한다.
+  ※ const title, const username 등이 여러 섹션에서 다시 선언되므로 한 번에 한 섹션만 푼다.
+- 주의! 아래 섹션은 HTML에 없는 요소를 사용한다. (주석에 "있다고 가정한다"로 적혀 있음)
+  < 14 > #btn / < 16 > #memberName, #newName, #changeName / < 17 > #photo, #changePhoto
+  → 그대로 풀면 null 에러가 나므로, 코드 설명만 하거나 HTML에 요소를 잠깐 추가해서 시연한다.
+
+< 진행 순서 >
+1) 개요 (3분) - < 1 >, < 2 >
+   - 판서 : 내용(textContent, innerHTML, innerText, value) / 속성(get·set·remove·hasAttribute) / dataset
+
+2) textContent / innerHTML (12분)  ★ 핵심 - < 3 > ~ < 5 >
+   ▶ 시연 : title.textContent = "<strong>중요한 제목</strong>" → 태그가 글자 그대로 보임
+   ▶ 시연 : intro.innerHTML = "<strong>...</strong>" → 굵게 표시
+   ▶ 포인트 : 사용자 입력은 textContent (innerHTML은 보안 위험 → 05에서 다시)
+
+3) innerText (3분) - < 6 >
+   ▶ 포인트 : 화면에 보이는 글자 기준. 실무에서는 textContent를 기본으로 쓴다.
+
+4) value (8분) - < 7 >, < 8 >
+   ▶ 시연 : 입력창 내용을 직접 바꾼 뒤 콘솔에서 username.value 확인
+   ▶ 시연 : username.textContent → 빈 문자열 (입력값은 value로만 읽는다)
+   ▶ 시연 : select의 job.value → option의 value("student") 가 나온다 (보이는 글자 아님)
+
+5) 속성 4형제 (10분) - < 9 > ~ < 12 >
+   ▶ 시연 : productImage의 src, productLink의 href / target 읽기
+   ▶ 시연 : removeAttribute("target") 후 링크 클릭 → 새 탭이 아니라 현재 탭에서 열림
+   ▶ 포인트 : setAttribute("class", ...)는 기존 클래스를 덮어쓴다 → 04의 classList 예고
+
+6) 속성 vs 프로퍼티, Boolean 속성 (6분) - < 13 >, < 14 >
+   ▶ 시연 : 입력창에 글자 입력 → getAttribute("value")는 "홍길동", value는 입력한 값
+   - 판서 : disabled="false"도 비활성화된다 → 속성은 "있냐 없냐"
+   ▶ 포인트 : 상태 변경은 button.disabled = true / false 프로퍼티가 가장 간단
+
+7) dataset (8분)  ★ 실무 - < 15 >, < 15-1 >
+   ▶ 시연 : Elements 탭의 data-user-id → JS에서는 dataset.userId (카멜 표기)
+   ▶ 시연 : dataset.point + 500 → "3500500" / Number() 후 → 4000
+   ▶ 시연 : < 15-1 > 주석 해제 → 텀블러 / 머그컵 / 보온병 버튼 클릭 → 각각 다른 정보 표시
+   ▶ 포인트 : "버튼마다 다른 값"을 HTML에 심어 두는 방법 → 10_event 06(이벤트 위임)에서 다시 사용
+
+< 예상 질문 / 자주 막히는 곳 >
+- data-user-id를 dataset.user-id 로 쓰는 실수 → dataset.userId
+- dataset 값은 항상 문자열 → 계산 전에 Number()
+- textContent로 input 값을 읽는 실수 → value
+- 이 파일 안의 < 18 > 문제 / < 19 > 정답은 복습용이다. 수업 시간 실습은 03_content_attr_test를 사용한다.
+
+< 실습 연결 : 03_content_attr_test.html / .js >
+- 5)까지 설명 후 : 문제 1 ~ 3 (기초)
+- 7)까지 설명 후 : 문제 4 (기초, dataset), 문제 5 ~ 7 (응용)
+- 수업 마지막    : 문제 8 ~ 10 (심화, 문제 10 쿠폰 할인 계산은 dataset + Number 종합)
+=====================================================================================
+*/
+
+
+/*
     03_DOM_Content_Attribute.js
 
     < 1. DOM 요소의 내용과 속성 변경

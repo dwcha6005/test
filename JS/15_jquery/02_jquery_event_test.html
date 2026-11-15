@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. jQuery 이벤트와 효과 실습</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="02_jquery_event_test.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; padding: 10px 14px; margin-bottom: 10px; }
+        h2 { font-size: 16px; margin: 0 0 8px; }
+        .selected { background-color: #dbeafe; }
+        .liked { color: crimson; }
+        .error { color: crimson; }
+        .ok { color: seagreen; }
+        .hidden { display: none; }
+        #banner { padding: 10px; background-color: #fff3cd; }
+        #detailBox { display: none; padding: 8px; background-color: #f5f5f5; }
+        .stars span { font-size: 24px; color: #ccc; cursor: pointer; }
+        .stars span.on { color: orange; }
+        .card { display: inline-block; width: 120px; margin: 4px; padding: 8px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>jQuery 이벤트 실습 - 쇼핑몰</h1>
+
+    <section>
+        <h2>문제 1</h2>
+        <button type="button" id="greetBtn">환영 메시지</button>
+        <p id="greetResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 2</h2>
+        <ul id="sizeList">
+            <li>S</li>
+            <li>M</li>
+            <li>L</li>
+            <li>XL</li>
+        </ul>
+        <p id="sizeResult">사이즈를 선택하세요.</p>
+    </section>
+
+    <section>
+        <h2>문제 3</h2>
+        <div id="banner">신규 가입 쿠폰 받으세요!</div>
+        <button type="button" id="closeBanner">배너 닫기</button>
+        <button type="button" id="detailBtn">상세 정보</button>
+        <div id="detailBox">배송 : 2~3일 / 교환 : 7일 이내</div>
+    </section>
+
+    <section>
+        <h2>문제 4</h2>
+        <button type="button" id="eventBtn">이벤트 응모 (1회)</button>
+        <p id="eventResult"></p>
+    </section>
+
+    <section>
+        <h2>문제 5</h2>
+        <div id="productArea">
+            <div class="card" data-name="텀블러" data-price="12000"><strong>텀블러</strong><br><button type="button" class="like-btn">♡ 찜</button></div>
+            <div class="card" data-name="머그컵" data-price="8500"><strong>머그컵</strong><br><button type="button" class="like-btn">♡ 찜</button></div>
+            <div class="card" data-name="보온병" data-price="23000"><strong>보온병</strong><br><button type="button" class="like-btn">♡ 찜</button></div>
+        </div>
+        <button type="button" id="addProduct">상품 추가</button>
+        <p id="likeCount">찜 0개</p>
+    </section>
+
+    <section>
+        <h2>문제 6</h2>
+        <form id="reviewForm">
+            <textarea id="reviewText" rows="3" cols="40" placeholder="리뷰 (100자 이내)"></textarea>
+            <p><span id="charCount">0</span> / 100</p>
+            <button type="submit">등록</button>
+        </form>
+        <ul id="reviewList"></ul>
+    </section>
+
+    <section>
+        <h2>문제 7</h2>
+        <div class="stars" id="stars">
+            <span data-score="1">★</span><span data-score="2">★</span><span data-score="3">★</span><span data-score="4">★</span><span data-score="5">★</span>
+        </div>
+        <p id="starResult">별점을 선택하세요.</p>
+    </section>
+
+    <section>
+        <h2>문제 8</h2>
+        <input type="text" id="searchInput" placeholder="상품 검색">
+        <ul id="searchList">
+            <li>무선 이어폰</li>
+            <li>무선 마우스</li>
+            <li>기계식 키보드</li>
+            <li>모니터 받침대</li>
+            <li>USB 허브</li>
+        </ul>
+        <p id="searchCount"></p>
+    </section>
+
+    <section>
+        <h2>문제 9</h2>
+        <table border="1" cellpadding="4">
+            <thead><tr><th>상품</th><th>가격</th><th>수량</th><th>금액</th><th></th></tr></thead>
+            <tbody id="cartBody">
+                <tr data-price="12000"><td>텀블러</td><td>12,000</td><td><button type="button" class="minus">-</button> <span class="qty">1</span> <button type="button" class="plus">+</button></td><td class="amount">12,000</td><td><button type="button" class="remove">삭제</button></td></tr>
+                <tr data-price="8500"><td>머그컵</td><td>8,500</td><td><button type="button" class="minus">-</button> <span class="qty">2</span> <button type="button" class="plus">+</button></td><td class="amount">17,000</td><td><button type="button" class="remove">삭제</button></td></tr>
+            </tbody>
+        </table>
+        <p id="cartTotal">합계: 29,000원</p>
+    </section>
+
+    <section>
+        <h2>문제 10</h2>
+        <button type="button" id="loadProducts">인기 상품 불러오기</button>
+        <div id="productCards"></div>
+    </section>
+</body>
+</html>

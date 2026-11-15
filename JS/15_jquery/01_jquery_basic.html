@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01. jQuery 기초</title>
+
+    <!--
+        < 2. jQuery 연결하기 >
+        1) jQuery 파일을 먼저 불러오고
+        2) 그다음 내 JS 파일을 불러온다. (순서가 바뀌면 "$ is not defined" 에러)
+        defer끼리는 작성한 순서대로 실행된다.
+    -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="01_jquery_basic.js" defer></script>
+
+    <style>
+        section { border: 1px solid #ccc; border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; }
+        h2 { font-size: 17px; margin: 0 0 8px; }
+        .highlight { background-color: yellow; }
+        .active { color: white; background-color: royalblue; }
+        .big { font-size: 22px; }
+        .selected { background-color: #dbeafe; }
+    </style>
+</head>
+<body>
+    <h1 id="title">01. jQuery 기초</h1>
+
+    <section>
+        <h2>3. 선택 - $()</h2>
+        <ul id="menu">
+            <li class="menu-item">김치찌개</li>
+            <li class="menu-item">된장찌개</li>
+            <li class="menu-item">제육볶음</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. 내용 - text(), html(), val()</h2>
+        <p id="intro">웹 개발을 공부하고 있습니다.</p>
+        <input type="text" id="username" value="홍길동">
+        <p id="valueResult"></p>
+    </section>
+
+    <section>
+        <h2>5. 속성 - attr(), prop(), data()</h2>
+        <a id="productLink" href="https://example.com" target="_blank">상품 상세 보기</a>
+        <label><input type="checkbox" id="agree"> 약관 동의</label>
+        <button type="button" id="buyBtn" data-product-id="P01" data-price="12000">텀블러 구매</button>
+        <p id="attrResult"></p>
+    </section>
+
+    <section>
+        <h2>6. 클래스와 스타일 - addClass(), css()</h2>
+        <p id="message">스타일을 변경해 봅시다.</p>
+    </section>
+
+    <section>
+        <h2>7. 여러 요소 한 번에 - each()</h2>
+        <ol id="scoreList">
+            <li data-score="95">홍길동</li>
+            <li data-score="72">김철수</li>
+            <li data-score="88">이영희</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>8. 생성과 삭제 - append(), remove()</h2>
+        <ul id="todoList">
+            <li>기존 할 일</li>
+        </ul>
+    </section>
+
+    <section id="shop">
+        <h2>9. 탐색 - closest(), find(), siblings()</h2>
+        <ul id="productList">
+            <li class="product" id="item1"><span class="name">노트북</span> <span class="price">1200000</span></li>
+            <li class="product" id="item2"><span class="name">마우스</span> <span class="price">25000</span></li>
+            <li class="product" id="item3"><span class="name">키보드</span> <span class="price">89000</span></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>10. 체이닝</h2>
+        <p id="chainBox">체이닝으로 한 번에 바꾸기</p>
+    </section>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/* 기존 ch05_test App.css를 Simple Counter 영역에만 적용되도록 정리 */
+.counter-app {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.counter-app > section {
+  padding: 20px;
+  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 30px;
+  margin-bottom: 10px;
+}

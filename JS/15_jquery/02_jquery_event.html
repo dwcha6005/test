@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. jQuery 이벤트와 효과</title>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+    <script src="02_jquery_event.js" defer></script>
+    <style>
+        section { border: 1px solid #ccc; border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; }
+        h2 { font-size: 17px; margin: 0 0 8px; }
+        .done span { color: #999; text-decoration: line-through; }
+        .error { color: crimson; }
+        #effectBox { width: 220px; padding: 16px; margin-top: 8px; background-color: #dbeafe; border-radius: 8px; }
+        #moveBox { width: 60px; height: 40px; background-color: royalblue; border-radius: 6px; position: relative; }
+        .faq-a { display: none; margin: 4px 0 10px 16px; color: #555; }
+        .tab-btn.active { background-color: royalblue; color: white; }
+        .tab-panel { display: none; padding: 8px; border: 1px solid #ddd; }
+        .tab-panel.active { display: block; }
+    </style>
+</head>
+<body>
+    <h1>02. jQuery 이벤트와 효과</h1>
+
+    <section>
+        <h2>1. on() - 이벤트 등록</h2>
+        <button type="button" id="helloBtn">인사하기</button>
+        <p id="helloResult"></p>
+        <div id="colorArea">
+            <button type="button" class="color-btn" data-color="crimson">빨강</button>
+            <button type="button" class="color-btn" data-color="seagreen">초록</button>
+            <button type="button" class="color-btn" data-color="royalblue">파랑</button>
+        </div>
+        <p id="colorResult">색을 고르세요.</p>
+    </section>
+
+    <section>
+        <h2>2. one(), off()</h2>
+        <button type="button" id="couponBtn">쿠폰 받기 (한 번만)</button>
+        <button type="button" id="countBtn">클릭 수 세기</button>
+        <button type="button" id="stopBtn">세기 중지</button>
+        <p id="countResult">0번 클릭</p>
+    </section>
+
+    <section>
+        <h2>3. 이벤트 위임 - on("click", "자식 선택자", 함수)</h2>
+        <input type="text" id="todoInput" placeholder="할 일 입력 후 Enter">
+        <ul id="todoList">
+            <li><span>DOM 복습하기</span> <button type="button" class="done-btn">완료</button> <button type="button" class="delete-btn">삭제</button></li>
+            <li><span>이벤트 복습하기</span> <button type="button" class="done-btn">완료</button> <button type="button" class="delete-btn">삭제</button></li>
+        </ul>
+        <p id="todoCount"></p>
+    </section>
+
+    <section>
+        <h2>4. 폼 이벤트 - input, submit</h2>
+        <form id="joinForm">
+            <input type="text" id="userId" placeholder="아이디 (4자 이상)">
+            <span id="idCheck"></span>
+            <button type="submit">가입</button>
+        </form>
+        <p id="joinResult"></p>
+    </section>
+
+    <section>
+        <h2>5. 효과 - show / hide / fade / slide</h2>
+        <button type="button" data-effect="hide">hide</button>
+        <button type="button" data-effect="show">show</button>
+        <button type="button" data-effect="toggle">toggle</button>
+        <button type="button" data-effect="fadeToggle">fadeToggle</button>
+        <button type="button" data-effect="slideToggle">slideToggle</button>
+        <div id="effectBox">효과 확인용 상자</div>
+    </section>
+
+    <section>
+        <h2>6. animate()</h2>
+        <button type="button" id="moveBtn">이동</button>
+        <button type="button" id="resetBtn">제자리</button>
+        <div id="moveBox"></div>
+    </section>
+
+    <section>
+        <h2>7-1. 실제 예 - FAQ 아코디언</h2>
+        <div id="faq">
+            <p class="faq-q"><button type="button">배송은 얼마나 걸리나요?</button></p>
+            <p class="faq-a">주문 후 2~3일 이내에 도착합니다.</p>
+            <p class="faq-q"><button type="button">교환은 가능한가요?</button></p>
+            <p class="faq-a">수령 후 7일 이내에 교환 신청이 가능합니다.</p>
+            <p class="faq-q"><button type="button">비회원 주문이 되나요?</button></p>
+            <p class="faq-a">비회원 주문도 가능합니다.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>7-2. 실제 예 - 탭 메뉴</h2>
+        <div id="tabMenu">
+            <button type="button" class="tab-btn active" data-tab="notice">공지</button>
+            <button type="button" class="tab-btn" data-tab="event">이벤트</button>
+            <button type="button" class="tab-btn" data-tab="qna">Q&amp;A</button>
+        </div>
+        <div class="tab-panel active" id="notice">이번 주 금요일은 휴강입니다.</div>
+        <div class="tab-panel" id="event">신규 가입 시 쿠폰 지급!</div>
+        <div class="tab-panel" id="qna">궁금한 점을 남겨 주세요.</div>
+    </section>
+
+    <section>
+        <h2>8. $.ajax() 맛보기 (fetch와 비교)</h2>
+        <button type="button" id="loadUsers">사용자 불러오기</button>
+        <ul id="userList"></ul>
+    </section>
+</body>
+</html>
