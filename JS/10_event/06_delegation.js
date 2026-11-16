@@ -171,6 +171,7 @@ const iconArea = document.querySelector("#iconArea");
 const iconResult = document.querySelector("#iconResult");
 
 iconArea.addEventListener("click", function(event) {
+    // const button = event.target.matches(".icon-btn");
     const button = event.target.closest(".icon-btn");
 
     console.log("target: " + event.target.tagName + " / 찾은 버튼: " + (button ? button.dataset.menu : null));

@@ -307,6 +307,9 @@ console.log(title.textContent);
 // console.log(Array.isArray(collection)); // false
 // console.log(Array.isArray(nodeList));   // false
 
+// 배열로 변경
+// Array.from(collection)
+// Array.from(nodeList)
 
 /*
     < 8. 요소에 접근하는 방법
