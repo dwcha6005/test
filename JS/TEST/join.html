@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입</title>
+<style>
+	* { box-sizing: border-box; }
+	body {
+		margin: 0;
+		padding: 40px 16px;
+		font-family: system-ui, -apple-system, "Malgun Gothic", sans-serif;
+		font-size: 14px;
+		color: #222;
+		background: #f5f6f8;
+	}
+	.container {
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 32px;
+		background: #fff;
+		border: 1px solid #e3e5e8;
+		border-radius: 8px;
+	}
+	h1 { margin: 0 0 24px; font-size: 22px; text-align: center; }
+	table { width: 100%; border-collapse: collapse; }
+	th, td { padding: 10px 8px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; }
+	th { width: 110px; padding-top: 16px; font-weight: 600; }
+
+	input[type="text"], input[type="password"], select, textarea {
+		padding: 6px 8px;
+		font: inherit;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+	input[type="text"]:read-only { background: #f0f0f0; }
+	textarea { width: 100%; resize: vertical; }
+	button {
+		padding: 6px 12px;
+		font: inherit;
+		background: #fff;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	button[type="submit"] { color: #fff; background: #2f6feb; border-color: #2f6feb; }
+	.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+	.row:last-child { margin-bottom: 0; }
+
+	/* 검증 메세지 */
+	.msg { min-height: 18px; margin-top: 4px; font-size: 13px; }
+	.msg.success { color: #1a7f37; }
+	.msg.warning { color: #c27c00; }
+	.msg.error   { color: #d1242f; }
+
+	.buttons { display: flex; gap: 8px; justify-content: center; padding-top: 24px; }
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>회원가입</h1>
+		<form id="joinForm" name="joinForm" action="" method="post">
+			<table>
+				<tr>
+					<th><label for="userName">이름</label></th>
+					<td><input type="text" id="userName" name="name"></td>
+				</tr>
+				<tr>
+					<th><label for="userId">ID</label></th>
+					<td>
+						<input type="text" id="userId" name="id" placeholder="4 ~ 8글자 사이 입력">
+						<div class="msg" id="checkIdResult"></div>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="passwd">비밀번호</label></th>
+					<td>
+						<input type="password" id="passwd" name="passwd" placeholder="8 ~ 16글자 사이 입력">
+						<div class="msg" id="checkPasswdResult"></div>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="passwd2">비밀번호확인</label></th>
+					<td>
+						<input type="password" id="passwd2">
+						<div class="msg" id="checkPasswd2Result"></div>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="jumin1">주민번호</label></th>
+					<td>
+						<div class="row">
+							<input type="text" id="jumin1" name="jumin1" size="8" maxlength="6" inputmode="numeric">
+							-
+							<input type="password" id="jumin2" name="jumin2" size="8" maxlength="7" inputmode="numeric">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td>
+						<div class="row">
+							<input type="text" id="postcode" name="postcode" size="6" readonly placeholder="우편번호">
+							<button type="button" id="btnSearchAddress">주소검색</button>
+						</div>
+						<div class="row">
+							<input type="text" id="address1" name="address1" size="36" readonly placeholder="기본주소">
+						</div>
+						<div class="row">
+							<input type="text" id="address2" name="address2" size="36" placeholder="상세주소">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="email1">E-Mail</label></th>
+					<td>
+						<div class="row">
+							<input type="text" id="email1" name="email1" size="10">
+							@
+							<input type="text" id="email2" name="email2" size="12">
+							<select id="emailDomain">
+								<option value="">직접입력</option>
+								<option value="naver.com">naver.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="gmail.com">gmail.com</option>
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="job">직업</label></th>
+					<td>
+						<select id="job" name="job">
+							<option value="">항목을 선택하세요</option>
+							<option value="dev">개발자</option>
+							<option value="db">DB엔지니어</option>
+							<option value="admin">관리자</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>성별</th>
+					<td>
+						<label><input type="radio" name="gender" value="M"> 남</label>
+						<label><input type="radio" name="gender" value="F" checked> 여</label>
+					</td>
+				</tr>
+				<tr>
+					<th>취미</th>
+					<td>
+						<label><input type="checkbox" id="hobby1" name="hobby" value="travel"> 여행</label>
+						<label><input type="checkbox" id="hobby2" name="hobby" value="reading"> 독서</label>
+						<label><input type="checkbox" id="hobby3" name="hobby" value="game"> 게임</label>
+						<label><input type="checkbox" id="checkAll"> 전체선택</label>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="motivation">가입동기</label></th>
+					<td>
+						<textarea id="motivation" name="motivation" rows="5"></textarea>
+					</td>
+				</tr>
+			</table>
+
+			<div class="buttons">
+				<button type="submit">가입</button>
+				<button type="reset">초기화</button>
+				<button type="button" id="btnBack">돌아가기</button>
+			</div>
+		</form>
+	</div>
+
+	<!-- 카카오(다음) 우편번호 API (https://postcode.map.daum.net/guide) -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" defer></script>
+	<!-- 모든 이벤트 처리는 join.js 에서 수행 (defer: HTML 파싱 완료 후 순서대로 실행) -->
+	<script src="join.js" defer></script>
+</body>
+</html>
