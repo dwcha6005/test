@@ -408,6 +408,9 @@ const itemInput = document.querySelector("#itemInput");
 const addBtn = document.querySelector("#addBtn");
 const todoList = document.querySelector("#todoList");
 
+itemInput.addEventListener("keyup", function(e){ 
+    if(e.key === 'Enter') addBtn.click() 
+})
 addBtn.addEventListener("click", function () {
     const text = itemInput.value.trim();
 
