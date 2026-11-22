@@ -1,9 +1,9 @@
 /*
 =====================================================================================
-[수업 콘티] 11_Form_WebStorage / 03. Web Storage              권장 90분 (설명 50 + 실습 40)
+[수업 콘티] 12_web_storage / 01. Web Storage              권장 90분 (설명 50 + 실습 40)
 =====================================================================================
 < 준비 >
-- 03_web_storage.html을 열고 F12 → Application 탭 → Local Storage → file:// 항목을 펼쳐 둔다.
+- 01_web_storage.html을 열고 F12 → Application 탭 → Local Storage → file:// 항목을 펼쳐 둔다.
   (Console 탭과 Application 탭을 번갈아 보여 준다.)
 - 이 파일은 열 때마다 visitCount가 1씩 증가한다. demo로 시작하는 key는 저장 후 바로 삭제된다.
 - 주의 : [clear] 버튼은 같은 PC의 다른 실습 파일 저장값까지 모두 지운다.
@@ -55,7 +55,7 @@
 - JSON.parse(null)은 null → || [] 기본값을 빼먹으면 null.push()에서 오류
 - "다른 사이트에서 내 localStorage를 볼 수 있나요?" → 같은 출처(사이트)만 접근 가능
 
-< 실습 연결 : 03_web_storage_test.html / .js (쇼핑몰 개인화) >
+< 실습 연결 : 01_web_storage_test.html / .js (쇼핑몰 개인화) >
 - 섹션 4까지 : 문제 1 ~ 4
 - 섹션 8까지 : 문제 5 ~ 7
 - 수업 마지막 : 문제 8 ~ 10 (최근 본 상품, 찜 토글, 리뷰 임시 저장)
@@ -65,7 +65,7 @@
 
 
 /*
-    03_web_storage.js
+    01_web_storage.js
 
     < 1. Web Storage란? >
 

@@ -1,9 +1,9 @@
 # 04. 미션 - 메모장을 Vite + 모듈 + json-server로 옮기기
 
 > **[수업 콘티]** 권장 40분 + 과제
-> 11_Form_WebStorage/04_memo_app 메모장을 아래처럼 바꾼다.
+> 12_web_storage/02_memo_app 메모장을 아래처럼 바꾼다.
 >
-> | 항목 | 변경 전 (11-04) | 변경 후 (이번 미션) |
+> | 항목 | 변경 전 (12-02) | 변경 후 (이번 미션) |
 > |---|---|---|
 > | 실행 | html 파일 더블클릭 | `npm run dev` (Vite) |
 > | 파일 | memo_app.js 한 파일 | main.js / api.js / render.js 로 분리 (모듈) |
@@ -31,7 +31,7 @@ npm install -D json-server
 
 ## 단계 2. db.json 만들기
 
-프로젝트 최상위에 만든다. 메모 하나의 모양은 11-04와 같다.
+프로젝트 최상위에 만든다. 메모 하나의 모양은 12-02와 같다.
 
 ```json
 {
@@ -48,7 +48,7 @@ npm install -D json-server
 
 ## 단계 3. index.html
 
-11-04의 `<body>` 내용(폼, 검색, 목록)을 Vite의 `index.html`에 옮기고, 스크립트를 아래처럼 연결한다.
+12-02의 `<body>` 내용(폼, 검색, 목록)을 Vite의 `index.html`에 옮기고, 스크립트를 아래처럼 연결한다.
 
 ```html
 <script type="module" src="/src/main.js"></script>
@@ -60,13 +60,13 @@ CSS는 `src/style.css`로 옮긴다. (main.js에서 `import "./style.css";` 또�
 
 ## 단계 4. api.js - 서버 요청만 담당하는 모듈
 
-13_fetch의 `request()` 함수를 옮기고, 메모용 함수를 **export** 한다.
+14_fetch의 `request()` 함수를 옮기고, 메모용 함수를 **export** 한다.
 
 ```js
 // src/api.js
 const BASE_URL = "http://localhost:3000";
 
-async function request(method, path, data) { /* 13_fetch 02 섹션 5와 동일 */ }
+async function request(method, path, data) { /* 14_fetch 02 섹션 5와 동일 */ }
 
 export function getMemos() { ... }              // GET    /memos
 export function createMemo(memo) { ... }        // POST   /memos
@@ -80,7 +80,7 @@ export function deleteMemo(id) { ... }          // DELETE /memos/:id
 
 ## 단계 5. render.js - 화면 그리기만 담당하는 모듈
 
-11-04의 `render()`를 옮긴다. 단, **데이터를 매개변수로 받도록** 바꾼다.
+12-02의 `render()`를 옮긴다. 단, **데이터를 매개변수로 받도록** 바꾼다.
 
 ```js
 // src/render.js

@@ -8,5 +8,5 @@ function Header() {
   );
 }
 
-// 다른 파일에서 import 할 수 있도록 내보내기 (14_module_vite 01에서 배운 default export)
+// 다른 파일에서 import 할 수 있도록 내보내기 (15_module_vite 01에서 배운 default export)
 export default Header;

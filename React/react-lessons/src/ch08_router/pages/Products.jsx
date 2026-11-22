@@ -12,7 +12,7 @@ import { products } from "../data.js";
   setSearchParams({ sort: "name" }) → 주소가 /products?sort=name 으로 바뀐다.
 
   정렬, 검색, 페이지 번호처럼 "새로고침하거나 주소를 공유해도 유지되어야 하는 상태"는
-  useState 대신 쿼리 스트링에 저장한다. (13_fetch 01의 쿼리 스트링과 같은 개념)
+  useState 대신 쿼리 스트링에 저장한다. (14_fetch 01의 쿼리 스트링과 같은 개념)
 */
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();

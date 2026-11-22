@@ -42,7 +42,7 @@
   - filtered는 state가 아니라 계산된 값 (ch06 [순서08])
 
 [순서08] localStorage 저장 (5분)
-  - useEffect([todos])로 저장 → 11_Form_WebStorage 03의 "바뀌면 저장, 열리면 불러오기"
+  - useEffect([todos])로 저장 → 12_web_storage 01의 "바뀌면 저장, 열리면 불러오기"
   - 시연 : 개발자 도구 Application 탭에서 react-todos 확인, 새로고침해도 유지
 
 실습 (25분) : Practice.jsx 문제 1 ~ 4

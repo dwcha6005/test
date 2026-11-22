@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
   [순서01] useEffect 기본 - 렌더링 "후"에 실행되는 코드
   [순서02] 의존성 배열 - 언제 다시 실행할지 정하기
   [순서03] 정리(cleanup) 함수 - 타이머 정리, 화면에서 사라질 때
-  [순서04] 서버 데이터 불러오기 - fetch + 로딩 / 에러 (13_fetch 연결)
+  [순서04] 서버 데이터 불러오기 - fetch + 로딩 / 에러 (14_fetch 연결)
   [순서05] 값이 바뀔 때마다 다시 요청하기 + 늦게 온 응답 무시
   [순서06] useRef - DOM 요소 접근 (포커스)
   [순서07] useRef - 렌더링과 상관없는 값 저장
@@ -104,7 +104,7 @@ function Step02() {
   - 컴포넌트가 화면에서 사라질 때(언마운트)
   - 의존성 값이 바뀌어 effect가 다시 실행되기 직전
 
-  정리하지 않으면 컴포넌트가 사라져도 타이머가 계속 돌아간다. (12_async 01의 clearInterval과 같은 이유)
+  정리하지 않으면 컴포넌트가 사라져도 타이머가 계속 돌아간다. (13_async 01의 clearInterval과 같은 이유)
 */
 function Clock() {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
@@ -138,7 +138,7 @@ function Step03() {
 
 
 /*
-  [순서04] 서버 데이터 불러오기 (13_fetch + 12_async 03의 3가지 상태)
+  [순서04] 서버 데이터 불러오기 (14_fetch + 13_async 03의 3가지 상태)
 
   - 처음 화면에 나타날 때 한 번 불러온다. → 의존성 배열 []
   - useEffect의 함수 자체에는 async를 붙일 수 없다.
@@ -190,7 +190,7 @@ function Step04() {
   [순서05] 값이 바뀔 때마다 다시 요청 + 늦게 온 응답 무시
 
   - userId가 바뀔 때마다 게시글을 다시 불러온다. → [userId]
-  - 회원을 빠르게 바꾸면 이전 요청의 응답이 늦게 와서 화면을 덮어쓸 수 있다. (12_async 03 [순서7])
+  - 회원을 빠르게 바꾸면 이전 요청의 응답이 늦게 와서 화면을 덮어쓸 수 있다. (13_async 03 [순서7])
     → 정리 함수에서 ignore = true 로 표시하고, 응답이 왔을 때 ignore면 무시한다.
 */
 function Step05() {

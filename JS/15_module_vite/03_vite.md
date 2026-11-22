@@ -4,7 +4,7 @@
 > 준비 : Node.js 20.19+ (또는 22.12+) 설치 확인 (`node -v`), 인터넷 연결 (패키지 설치)
 > 진행 방식 : 강사가 한 단계씩 실행 → 학생이 따라 실행 → 결과 확인 후 다음 단계
 > 목표 : React 수업 첫날 쓰는 명령(`npm create vite`, `npm run dev`)을 미리 익숙하게 만들고,
-> json-server로 **실제로 저장되는 서버**를 만들어 13_fetch의 게시판과 연결한다.
+> json-server로 **실제로 저장되는 서버**를 만들어 14_fetch의 게시판과 연결한다.
 
 ---
 
@@ -25,7 +25,7 @@ React 수업에서도 `npm create vite@latest`로 프로젝트를 만든다. 오
 
 ## 2. 프로젝트 만들기 (10분)
 
-작업할 폴더(예 : `D:\Git\JS\14_module_vite`)에서 터미널을 열고 실행한다.
+작업할 폴더(예 : `D:\Git\JS\15_module_vite`)에서 터미널을 열고 실행한다.
 
 ```bash
 npm create vite@latest my-vite-app
@@ -171,7 +171,7 @@ npm run preview
 
 ## 8. json-server : 진짜로 저장되는 연습 서버 (15분) ★
 
-13_fetch의 JSONPlaceholder는 저장이 안 됐다. json-server는 **db.json 파일 하나를 실제 REST API 서버로** 만들어 준다.
+14_fetch의 JSONPlaceholder는 저장이 안 됐다. json-server는 **db.json 파일 하나를 실제 REST API 서버로** 만들어 준다.
 
 ### 8-1. 설치
 
@@ -210,7 +210,7 @@ npm install -D json-server
 
 브라우저에서 `http://localhost:3000/posts` 를 열면 db.json의 내용이 보인다.
 
-### 8-5. 만들어지는 API (13_fetch에서 배운 그대로)
+### 8-5. 만들어지는 API (14_fetch에서 배운 그대로)
 
 | 메서드 | URL | 동작 |
 |---|---|---|
@@ -227,7 +227,7 @@ npm install -D json-server
 `npm install json-server`로 설치되는 현재 버전(v1)은 **id를 문자열**로 만든다. (예 : `"id": "a3f9"`)
 
 ```js
-// 13_fetch 코드처럼 Number()로 바꾸면 비교가 실패한다
+// 14_fetch 코드처럼 Number()로 바꾸면 비교가 실패한다
 const id = button.closest(".post").dataset.id;   // 문자열 그대로 사용
 const post = posts.find((p) => p.id === id);
 ```
@@ -236,9 +236,9 @@ const post = posts.find((p) => p.id === id);
 
 ---
 
-## 9. 13_fetch 게시판을 json-server로 바꾸기 (10분)
+## 9. 14_fetch 게시판을 json-server로 바꾸기 (10분)
 
-`13_fetch/02_fetch_crud.js`의 섹션 6을 Vite 프로젝트의 `src/main.js`로 옮기고 아래 3곳만 바꾼다.
+`14_fetch/02_fetch_crud.js`의 섹션 6을 Vite 프로젝트의 `src/main.js`로 옮기고 아래 3곳만 바꾼다.
 
 | 바꿀 곳 | 변경 전 | 변경 후 |
 |---|---|---|
@@ -276,4 +276,4 @@ npm run dev
 - "fetch가 Failed to fetch예요" → json-server 터미널(`npm run api`)이 켜져 있는지 확인
 - "db.json을 고쳤는데 반영이 안 돼요" → json-server 터미널을 껐다 다시 켠다.
 
-**실습 연결** : 04_mission.md (11-04 메모장을 Vite + 모듈 + json-server로 옮기기)
+**실습 연결** : 04_mission.md (12-02 메모장을 Vite + 모듈 + json-server로 옮기기)

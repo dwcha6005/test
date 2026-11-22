@@ -21,7 +21,7 @@ import "./ch07.css";
   [순서05] 목록과 항목                          → components/TodoList.jsx, TodoItem.jsx
   [순서06] 완료 토글, 삭제 (onToggle, onDelete)
   [순서07] 검색과 필터                          → components/TodoList.jsx
-  [순서08] localStorage에 저장 (useEffect)      → 11_Form_WebStorage 03 복습
+  [순서08] localStorage에 저장 (useEffect)      → 12_web_storage 01 복습
 
 
   [순서01] 화면 설계

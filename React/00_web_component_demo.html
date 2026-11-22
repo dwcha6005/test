@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Components 데모 - React 첫 시간</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 0 16px 40px; }
+        section { border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; }
+        .cards { display: flex; gap: 12px; }
+
+        /* 페이지의 .title은 빨간색 → 카드 안의 .title에는 적용될까? (3번) */
+        .title { color: crimson; }
+    </style>
+</head>
+<body>
+    <h1 class="title">Web Components 데모</h1>
+
+    <section>
+        <h2>1. 가장 간단한 나만의 태그</h2>
+        <hello-message></hello-message>
+        <hello-message></hello-message>
+    </section>
+
+    <section>
+        <h2>2. 속성으로 내용 바꾸기 (= React의 props)</h2>
+        <div class="cards">
+            <product-card id="card1" name="텀블러" price="12000"></product-card>
+            <product-card name="머그컵" price="8500"></product-card>
+            <product-card name="보온병" price="23000"></product-card>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. 스타일 격리 (Shadow DOM)</h2>
+        <p>위 페이지 제목 <code>.title</code>은 빨간색인데, 카드 안의 <code>.title</code>은 파란색이다.</p>
+        <p>→ 카드 안의 스타일은 바깥과 섞이지 않는다.</p>
+    </section>
+
+    <section>
+        <h2>4. 한계 - 데이터가 바뀌면?</h2>
+        <button type="button" id="changePrice">텀블러 가격을 15000으로 변경</button>
+        <p id="result"></p>
+    </section>
+
+    <script>
+        // ------------------------------------------------------------------
+        // 1. 가장 간단한 나만의 태그
+        //    ① HTMLElement를 상속한 class를 만들고
+        //    ② connectedCallback(화면에 붙을 때 실행)에서 내용을 넣고
+        //    ③ customElements.define("태그-이름", class) 로 등록한다.
+        //    ※ 태그 이름에는 반드시 하이픈(-)이 있어야 한다.
+        // ------------------------------------------------------------------
+        class HelloMessage extends HTMLElement {
+            connectedCallback() {
+                this.textContent = "안녕하세요! 저는 <hello-message> 태그입니다.";
+            }
+        }
+
+        customElements.define("hello-message", HelloMessage);
+
+
+        // ------------------------------------------------------------------
+        // 2, 3. 속성(name, price)을 받는 카드 + 스타일 격리
+        //    getAttribute()로 속성을 읽는다. (React에서는 props로 받는다)
+        //    attachShadow() : 카드 안쪽을 바깥과 분리된 공간(Shadow DOM)으로 만든다.
+        // ------------------------------------------------------------------
+        class ProductCard extends HTMLElement {
+            connectedCallback() {
+                const name = this.getAttribute("name");
+                const price = Number(this.getAttribute("price"));
+
+                const shadow = this.attachShadow({ mode: "open" });
+                shadow.innerHTML = `
+                    <style>
+                        .card  { width: 140px; padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
+                        .title { margin: 0; font-weight: bold; color: royalblue; }
+                    </style>
+                    <div class="card">
+                        <p class="title">${name}</p>
+                        <p>${price.toLocaleString()}원</p>
+                    </div>
+                `;
+            }
+        }
+
+        customElements.define("product-card", ProductCard);
+
+
+        // ------------------------------------------------------------------
+        // 4. 한계 : 속성(데이터)을 바꿔도 화면은 그대로다.
+        //    화면을 다시 그리는 코드를 우리가 직접 더 작성해야 한다.
+        //    React는 state만 바꾸면 화면이 자동으로 다시 그려진다. → 이것이 React를 쓰는 이유
+        // ------------------------------------------------------------------
+        document.querySelector("#changePrice").addEventListener("click", function () {
+            const card = document.querySelector("#card1");
+            card.setAttribute("price", "15000");
+
+            document.querySelector("#result").textContent =
+                "price 속성 : " + card.getAttribute("price") + " → 그런데 카드의 가격은 그대로다!";
+        });
+    </script>
+</body>
+</html>

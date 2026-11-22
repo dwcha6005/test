@@ -1,13 +1,13 @@
 /*
 =====================================================================================
-[수업 콘티] 13_fetch / 01. HTTP와 fetch (GET)                 권장 150분 (설명 80 + 실습 70)
+[수업 콘티] 14_fetch / 01. HTTP와 fetch (GET)                 권장 150분 (설명 80 + 실습 70)
 =====================================================================================
 < 준비 >
 - 인터넷 연결 필수. 01_fetch_get.html을 열고 F12 → Network 탭, Console 탭.
 - 사용하는 연습용 API (회원가입, 키 필요 없음)
   · JSONPlaceholder : https://jsonplaceholder.typicode.com  (게시글, 회원, 할 일)
   · DummyJSON       : https://dummyjson.com                 (상품 검색, 페이지)
-- 12_async의 api.getUsers()가 오늘부터 진짜 서버 요청으로 바뀐다고 소개한다.
+- 13_async의 api.getUsers()가 오늘부터 진짜 서버 요청으로 바뀐다고 소개한다.
 
 < 진행 순서 >
 1) HTTP 개념 (15분) - 섹션 1
@@ -32,7 +32,7 @@
 5) 목록 + 3가지 상태 (10분) - 섹션 5
    ▶ 시연 : [게시글 10개] → "불러오는 중..." → 10개 목록
             Network 탭 상단 "No throttling" → "Slow 3G"로 바꾸고 다시 → 로딩 상태가 길게 보임 → 원복
-   ▶ 포인트 : 12_async 03의 상태 패턴과 완전히 같다. api.getXxx()가 fetch로 바뀐 것뿐
+   ▶ 포인트 : 13_async 03의 상태 패턴과 완전히 같다. api.getXxx()가 fetch로 바뀐 것뿐
 
 6) 실패 상황 (15분) - 섹션 6, 7  ★ 가장 많이 틀리는 부분
    ▶ 시연 : [999번 게시글] → "요청 실패 (404)"
@@ -55,8 +55,8 @@
 < 예상 질문 / 자주 막히는 곳 >
 - await response.json()에서 await를 빼먹음 → Promise가 들어감
 - "CORS 오류가 나요" → 서버가 허용하지 않은 곳에서의 요청. 오늘 쓰는 API는 모두 허용되어 있다.
-  (학원 네트워크에서 API가 막혀 있으면 12_async의 fake_api.js로 대신 진행)
-- 로컬 JSON 파일을 fetch("data.json")로 읽으면 file://에서는 막힌다 → 14_module_vite에서 서버로 실행
+  (학원 네트워크에서 API가 막혀 있으면 13_async의 fake_api.js로 대신 진행)
+- 로컬 JSON 파일을 fetch("data.json")로 읽으면 file://에서는 막힌다 → 15_module_vite에서 서버로 실행
 
 < 실습 연결 : 01_fetch_get_test.html / .js (회원 · 게시판 · 상품 조회) >
 - 섹션 5까지 : 문제 1 ~ 4
@@ -137,7 +137,7 @@ const BASE_URL = "https://jsonplaceholder.typicode.com";
     - response.ok     : 상태 코드가 200 ~ 299이면 true
     - response.json() : 본문을 객체로 변환 (Promise 반환 → await 필요)
 
-    fetch는 Promise를 반환한다. → 12_async에서 배운 async / await 그대로 사용
+    fetch는 Promise를 반환한다. → 13_async에서 배운 async / await 그대로 사용
 */
 
 document.querySelector("#basicBtn").addEventListener("click", async function() {
@@ -161,7 +161,7 @@ document.querySelector("#basicBtn").addEventListener("click", async function() {
 /*
     < 5. 목록 + 로딩 / 성공 / 에러 >
 
-    12_async 03의 패턴과 같다. api.getUsers() 자리에 fetch가 들어갔을 뿐이다.
+    13_async 03의 패턴과 같다. api.getUsers() 자리에 fetch가 들어갔을 뿐이다.
     URL 끝의 ?_limit=10 은 "10개만 달라"는 조건이다. (섹션 9에서 자세히)
 */
 

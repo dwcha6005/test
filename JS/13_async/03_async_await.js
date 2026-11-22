@@ -1,6 +1,6 @@
 /*
 =====================================================================================
-[수업 콘티] 12_async / 03. async / await                     권장 150분 (설명 80 + 실습 70)
+[수업 콘티] 13_async / 03. async / await                     권장 150분 (설명 80 + 실습 70)
 =====================================================================================
 < 준비 >
 - 03_async_await.html을 열고 F12 → Console 탭.
@@ -180,7 +180,7 @@ awaitBtn.addEventListener("click", async function() {
     2) 상태에 맞게 화면을 그리는 함수(renderWeather)를 만든다.
     3) 요청 흐름에서는 상태만 바꾸고 renderWeather()를 호출한다.
 
-    → React의 useState + 렌더링 방식과 같은 구조이다. (11-04 메모장의 data → render와도 같다)
+    → React의 useState + 렌더링 방식과 같은 구조이다. (12-02 메모장의 data → render와도 같다)
 */
 
 const citySelect = document.querySelector("#citySelect");

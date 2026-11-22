@@ -161,7 +161,7 @@ function Step03() {
   수정    todos[i].done = true            todos.map((t) => t.id === id ? { ...t, done: !t.done } : t)
 
   push, splice는 배열 주소가 그대로라서 React가 바뀐 것을 알지 못한다.
-  → 12_async 이전에 배운 map / filter / 전개 연산자가 여기서 매일 쓰인다.
+  → 13_async 이전에 배운 map / filter / 전개 연산자가 여기서 매일 쓰인다.
 */
 function Step04to06() {
   const [todos, setTodos] = useState([

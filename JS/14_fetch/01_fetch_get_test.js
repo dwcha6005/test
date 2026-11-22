@@ -94,7 +94,7 @@ URL : https://dummyjson.com/products/search?q=검색어&limit=5&select=title,pri
 
 ③ 취소로 인한 실패(error.name === "AbortError")는 화면에 에러로 표시하지 마시오.
 ④ liveStatus에 "검색 중..." / "5건" / "검색 결과 없음"을 표시하시오. 빈 검색어면 모두 비우시오.
-⑤ 12_async의 "요청 번호" 방식과 비교하여 장점을 주석으로 작성하시오.
+⑤ 13_async의 "요청 번호" 방식과 비교하여 장점을 주석으로 작성하시오.
 
 
 < 문제 10. 대시보드 - 일부 실패해도 나머지 표시 >
