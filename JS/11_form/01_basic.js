@@ -224,9 +224,10 @@ form.addEventListener("submit", function(event) {
 
 form.addEventListener("submit", function() {
     const formData = new FormData(form);
-
+    
     console.log("get :", formData.get("customerName"));
     console.log("getAll :", formData.getAll("services"));
+    console.log(formData)
     console.log("객체 :", Object.fromEntries(formData));
 });
 
