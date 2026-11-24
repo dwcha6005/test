@@ -58,7 +58,7 @@ const Welcome = () => {
   return <p>화살표 함수로 만든 컴포넌트입니다.</p>;
 };
 
-function Step02() {
+function Basic() { // [순서02]
   return (
     <section>
       <h2>[순서02] 컴포넌트</h2>
@@ -90,7 +90,7 @@ function Step02() {
 
   4. 주석은 { /* 주석 *\/ } 형태로 작성한다.
 */
-function Step03() {
+function Rules() { // [순서03]
   return (
     // Fragment : 여러 요소를 묶지만 실제 HTML에는 아무 태그도 생기지 않는다.
     <>
@@ -125,7 +125,7 @@ function Step03() {
   - 배열 : 요소를 이어서 표시 (["a","b"] → ab)
   - 객체 : 오류! → obj.name 처럼 속성을 꺼내서 표시해야 함
 */
-function Step04() {
+function Expr() { // [순서04]
   const n1 = 10;
   const n2 = 20;
   const name = "홍길동";
@@ -185,7 +185,7 @@ function Grade({ score }) {
   return <p>{score}점 : 재시험 대상</p>;
 }
 
-function Step05() {
+function Cond() { // [순서05]
   const num = 19;
   const isLogin = false;
   const unread = 0;
@@ -235,7 +235,7 @@ function Step05() {
 
   3) 조건에 따라 스타일 바꾸기 : 삼항 연산자 활용
 */
-function Step06() {
+function Style() { // [순서06]
   const isError = true;
   const boxStyle = {
     backgroundColor: "#e0f2fe",
@@ -266,11 +266,11 @@ export default function App() {
     <div>
       <h1>ch01. React 시작과 JSX</h1>
       <p>[순서01]은 주석으로 설명합니다. (프로젝트 구조와 실행 흐름)</p>
-      <Step02 />
-      <Step03 />
-      <Step04 />
-      <Step05 />
-      <Step06 />
+      <Basic />
+      <Rules />
+      <Expr />
+      <Cond />
+      <Style />
     </div>
   );
 }

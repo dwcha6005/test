@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 /*
-  ch13 실습 - Next.js 상품 페이지
+  ch01 실습 - Next.js 상품 페이지
 
   사용 API : https://dummyjson.com/products?limit=12&select=title,price,category,description
              https://dummyjson.com/products/1
@@ -30,7 +30,7 @@ import Link from "next/link";
 export default function PracticePage() {
   return (
     <main>
-      <h1>ch13 실습</h1>
+      <h1>ch01 실습</h1>
       <p>문제는 이 파일(app/practice/page.js)의 주석을 확인하세요.</p>
       <Link href="/practice/products">정답 확인 : 상품 목록 →</Link>
     </main>

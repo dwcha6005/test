@@ -2,7 +2,7 @@ import ProductSearch from "@/components/ProductSearch";
 
 // < 문제 1, 3 ① >
 export const metadata = {
-  title: "상품 목록 | ch13 실습",
+  title: "상품 목록 | ch01 실습",
 };
 
 export default async function ProductsPage() {

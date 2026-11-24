@@ -1,5 +1,5 @@
 /*
-  ch13. Next.js (App Router)
+  ch01. Next.js (App Router)
 
   [순서01] Next.js란? 설치와 실행                → 이 파일
   [순서02] 파일 기반 라우팅 (app 폴더)            → 이 파일, app/about/page.js
@@ -48,7 +48,7 @@
 export default function Home() {
   return (
     <main>
-      <h1>ch13. Next.js</h1>
+      <h1>ch01. Next.js</h1>
       <p>위 메뉴를 눌러 각 페이지를 확인하세요.</p>
       <ul>
         <li>소개 : 가장 단순한 페이지 (app/about/page.js)</li>

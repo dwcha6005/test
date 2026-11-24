@@ -4,15 +4,15 @@
 
 | 폴더 | 내용 | 실행 주소 |
 | --- | --- | --- |
-| `react-lessons` | ch01 ~ ch12 (Vite + React 19) | http://localhost:5173 |
-| `next-lessons` | ch13 Next.js (App Router) | http://localhost:3000 |
+| `react-lessons` | ch01 ~ ch13 (Vite + React 19) | http://localhost:5173 |
+| `next-lessons` | Next.js ch01 (App Router), 별도 프로젝트라 ch01부터 | http://localhost:3000 |
 
 ## 1. 실행 방법
 
 Node.js 22 LTS 이상을 권장한다. (Vite 8은 20.19 이상, Next.js 16은 20.9 이상이 필요하다)
 
 ```bash
-# 리액트 기초 ~ Redux
+# 리액트 기초 ~ 소셜 로그인
 cd react-lessons
 npm install      # 처음 한 번만
 npm run dev
@@ -53,9 +53,12 @@ import App from "./ch02_props/App.jsx";        // 수업 자료
 | Context API | ch10. Context API | `ch10_context` | 2 |
 | useReducer | ch11. useReducer | `ch11_reducer` | 1 |
 | 리덕스 | ch12. Redux, Redux Toolkit | `ch12_redux` | 2 |
-| Next.js | ch13. Next.js (App Router) | `next-lessons` | 2 |
+| 소셜 로그인 | ch13. 소셜 로그인 흉내 내기 (OAuth 흐름, 토큰 저장) | `ch13_social_login` | 2 |
+| Next.js | ch01. Next.js (App Router) | `next-lessons` | 2 |
 
-모두 합쳐 23교시다.
+모두 합쳐 25교시다.
+
+> ch13 소셜 로그인은 실제 카카오/구글/네이버 서버 없이 프론트엔드만으로 흐름을 흉내 낸 예제다. 실제 연결에는 앱 키 발급과 백엔드가 필요하다.
 
 할 일 앱은 이후 챕터에서도 계속 다시 만든다. 같은 기능을 다른 방식으로 바꿔 보면서 비교하는 흐름이다.
 
@@ -75,5 +78,5 @@ import App from "./ch02_props/App.jsx";        // 수업 자료
 
 ## 5. 외부 API
 
-- https://jsonplaceholder.typicode.com: 사용자, 게시글, 할 일 (ch06, ch11, ch12, ch13)
-- https://dummyjson.com: 상품 검색 (ch06 실습, ch12 실습, ch13 실습)
+- https://jsonplaceholder.typicode.com: 사용자, 게시글, 할 일 (ch06, ch11, ch12, Next.js ch01)
+- https://dummyjson.com: 상품 검색 (ch06 실습, ch12 실습, Next.js ch01 실습)

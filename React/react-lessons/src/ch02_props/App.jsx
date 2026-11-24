@@ -28,7 +28,7 @@ import Card from "./components/Card.jsx";
   - 문자열은 "따옴표", 그 외 값(변수, 숫자, 배열 ...)은 { } 로 전달한다.
   - 같은 컴포넌트에 다른 props를 주면 다른 내용이 표시된다. → 재사용
 */
-function Step02() {
+function Pass() { // [순서02]
   const myName = "홍길동";
 
   return (
@@ -48,7 +48,7 @@ function Step02() {
   두 번째 UserInfo에는 foodList를 보내지 않았다.
   → 기본값 [] 덕분에 오류 없이 "0개"로 표시된다.
 */
-function Step03() {
+function Destruct() { // [순서03]
   return (
     <section>
       <h2>[순서03] 구조 분해 + 기본값</h2>
@@ -65,7 +65,7 @@ function Step03() {
   props가 많을 때 객체로 만들어 {...객체} 로 전달할 수 있다.
   <UserInfo {...userData} />  ===  <UserInfo name={userData.name} location={userData.location} ... />
 */
-function Step04() {
+function Spread() { // [순서04]
   const userData = {
     name: "박민수",
     location: "제주",
@@ -102,9 +102,9 @@ function Product({ name, price, soldOut = false, tags = [], onBuy }) {
   );
 }
 
-function Step05() {
+function Types() { // [순서05]
   function handleBuy() {
-    alert("부모(Step05)의 함수가 실행되었습니다.");
+    alert("부모(Types)의 함수가 실행되었습니다.");
   }
 
   return (
@@ -120,7 +120,7 @@ function Step05() {
 /*
   [순서06] children → components/Card.jsx
 */
-function Step06() {
+function Children() { // [순서06]
   return (
     <section>
       <h2>[순서06] children</h2>
@@ -146,7 +146,7 @@ function Step06() {
   - 데이터는 항상 부모 → 자식 한 방향으로 흐른다.
   - 자식이 값을 바꾸고 싶으면 부모가 내려준 "함수"를 호출해서 부모에게 요청한다. (ch05)
 */
-function Step07() {
+function ReadOnly() { // [순서07]
   return (
     <section>
       <h2>[순서07] props는 읽기 전용</h2>
@@ -160,12 +160,12 @@ export default function App() {
   return (
     <div>
       <Header />
-      <Step02 />
-      <Step03 />
-      <Step04 />
-      <Step05 />
-      <Step06 />
-      <Step07 />
+      <Pass />
+      <Destruct />
+      <Spread />
+      <Types />
+      <Children />
+      <ReadOnly />
       <Footer />
     </div>
   );

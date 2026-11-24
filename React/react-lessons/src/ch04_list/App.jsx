@@ -25,7 +25,7 @@ import { useState } from "react";
   화살표 함수에서 { } 없이 바로 JSX를 쓰면 자동으로 return 된다.
   여러 줄이면 ( ) 로 감싼다.
 */
-function Step01() {
+function List() { // [순서01]
   const fruits = ["사과", "배", "포도"];
   const users = [
     { id: 1, name: "홍길동", age: 25 },
@@ -74,7 +74,7 @@ function Step01() {
   - index를 key로 쓴 목록 : 입력한 글자가 엉뚱한 항목에 붙어 있다.
   - id를 key로 쓴 목록     : 입력한 글자가 원래 항목에 그대로 있다.
 */
-function Step02() {
+function Key() { // [순서02]
   const [items, setItems] = useState([
     { id: 1, text: "첫 번째" },
     { id: 2, text: "두 번째" },
@@ -119,7 +119,7 @@ function Step02() {
   배열.filter(조건).map(...) 처럼 이어서 사용한다.
   결과가 없을 때의 화면도 함께 처리한다.
 */
-function Step03() {
+function Filter() { // [순서03]
   const products = [
     { id: 1, name: "무선 이어폰", price: 89000, soldOut: false },
     { id: 2, name: "기계식 키보드", price: 129000, soldOut: true },
@@ -163,7 +163,7 @@ function Step03() {
   push, splice는 배열 주소가 그대로라서 React가 바뀐 것을 알지 못한다.
   → 13_async 이전에 배운 map / filter / 전개 연산자가 여기서 매일 쓰인다.
 */
-function Step04to06() {
+function Todo() { // [순서04~06]
   const [todos, setTodos] = useState([
     { id: 1, text: "React 복습", done: false },
     { id: 2, text: "점심 먹기", done: true },
@@ -227,7 +227,7 @@ function Step04to06() {
   - 이전 값을 기준으로 새 값을 만들 때는 함수형 업데이트를 쓰는 것이 안전하다.
     setTodos((prev) => [...prev, newTodo]);
 */
-function Step07() {
+function Update() { // [순서07]
   const [count, setCount] = useState(0);
 
   const plusThreeWrong = () => {
@@ -269,7 +269,7 @@ function ContactItem({ contact, onDelete }) {
   );
 }
 
-function Step08() {
+function Contacts() { // [순서08]
   const [contacts, setContacts] = useState([
     { id: 1, name: "홍길동", phone: "010-1111-2222" },
     { id: 2, name: "김철수", phone: "010-3333-4444" },
@@ -296,12 +296,12 @@ export default function App() {
   return (
     <div>
       <h1>ch04. 목록 렌더링과 배열 State</h1>
-      <Step01 />
-      <Step02 />
-      <Step03 />
-      <Step04to06 />
-      <Step07 />
-      <Step08 />
+      <List />
+      <Key />
+      <Filter />
+      <Todo />
+      <Update />
+      <Contacts />
     </div>
   );
 }

@@ -258,7 +258,7 @@
       주소별 화면   → React Router (ch08)
       스타일        → styled-components (ch09)
       전역 상태     → Context API (ch10), useReducer (ch11), Redux (ch12)
-  - 이것들을 처음부터 한 세트로 묶어 둔 "프레임워크" → Next.js (ch13)
+  - 이것들을 처음부터 한 세트로 묶어 둔 "프레임워크" → Next.js (next-lessons 프로젝트)
 
 < 개발 도구 >
   - 브라우저는 JSX를 모른다. → Vite가 JSX를 일반 JS로 바꿔서 보여 준다.
@@ -276,7 +276,8 @@
   ch01 JSX → ch02 props → ch03 state/이벤트 → ch04 목록 → ch05 state 끌어올리기
   → ch06 useEffect/useRef → ch07 종합 할 일 앱
   → ch08 Router → ch09 styled-components → ch10 Context → ch11 useReducer → ch12 Redux
-  → ch13 Next.js
+  → ch13 소셜 로그인 흉내 (Router + Context + Web Storage 종합)
+  → Next.js (별도 프로젝트 next-lessons, ch01부터)
 
 
 =====================================================================

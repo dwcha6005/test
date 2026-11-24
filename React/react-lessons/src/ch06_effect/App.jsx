@@ -29,13 +29,13 @@ const API = "https://jsonplaceholder.typicode.com";
   그 밖의 작업(서버 요청, 타이머, document.title 변경 등)을 "부수 효과(side effect)"라고 하며
   useEffect 안에서 처리한다.
 */
-function Step01() {
+function Basic() { // [순서01]
   const [count, setCount] = useState(0);
 
-  console.log("[Step01] 1. 렌더링 중 (화면 그리기 전)");
+  console.log("[Basic] 1. 렌더링 중 (화면 그리기 전)");
 
   useEffect(() => {
-    console.log("[Step01] 2. useEffect 실행 (화면 그린 후)");
+    console.log("[Basic] 2. useEffect 실행 (화면 그린 후)");
     document.title = `클릭 ${count}회`;
   });
 
@@ -58,7 +58,7 @@ function Step01() {
 
   effect 안에서 사용하는 state, props는 의존성 배열에 넣는다.
 */
-function Step02() {
+function Deps() { // [순서02]
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
   const [logs, setLogs] = useState([]);
@@ -124,7 +124,7 @@ function Clock() {
   return <p style={{ fontSize: 22, fontWeight: "bold" }}>{time}</p>;
 }
 
-function Step03() {
+function Cleanup() { // [순서03]
   const [show, setShow] = useState(true);
 
   return (
@@ -145,7 +145,7 @@ function Step03() {
     → 안에서 async 함수를 만들고 바로 호출한다.
   - 로딩 / 성공 / 에러 상태를 각각 state로 관리한다.
 */
-function Step04() {
+function Users() { // [순서04]
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -193,7 +193,7 @@ function Step04() {
   - 회원을 빠르게 바꾸면 이전 요청의 응답이 늦게 와서 화면을 덮어쓸 수 있다. (13_async 03 [순서7])
     → 정리 함수에서 ignore = true 로 표시하고, 응답이 왔을 때 ignore면 무시한다.
 */
-function Step05() {
+function Posts() { // [순서05]
   const [userId, setUserId] = useState(1);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -258,7 +258,7 @@ function Step05() {
     화면만 비워지고 text state에는 이전 값이 남아 있어서, 다음 입력 때 이전 내용이 다시 나타난다.
     → 입력창 비우기는 setText("") 로 한다.
 */
-function Step06() {
+function Focus() { // [순서06]
   const [text, setText] = useState("");
   const [list, setList] = useState([]);
   const inputRef = useRef(null);
@@ -303,7 +303,7 @@ function Step06() {
 
   사용 예 : 타이머 id 저장, 이전 값 기억, 화면에 보여 줄 필요 없는 횟수 세기
 */
-function Step07() {
+function RefBox() { // [순서07]
   const [count, setCount] = useState(0);
   const clickRef = useRef(0);
   let normal = 0;
@@ -346,13 +346,13 @@ export default function App() {
   return (
     <div>
       <h1>ch06. useEffect와 useRef</h1>
-      <Step01 />
-      <Step02 />
-      <Step03 />
-      <Step04 />
-      <Step05 />
-      <Step06 />
-      <Step07 />
+      <Basic />
+      <Deps />
+      <Cleanup />
+      <Users />
+      <Posts />
+      <Focus />
+      <RefBox />
     </div>
   );
 }

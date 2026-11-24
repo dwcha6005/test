@@ -12,7 +12,7 @@ async function getProduct(id) {
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const product = await getProduct(id);
-  return { title: product ? `${product.title} | ch13 실습` : "상품 없음" };
+  return { title: product ? `${product.title} | ch01 실습` : "상품 없음" };
 }
 
 export default async function ProductDetailPage({ params }) {

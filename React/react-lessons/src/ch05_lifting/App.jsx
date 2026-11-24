@@ -34,7 +34,7 @@ function BadViewer() {
   return <p>Viewer : count를 알 수 없음 → 항상 ???</p>;
 }
 
-function Step01() {
+function Separate() { // [순서01]
   return (
     <section>
       <h2>[순서01] 형제끼리는 state를 공유할 수 없다</h2>
@@ -71,7 +71,7 @@ function Step01() {
          자식(Viewer, Controller)도 함께 다시 렌더링된다.
          (Controller는 값이 바뀌지 않아도 다시 그려진다. 성능 최적화는 React.memo 등으로 나중에)
 */
-function Step03() {
+function Counter() { // [순서03]
   const [count, setCount] = useState(0);
 
   const handleClick = (value) => {
@@ -106,9 +106,9 @@ export default function App() {
   return (
     <div>
       <h1 style={{ fontSize: 22 }}>ch05. State 끌어올리기</h1>
-      <Step01 />
+      <Separate />
       <h2 style={{ fontSize: 17 }}>[순서02] ~ [순서03] Simple Counter</h2>
-      <Step03 />
+      <Counter />
     </div>
   );
 }

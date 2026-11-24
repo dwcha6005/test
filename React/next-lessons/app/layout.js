@@ -12,7 +12,7 @@ import "./globals.css";
 */
 export const metadata = {
   title: "Next.js 수업",
-  description: "ch13. Next.js App Router 기초",
+  description: "ch01. Next.js App Router 기초",
 };
 
 export default function RootLayout({ children }) {

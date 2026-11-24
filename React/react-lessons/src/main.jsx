@@ -13,11 +13,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 /* ---------------- 리액트 기초 ---------------- */
-// import App from "./ch01_jsx/App.jsx";
+import App from "./ch01_jsx/App.jsx";
 // import App from "./ch01_jsx/Practice.jsx";
 // import App from "./ch02_props/App.jsx";
 // import App from "./ch02_props/Practice.jsx";
-import App from "./ch03_state/App.jsx";
+// import App from "./ch03_state/App.jsx";
 // import App from "./ch03_state/Practice.jsx";
 // import App from "./ch04_list/App.jsx";
 // import App from "./ch04_list/Practice.jsx";
@@ -47,6 +47,10 @@ import App from "./ch03_state/App.jsx";
 /* ---------------- Redux Toolkit ---------------- */
 // import App from "./ch12_redux/App.jsx";
 // import App from "./ch12_redux/Practice.jsx";
+
+/* ---------------- 소셜 로그인 흉내 ---------------- */
+// import App from "./ch13_social_login/App.jsx";
+// import App from "./ch13_social_login/Practice.jsx";
 
 createRoot(document.getElementById("root")).render(
   // StrictMode : 개발할 때만 컴포넌트를 일부러 두 번 실행해서 실수를 찾아 준다.

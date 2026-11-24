@@ -26,7 +26,7 @@ import { useState } from "react";
       const handleClick = (e) => { e.target ... }
   - 컴포넌트 안에서만 쓰는 함수는 컴포넌트 함수 "안"에 선언한다.
 */
-function Step01() {
+function Click() { // [순서01]
   const handleClick = () => {
     alert("버튼 클릭!");
   };
@@ -68,7 +68,7 @@ function Step01() {
   - 순수 JS라면 document.querySelector(...).textContent = count 로 직접 바꿨다.
   → React에서는 State를 사용한다.
 */
-function Step02() {
+function Variable() { // [순서02]
   let count = 0;
 
   const onIncrease = () => {
@@ -98,11 +98,11 @@ function Step02() {
     훅 : 함수 컴포넌트에서 state 같은 React 기능을 쓸 수 있게 해 주는 함수
   - 훅은 컴포넌트 함수의 "맨 위"에서 호출한다. (if, for 안에서 호출 X)
 */
-function Step03() {
+function Counter() { // [순서03]
   const [count, setCount] = useState(0);
   const [isOn, setIsOn] = useState(false);
 
-  console.log("Step03 렌더링, count =", count);
+  console.log("Counter 렌더링, count =", count);
 
   return (
     <section>
@@ -132,7 +132,7 @@ function Step03() {
   - value만 쓰고 onChange를 빼면 입력이 안 된다. (React가 값을 고정)
   - React의 onChange는 HTML의 input 이벤트처럼 "입력할 때마다" 실행된다.
 */
-function Step04() {
+function Input() { // [순서04]
   const [text, setText] = useState("");
 
   return (
@@ -163,7 +163,7 @@ function Step04() {
       ...form               : 기존 값을 모두 복사
       [e.target.name]: 값   : 해당 key만 새 값으로 덮어쓰기 (계산된 속성 이름)
 */
-function Step05() {
+function MultiInput() { // [순서05]
   const [form, setForm] = useState({
     name: "",
     gender: "",
@@ -210,7 +210,7 @@ function Step05() {
   - e.preventDefault()로 페이지 새로고침을 막는다. (10_event 04와 같음)
   - 값은 이미 state에 있으므로 따로 읽을 필요가 없다.
 */
-function Step06() {
+function Submit() { // [순서06]
   const [id, setId] = useState("");
   const [message, setMessage] = useState("");
 
@@ -244,7 +244,7 @@ function Step06() {
 
   - main.jsx의 <StrictMode>는 개발할 때만 컴포넌트를 일부러 두 번 실행한다.
   - 함수 안에서 실수(예: 렌더링 중에 외부 값을 바꾸는 코드)가 있으면 두 번 실행될 때 드러나도록 하기 위함이다.
-  - 그래서 Step03의 "렌더링" 로그가 두 번씩 찍힌다. → 정상이므로 StrictMode를 지우지 않는다.
+  - 그래서 Counter의 "렌더링" 로그가 두 번씩 찍힌다. → 정상이므로 StrictMode를 지우지 않는다.
   - npm run build로 만든 배포 버전에서는 한 번만 실행된다.
 */
 
@@ -253,12 +253,12 @@ export default function App() {
   return (
     <div>
       <h1>ch03. 이벤트와 State</h1>
-      <Step01 />
-      <Step02 />
-      <Step03 />
-      <Step04 />
-      <Step05 />
-      <Step06 />
+      <Click />
+      <Variable />
+      <Counter />
+      <Input />
+      <MultiInput />
+      <Submit />
     </div>
   );
 }
