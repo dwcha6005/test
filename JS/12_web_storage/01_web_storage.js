@@ -405,6 +405,122 @@ renderKeywords();
 
 
 /*
+    < 10. (참고) 쿠키 >
+
+    쿠키도 브라우저에 "이름=값"을 저장하지만, Web Storage와 목적이 다르다.
+
+    - 요청할 때마다 서버로 자동 전송된다 → 서버가 "누가 보낸 요청인지" 알 수 있다 (로그인 유지)
+    - 만료 시간을 정할 수 있다 → 시간이 지나면 브라우저가 알아서 삭제
+    - 용량이 작다 (약 4KB)
+    - 로그인 쿠키는 보통 서버가 HttpOnly로 만든다 → JS(document.cookie)로는 읽을 수 없다
+
+    프론트에서 쿠키 다루기 : document.cookie
+    - 쓰기 : document.cookie = "이름=값; max-age=초; path=/"
+             → 그 이름의 쿠키 하나만 추가/덮어쓴다 (다른 쿠키는 그대로)
+    - 읽기 : document.cookie
+             → "a=1; b=2" 처럼 모든 쿠키가 한 문자열로 나온다 (직접 잘라서 찾아야 함)
+    - 삭제 : 같은 이름으로 max-age=0 을 주어 다시 저장
+
+    Web Storage처럼 편한 메서드가 없으므로 함수를 만들어서 쓴다.
+
+    주의 : 크롬은 file://로 연 파일에서는 쿠키를 저장하지 않는다.
+           → Live Server(http://127.0.0.1:5500)로 열어서 실습한다.
+*/
+
+// 쿠키 저장 (seconds초 뒤에 자동 삭제)
+function setCookie(name, value, seconds) {
+    document.cookie = name + "=" + encodeURIComponent(value) + "; max-age=" + seconds + "; path=/";
+}
+
+// 쿠키 읽기 (없으면 null)
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");   // "a=1; b=2" → ["a=1", "b=2"]
+
+    for (let i = 0; i < cookies.length; i++) {
+        const parts = cookies[i].split("=");       // "a=1" → ["a", "1"]
+
+        if (parts[0] === name) {
+            return decodeURIComponent(parts[1]);
+        }
+    }
+
+    return null;
+}
+
+// 쿠키 삭제 (max-age=0)
+function deleteCookie(name) {
+    setCookie(name, "", 0);
+}
+
+// 참고 : encodeURIComponent / decodeURIComponent
+//        한글, 공백, ; 같은 문자를 쿠키에 안전하게 넣고 꺼내기 위해 사용한다.
+
+const cookieName = document.querySelector("#cookieName");
+const cookieValue = document.querySelector("#cookieValue");
+const cookieSeconds = document.querySelector("#cookieSeconds");
+const cookieMsg = document.querySelector("#cookieMsg");
+const cookieAll = document.querySelector("#cookieAll");
+
+// document.cookie 전체 문자열을 화면에 보여주는 함수
+function renderCookie() {
+    cookieAll.textContent = "document.cookie → " + (document.cookie || "(저장된 쿠키 없음)");
+}
+
+if (location.protocol === "file:") {
+    cookieMsg.textContent = "⚠ file://로 열면 크롬에서 쿠키가 저장되지 않습니다. Live Server로 열어 주세요.";
+}
+
+document.querySelector("#cookieSetBtn").addEventListener("click", function() {
+    setCookie(cookieName.value, cookieValue.value, Number(cookieSeconds.value));
+    cookieMsg.textContent = "저장 : " + cookieName.value + " = " + cookieValue.value
+        + " (" + cookieSeconds.value + "초 뒤 자동 삭제)";
+    renderCookie();
+});
+
+document.querySelector("#cookieGetBtn").addEventListener("click", function() {
+    cookieMsg.textContent = "읽기 : " + cookieName.value + " → " + getCookie(cookieName.value);
+    renderCookie();   // 만료된 쿠키가 사라졌는지도 함께 확인
+});
+
+document.querySelector("#cookieDelBtn").addEventListener("click", function() {
+    deleteCookie(cookieName.value);
+    cookieMsg.textContent = "삭제 : " + cookieName.value;
+    renderCookie();
+});
+
+renderCookie();
+
+
+/*
+    실제 예 - "오늘 하루 보지 않기" 공지
+
+    1) 페이지가 열리면 : hideNotice 쿠키가 있으면 공지를 숨긴다
+    2) 버튼을 누르면   : 공지를 숨기고 + 쿠키 저장 (만료 시간 지정)
+
+    → 시간이 지나면 쿠키가 자동으로 삭제되므로, 따로 지우는 코드 없이 공지가 다시 보인다.
+      (localStorage로 하려면 저장 시각을 함께 저장하고, 열 때마다 시간을 비교해야 한다)
+*/
+
+const notice = document.querySelector("#notice");
+
+// 1) 페이지가 열리면
+if (getCookie("hideNotice") === "Y") {
+    notice.hidden = true;
+}
+
+// 2) 버튼을 누르면
+document.querySelector("#hideTodayBtn").addEventListener("click", function() {
+    setCookie("hideNotice", "Y", 60 * 60 * 24);   // 하루 = 86400초
+    notice.hidden = true;
+    renderCookie();
+});
+
+document.querySelector("#hide10sBtn").addEventListener("click", function() {
+    setCookie("hideNotice", "Y", 10);             // 시연용 : 10초
+    notice.hidden = true;
+    renderCookie();
+});
+/*
     < 10. 정리와 주의사항 >
 
     1) setItem / getItem / removeItem / clear

@@ -66,5 +66,18 @@
         </form>
         <div id="keywordList"></div>
     </section>
+
+    <section>
+        <h2>10. (참고) 쿠키 - 저장 / 읽기 / 삭제</h2>
+        이름 <input type="text" id="cookieName" value="lang" size="8">
+        값 <input type="text" id="cookieValue" value="ko" size="8">
+        유지 시간 <input type="number" id="cookieSeconds" value="60" min="0" style="width: 60px">초
+        <button type="button" id="cookieSetBtn">쿠키 저장</button>
+        <button type="button" id="cookieGetBtn">쿠키 읽기</button>
+        <button type="button" id="cookieDelBtn">쿠키 삭제</button>
+        <p id="cookieMsg"></p>
+        <p id="cookieAll"></p>
+        <p>맨 위 공지에서 [10초 동안 보지 않기] → F5 → 10초 뒤 다시 F5 → 공지가 다시 보이는지 확인</p>
+    </section>
 </body>
 </html>
