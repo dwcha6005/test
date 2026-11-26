@@ -184,8 +184,6 @@ function Users() { // [순서04]
     </section>
   );
 }
-
-
 /*
   [순서05] 값이 바뀔 때마다 다시 요청 + 늦게 온 응답 무시
 
@@ -356,3 +354,5 @@ export default function App() {
     </div>
   );
 }
+
+

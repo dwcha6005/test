@@ -13,9 +13,9 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 /* ---------------- 리액트 기초 ---------------- */
-import App from "./ch01_jsx/App.jsx";
+// import App from "./ch01_jsx/App.jsx";
 // import App from "./ch01_jsx/Practice.jsx";
-// import App from "./ch02_props/App.jsx";
+import App from "./ch02_props/App.jsx";
 // import App from "./ch02_props/Practice.jsx";
 // import App from "./ch03_state/App.jsx";
 // import App from "./ch03_state/Practice.jsx";

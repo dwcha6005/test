@@ -1,22 +1,22 @@
 /*
   ch02 실습 - 컴포넌트와 props
 
-  < 문제 1. 상품 카드 > [기초]
+  < 문제 1. 상품 카드 (ProductCard) >
   ① name, price를 props로 받는 ProductCard 컴포넌트를 만드시오.
   ② 가격은 toLocaleString()으로 "89,000원"처럼 표시하시오.
   ③ App에서 ProductCard 3개를 서로 다른 값으로 표시하시오.
 
-  < 문제 2. 기본값 > [기초]
+  < 문제 2. 기본값 >
   ① ProductCard에 badge props를 추가하시오.
   ② badge가 전달되면 상품명 옆에 [badge] 형태로 표시하고, 전달되지 않으면 아무것도 표시하지 마시오.
   ③ discount props(기본값 0)를 추가하여, 0보다 크면 "n% 할인가 : 00,000원"을 추가로 표시하시오.
 
-  < 문제 3. children - 알림 상자 > [응용]
+  < 문제 3. children - 알림 상자 (Alert) >
   ① type("info" | "warning" | "error")과 children을 받는 Alert 컴포넌트를 만드시오.
   ② type에 따라 배경색을 다르게 하시오. info : #e0f2fe / warning : #fef3c7 / error : #fee2e2
   ③ type이 전달되지 않으면 "info"로 표시하시오.
 
-  < 문제 4. 객체 배열 + 스프레드 > [응용]
+  < 문제 4. 객체 배열 + 스프레드 >
     const products = [
       { name: "텀블러", price: 12000, badge: "BEST" },
       { name: "머그컵", price: 8500, discount: 10 },

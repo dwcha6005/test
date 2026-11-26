@@ -146,14 +146,14 @@ function Children() { // [순서06]
   - 데이터는 항상 부모 → 자식 한 방향으로 흐른다.
   - 자식이 값을 바꾸고 싶으면 부모가 내려준 "함수"를 호출해서 부모에게 요청한다. (ch05)
 */
-function ReadOnly() { // [순서07]
-  return (
-    <section>
-      <h2>[순서07] props는 읽기 전용</h2>
-      <p>부모 → 자식 : props로 값 전달 / 자식 → 부모 : props로 받은 함수 호출</p>
-    </section>
-  );
-}
+// function ReadOnly() { // [순서07]
+//   return (
+//     <section>
+//       <h2>[순서07] props는 읽기 전용</h2>
+//       <p>부모 → 자식 : props로 값 전달 / 자식 → 부모 : props로 받은 함수 호출</p>
+//     </section>
+//   );
+// }
 
 
 export default function App() {
@@ -165,7 +165,7 @@ export default function App() {
       <Spread />
       <Types />
       <Children />
-      <ReadOnly />
+      {/* <ReadOnly /> */}
       <Footer />
     </div>
   );
