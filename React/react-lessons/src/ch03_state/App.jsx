@@ -172,6 +172,11 @@ function MultiInput() { // [순서05]
   });
 
   const handleChange = (e) => {
+    // 현재 수정된 key를 찾아 value 변경 후 
+    // setForm() 함수로 form 전달
+    // => form은 객체! 참조 타입이므로 form 변수의 값(주소)는 변경되지 않았다!
+    // form[e.target.name] = e.target.value
+    // setForm(form)
     setForm({
       ...form,
       [e.target.name]: e.target.value,
